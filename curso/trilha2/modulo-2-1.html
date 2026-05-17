@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Configurando o ambiente Hermes — instalação, setup e verificação de saúde">
+  <meta name="description" content="Configurando o ambiente Hermes — instalação passo a passo, configuração e verificação de saúde">
   <title>Configurando o ambiente Hermes | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
@@ -23,8 +23,6 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -122,7 +120,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Configurando o ambiente Hermes</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Instalação passo a passo, estrutura de diretórios e checklist de verificação de saúde — a base sólida antes de qualquer configuração avançada.</p>
+      <p class="text-lg text-neutral-400 max-w-3xl">Instalação passo a passo, configuração de diretórios e verificação de saúde do sistema antes de avançar.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-blue-400">7</div>
@@ -133,11 +131,11 @@
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-blue-400">Prático</div>
+          <div class="text-xl font-bold text-blue-400">Intermediário</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-blue-400">Setup</div>
+          <div class="text-xl font-bold text-blue-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -150,44 +148,68 @@
     <section id="topico-1" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
-        <h2 class="text-2xl font-bold">💻 Pré-requisitos — o que você precisa antes de começar</h2>
+        <h2 class="text-2xl font-bold">📋 Pré-requisitos</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Antes de instalar o Hermes, confirme que você tem o ambiente correto. <strong class="text-blue-400">Verificar pré-requisitos antes de instalar</strong> evita erros frustrantes no meio do processo — a maioria dos problemas de instalação vem de versões incorretas de dependências ou falta de permissões adequadas.
+        Antes de instalar o Hermes, confirme três coisas: <strong class="text-blue-400">sistema operacional compatível, Node.js 20+ e uma conta Anthropic com API key ativa</strong>. Pular essa verificação é a causa #1 de instalações quebradas.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">Um conjunto mínimo de ferramentas e permissões que o ambiente precisa ter antes de instalar o Hermes — como Node.js 18+, terminal funcional e conta Anthropic ativa.</p>
+        <p class="text-neutral-300">O Hermes Agent é um runtime CLI que orquestra agentes do Triad localmente. Roda em Linux, macOS e Windows (via WSL2), exige Node.js 20.x ou superior e uma <code class="text-blue-400">ANTHROPIC_API_KEY</code> válida para se conectar aos modelos Claude.</p>
       </div>
 
-      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-          <span class="mr-2">📋</span> Pré-requisitos obrigatórios
-        </h3>
-        <ul class="space-y-2 text-neutral-300">
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Sistema operacional:</strong> macOS, Linux ou Windows com WSL (Windows Subsystem for Linux)</span></li>
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Node.js 18+:</strong> verifique com <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">node --version</code></span></li>
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Conta Anthropic:</strong> para autenticar o Claude como modelo orquestrador</span></li>
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Terminal:</strong> com permissões de usuário (não precisa de sudo para tudo)</span></li>
-          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Editor de código:</strong> VS Code recomendado, mas qualquer editor funciona</span></li>
-        </ul>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🔍 Verifique o que você já tem</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># Versão do Node — precisa ser >= 20.x</span></p>
+          <p>node --version</p>
+          <p class="text-neutral-500"># v20.11.1</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Versão do npm — precisa ser >= 10.x</span></p>
+          <p>npm --version</p>
+          <p class="text-neutral-500"># 10.2.4</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Sistema operacional</span></p>
+          <p>uname -a</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Ambiente válido</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Node.js 20.x ou superior (LTS recomendado)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>npm 10.x via gerenciador oficial</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>API key Anthropic (formato sk-ant-...)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Permissão de escrita em <code>~/</code></span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Configurações que quebram</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Node.js 18.x ou inferior (faltam APIs)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>npm instalado via sudo (permissões erradas)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Windows nativo sem WSL2</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>API key expirada ou sem créditos</span></li>
+          </ul>
+        </div>
       </div>
 
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">💡</span> Dica Prática
+          <span class="mr-2">💡</span> Dica primária
         </h3>
-        <p class="text-neutral-300">Não é necessário ser desenvolvedor para usar o Hermes, mas familiaridade com o terminal é essencial. Se você consegue navegar entre diretórios e rodar comandos simples, está pronto. O Hermes abstrai toda a complexidade técnica — a instalação é o momento com mais fricção do processo inteiro.</p>
+        <p class="text-neutral-300">Use <strong>nvm</strong> para gerenciar versões do Node — assim você troca entre projetos sem conflito. Evite <code>sudo npm install</code> a qualquer custo: ele cria arquivos com owner errado em <code>~/.npm</code> e quebra futuras instalações globais.</p>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Node.js como runtime</span><p class="text-sm text-neutral-400 mt-1">O motor de execução JavaScript que o Hermes usa internamente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Terminal/shell básico</span><p class="text-sm text-neutral-400 mt-1">Navegação, execução de comandos e variáveis de ambiente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">WSL para Windows</span><p class="text-sm text-neutral-400 mt-1">Camada de compatibilidade Linux que permite rodar Hermes no Windows</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Permissões de usuário</span><p class="text-sm text-neutral-400 mt-1">Instalação local (~/...) não requer privilégios de administrador</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Node 20 LTS</span><p class="text-sm text-neutral-400 mt-1">Versão mínima — APIs de fetch nativo e streams modernos são exigidas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">API key como segredo</span><p class="text-sm text-neutral-400 mt-1">Nunca commite no Git — sempre via variável de ambiente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">WSL2 no Windows</span><p class="text-sm text-neutral-400 mt-1">Hermes assume um shell POSIX — Windows nativo não é suportado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Permissões em <code>~/</code></span><p class="text-sm text-neutral-400 mt-1">O Hermes cria <code>~/.hermes/</code> — exige escrita no home do usuário</p></div>
         </div>
       </div>
     </section>
@@ -196,48 +218,56 @@
     <section id="topico-2" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
-        <h2 class="text-2xl font-bold">📦 Instalação do Hermes Agent — passo a passo</h2>
+        <h2 class="text-2xl font-bold">📦 Instalação do Hermes Agent</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        O Hermes Agent é instalado via terminal. <strong class="text-blue-400">Seguir a sequência correta de instalação</strong> evita estados inconsistentes que são difíceis de diagnosticar depois. Pular o wizard de setup inicial é a causa número um de configurações quebradas.
+        A instalação acontece em duas etapas: <strong class="text-blue-400">um comando global do npm</strong> e um <strong class="text-blue-400">setup wizard interativo</strong> que prepara o ambiente local. O wizard valida tudo antes de finalizar.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O processo de instalação global do Hermes via npm e execução do wizard interativo que configura chaves de API, modelos padrão e a estrutura de diretórios necessária.</p>
+        <p class="text-neutral-300">O <code class="text-blue-400">hermes-agent</code> é o pacote npm que instala o binário <code>hermes</code> no PATH. Após a instalação, <code>hermes init</code> é o wizard que cria a estrutura <code>~/.hermes/</code>, valida a API key, registra o usuário e baixa as skills padrão.</p>
       </div>
 
-      <div class="space-y-6 mb-6">
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold">1</span>
-          </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-            <h4 class="font-semibold mb-2">Instalar via npm</h4>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm mb-2">npm install -g hermes-agent</code>
-            <p class="text-sm text-neutral-400">A flag <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">-g</code> instala globalmente, tornando o comando <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes</code> disponível em qualquer diretório do terminal.</p>
-          </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🚀 Instalação global</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># Instala o binário global</span></p>
+          <p>npm install -g hermes-agent</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Confirma a instalação</span></p>
+          <p>hermes --version</p>
+          <p class="text-neutral-500"># hermes-agent 1.4.2</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Inicia o setup wizard</span></p>
+          <p>hermes init</p>
         </div>
+      </div>
 
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold">2</span>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧙</span> O que o setup wizard faz
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1 flex-shrink-0">1.</span>
+            <span><strong>Detecta o shell</strong> ativo (zsh, bash, fish) para configurar PATH e env vars no rc correto.</span>
           </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-            <h4 class="font-semibold mb-2">Rodar o wizard de setup</h4>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm mb-2">hermes setup</code>
-            <p class="text-sm text-neutral-400">O wizard interativo guia pela configuração de chaves de API, preferências de modelo e criação da estrutura de diretórios. Não pule nenhuma etapa.</p>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1 flex-shrink-0">2.</span>
+            <span><strong>Cria <code>~/.hermes/</code></strong> com subdiretórios <code>memory/</code>, <code>skills/</code>, <code>jobs/</code> e <code>logs/</code>.</span>
           </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
-            <span class="text-blue-400 font-bold">3</span>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1 flex-shrink-0">3.</span>
+            <span><strong>Pede a API key</strong> e faz uma chamada de validação contra a API Anthropic.</span>
           </div>
-          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
-            <h4 class="font-semibold mb-2">Verificar a instalação</h4>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm mb-2">hermes --version</code>
-            <p class="text-sm text-neutral-400">Deve retornar o número da versão instalada. Se retornar "command not found", a instalação não foi concluída corretamente.</p>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1 flex-shrink-0">4.</span>
+            <span><strong>Baixa as skills padrão</strong> do registry oficial — research, code, review.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1 flex-shrink-0">5.</span>
+            <span><strong>Roda um smoke test</strong> de fim a fim — se passar, a instalação está confirmada.</span>
           </div>
         </div>
       </div>
@@ -245,10 +275,10 @@
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">npm install global</span><p class="text-sm text-neutral-400 mt-1">Instalação acessível de qualquer diretório no terminal</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes setup wizard</span><p class="text-sm text-neutral-400 mt-1">Configuração interativa que não deve ser pulada</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Variáveis de ambiente</span><p class="text-sm text-neutral-400 mt-1">ANTHROPIC_API_KEY e outras chaves configuradas no .env ou shell</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Estado de configuração</span><p class="text-sm text-neutral-400 mt-1">Sequência de setup que deve ser seguida para evitar inconsistências</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Instalação global vs local</span><p class="text-sm text-neutral-400 mt-1">Hermes é um CLI — global (<code>-g</code>) é o caminho correto, nunca dentro de projetos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Setup wizard idempotente</span><p class="text-sm text-neutral-400 mt-1">Pode rodar <code>hermes init</code> múltiplas vezes — só corrige o que estiver faltando</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Validação de API key embutida</span><p class="text-sm text-neutral-400 mt-1">O wizard só prossegue se a chave responder com 200 na rota /v1/models</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Skills padrão pré-instaladas</span><p class="text-sm text-neutral-400 mt-1">research, code e review já vêm prontas — você pode adicionar customizadas depois</p></div>
         </div>
       </div>
     </section>
@@ -257,62 +287,75 @@
     <section id="topico-3" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
-        <h2 class="text-2xl font-bold">📁 Configuração inicial — diretórios, permissões, variáveis</h2>
+        <h2 class="text-2xl font-bold">⚙️ Configuração inicial</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Após a instalação base, o Hermes cria uma estrutura de diretórios em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/</code>. <strong class="text-blue-400">Conhecer essa estrutura</strong> permite fazer backup do que importa, entender onde fica cada configuração e diagnosticar problemas com mais rapidez quando algo falha.
+        Depois do <code>hermes init</code>, três configurações precisam estar corretas para o agente funcionar de verdade: <strong class="text-blue-400">a API key persistente no shell, a estrutura de diretórios e as permissões de arquivo</strong>.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A árvore de diretórios criada em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/</code> após a instalação — incluindo soul.md, config.json, skills/ e memory/ — e as variáveis de ambiente necessárias para autenticar o Hermes.</p>
+        <p class="text-neutral-300">A configuração inicial define onde o Hermes guarda dados (<code>~/.hermes/</code>), como acessa a Anthropic (<code>ANTHROPIC_API_KEY</code> via env) e quais permissões os arquivos têm (600 para o config, 700 para o diretório). É o tripé que mantém o sistema seguro e funcional.</p>
       </div>
 
-      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-          <span class="mr-2">🗂️</span> Estrutura de diretórios ~/.hermes/
-        </h3>
-        <div class="space-y-3">
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">soul.md</code>
-            <p class="text-sm text-neutral-300">Contexto pessoal — quem você é, seus objetivos, negócio e preferências</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">skills/</code>
-            <p class="text-sm text-neutral-300">Personas e skills configuradas — incluindo Orpheus e outras</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">memory/</code>
-            <p class="text-sm text-neutral-300">Histórico de conversas e memória persistente entre sessões</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">config.json</code>
-            <p class="text-sm text-neutral-300">Configurações gerais — modelos, chaves de API, preferências de execução</p>
-          </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🔐 Configurando a API key no shell</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># Adicione ao final do ~/.zshrc (ou ~/.bashrc)</span></p>
+          <p>export ANTHROPIC_API_KEY=sk-ant-api03-...</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Recarregue o shell</span></p>
+          <p>source ~/.zshrc</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Confirme que está no ambiente</span></p>
+          <p>echo $ANTHROPIC_API_KEY | head -c 20</p>
+          <p class="text-neutral-500"># sk-ant-api03-XXXXXX</p>
         </div>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
-        <h3 class="text-lg font-semibold mb-4">🔐 Variáveis de ambiente necessárias</h3>
-        <div class="space-y-3">
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">ANTHROPIC_API_KEY</code>
-            <p class="text-sm text-neutral-300">Obrigatória — autentica o Claude como modelo padrão do Hermes</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <code class="font-mono bg-dark-700 px-2 py-1 rounded text-blue-400 text-sm flex-shrink-0">OPENROUTER_API_KEY</code>
-            <p class="text-sm text-neutral-300">Opcional mas recomendada — habilita acesso a DeepSeek, GPT e outros modelos</p>
-          </div>
+        <h3 class="text-lg font-semibold mb-4">📁 Estrutura de diretórios</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>mkdir -p ~/.hermes/{memory,skills,jobs,logs}</p>
+          <p>&nbsp;</p>
+          <p>~/.hermes/</p>
+          <p class="ml-4">├── config.json     <span class="text-neutral-500"># configuração principal (chmod 600)</span></p>
+          <p class="ml-4">├── memory/         <span class="text-neutral-500"># estado persistente entre runs</span></p>
+          <p class="ml-4">├── skills/         <span class="text-neutral-500"># pacotes de skills instaladas</span></p>
+          <p class="ml-4">├── jobs/           <span class="text-neutral-500"># histórico de tarefas executadas</span></p>
+          <p class="ml-4">└── logs/           <span class="text-neutral-500"># logs estruturados em JSONL</span></p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Permissões seguras</span></p>
+          <p>chmod 700 ~/.hermes</p>
+          <p>chmod 600 ~/.hermes/config.json</p>
         </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧩</span> Três camadas de configuração
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Env vars</strong> — segredos (API keys, tokens) ficam aqui. Nunca em arquivo.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong><code>~/.hermes/config.json</code></strong> — preferências do usuário (modelo padrão, timeouts, telemetria).</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong><code>.hermes.json</code> no projeto</strong> — overrides por projeto, commitáveis no Git sem expor segredos.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica primária
+        </h3>
+        <p class="text-neutral-300">Se você usa <strong>1Password CLI</strong> ou <strong>direnv</strong>, integre a API key dali em vez de hardcodar no <code>~/.zshrc</code>. Assim a chave nunca toca o disco em texto plano e rotação fica trivial.</p>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">~/.hermes/ como base</span><p class="text-sm text-neutral-400 mt-1">Diretório raiz de toda a configuração pessoal do Hermes</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">ANTHROPIC_API_KEY</span><p class="text-sm text-neutral-400 mt-1">Chave obrigatória para o modelo orquestrador funcionar</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Backup de configuração</span><p class="text-sm text-neutral-400 mt-1">Copie ~/.hermes/ regularmente — é onde seu trabalho de configuração vive</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">config.json</span><p class="text-sm text-neutral-400 mt-1">Arquivo central de configuração — editável diretamente quando necessário</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Segredos via env</span><p class="text-sm text-neutral-400 mt-1">API key em variável de ambiente, nunca em config.json commitável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Permissões 700/600</span><p class="text-sm text-neutral-400 mt-1">Diretório <code>~/.hermes</code> só para o user; config.json só leitura/escrita do owner</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Config em camadas</span><p class="text-sm text-neutral-400 mt-1">Env → user config → project config — o último sobrescreve</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Estrutura de diretórios fixa</span><p class="text-sm text-neutral-400 mt-1"><code>memory/</code>, <code>skills/</code>, <code>jobs/</code>, <code>logs/</code> — Hermes assume essa hierarquia</p></div>
         </div>
       </div>
     </section>
@@ -321,44 +364,65 @@
     <section id="topico-4" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
-        <h2 class="text-2xl font-bold">🧪 Primeiro teste — confirmar que Hermes está funcionando</h2>
+        <h2 class="text-2xl font-bold">✅ Primeiro teste</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Após a instalação e configuração, o primeiro teste é uma conversa simples para confirmar que o sistema responde corretamente. <strong class="text-blue-400">Testar o básico antes de avançar</strong> é a prática que separa instalações que funcionam de instalações que parecem funcionar mas falham em casos importantes.
+        Antes de pedir ao Hermes qualquer tarefa real, rode o <strong class="text-blue-400">smoke test pós-instalação</strong>: dois comandos curtos confirmam que o binário está no PATH, a API key funciona e o pipeline de jobs está vivo.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">Um smoke test em dois comandos que verifica se o Hermes lê o soul.md e consegue executar ferramentas de terminal — os dois pilares da funcionalidade básica do sistema.</p>
+        <p class="text-neutral-300">O smoke test é a sequência mínima de comandos que prova que a instalação funciona ponta a ponta: <code>hermes ping</code> testa conectividade com a Anthropic, <code>hermes status</code> mostra o estado do daemon, das skills carregadas e do último job executado.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
-          <h4 class="font-bold text-blue-400 mb-4">✓ Teste 1 — Memória e soul.md</h4>
-          <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm mb-3">hermes "O que você sabe sobre mim até agora?"</code>
-          <p class="text-sm text-neutral-300">Se o Hermes mencionar dados que você preencheu no soul.md, o carregamento de contexto está funcionando.</p>
-        </div>
-        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
-          <h4 class="font-bold text-blue-400 mb-4">✓ Teste 2 — Execução de ferramenta</h4>
-          <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm mb-3">hermes "Crie um arquivo ~/Desktop/hermes-test.txt com o texto 'Instalação OK'"</code>
-          <p class="text-sm text-neutral-300">Se o arquivo for criado, o Hermes está executando ferramentas de terminal corretamente.</p>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🏓 Comando 1: hermes ping</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes ping</p>
+          <p>&nbsp;</p>
+          <p class="text-blue-400">✓ Binário detectado: /usr/local/bin/hermes</p>
+          <p class="text-blue-400">✓ Config carregada: ~/.hermes/config.json</p>
+          <p class="text-blue-400">✓ API key válida (sk-ant-***...***ZP4Q)</p>
+          <p class="text-blue-400">✓ Latência Anthropic: 187ms</p>
+          <p class="text-blue-400">✓ Modelo padrão: claude-sonnet-4-5</p>
         </div>
       </div>
 
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
-          <span class="mr-2">💡</span> Por que esses dois testes específicos
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📊 Comando 2: hermes status</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes status</p>
+          <p>&nbsp;</p>
+          <p>Daemon ......... <span class="text-blue-400">running (pid 38291)</span></p>
+          <p>Skills ......... <span class="text-blue-400">3 loaded</span> (research, code, review)</p>
+          <p>Memory ......... <span class="text-blue-400">0 entries</span></p>
+          <p>Jobs ........... <span class="text-blue-400">0 active, 0 historic</span></p>
+          <p>Last error ..... <span class="text-neutral-500">none</span></p>
+          <p>Uptime ......... <span class="text-blue-400">00:00:14</span></p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧪</span> Job de teste real
         </h3>
-        <p class="text-neutral-300">O Teste 1 valida que o soul.md está sendo lido — o problema mais comum em instalações parciais. O Teste 2 valida que o Hermes tem permissão para executar comandos de terminal — necessário para a maioria dos casos de uso avançados. Juntos, eles cobrem os dois pilares da funcionalidade do Hermes: contexto e execução.</p>
+        <p class="text-neutral-300 mb-3">Para confirmar o pipeline completo, envie um job trivial:</p>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes run "diga apenas: ambiente operacional"</p>
+          <p>&nbsp;</p>
+          <p class="text-neutral-500"># job_id: hms_01HXY...</p>
+          <p class="text-neutral-500"># status: completed (1.2s)</p>
+          <p>ambiente operacional</p>
+        </div>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Smoke test</span><p class="text-sm text-neutral-400 mt-1">Teste mínimo que confirma que o sistema básico funciona</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Verificação de soul.md</span><p class="text-sm text-neutral-400 mt-1">Confirma que o contexto pessoal está sendo carregado</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Execução de terminal</span><p class="text-sm text-neutral-400 mt-1">Hermes precisa de permissão para criar/modificar arquivos</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Iteração de diagnóstico</span><p class="text-sm text-neutral-400 mt-1">Isolar o problema em componentes para encontrar a causa raiz</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Smoke test mínimo</span><p class="text-sm text-neutral-400 mt-1">Ping + status + um job trivial — três comandos cobrem o pipeline</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Latência como sinal</span><p class="text-sm text-neutral-400 mt-1">Latência acima de 1s no <code>ping</code> indica rede ou rate limit</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Skills carregadas</span><p class="text-sm text-neutral-400 mt-1"><code>status</code> mostra quantas skills o daemon registrou — 0 indica problema</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Job ID rastreável</span><p class="text-sm text-neutral-400 mt-1">Todo <code>hermes run</code> emite um ID — usado para auditar e re-executar</p></div>
         </div>
       </div>
     </section>
@@ -367,48 +431,62 @@
     <section id="topico-5" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
-        <h2 class="text-2xl font-bold">📊 O dashboard do Hermes — visão geral da interface</h2>
+        <h2 class="text-2xl font-bold">🖥️ O dashboard do Hermes</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        O Hermes tem uma interface de dashboard que centraliza todas as informações do sistema em um lugar visual. <strong class="text-blue-400">Conhecer o dashboard antes de precisar dele</strong> reduz a fricção quando algo vai errado — você sabe onde olhar sem precisar procurar.
+        O Hermes expõe um <strong class="text-blue-400">dashboard local chamado Pantheon</strong> — uma interface web em <code>http://localhost:7777</code> que mostra histórico de jobs, status das skills, custo acumulado e logs ao vivo. É o painel de controle para inspeção.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A interface visual do Hermes acessada com <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes dashboard</code> — um painel que centraliza histórico de conversas, memória ativa, personas, uso de tokens e jobs agendados.</p>
+        <p class="text-neutral-300">Pantheon é a UI web embutida no Hermes que serve em <code>localhost:7777</code> e oferece quatro painéis: <strong>Jobs</strong> (histórico e status), <strong>Skills</strong> (instaladas e versão), <strong>Memory</strong> (estado persistente) e <strong>Logs</strong> (stream estruturado). É read-only por design — comandos de mutação continuam pelo CLI.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🚪 Subindo o dashboard</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes dashboard</p>
+          <p>&nbsp;</p>
+          <p class="text-blue-400">✓ Pantheon UI: http://localhost:7777</p>
+          <p class="text-blue-400">✓ WebSocket logs: ws://localhost:7778</p>
+          <p class="text-neutral-500"># Abra no navegador — Ctrl+C aqui encerra.</p>
+        </div>
       </div>
 
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-          <span class="mr-2">🖥️</span> O que você encontra no dashboard
+          <span class="mr-2">🏛️</span> Os quatro painéis do Pantheon
         </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <h4 class="font-semibold text-white mb-2">Histórico e memória</h4>
-            <ul class="space-y-1 text-sm text-neutral-300">
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Histórico completo de conversas</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Memória ativa e contexto carregado</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Decisões registradas do soul.md</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-white mb-2">Controle operacional</h4>
-            <ul class="space-y-1 text-sm text-neutral-300">
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Skills e personas ativas (Pantheon)</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Uso e custo de tokens acumulado</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Status de jobs agendados em background</li>
-            </ul>
-          </div>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Jobs</strong> — lista cronológica com job_id, prompt, status (running/done/failed), duração e custo em USD.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Skills</strong> — pacotes instalados, versão semântica, última atualização e botão para inspecionar manifest.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Memory</strong> — entradas persistentes (chave/valor) e tamanho em bytes. Útil para depurar drift de estado.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Logs</strong> — stream ao vivo via WebSocket; cada linha é JSON estruturado com level, ts, source e payload.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🔎 Inspecionando um job pelo CLI</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes job show hms_01HXY...</p>
+          <p>&nbsp;</p>
+          <p>id ............ hms_01HXY...</p>
+          <p>prompt ........ "diga apenas: ambiente operacional"</p>
+          <p>status ........ <span class="text-blue-400">completed</span></p>
+          <p>model ......... claude-sonnet-4-5</p>
+          <p>tokens ........ 14 in / 4 out</p>
+          <p>cost .......... $0.00012</p>
+          <p>duration ...... 1.184s</p>
         </div>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes dashboard</span><p class="text-sm text-neutral-400 mt-1">Comando para abrir a interface visual no browser</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Pantheon visual</span><p class="text-sm text-neutral-400 mt-1">Interface gráfica para gerenciar personas e skills</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Status de jobs</span><p class="text-sm text-neutral-400 mt-1">Monitoramento de tarefas executadas em background</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Custo acumulado</span><p class="text-sm text-neutral-400 mt-1">Rastreamento de uso de tokens e custo por período</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Pantheon como UI read-only</span><p class="text-sm text-neutral-400 mt-1">Dashboard inspeciona; mutações continuam pelo CLI para evitar drift</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Custo por job visível</span><p class="text-sm text-neutral-400 mt-1">Cada execução mostra tokens e USD — base para auditoria de gasto</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Logs estruturados em JSONL</span><p class="text-sm text-neutral-400 mt-1">Cada linha é JSON parseável — facilita grep, jq e ingestão em observability</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">localhost:7777 fechado por padrão</span><p class="text-sm text-neutral-400 mt-1">Bind apenas em 127.0.0.1 — para expor, configure proxy reverso explícito</p></div>
         </div>
       </div>
     </section>
@@ -417,44 +495,70 @@
     <section id="topico-6" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
-        <h2 class="text-2xl font-bold">🔗 Conectando Claude Code ao Hermes — integração</h2>
+        <h2 class="text-2xl font-bold">🔗 Conectando Claude Code ao Hermes</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Claude Code e Hermes são ferramentas complementares que funcionam melhor integradas. <strong class="text-blue-400">A integração entre os dois</strong> é onde o sistema atinge seu potencial máximo — Hermes orquestra a vida toda, incluindo o trabalho de código que Claude Code executa.
+        O Claude Code pode <strong class="text-blue-400">delegar tarefas pesadas ao Hermes</strong> via uma ponte chamada <code>hermes-bridge</code>. O CC continua sendo seu pair-programmer no terminal — o Hermes executa em background trabalhos de longa duração, paralelos ou que exigem skills específicas.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A configuração via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup integrations</code> que conecta Claude Code ao Hermes — permitindo que o Hermes delegue tarefas de código automaticamente e compartilhe contexto entre as duas ferramentas.</p>
+        <p class="text-neutral-300">O <code class="text-blue-400">hermes-bridge</code> é uma flag do Claude Code que registra o daemon Hermes como provedor de jobs assíncronos. Com a ponte ativa, o CC ganha um novo tool <code>delegate_to_hermes(task, skill)</code> — útil para refactors longos, varreduras de codebase ou análises que ultrapassam o context window de uma sessão.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🌉 Ativando a ponte</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># Sessão CC com ponte ativa</span></p>
+          <p>claude code --hermes-bridge</p>
+          <p>&nbsp;</p>
+          <p class="text-blue-400">✓ Hermes daemon detectado (pid 38291)</p>
+          <p class="text-blue-400">✓ Bridge ativa em ws://localhost:7778</p>
+          <p class="text-blue-400">✓ Tool registrado: delegate_to_hermes</p>
+          <p>&nbsp;</p>
+          <p><span class="text-neutral-500"># Persistir como padrão</span></p>
+          <p>echo 'alias cc="claude code --hermes-bridge"' >> ~/.zshrc</p>
+        </div>
       </div>
 
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-          <span class="mr-2">⚡</span> Configurando a integração
+          <span class="mr-2">🎯</span> Quando delegar ao Hermes
         </h3>
-        <div class="space-y-4">
-          <div>
-            <code class="font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm block mb-2">hermes setup integrations</code>
-            <p class="text-sm text-neutral-300">O wizard de integrações mostra as ferramentas detectadas no sistema e permite configurar como o Hermes as utiliza.</p>
-          </div>
-          <div class="border-t border-dark-600 pt-4">
-            <h4 class="font-semibold text-white mb-2">O que a integração permite</h4>
-            <ul class="space-y-2 text-sm text-neutral-300">
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Hermes delega tarefas de código ao Claude Code automaticamente</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Dashboard unificado mostra uso de ambas as ferramentas</li>
-              <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">•</span>Contexto compartilhado — Hermes sabe o que Claude Code fez</li>
-            </ul>
-          </div>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Tarefas >30 minutos</strong> — refactors de monorepo, migrações de versão, testes massivos.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Trabalho paralelo</strong> — quando você quer 3–5 ângulos rodando ao mesmo tempo sem travar a sessão CC.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Skill especializada</strong> — research profundo, vetorização de codebase, auditoria de segurança com tools dedicadas.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">•</span><span><strong>Contextos grandes</strong> — quando o input ultrapassa o orçamento da sessão atual e precisa de chunking.</span></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Bom uso da ponte</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Hermes, audita os 200 arquivos de <code>src/api/</code>"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Hermes, roda 4 estratégias de migração em paralelo"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Hermes, mapeia dependências entre módulos"</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Delegar errado</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Hermes, renomeia esta variável" (CC resolve em 2s)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Delegar com input ambíguo — gera job inútil</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Delegar sem critério de sucesso (vira loop infinito)</span></li>
+          </ul>
         </div>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes setup integrations</span><p class="text-sm text-neutral-400 mt-1">Wizard para conectar ferramentas externas ao Hermes</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Delegação de código</span><p class="text-sm text-neutral-400 mt-1">Hermes decide quando usar Claude Code para tarefas técnicas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Dashboard unificado</span><p class="text-sm text-neutral-400 mt-1">Visão consolidada de uso e custo de todas as ferramentas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Fluxo de orquestração</span><p class="text-sm text-neutral-400 mt-1">Hermes como camada de coordenação entre ferramentas especializadas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Bridge via WebSocket</span><p class="text-sm text-neutral-400 mt-1">CC e Hermes conversam por <code>ws://localhost:7778</code> — sem polling</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">delegate_to_hermes como tool</span><p class="text-sm text-neutral-400 mt-1">Aparece no toolbelt do CC — só dispara quando o modelo decide delegar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Async por design</span><p class="text-sm text-neutral-400 mt-1">A sessão CC não trava esperando — recebe o job_id e segue conversando</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Critério de sucesso obrigatório</span><p class="text-sm text-neutral-400 mt-1">Job sem critério vira loop — sempre passe condições testáveis</p></div>
         </div>
       </div>
     </section>
@@ -463,60 +567,77 @@
     <section id="topico-7" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">7</span>
-        <h2 class="text-2xl font-bold">✅ Verificação de saúde — checklist pós-instalação</h2>
+        <h2 class="text-2xl font-bold">🩺 Verificação de saúde</h2>
       </div>
       <p class="text-neutral-300 mb-6 leading-relaxed">
-        Antes de avançar para qualquer configuração avançada, execute o checklist completo de verificação de saúde. <strong class="text-blue-400">Um sistema parcialmente configurado</strong> pode parecer funcionar mas falhar em casos importantes — o checklist garante que você tem uma base sólida.
+        Antes de avançar para o próximo módulo, rode <code class="text-blue-400">hermes doctor</code> — o diagnóstico oficial que <strong class="text-blue-400">audita 12 checks de instalação, configuração e conectividade</strong> e devolve um relatório com correções automáticas quando possível.
       </p>
 
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">Uma lista de sete verificações que cobrem os componentes essenciais do Hermes — resposta básica, carregamento do soul.md, chave ativa, execução de terminal, dashboard, memória persistente e skills disponíveis.</p>
+        <p class="text-neutral-300">O <code>hermes doctor</code> é a ferramenta de auto-diagnóstico do Hermes. Executa 12 verificações categorizadas em quatro grupos (Sistema, Config, Rede, Skills) e emite um relatório com status <span class="text-blue-400">PASS</span>, <span class="text-yellow-400">WARN</span> ou <span class="text-red-400">FAIL</span> para cada item — com sugestão de correção quando aplicável.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🩺 Saída de hermes doctor</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>hermes doctor</p>
+          <p>&nbsp;</p>
+          <p class="text-neutral-500">━━━ Sistema ━━━</p>
+          <p><span class="text-blue-400">PASS</span> Node.js >= 20.x (v20.11.1)</p>
+          <p><span class="text-blue-400">PASS</span> Shell POSIX detectado (zsh)</p>
+          <p><span class="text-blue-400">PASS</span> Permissões em ~/.hermes (700)</p>
+          <p>&nbsp;</p>
+          <p class="text-neutral-500">━━━ Config ━━━</p>
+          <p><span class="text-blue-400">PASS</span> config.json válido (chmod 600)</p>
+          <p><span class="text-blue-400">PASS</span> ANTHROPIC_API_KEY no env</p>
+          <p><span class="text-yellow-400">WARN</span> Telemetria opt-in não definida</p>
+          <p>&nbsp;</p>
+          <p class="text-neutral-500">━━━ Rede ━━━</p>
+          <p><span class="text-blue-400">PASS</span> api.anthropic.com alcançável</p>
+          <p><span class="text-blue-400">PASS</span> Latência mediana: 187ms</p>
+          <p>&nbsp;</p>
+          <p class="text-neutral-500">━━━ Skills ━━━</p>
+          <p><span class="text-blue-400">PASS</span> research v1.2.0</p>
+          <p><span class="text-blue-400">PASS</span> code v1.4.1</p>
+          <p><span class="text-blue-400">PASS</span> review v0.9.3</p>
+          <p>&nbsp;</p>
+          <p>11/12 PASS · 1 WARN · 0 FAIL</p>
+        </div>
       </div>
 
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
         <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-          <span class="mr-2">🩺</span> Checklist de verificação de saúde
+          <span class="mr-2">🔁</span> Fluxo de troubleshooting
         </h3>
-        <div class="space-y-3">
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Hermes responde</strong><p class="text-sm text-neutral-400">Execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes "olá"</code> e confirme resposta</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">soul.md é carregado</strong><p class="text-sm text-neutral-400">Hermes menciona dados do seu perfil sem você os fornecer</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Chave API está ativa</strong><p class="text-sm text-neutral-400">Nenhum erro de autenticação nas primeiras chamadas</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Terminal funciona como ferramenta</strong><p class="text-sm text-neutral-400">Hermes consegue criar arquivos e executar comandos</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Dashboard abre</strong><p class="text-sm text-neutral-400">Execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes dashboard</code> e confirme que abre no browser</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Histórico é salvo entre sessões</strong><p class="text-sm text-neutral-400">Feche e reabra o terminal — Hermes ainda lembra a conversa anterior</p></div>
-          </div>
-          <div class="flex items-center space-x-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold text-lg">✓</span>
-            <div><strong class="text-white">Skills podem ser carregadas</strong><p class="text-sm text-neutral-400">Execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes skills list</code> sem erro</p></div>
-          </div>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">1.</span><span><strong>Rode <code>hermes doctor</code></strong> — sempre primeiro. Identifica 90% dos problemas comuns.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">2.</span><span><strong>Aplique <code>hermes doctor --fix</code></strong> — auto-corrige permissões erradas, diretórios faltantes e configs corrompidas.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">3.</span><span><strong>Inspecione <code>~/.hermes/logs/</code></strong> — logs estruturados das últimas 100 execuções.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1 flex-shrink-0">4.</span><span><strong>Se persistir, <code>hermes init --reset</code></strong> — recria a estrutura preservando memory/.</span></div>
         </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📋 Checklist pós-instalação</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>node --version</code> retorna v20.x ou superior</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>hermes --version</code> imprime versão sem erro</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>~/.hermes/</code> existe com permissão 700</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>$ANTHROPIC_API_KEY</code> está exportada e válida</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>hermes ping</code> conecta em menos de 1s</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>hermes run "ping"</code> retorna sem erro</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400">☐</span><span><code>hermes doctor</code> mostra 0 FAIL</span></li>
+        </ul>
       </div>
 
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Verificação sistemática</span><p class="text-sm text-neutral-400 mt-1">Testar cada componente antes de considerar a instalação concluída</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Base sólida antes de avançar</span><p class="text-sm text-neutral-400 mt-1">Configurações avançadas falham se a base estiver incompleta</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Diagnóstico de instalação</span><p class="text-sm text-neutral-400 mt-1">Cada item do checklist mapeia para um componente específico do sistema</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Problemas latentes</span><p class="text-sm text-neutral-400 mt-1">Erros não detectados agora causam falhas silenciosas em uso real</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">12 checks categorizados</span><p class="text-sm text-neutral-400 mt-1">Sistema, Config, Rede e Skills — cada um com PASS/WARN/FAIL</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold"><code>--fix</code> idempotente</span><p class="text-sm text-neutral-400 mt-1">Auto-corrige permissões e diretórios sem destruir dados existentes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Doctor antes de tudo</span><p class="text-sm text-neutral-400 mt-1">Toda dúvida começa rodando <code>hermes doctor</code> — economiza horas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Reset preserva memory</span><p class="text-sm text-neutral-400 mt-1"><code>--reset</code> recria estrutura mas preserva <code>memory/</code> e <code>jobs/</code></p></div>
         </div>
       </div>
     </section>
@@ -525,39 +646,39 @@
     <section class="mb-12">
       <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
         <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="mr-3">📌</span> Resumo do Módulo 2.1
+          <span class="mr-3">✅</span> Resumo do Módulo
         </h2>
 
         <div class="space-y-4 mb-8">
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Pré-requisitos verificados</strong><span class="text-neutral-400"> — Node.js 18+, conta Anthropic, terminal funcional</span></div>
+            <div><strong class="text-white">Pré-requisitos checados</strong><span class="text-neutral-400"> — Node 20+, npm sem sudo, API key Anthropic válida e shell POSIX</span></div>
           </div>
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Hermes instalado via npm</strong><span class="text-neutral-400"> — com wizard de setup completo e sem etapas puladas</span></div>
+            <div><strong class="text-white">Instalação em duas etapas</strong><span class="text-neutral-400"> — <code>npm install -g hermes-agent</code> seguido de <code>hermes init</code> idempotente</span></div>
           </div>
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Estrutura ~/.hermes/ mapeada</strong><span class="text-neutral-400"> — soul.md, skills/, memory/ e config.json</span></div>
+            <div><strong class="text-white">Configuração em camadas</strong><span class="text-neutral-400"> — env vars para segredos, <code>~/.hermes/config.json</code> para usuário, <code>.hermes.json</code> por projeto</span></div>
           </div>
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Smoke tests executados</strong><span class="text-neutral-400"> — memória e execução de terminal validados</span></div>
+            <div><strong class="text-white">Smoke test mínimo</strong><span class="text-neutral-400"> — <code>hermes ping</code> + <code>hermes status</code> + um job trivial cobrem o pipeline</span></div>
           </div>
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Dashboard e integrações configurados</strong><span class="text-neutral-400"> — incluindo Claude Code se disponível</span></div>
+            <div><strong class="text-white">Pantheon como painel</strong><span class="text-neutral-400"> — UI read-only em <code>localhost:7777</code> para auditar jobs, skills, memory e logs</span></div>
           </div>
           <div class="flex items-start space-x-3">
             <span class="text-blue-400 mt-1">✓</span>
-            <div><strong class="text-white">Checklist de saúde completo</strong><span class="text-neutral-400"> — todos os 7 itens verificados antes de avançar</span></div>
+            <div><strong class="text-white"><code>hermes doctor</code> antes de avançar</strong><span class="text-neutral-400"> — 0 FAIL nos 12 checks é o portão de qualidade pré-trabalho real</span></div>
           </div>
         </div>
 
         <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
           <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">2.2 — Conectando OpenRouter: chaves, dashboard e roteamento de modelos para o Triad</p>
+          <p class="text-neutral-300">2.2 — Configurando OpenRouter como fallback de modelo</p>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4">

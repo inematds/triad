@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Gemini CLI — capacidade multimodal no terminal integrada ao Hermes">
-  <title>Gemini CLI | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Gemini CLI — capacidade multimodal no terminal: instale, autentique e integre ao Hermes para análise de vídeo, imagem e PDF">
+  <title>Gemini CLI — Capacidade multimodal no terminal | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,10 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -51,15 +52,21 @@
     html:not(.dark) .text-yellow-400 { color: #a16207; }
     html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
     html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
     html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    .code-block { background-color: #0b1220; border: 1px solid #1f2937; border-radius: 0.5rem; padding: 1rem; overflow-x: auto; color: #e2e8f0; }
+    html:not(.dark) .code-block { background-color: #0f172a; color: #e2e8f0; border-color: #1e293b; }
+    .code-block .prompt { color: #60a5fa; }
+    .code-block .comment { color: #94a3b8; }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
 
+  <!-- NAV -->
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -69,7 +76,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -88,7 +94,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -102,6 +107,7 @@
     </div>
   </nav>
 
+  <!-- BREADCRUMB -->
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="flex items-center space-x-2 text-sm text-neutral-400">
       <a href="../../index.html" class="hover:text-blue-400">Início</a>
@@ -112,304 +118,457 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.4</span>
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎬 Gemini CLI — Capacidade multimodal no terminal</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Instale, autentique e integre o Gemini CLI ao Hermes para análise de vídeo, imagem e PDF — o especialista multimodal do seu ecossistema local de ferramentas.</p>
+      <p class="text-lg text-neutral-400 max-w-3xl">Instale, autentique e integre o Gemini CLI ao Hermes para análise de vídeo, imagem e PDF diretamente do terminal — adicionando visão e áudio ao seu Triad.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Setup</div><div class="text-xs text-neutral-400">Tipo</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">~35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Intermediário</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Prática</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- T1 -->
+    <!-- TÓPICO 1 -->
     <section id="topico-1" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
-        <h2 class="text-2xl font-bold">💡 O que é CLI e por que o Gemini CLI é poderoso</h2>
+        <h2 class="text-2xl font-bold">💻 O que é CLI e por que o Gemini CLI é poderoso</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">CLI significa Command Line Interface — interação via terminal sem interface gráfica. O Gemini CLI é a implementação oficial do Google, e o que o torna especialmente poderoso é que <strong class="text-blue-400">o Hermes pode invocá-lo como uma ferramenta local</strong> — transformando Gemini em capacidade multimodal sempre disponível.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Uma CLI é um <strong class="text-blue-400">programa que vive no terminal</strong> — sem GUI, sem navegador, scriptável e composável com outros comandos. O Gemini CLI traz o modelo multimodal do Google direto pra esse ambiente, e isso muda como o Hermes despacha tarefas de visão e áudio.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">CLI é uma interface de linha de comando — uma ferramenta que roda no terminal e pode ser invocada por outros programas. O Gemini CLI é a implementação oficial do Google que traz análise multimodal (vídeo, imagem, PDF) para dentro do ecossistema do Hermes.</p>
+        <p class="text-neutral-300">O Gemini CLI é o cliente oficial em linha de comando do modelo Gemini do Google. Diferente de um chat web, aceita arquivos locais como entrada — imagem, PDF, vídeo, áudio — e devolve a resposta no stdout, pronta para pipe, redirecionamento ou consumo por outro processo.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
-          <h4 class="font-bold text-neutral-400 mb-3 text-sm">Modelos de IA convencionais</h4>
-          <ul class="space-y-2 text-sm text-neutral-300">
-            <li class="flex items-start gap-2"><span class="text-neutral-500">•</span>Interface gráfica obrigatória</li>
-            <li class="flex items-start gap-2"><span class="text-neutral-500">•</span>Não podem ser invocados por outros agentes</li>
-            <li class="flex items-start gap-2"><span class="text-neutral-500">•</span>Contexto isolado por sessão</li>
-          </ul>
-        </div>
-        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
-          <h4 class="font-bold text-blue-400 mb-3 text-sm">Gemini CLI local</h4>
-          <ul class="space-y-2 text-sm text-neutral-300">
-            <li class="flex items-start gap-2"><span class="text-blue-400">•</span>Invocável pelo Hermes como ferramenta</li>
-            <li class="flex items-start gap-2"><span class="text-blue-400">•</span>Analisa vídeo, imagem, PDF, áudio</li>
-            <li class="flex items-start gap-2"><span class="text-blue-400">•</span>Custo zero com conta Google gratuita</li>
-          </ul>
-        </div>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧩</span> Por que CLI importa para o Triad
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Scriptável:</strong> o Hermes invoca por <code class="text-blue-400">subprocess</code>, captura stdout, passa pro Crítico</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Local-first:</strong> arquivos ficam na sua máquina, só o necessário sobe na chamada</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Composável:</strong> pipa com <code class="text-blue-400">jq</code>, <code class="text-blue-400">grep</code>, <code class="text-blue-400">tee</code> e qualquer ferramenta unix</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>Multimodal nativo:</strong> imagem, PDF, vídeo, áudio em uma única flag</span></li>
+        </ul>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">O Claude do Triad é forte em texto e raciocínio, mas o tier gratuito não processa vídeo. Adicionar o Gemini CLI como ferramenta dá ao Hermes uma <strong>especialização multimodal local</strong> sem custo extra — ele passa a despachar tarefas de visão para o modelo certo.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">CLI vs interface gráfica</span><p class="text-sm text-neutral-400 mt-1">Terminal permite invocação por outros programas — interfaces gráficas não</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Hermes invocando CLI</span><p class="text-sm text-neutral-400 mt-1">Hermes pode chamar gemini como ferramenta de terminal automaticamente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Multimodal local</span><p class="text-sm text-neutral-400 mt-1">Vídeo, imagem, PDF e áudio processados localmente via terminal</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Custo zero</span><p class="text-sm text-neutral-400 mt-1">Tier gratuito do Gemini é generoso para uso pessoal e inclui Gemini 2.0</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">CLI vs SDK vs API</span><p class="text-sm text-neutral-400 mt-1">CLI é o binário; SDK é a lib em código; API é o endpoint HTTP cru</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Multimodal local</span><p class="text-sm text-neutral-400 mt-1">Arquivos ficam no disco, só o necessário sobe pra inferência</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Ferramenta do Hermes</span><p class="text-sm text-neutral-400 mt-1">Gemini CLI vira especialista que o Condutor invoca quando a tarefa exige visão</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">stdout como contrato</span><p class="text-sm text-neutral-400 mt-1">O Hermes consome o output igual a qualquer comando unix</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T2 -->
+    <!-- TÓPICO 2 -->
     <section id="topico-2" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
-        <h2 class="text-2xl font-bold">📦 Instalando o Gemini CLI</h2>
+        <h2 class="text-2xl font-bold">📥 Instalando o Gemini CLI</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">A instalação é feita via npm com uma única linha de comando. <strong class="text-blue-400">A instalação global via npm</strong> é o caminho mais simples e garante atualizações automáticas quando o Google lança novas versões.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A instalação é <strong class="text-blue-400">um clone + um npm install</strong>. Único pré-requisito é Node.js 18+ no PATH. Depois, o binário <code class="text-blue-400">gemini</code> fica disponível globalmente em qualquer diretório.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O processo de instalar o pacote <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">@google/gemini-cli</code> globalmente via npm para que o comando <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini</code> fique disponível em qualquer diretório e detectável pelo Hermes.</p>
+        <p class="text-neutral-300">A instalação do Gemini CLI consiste em clonar o repositório oficial, rodar <code class="text-blue-400">npm install -g .</code> para instalar globalmente, e verificar com <code class="text-blue-400">gemini --version</code> que o binário está acessível.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🛠️ Instalação e verificação</h3>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Passos de instalação
+        </h3>
         <div class="space-y-4">
-          <div>
-            <p class="text-sm text-neutral-400 mb-2">Instalar globalmente:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">npm install -g @google/gemini-cli</code>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">1</span></div>
+            <div class="flex-1">
+              <h4 class="font-semibold mb-2">Verificar Node.js 18+</h4>
+              <div class="code-block text-sm"><span class="prompt">$</span> node --version<br><span class="comment"># esperado: v18.x ou superior</span></div>
+            </div>
           </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-2">Verificar instalação:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">gemini --version</code>
-            <p class="text-sm text-neutral-300 mt-2">Se retornar o número da versão, a instalação está correta. Se retornar "command not found", tente reiniciar o terminal ou verificar o PATH.</p>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">2</span></div>
+            <div class="flex-1">
+              <h4 class="font-semibold mb-2">Clonar o repositório oficial</h4>
+              <div class="code-block text-sm"><span class="prompt">$</span> git clone https://github.com/google/gemini-cli &amp;&amp; cd gemini-cli</div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">3</span></div>
+            <div class="flex-1">
+              <h4 class="font-semibold mb-2">Instalar globalmente</h4>
+              <div class="code-block text-sm"><span class="prompt">$</span> npm install -g .<br><span class="comment"># instala o binário gemini no PATH global</span></div>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center"><span class="text-blue-400 font-bold">4</span></div>
+            <div class="flex-1">
+              <h4 class="font-semibold mb-2">Verificar instalação</h4>
+              <div class="code-block text-sm"><span class="prompt">$</span> gemini --version<br><span class="prompt">$</span> which gemini<br><span class="comment"># deve apontar para ~/.npm-global/bin/gemini ou similar</span></div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica
+        </h3>
+        <p class="text-neutral-300">Se <code class="text-primary">gemini: command not found</code> após instalar, seu npm global bin não está no PATH. Rode <code class="text-primary">npm config get prefix</code> e adicione <code class="text-primary">$PREFIX/bin</code> ao seu <code class="text-primary">.bashrc</code> ou <code class="text-primary">.zshrc</code>.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">npm install -g</span><p class="text-sm text-neutral-400 mt-1">Instalação global que torna o comando disponível em qualquer diretório</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">gemini --version</span><p class="text-sm text-neutral-400 mt-1">Verificação que confirma instalação bem-sucedida</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Atualização automática</span><p class="text-sm text-neutral-400 mt-1">npm update -g @google/gemini-cli atualiza para a versão mais recente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Instalação global vs local</span><p class="text-sm text-neutral-400 mt-1">Global (-g) é necessária para o Hermes detectar o CLI no PATH do sistema</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">npm install -g</span><p class="text-sm text-neutral-400 mt-1">Instala globalmente — binário fica disponível em qualquer diretório</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">PATH do npm</span><p class="text-sm text-neutral-400 mt-1">Pasta onde npm coloca executáveis globais — precisa estar no PATH</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Node 18+</span><p class="text-sm text-neutral-400 mt-1">Pré-requisito para fetch nativo e ESM modernos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">which</span><p class="text-sm text-neutral-400 mt-1">Confirma qual binário o shell executa quando você digita <code>gemini</code></p></div>
         </div>
       </div>
     </section>
 
-    <!-- T3 -->
+    <!-- TÓPICO 3 -->
     <section id="topico-3" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
         <h2 class="text-2xl font-bold">🔐 Autenticando com sua conta Google</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">A autenticação via conta Google <strong class="text-blue-400">elimina a necessidade de chave de API</strong> — o que significa custo zero para começar. O tier gratuito inclui acesso generoso ao Gemini 2.0 para uso pessoal.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Gemini CLI usa <strong class="text-blue-400">OAuth pela conta Google</strong> — sem chave de API, sem cartão. O comando abre o navegador, você consente, e o token fica salvo em <code class="text-blue-400">~/.config/gemini/</code>. Para uso pessoal e do Triad, o tier gratuito é generoso.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O fluxo OAuth via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini auth login</code> que autentica o CLI com sua conta Google pessoal — sem precisar de API key, Google Cloud ou cartão de crédito para o tier gratuito.</p>
+        <p class="text-neutral-300">A autenticação OAuth do Gemini CLI vincula o binário à sua conta Google. O fluxo é: rodar <code class="text-blue-400">gemini auth login</code>, completar consentimento no navegador, e o token de refresh fica persistido localmente para uso futuro.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🔑 Processo de autenticação</h3>
-        <div class="space-y-2 text-sm text-neutral-300">
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">1.</span>Execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini auth login</code> no terminal</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">2.</span>O CLI abre um link de autenticação no browser automaticamente</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">3.</span>Autentique com sua conta Google no browser</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">4.</span>Cole o código de verificação no terminal quando solicitado</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">5.</span>A autenticação é salva localmente e válida por meses</div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔑</span> Fluxo de autenticação
+        </h3>
+        <div class="code-block text-sm mb-4">
+          <span class="prompt">$</span> gemini auth login<br>
+          <span class="comment"># abre browser → consente → token salvo</span><br>
+          <br>
+          <span class="prompt">$</span> gemini auth status<br>
+          <span class="comment"># Logged in as: voce@gmail.com</span>
+        </div>
+        <p class="text-neutral-300 text-sm">Para revogar acesso a qualquer momento: <code class="text-blue-400">gemini auth logout</code> remove o token local.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Tier gratuito (use isto)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>60 requests por minuto</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>1.000 requests por dia</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Modelo Gemini 2.5 Pro disponível</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Vídeo, PDF, áudio e imagem inclusos</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Sem cartão de crédito</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Tier pago (só se necessário)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Cobra por token de entrada/saída</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Exige conta de billing GCP configurada</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Útil só em produção de alto volume</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Para Triad pessoal: gratuito basta</span></li>
+          </ul>
         </div>
       </div>
-      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3">💡 Auth vs API key</h3>
-        <p class="text-neutral-300 text-sm">A autenticação via conta Google é diferente de usar uma API key do Google Cloud. Com a conta Google pessoal, você usa o tier gratuito sem precisar de projeto no Google Cloud, cartão de crédito ou configuração adicional. Para uso comercial intensivo, use API key via Google AI Studio.</p>
-      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">gemini auth login</span><p class="text-sm text-neutral-400 mt-1">Comando que inicia o fluxo de autenticação OAuth com Google</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Tier gratuito</span><p class="text-sm text-neutral-400 mt-1">Limite generoso para uso pessoal — suficiente para o ecossistema do Triad</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Sem API key necessária</span><p class="text-sm text-neutral-400 mt-1">Conta Google pessoal é suficiente — sem Google Cloud ou cartão</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Validade da autenticação</span><p class="text-sm text-neutral-400 mt-1">Token salvo localmente permanece válido por longo período</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">OAuth vs API key</span><p class="text-sm text-neutral-400 mt-1">OAuth vincula à conta humana; API key é credencial técnica revogável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Token persistente</span><p class="text-sm text-neutral-400 mt-1">Salvo em <code>~/.config/gemini/</code> — não precisa refazer login a cada uso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Tier gratuito generoso</span><p class="text-sm text-neutral-400 mt-1">1.000 req/dia cobre Triad pessoal com folga</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Sem cartão</span><p class="text-sm text-neutral-400 mt-1">Sem risco de fatura surpresa — limite é hard cap, não soft</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T4 -->
+    <!-- TÓPICO 4 -->
     <section id="topico-4" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
-        <h2 class="text-2xl font-bold">⌨️ Comandos básicos — primeiras chamadas no terminal</h2>
+        <h2 class="text-2xl font-bold">⚡ Comandos básicos</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Com o CLI autenticado, os comandos básicos cobrem texto, arquivos e análise multimodal. <strong class="text-blue-400">Familiaridade com a sintaxe do CLI</strong> é necessária antes de integrá-lo ao Hermes — saber o que funciona diretamente facilita o debugging da integração.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Três flags resolvem 90% dos casos: <strong class="text-blue-400">prompt direto</strong>, <strong class="text-blue-400">-f arquivo</strong> e <strong class="text-blue-400">-i imagem</strong>. O resto é pipe e redirecionamento padrão do shell.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A sintaxe básica do Gemini CLI para perguntas de texto, análise de arquivos com a flag <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">-f</code> e processamento de URLs — os comandos que o Hermes usará ao delegar tarefas multimodais.</p>
+        <p class="text-neutral-300">A superfície de comando do Gemini CLI cobre prompts textuais simples, arquivos de documento (<code class="text-blue-400">-f</code> para PDF, vídeo, áudio) e imagens (<code class="text-blue-400">-i</code>). Todos retornam texto no stdout, que pode ser piped para outros comandos.</p>
       </div>
-      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">💻 Sintaxe dos comandos</h3>
-        <div class="space-y-4">
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Pergunta de texto simples:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">gemini "explique o que é arquitetura multi-modelo"</code>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold mb-3 text-blue-400">Prompt textual simples</h4>
+          <div class="code-block text-sm">
+            <span class="prompt">$</span> gemini "explique arquitetura de microsserviços em 3 bullets"
           </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Análise de PDF:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">gemini -f relatorio.pdf "resuma os principais pontos"</code>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold mb-3 text-blue-400">Análise de imagem (-i)</h4>
+          <div class="code-block text-sm">
+            <span class="prompt">$</span> gemini "describe this image" -i screenshot.png
           </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Análise de imagem:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">gemini -f screenshot.png "descreva o que você vê"</code>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold mb-3 text-blue-400">Análise de PDF (-f)</h4>
+          <div class="code-block text-sm">
+            <span class="prompt">$</span> gemini "summarize" -f doc.pdf
           </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Análise de vídeo (URL):</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">gemini -f https://youtube.com/watch?v=XYZ "analise os primeiros 30 segundos"</code>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold mb-3 text-blue-400">Análise de vídeo (-f)</h4>
+          <div class="code-block text-sm">
+            <span class="prompt">$</span> gemini "transcribe + highlights" -f video.mp4
+          </div>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-semibold mb-3 text-blue-400">Pipe para outros comandos</h4>
+          <div class="code-block text-sm">
+            <span class="prompt">$</span> gemini "extraia bullets em JSON" -f doc.pdf | jq '.bullets'<br>
+            <span class="prompt">$</span> gemini "resuma" -f video.mp4 &gt; resumo.md
           </div>
         </div>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica
+        </h3>
+        <p class="text-neutral-300">Vídeos longos consomem muito token. Para arquivos acima de 30 minutos, peça <strong>análise por trechos</strong> ou extraia o áudio com <code class="text-primary">ffmpeg</code> antes — áudio puro custa muito menos que vídeo.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">gemini "prompt"</span><p class="text-sm text-neutral-400 mt-1">Sintaxe básica para qualquer pergunta de texto</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">-f para arquivo</span><p class="text-sm text-neutral-400 mt-1">Flag que passa um arquivo ou URL como entrada para análise</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Tipos suportados</span><p class="text-sm text-neutral-400 mt-1">PDF, imagens (PNG/JPG), vídeos, áudio e URLs do YouTube</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Saída no terminal</span><p class="text-sm text-neutral-400 mt-1">Resultado é texto que pode ser capturado e processado por outros comandos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">-f vs -i</span><p class="text-sm text-neutral-400 mt-1">-f para documentos (PDF, vídeo, áudio); -i para imagens</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">stdout como contrato</span><p class="text-sm text-neutral-400 mt-1">Todo output vai pro stdout — pipa e redireciona livremente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Prompt explícito</span><p class="text-sm text-neutral-400 mt-1">O prompt manda no formato — peça JSON, markdown, bullets, como precisar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Custo por modalidade</span><p class="text-sm text-neutral-400 mt-1">Vídeo &gt; áudio &gt; PDF &gt; imagem &gt; texto em consumo de token</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T5 -->
+    <!-- TÓPICO 5 -->
     <section id="topico-5" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
-        <h2 class="text-2xl font-bold">🔗 Conectando o Gemini CLI ao Hermes como ferramenta</h2>
+        <h2 class="text-2xl font-bold">🔌 Conectando Gemini CLI ao Hermes como ferramenta</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Para que o Hermes possa usar o Gemini CLI, configure-o como ferramenta disponível. <strong class="text-blue-400">Se o CLI estiver no PATH, o Hermes o detecta automaticamente</strong> — a integração pode ser zero-configuração.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Uma vez instalado e autenticado, o Hermes <strong class="text-blue-400">detecta o Gemini automaticamente</strong> rodando <code class="text-blue-400">hermes setup tools</code>. Ele varre o PATH atrás de CLIs conhecidas e registra cada uma como skill disponível pro Condutor.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O processo de registrar o Gemini CLI como ferramenta no Hermes via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup tools</code> — após isso, o Hermes delega automaticamente tarefas multimodais ao Gemini sem precisar ser instruído explicitamente.</p>
+        <p class="text-neutral-300">O comando <code class="text-blue-400">hermes setup tools</code> faz auto-discovery de CLIs externas no seu PATH e gera <code class="text-blue-400">~/.hermes/tools.json</code> descrevendo cada ferramenta — nome, capabilities, invocação — para o Condutor consultar ao planejar tarefas.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🛠️ Configurando a integração</h3>
-        <div class="space-y-4">
-          <div>
-            <p class="text-sm text-neutral-400 mb-2">Verificar ferramentas detectadas automaticamente:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">hermes setup tools</code>
-            <p class="text-sm text-neutral-300 mt-2">Se o Gemini CLI estiver no PATH, aparece na lista automaticamente.</p>
-          </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-2">Se não detectar automaticamente, adicionar manualmente:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">hermes tools add gemini --command "gemini"</code>
-          </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🔍</span> Detecção automática
+        </h3>
+        <div class="code-block text-sm mb-4">
+          <span class="prompt">$</span> hermes setup tools<br>
+          <span class="comment">→ scanning PATH...</span><br>
+          <span class="comment">✓ found: gemini   (multimodal: video, image, pdf, audio)</span><br>
+          <span class="comment">✓ found: gh       (github: repos, issues, pr)</span><br>
+          <span class="comment">✓ found: ffmpeg   (media: convert, extract)</span><br>
+          <span class="comment">→ written to ~/.hermes/tools.json</span>
+        </div>
+        <p class="text-neutral-300 text-sm">A partir daí, o Condutor sabe que se uma tarefa exige análise de vídeo, ele deve despachar via Gemini — não tentar fazer no Claude.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🗂️ tools.json gerado (exemplo)</h3>
+        <div class="code-block text-sm">
+{<br>
+&nbsp;&nbsp;"gemini": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"binary": "/usr/local/bin/gemini",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"capabilities": ["vision", "video", "pdf", "audio"],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"invoke": "gemini \"{prompt}\" {flags}",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"cost_tier": "free"<br>
+&nbsp;&nbsp;}<br>
+}
         </div>
       </div>
+
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3">💡 Delegação automática</h3>
-        <p class="text-neutral-300 text-sm">Com o Gemini CLI configurado como ferramenta, o Hermes decide automaticamente quando usá-lo — você não precisa especificar "use o Gemini para isso". Se a tarefa envolve análise visual ou multimodal, o Hermes invoca o Gemini por conta própria. Isso é a diferença entre ter uma ferramenta disponível e ter uma ferramenta integrada.</p>
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica
+        </h3>
+        <p class="text-neutral-300">Rode <code class="text-primary">hermes setup tools</code> de novo sempre que instalar uma nova CLI. O Hermes não detecta em tempo real — só na configuração.</p>
       </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes setup tools</span><p class="text-sm text-neutral-400 mt-1">Wizard que detecta e configura ferramentas de terminal disponíveis</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Detecção automática</span><p class="text-sm text-neutral-400 mt-1">CLIs no PATH do sistema são detectados sem configuração manual</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes tools add</span><p class="text-sm text-neutral-400 mt-1">Comando para adicionar manualmente ferramentas não detectadas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Delegação automática</span><p class="text-sm text-neutral-400 mt-1">Hermes decide quando usar Gemini com base na natureza da tarefa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Auto-discovery</span><p class="text-sm text-neutral-400 mt-1">Hermes varre PATH e identifica CLIs conhecidas sem config manual</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">tools.json</span><p class="text-sm text-neutral-400 mt-1">Manifesto que o Condutor lê pra decidir qual ferramenta usar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Capabilities</span><p class="text-sm text-neutral-400 mt-1">Tags que mapeiam tarefa → ferramenta (vision → gemini, repo → gh)</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Re-scan manual</span><p class="text-sm text-neutral-400 mt-1">Setup roda só on-demand — instalou ferramenta nova, rode de novo</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T6 -->
+    <!-- TÓPICO 6 -->
     <section id="topico-6" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
-        <h2 class="text-2xl font-bold">🎬 Caso de uso: analisar vídeo/imagem via Hermes</h2>
+        <h2 class="text-2xl font-bold">🎥 Caso de uso: analisar vídeo/imagem via Hermes</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Com o Gemini CLI integrado, análise de vídeo e imagem se torna uma capacidade natural do Hermes. <strong class="text-blue-400">Análise de vídeo é algo que nenhum outro modelo no Triad faz bem</strong> — Gemini é o especialista multimodal do ecossistema.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Com o Gemini registrado, o Hermes <strong class="text-blue-400">despacha automaticamente</strong> tarefas multimodais. Você manda uma instrução natural — "resuma essa reunião" — e o Condutor decide invocar o Gemini, não o Claude.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">Um fluxo onde o Hermes recebe um pedido de análise de vídeo ou imagem, invoca automaticamente o Gemini CLI com a URL ou arquivo, e entrega o breakdown estruturado — sem que você precise interagir com o CLI diretamente.</p>
+        <p class="text-neutral-300">O fluxo end-to-end onde o Hermes recebe tarefa que envolve mídia, consulta <code class="text-blue-400">tools.json</code>, identifica que o Gemini tem capability <code class="text-blue-400">vision</code>, monta o comando, executa, captura stdout e devolve o resultado integrado ao loop Worker-Crítico.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🎯 Caso de uso concreto</h3>
-        <div class="bg-dark-800/50 rounded-lg p-4 border border-dark-600 mb-4">
-          <p class="text-sm text-neutral-400 mb-2">Prompt para o Hermes:</p>
-          <p class="text-neutral-300 text-sm italic">"Use o Gemini CLI para analisar meu vídeo do YouTube [URL] e me dê um breakdown dos primeiros 30 segundos — o que aparece na tela, qual é o gancho visual e qual é a energia transmitida"</p>
-        </div>
-        <h4 class="font-semibold text-white mb-3">O que acontece nos bastidores:</h4>
-        <div class="space-y-2 text-sm text-neutral-300">
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">1.</span>Hermes recebe o pedido e identifica que precisa de análise de vídeo</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">2.</span>Invoca o Gemini CLI automaticamente com a URL do vídeo</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">3.</span>Gemini analisa o vídeo e retorna dados visuais estruturados</div>
-          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">4.</span>Hermes formata e entrega o breakdown para você</div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎬</span> Exemplo prático
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <p><strong class="text-blue-400">Você:</strong> "Hermes, resuma a reunião em <code>reuniao.mp4</code> e liste decisões"</p>
+          <p><strong class="text-blue-400">Condutor:</strong> identifica tarefa multimodal → consulta tools.json → escolhe Gemini</p>
+          <p><strong class="text-blue-400">Worker:</strong> invoca <code>gemini "transcreva + liste decisões em JSON" -f reuniao.mp4</code></p>
+          <p><strong class="text-blue-400">Crítico:</strong> valida output contra critérios (decisões têm responsável? prazo?)</p>
+          <p><strong class="text-blue-400">SHIP/REVISE:</strong> se REVISE, Worker re-invoca com prompt refinado</p>
         </div>
       </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🧪 Comando equivalente manual</h3>
+        <div class="code-block text-sm">
+<span class="prompt">$</span> gemini "transcreva a reunião e estruture em JSON com:<br>
+&nbsp;&nbsp;- resumo (3 bullets)<br>
+&nbsp;&nbsp;- decisoes: [{decisao, responsavel, prazo}]<br>
+&nbsp;&nbsp;- acoes_pendentes: [{acao, owner}]" \<br>
+&nbsp;&nbsp;-f reuniao.mp4 | jq '.' &gt; reuniao_estruturada.json
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Por que isso muda o Triad
+        </h3>
+        <p class="text-neutral-300">Sem o Gemini, o Triad estava limitado a texto e código. Com ele, <strong>qualquer ativo de mídia</strong> entra no loop — screenshots de bug, vídeos de demo, PDFs de contrato, áudios de cliente. O Condutor agora roteia por modalidade, não só por tipo de tarefa.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Análise de vídeo do YouTube</span><p class="text-sm text-neutral-400 mt-1">Gemini processa URLs diretamente — sem download necessário</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Breakdown visual</span><p class="text-sm text-neutral-400 mt-1">Análise estruturada de elementos visuais, narrativa e energia do conteúdo</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Hermes como orquestrador</span><p class="text-sm text-neutral-400 mt-1">Hermes coordena a chamada ao Gemini e processa o resultado</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Especialista multimodal</span><p class="text-sm text-neutral-400 mt-1">Gemini é o único modelo do ecossistema com capacidade nativa de vídeo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Roteamento por modalidade</span><p class="text-sm text-neutral-400 mt-1">Condutor escolhe ferramenta pela mídia da entrada, não só pelo tipo de tarefa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Gemini no loop</span><p class="text-sm text-neutral-400 mt-1">Output do Gemini entra no Crítico como qualquer draft — mesmas regras</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Prompt estruturado</span><p class="text-sm text-neutral-400 mt-1">Peça JSON sempre que o resultado for consumido por outro programa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Mídia como input</span><p class="text-sm text-neutral-400 mt-1">Vídeo, áudio, imagem viram primeira-classe no Triad com Gemini</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T7 -->
+    <!-- TÓPICO 7 -->
     <section id="topico-7" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">7</span>
-        <h2 class="text-2xl font-bold">🧩 Expandindo para GitHub CLI, OpenAI CLI e outros</h2>
+        <h2 class="text-2xl font-bold">🧰 Expandindo para GitHub CLI, OpenAI CLI e outros</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">O Gemini CLI é um exemplo de um padrão extensível. <strong class="text-blue-400">Qualquer CLI instalado pode se tornar uma ferramenta do Hermes</strong> — o ecossistema de CLIs transforma o Hermes em um orquestrador de capacidades locais ilimitadas.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O padrão <strong class="text-blue-400">CLI-como-ferramenta</strong> é extensível. Qualquer binário com stdin/stdout bem definidos pode virar skill do Hermes — basta estar no PATH e ter entrada no <code class="text-blue-400">tools.json</code>.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O padrão de integração que permite adicionar qualquer CLI ao ecossistema do Hermes — GitHub CLI, Vercel CLI, AWS CLI e qualquer outro que esteja no PATH e retorne texto podem ser registrados e invocados automaticamente.</p>
+        <p class="text-neutral-300">O modelo extensível onde Gemini, GitHub CLI, OpenAI CLI, ffmpeg, jq e qualquer outro binário scriptável se tornam ferramentas registradas que o Condutor pode despachar conforme a capability necessária.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🔌 CLIs que seguem o mesmo padrão</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-3">
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">GitHub CLI (gh)</strong>
-              <p class="text-xs text-neutral-400 mt-1">Cria issues, PRs e releases via Hermes sem abrir o browser</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Vercel CLI</strong>
-              <p class="text-xs text-neutral-400 mt-1">Deploy de projetos web diretamente pelo Hermes</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">OpenAI CLI</strong>
-              <p class="text-xs text-neutral-400 mt-1">Acesso a modelos e fine-tuning da OpenAI via terminal</p>
-            </div>
-          </div>
-          <div class="space-y-3">
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">AWS CLI / gcloud</strong>
-              <p class="text-xs text-neutral-400 mt-1">Infraestrutura cloud gerenciada pelo Hermes</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Stripe CLI</strong>
-              <p class="text-xs text-neutral-400 mt-1">Operações de pagamento e testes de webhook</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Qualquer CLI local</strong>
-              <p class="text-xs text-neutral-400 mt-1">Se está no PATH e retorna texto, o Hermes pode usá-lo</p>
-            </div>
-          </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🧩</span> CLIs comuns para registrar
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>gh (GitHub CLI):</strong> issues, PRs, repos, workflows — Condutor lê issue → Worker abre PR</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>openai CLI:</strong> alternativa quando precisar de DALL-E para imagem ou Whisper para áudio</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>ffmpeg:</strong> extrai áudio de vídeo antes de mandar pro Gemini — corta custo em ordens de magnitude</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>jq:</strong> processa JSON entre etapas, filtra campos, transforma estruturas</span></li>
+          <li class="flex items-start space-x-2"><span class="text-blue-400 mt-1">•</span><span><strong>pandoc:</strong> converte entre formatos de documento (markdown, docx, html, pdf)</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🔧 Adicionando uma CLI customizada ao tools.json</h3>
+        <div class="code-block text-sm">
+{<br>
+&nbsp;&nbsp;"minha_cli": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"binary": "/usr/local/bin/minha-cli",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"capabilities": ["domain_x", "analysis"],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"invoke": "minha-cli --input {file} --prompt \"{prompt}\"",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"cost_tier": "local"<br>
+&nbsp;&nbsp;}<br>
+}
         </div>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> O padrão por trás
+        </h3>
+        <p class="text-neutral-300">O Triad não é monolítico. Cada CLI é um <strong>especialista substituível</strong>. Gemini hoje é o melhor multimodal gratuito; amanhã pode ser outro. O contrato — entrada via flag, saída via stdout — sobrevive à troca. Construa para o contrato, não para o vendor.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">gh CLI para GitHub</span><p class="text-sm text-neutral-400 mt-1">Hermes pode criar issues e PRs sem sair do fluxo principal</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Padrão extensível</span><p class="text-sm text-neutral-400 mt-1">O mesmo processo de configuração funciona para qualquer CLI</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Hermes como orquestrador</span><p class="text-sm text-neutral-400 mt-1">Camada de inteligência que coordena múltiplas ferramentas especializadas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Ecossistema local</span><p class="text-sm text-neutral-400 mt-1">CLIs instalados localmente ampliam capacidades sem dependência de interfaces web</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">CLI-como-ferramenta</span><p class="text-sm text-neutral-400 mt-1">Padrão extensível: qualquer binário scriptável vira skill do Triad</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Contrato stdout/stdin</span><p class="text-sm text-neutral-400 mt-1">Interface unix universal — sobrevive a troca de vendor</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Composição de ferramentas</span><p class="text-sm text-neutral-400 mt-1">ffmpeg extrai áudio → gemini transcreve → jq estrutura — pipeline real</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Especialista substituível</span><p class="text-sm text-neutral-400 mt-1">Cada CLI cobre um nicho — trocar uma não quebra o sistema</p></div>
         </div>
       </div>
     </section>
@@ -417,28 +576,56 @@
     <!-- RESUMO -->
     <section class="mb-12">
       <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo 2.4</h2>
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
         <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Gemini CLI instalado globalmente</strong><span class="text-neutral-400"> — npm install -g e verificação com gemini --version</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Autenticado com conta Google</strong><span class="text-neutral-400"> — sem API key, tier gratuito para uso pessoal</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Comandos básicos dominados</strong><span class="text-neutral-400"> — texto, PDF, imagem e vídeo via -f</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Gemini integrado ao Hermes como ferramenta</strong><span class="text-neutral-400"> — detecção automática via PATH ou configuração manual</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Caso de uso de vídeo validado</strong><span class="text-neutral-400"> — Hermes delega análise multimodal ao Gemini automaticamente</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Padrão extensível compreendido</strong><span class="text-neutral-400"> — qualquer CLI pode ser adicionado ao ecossistema do Hermes</span></div></div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">CLI como ferramenta</strong><span class="text-neutral-400"> — terminal scriptável, composável, local-first; melhor interface para integração com Hermes</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Instalação em 4 passos</strong><span class="text-neutral-400"> — Node 18+, git clone, npm install -g, verificar com <code>gemini --version</code></span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">OAuth com conta Google</strong><span class="text-neutral-400"> — <code>gemini auth login</code>, sem cartão, tier gratuito de 1.000 req/dia</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Três flags resolvem tudo</strong><span class="text-neutral-400"> — prompt direto, <code>-i imagem</code>, <code>-f arquivo</code> para PDF/vídeo/áudio</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Auto-discovery do Hermes</strong><span class="text-neutral-400"> — <code>hermes setup tools</code> varre PATH, escreve tools.json, expõe Gemini ao Condutor</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Padrão extensível</strong><span class="text-neutral-400"> — gh, openai, ffmpeg, jq, pandoc seguem o mesmo modelo. Construa para o contrato, não para o vendor</span></div>
+          </div>
         </div>
+
         <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
           <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">2.5 — Criando a skill Orpheus: seu deep work agent com o fluxo Triad completo</p>
+          <p class="text-neutral-300">2.5 — Orpheus: o sintetizador de áudio do Triad</p>
         </div>
+
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-2-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.3</a>
-          <a href="modulo-2-5.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 2
+          </a>
+          <a href="modulo-2-5.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">
+            Próximo Módulo →
+          </a>
         </div>
       </div>
     </section>
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="border-t border-dark-600 py-8 mt-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
       <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
@@ -450,12 +637,14 @@
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     const html = document.documentElement;
+
     if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
       themeToggleDarkIcon.classList.remove('hidden');
       html.classList.remove('dark');
     } else {
       themeToggleLightIcon.classList.remove('hidden');
     }
+
     themeToggle.addEventListener('click', () => {
       themeToggleDarkIcon.classList.toggle('hidden');
       themeToggleLightIcon.classList.toggle('hidden');
@@ -463,5 +652,6 @@
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
   </script>
+
 </body>
 </html>

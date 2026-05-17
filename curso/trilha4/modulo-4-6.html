@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Onboarding Não-Técnico — facilitando a adoção do TRIAD para quem não programa">
-  <title>Onboarding Não-Técnico | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Onboarding para não-técnicos — templates, guias e métricas de adoção para escalar o TRIAD além do terminal">
+  <title>Onboarding para não-técnicos | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -62,7 +62,6 @@
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -72,7 +71,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -91,7 +89,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -119,24 +116,24 @@
   <!-- HEADER -->
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.6</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🤝 Onboarding Não-Técnico</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Facilitando a adoção do TRIAD para quem não programa — soul.md simplificado, personas prontas e suporte estruturado.</p>
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.6 · FINAL DO CURSO</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">👥 Onboarding para não-técnicos — Templates e guias</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Escale o TRIAD para gestores e criadores — simplificação, templates prontos e métricas de adoção.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">7</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~35</div>
+          <div class="text-xl font-bold text-amber-400">~45</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Básico</div>
+          <div class="text-xl font-bold text-amber-400">Intermediário</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Estratégia</div>
+          <div class="text-xl font-bold text-amber-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,285 +142,604 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🚧 O desafio de escalar para usuários não-técnicos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O TRIAD nasceu no terminal — mas <strong class="text-amber-400">80% dos usuários potenciais nunca vão abrir um terminal</strong>. Gestores, criadores, analistas e pesquisadores precisam dos mesmos resultados sem precisar memorizar comandos. Esse é o gap de empatia que separa "ferramenta de poder" de "ferramenta universal".
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🚧</span>
-          <div>
-            <span class="font-medium">As quatro barreiras para usuários não-técnicos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Por que o TRIAD parece complexo demais</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Usuários não-técnicos enfrentam quatro barreiras ao adotar o TRIAD: (1) Barreira de instalação — terminal, npm, variáveis de ambiente parecem intimidantes; (2) Barreira conceitual — API keys, modelos, tokens são jargão desconhecido; (3) Barreira de conteúdo — soul.md vazio sem saber o que escrever; (4) Barreira de confiança — medo de errar e "quebrar algo". Cada barreira precisa de uma solução específica.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Identificar as barreiras exatas permite criar soluções direcionadas. Sem esse mapeamento, você tenta ensinar "tudo" e não resolve "nada" para o usuário não-técnico que abandona na segunda etapa.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Barreira de instalação vs barreira conceitual</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Conteúdo vazio como bloqueio de início</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Medo de errar como barreira emocional</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Solução específica para cada barreira</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O gap de empatia é a distância entre o modelo mental do criador técnico (terminal, markdown, flags, jobs) e o modelo mental do usuário final não-técnico (formulários, botões, resultados, "isso vai me ajudar agora?"). Onboarding eficaz é o que costura esse gap.</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">📝</span>
-          <div>
-            <span class="font-medium">soul.md simplificado — 10 perguntas</span>
-            <span class="text-neutral-500 text-sm ml-2">- Contexto mínimo viável para começar</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Em vez do soul.md completo (com 15+ seções), o onboarding não-técnico usa um template de 10 perguntas respondidas em linguagem natural: (1) Quem é você profissionalmente?, (2) Qual é o seu maior objetivo agora?, (3) Quais são seus 3 projetos ativos?, (4) Como você prefere receber informações — listas, texto corrido, exemplos?, (5) Qual é sua maior dificuldade atual?, mais 5 perguntas sobre estilo e contexto.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Um soul.md vazio paralisa o usuário. Dez perguntas simples permitem preencher 80% do contexto necessário em 15 minutos — sem precisar entender a estrutura técnica do arquivo.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>10 perguntas em linguagem natural</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Contexto mínimo viável para começar</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Expansão incremental ao longo do tempo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sem necessidade de entender estrutura técnica</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">📖</span>
-          <div>
-            <span class="font-medium">Guia de primeiro uso</span>
-            <span class="text-neutral-500 text-sm ml-2">- As qualidades de um bom guia inicial</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Um bom guia de primeiro uso para o TRIAD tem quatro qualidades: (1) Uma vitória rápida nos primeiros 5 minutos — a pessoa delega uma tarefa real e vê o resultado; (2) Linguagem sem jargão — "seu assistente" em vez de "o agente", "escreva sobre você" em vez de "preencha o soul.md"; (3) Screenshots de cada passo crítico; (4) Checklist de progresso — o usuário sabe onde está e quanto falta.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">A vitória rápida é psicologicamente crítica — a pessoa que consegue algo concreto nos primeiros 5 minutos tem 5x mais chance de continuar o onboarding do que a que fica 20 minutos configurando sem ver resultado.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Vitória rápida nos primeiros 5 minutos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Linguagem sem jargão técnico</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Screenshots de passos críticos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Checklist de progresso visível</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">🎭</span>
-          <div>
-            <span class="font-medium">Personas prontas para uso imediato</span>
-            <span class="text-neutral-500 text-sm ml-2">- Quatro templates para perfis comuns</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Quatro personas pré-configuradas para perfis comuns de usuários não-técnicos: (1) Orpheus — escritor e criador de conteúdo; (2) Scribe — assistente de escrita formal e documentação; (3) Ágora — facilitador de reuniões e resumos executivos; (4) PersonaPlanner — planejamento de projetos e tarefas. Cada uma tem um system prompt otimizado que funciona sem customização desde o primeiro uso.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Personas prontas eliminam a barreira de conteúdo do Pantheon. O usuário não precisa escrever um system prompt do zero — ele escolhe a persona que mais se aproxima do seu uso e começa imediatamente.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Orpheus para criação de conteúdo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Scribe para escrita formal</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Ágora para facilitação e resumos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>PersonaPlanner para gestão de projetos</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">❓</span>
-          <div>
-            <span class="font-medium">FAQ das 10 dúvidas mais comuns</span>
-            <span class="text-neutral-500 text-sm ml-2">- Respostas diretas para quem está começando</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">As 10 dúvidas mais frequentes de usuários não-técnicos: (1) Preciso saber programar? Não. (2) Quanto custa por mês? Menos de $10 para uso moderado. (3) Meus dados ficam seguros? Sim, soul.md fica no seu computador. (4) Posso usar sem internet? Parcialmente — Gemini CLI funciona offline para multimodal. (5) O que acontece se eu errar o soul.md? Nada — você edita e reinicia. Mais 5 perguntas sobre personas, integração e modelos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Um FAQ bem construído reduz o volume de suporte humano em 60-70% — as mesmas dúvidas se repetem, e respondê-las uma vez em escrito é mais eficiente do que responder individualmente para cada pessoa.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Dúvidas sobre custo e segurança primeiro</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Linguagem tranquilizadora (nada quebra)</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Respostas curtas com link para mais detalhes</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>FAQ reduz 70% das demandas de suporte</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🆘</span>
-          <div>
-            <span class="font-medium">Protocolo de suporte — 4 níveis de escalada</span>
-            <span class="text-neutral-500 text-sm ml-2">- Do autoatendimento ao suporte humano</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O protocolo de suporte tem 4 níveis: (1) Autoatendimento — FAQ e guia de primeiro uso cobrem 70% dos problemas; (2) Documentação aprofundada — módulos do curso cobrem 20% restante; (3) Comunidade — grupo no Telegram ou Discord onde usuários ajudam entre si; (4) Suporte direto — reservado para bugs confirmados ou casos edge que o material não cobre. Cada nível tem SLA definido.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Sem níveis de escalada, todo problema chega diretamente ao criador do sistema — insustentável em escala. A pirâmide de suporte garante que o suporte humano é usado apenas onde agrega valor único.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>4 níveis: FAQ → Docs → Comunidade → Direto</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Cada nível com SLA e critério de escalada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Comunidade como amplificador de suporte</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Suporte direto apenas para casos edge</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">📈</span>
-          <div>
-            <span class="font-medium">Métricas de adoção bem-sucedida</span>
-            <span class="text-neutral-500 text-sm ml-2">- Como saber se o onboarding está funcionando</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Cinco métricas para medir adoção bem-sucedida do TRIAD: (1) Taxa de conclusão do guia de primeiro uso — meta: 70%+; (2) Tempo até primeira tarefa delegada — meta: menos de 30 minutos; (3) Retenção no sétimo dia — meta: 50%+ ainda usando; (4) NPS do onboarding — meta: 7+; (5) Volume de tickets de suporte por novo usuário — meta: menos de 1 ticket nos primeiros 7 dias.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Métricas transformam "acho que está funcionando" em evidência concreta. Se a taxa de conclusão do guia cai para 40%, você sabe que tem um problema específico a resolver — não uma vaga sensação de que algo está errado.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Conclusão do guia como métrica de topo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tempo até primeira delegação</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Retenção D7 como indicador de valor percebido</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tickets de suporte como proxy de fricção</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🧠</span> Três barreiras que matam adoção
+        </h3>
+        <div class="space-y-3 text-neutral-300">
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">4 barreiras mapeadas</strong><span class="text-neutral-400"> — instalação, conceitual, conteúdo, confiança</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">①</span>
+            <span><strong>Barreira de instalação</strong> — "preciso instalar Python, Node, configurar PATH?" Se a primeira tela já assusta, o usuário desiste antes de ver valor.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">soul.md de 10 perguntas</strong><span class="text-neutral-400"> — contexto mínimo viável em 15 minutos</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">②</span>
+            <span><strong>Barreira de configuração</strong> — pedir para o usuário escrever um soul.md em markdown puro é exigir que ele aprenda uma linguagem antes de receber valor.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">4 personas prontas</strong><span class="text-neutral-400"> — Orpheus, Scribe, Ágora e PersonaPlanner</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Suporte estruturado em 4 níveis</strong><span class="text-neutral-400"> — escalada eficiente do FAQ ao direto</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">③</span>
+            <span><strong>Barreira de vocabulário</strong> — "Worker", "Crítico", "Pantheon", "Hermes" são palavras vazias até que o usuário veja o resultado. Inverta: mostre o resultado primeiro, dê o nome depois.</span>
           </div>
         </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Parabéns!</h3>
-          <p class="text-neutral-300">Você concluiu a Trilha 4 — Construção e Escala. O seu sistema TRIAD está pronto para operar em escala real, com arquitetura sólida, integrações externas, automação overnight e onboarding para qualquer perfil de usuário.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Onboarding técnico (afasta)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Clone o repositório, copie o .env.example..."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Edite seu soul.md seguindo o schema"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Configure as flags do Hermes no config.yaml"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Tutorial de 40 minutos antes do primeiro resultado</span></li>
+          </ul>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-4-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.5</a>
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Ver Trilha 4 Completa →</a>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Onboarding humano (engaja)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Instalador único — um clique, sem PATH</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Formulário web gera o soul.md por você</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Persona pré-pronta — escolha uma, comece</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Primeiro resultado em menos de 5 minutos</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Cada amigo, colega ou cliente que você quer ajudar com o TRIAD é um teste real de onboarding. Se você não tem templates prontos e um guia simples, vai gastar horas explicando — e a maioria desiste antes de ver valor. Onboarding é o multiplicador silencioso da adoção.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Gap de empatia</span><p class="text-sm text-neutral-400 mt-1">Distância entre o modelo mental técnico e o do usuário final não-técnico</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Time-to-value</span><p class="text-sm text-neutral-400 mt-1">Tempo entre instalação e o primeiro resultado útil — meta: menos de 5 minutos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Resultado antes de jargão</span><p class="text-sm text-neutral-400 mt-1">Mostre o que o sistema entrega antes de ensinar como ele se chama</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Templates como atalho</span><p class="text-sm text-neutral-400 mt-1">Cada template pronto remove uma decisão de configuração do usuário</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-4-5.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.5: Deploy GitHub Pages</a>
-      <a href="index.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Trilha 4: Índice completo →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">📄 Simplificando o soul.md — versão para não-técnicos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O soul.md em markdown puro é poderoso — e intimidador. <strong class="text-amber-400">A versão form-based</strong> traduz cada campo do soul em uma pergunta de formulário web. O usuário responde, o sistema gera o markdown.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um wizard web em 6 telas que captura as informações essenciais do soul (identidade, missão, restrições, estilo, valores, sucesso) através de campos de formulário com placeholders e exemplos — e exporta um soul.md formatado e validado.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🪄</span> Antes e depois — o mesmo soul, duas interfaces
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-neutral-500 mb-2 font-semibold">ANTES — markdown puro</p>
+            <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 space-y-1">
+              <p class="text-amber-400"># soul.md</p>
+              <p class="text-amber-400">## identity</p>
+              <p>name: ___</p>
+              <p>archetype: ___</p>
+              <p class="text-amber-400">## mission</p>
+              <p>primary: ___</p>
+              <p>scope: ___</p>
+              <p class="text-amber-400">## constraints</p>
+              <p>- ___</p>
+              <p>- ___</p>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs text-neutral-500 mb-2 font-semibold">DEPOIS — formulário web</p>
+            <div class="bg-dark-700/50 rounded-lg p-4 text-xs text-neutral-300 space-y-2">
+              <div>
+                <p class="text-amber-400 font-semibold">Nome do seu assistente</p>
+                <p class="text-neutral-500 italic">ex: "Athena", "Apolo", "Maria"</p>
+              </div>
+              <div>
+                <p class="text-amber-400 font-semibold">Em uma frase, o que ele faz?</p>
+                <p class="text-neutral-500 italic">ex: "Escreve posts pra LinkedIn"</p>
+              </div>
+              <div>
+                <p class="text-amber-400 font-semibold">O que ele NUNCA deve fazer?</p>
+                <p class="text-neutral-500 italic">ex: "Usar emojis, prometer ROI"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica de design
+        </h3>
+        <p class="text-neutral-300">Cada campo do formulário deve ter <strong>placeholder concreto</strong> (não "ex: seu objetivo"), <strong>exemplo real</strong> abaixo e <strong>botão "usar este exemplo"</strong>. O usuário não-técnico não sabe o que escrever até ver alguém escrevendo.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Form-to-markdown</span><p class="text-sm text-neutral-400 mt-1">Formulário web captura entrada estruturada e gera markdown válido por baixo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Placeholders concretos</span><p class="text-sm text-neutral-400 mt-1">Exemplos reais reduzem em 60% o tempo de preenchimento</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Validação inline</span><p class="text-sm text-neutral-400 mt-1">Erros aparecem no campo, não em uma tela de "schema inválido"</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Export reversível</span><p class="text-sm text-neutral-400 mt-1">O usuário avançado ainda pode editar o markdown gerado</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">📖 Guia de primeiro uso — a primeira semana com Hermes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem um caminho narrado, o usuário fica olhando para uma tela em branco. <strong class="text-amber-400">A jornada de 7 dias</strong> dá um ritmo, uma vitória pequena por dia, e leva à autonomia sem sobrecarga cognitiva.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um roteiro de 7 dias que distribui a complexidade do TRIAD em incrementos pequenos — instalação no dia 1, primeira tarefa no dia 3, exploração no dia 5, primeiro job assíncrono no dia 7. Nenhum passo exige mais de 15 minutos.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-amber-500/20 flex flex-col items-center justify-center">
+            <span class="text-xs text-amber-400">DIA</span>
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Instale e configure seu primeiro soul</h4>
+            <p class="text-sm text-neutral-400">15 min. Baixe o instalador, escolha uma persona pré-pronta (Athena para escrita, Orpheus para estratégia), responda 6 perguntas no wizard. Resultado: Hermes pronto pra conversar.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-amber-500/20 flex flex-col items-center justify-center">
+            <span class="text-xs text-amber-400">DIA</span>
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Sua primeira tarefa real</h4>
+            <p class="text-sm text-neutral-400">10 min. Use o template "Resuma este texto em 5 pontos" ou "Reescreva este e-mail mais conciso". Pequena, concreta, com resultado tangível. Sensação de "isso funciona".</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-amber-500/20 flex flex-col items-center justify-center">
+            <span class="text-xs text-amber-400">DIA</span>
+            <span class="text-amber-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Tour pelo Pantheon</h4>
+            <p class="text-sm text-neutral-400">15 min. Apresente os outros personagens (Athena, Orpheus, Apolo) com analogias simples — "Hermes é o mensageiro, Orpheus é o estrategista". Cada um com 1 exemplo de quando usar.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-amber-500/20 flex flex-col items-center justify-center">
+            <span class="text-xs text-amber-400">DIA</span>
+            <span class="text-amber-400 font-bold">7</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Primeiro job overnight</h4>
+            <p class="text-sm text-neutral-400">10 min de setup, processa enquanto dorme. "Analise estes 20 documentos e me devolva um resumo de manhã". O usuário sente o poder da execução assíncrona — momento "wow" que cimenta o hábito.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Princípio de design
+        </h3>
+        <p class="text-neutral-300">Cada dia tem <strong>uma única vitória</strong>. Não tente ensinar persona + tarefa + Pantheon + jobs no dia 1. Esparramar a complexidade ao longo da semana mantém o usuário sentindo progresso, não sobrecarga.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Jornada de 7 dias</span><p class="text-sm text-neutral-400 mt-1">Quatro marcos espaçados, cada um com vitória concreta e sem sobreposição</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Momento wow no dia 7</span><p class="text-sm text-neutral-400 mt-1">O job overnight é o que converte curiosidade em hábito de uso recorrente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Uma vitória por dia</span><p class="text-sm text-neutral-400 mt-1">Não acumule features no mesmo dia — distribua a complexidade no tempo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">15 min por sessão</span><p class="text-sm text-neutral-400 mt-1">Acima disso, o usuário não-técnico abandona — abaixo, não sente progresso</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">🎭 Templates de personas prontas para copiar e usar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Pedir para o usuário não-técnico "criar uma persona do zero" é a forma mais rápida de matar a adoção. <strong class="text-amber-400">Templates prontos</strong> dão um ponto de partida que ele pode ajustar — não inventar.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Uma biblioteca curada de souls pré-prontos, cada um com nome mitológico, descrição em uma frase, caso de uso ideal e três tarefas de exemplo. O usuário escolhe a que mais se aproxima do que precisa e ajusta no máximo 2-3 campos.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="text-3xl">🎯</span>
+            <h4 class="font-bold text-amber-400">Orpheus — Estratégia</h4>
+          </div>
+          <p class="text-sm text-neutral-400 mb-3">Pesa decisões, monta argumentos, faz pre-mortem. Ideal pra fundadores, PMs, consultores.</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p class="text-amber-400">soul: orpheus.md</p>
+            <p>archetype: strategist</p>
+            <p>tone: direto, sem floreio</p>
+            <p>output: argumento + contra</p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="text-3xl">✍️</span>
+            <h4 class="font-bold text-amber-400">Athena — Escrita</h4>
+          </div>
+          <p class="text-sm text-neutral-400 mb-3">Redação de posts, e-mails, ensaios. Ideal pra criadores, marketers, escritores.</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p class="text-amber-400">soul: athena.md</p>
+            <p>archetype: writer</p>
+            <p>tone: claro, calor humano</p>
+            <p>output: rascunho + 2 variantes</p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="text-3xl">🔍</span>
+            <h4 class="font-bold text-amber-400">Hermes-research — Pesquisa</h4>
+          </div>
+          <p class="text-sm text-neutral-400 mb-3">Deep dives, sínteses, comparativos. Ideal pra analistas, pesquisadores, estudantes.</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p class="text-amber-400">soul: hermes-research.md</p>
+            <p>archetype: researcher</p>
+            <p>tone: cético, cita fontes</p>
+            <p>output: síntese + bibliografia</p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <div class="flex items-center space-x-3 mb-3">
+            <span class="text-3xl">🎨</span>
+            <h4 class="font-bold text-amber-400">Apollo — Criativo</h4>
+          </div>
+          <p class="text-sm text-neutral-400 mb-3">Brainstorm, naming, conceitos visuais. Ideal pra designers, criativos, founders.</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p class="text-amber-400">soul: apollo.md</p>
+            <p>archetype: creator</p>
+            <p>tone: ousado, lateral</p>
+            <p>output: 10 ideias divergentes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-3 flex items-center">
+          <span class="mr-2">📦</span> Estrutura de um template
+        </h3>
+        <p class="text-neutral-300 mb-3">Todo template entrega 4 elementos prontos:</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">•</span><span><strong>soul.md completo</strong> — pronto pra uso, com placeholders apenas em nome e contexto pessoal</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">•</span><span><strong>3 tarefas de exemplo</strong> — para o usuário copiar/colar e ver a persona em ação</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">•</span><span><strong>Vídeo de 90 segundos</strong> — mostrando a persona resolvendo uma tarefa real</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">•</span><span><strong>Variações</strong> — 2-3 customizações comuns (tom mais formal, escopo restrito, etc.)</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Biblioteca curada</span><p class="text-sm text-neutral-400 mt-1">4-6 personas cobrem 80% dos casos de uso de não-técnicos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Ajustar, não criar</span><p class="text-sm text-neutral-400 mt-1">O usuário modifica 2-3 campos, não inventa o soul do zero</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Vídeo de 90s por template</span><p class="text-sm text-neutral-400 mt-1">Ver a persona em ação é mais persuasivo do que ler sua descrição</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tarefas de exemplo</span><p class="text-sm text-neutral-400 mt-1">Prompts prontos para copiar removem a paralisia do "o que peço agora?"</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">❓ FAQ — as 10 dúvidas mais comuns de usuários novos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Cada dúvida não respondida é um usuário perdido. <strong class="text-amber-400">Um FAQ curado</strong> — baseado em perguntas reais de não-técnicos — economiza horas de suporte e converte ansiedade em autonomia.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um documento de FAQ organizado por urgência (bloqueadores primeiro, curiosidade depois), com resposta direta em até 3 linhas e link para aprofundamento opcional. Cada entrada deve resolver — não apenas explicar.</p>
+      </div>
+
+      <div class="space-y-3 mb-6">
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <p class="text-amber-400 font-semibold mb-2">❓ Hermes não responde — o que faço?</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p>1. Cheque conexão de internet</p>
+            <p>2. Rode <span class="text-amber-400">triad doctor</span> — diagnóstico automático</p>
+            <p>3. Se persistir, reinicie: <span class="text-amber-400">triad restart hermes</span></p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <p class="text-amber-400 font-semibold mb-2">❓ Como cancelo um job em andamento?</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p>No painel: clique no job → "Cancelar"</p>
+            <p>No terminal: <span class="text-amber-400">triad job cancel &lt;id&gt;</span></p>
+            <p>Custos parciais já gastos não são reembolsados</p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <p class="text-amber-400 font-semibold mb-2">❓ Onde fica meu soul.md?</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p>Mac/Linux: <span class="text-amber-400">~/.triad/souls/</span></p>
+            <p>Windows: <span class="text-amber-400">%APPDATA%\triad\souls\</span></p>
+            <p>Use <span class="text-amber-400">triad soul open</span> para abrir no editor</p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <p class="text-amber-400 font-semibold mb-2">❓ Posso usar offline?</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p>Parcial: Workers locais (Ollama) funcionam offline</p>
+            <p>Workers via API (Claude, GPT) exigem internet</p>
+            <p>Configure em <span class="text-amber-400">Settings → Workers → Modo offline</span></p>
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <p class="text-amber-400 font-semibold mb-2">❓ Como mudo o modelo do Worker?</p>
+          <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300">
+            <p>No painel: Settings → Workers → escolha o modelo</p>
+            <p>Mudança aplica nos próximos jobs (não retroage)</p>
+            <p>Comparativo de modelos: <span class="text-amber-400">triad models</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ FAQ ruim</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Como funciona o TRIAD?" — vago, não é dúvida real</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Resposta de 40 linhas — usuário não lê até o fim</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Link para docs sem resumo — joga o problema pro usuário</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Linguagem técnica nas respostas (stdout, daemon, IPC)</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ FAQ bom</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Pergunta literal do usuário ("Hermes não responde")</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Resposta resolve em 3 passos numerados</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Link "saiba mais" opcional, no final</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Linguagem do usuário, não do desenvolvedor</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Perguntas literais</span><p class="text-sm text-neutral-400 mt-1">Use a frase exata que os usuários digitam, não a versão "limpa"</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Resposta em 3 passos</span><p class="text-sm text-neutral-400 mt-1">Numerados, acionáveis, no máximo 3 linhas de prosa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Resolver, não explicar</span><p class="text-sm text-neutral-400 mt-1">O FAQ acaba quando o problema é resolvido — explicação vem depois</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Ordem por urgência</span><p class="text-sm text-neutral-400 mt-1">Bloqueadores primeiro (não responde, erro), curiosidade depois</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🆘 Suporte e escalada — quando chamar o técnico</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Nem todo problema precisa de suporte humano — e nem todo problema deve ficar com o usuário. <strong class="text-amber-400">Uma matriz de escalada clara</strong> economiza tempo de todo mundo: self-fix para o trivial, suporte humano para o estrutural.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Uma cadeia de 4 níveis (self-fix → docs → comunidade → suporte técnico) com critérios objetivos pra subir de nível. Cada nível tem tempo máximo recomendado antes de escalar — evita usuário travado e suporte sobrecarregado.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">L1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Self-fix — comandos de diagnóstico (5 min)</h4>
+            <p class="text-sm text-neutral-400">Códigos de erro mapeados para comandos de correção. <span class="font-mono text-amber-400">triad doctor</span>, <span class="font-mono text-amber-400">triad restart</span>, <span class="font-mono text-amber-400">triad clean</span>. Resolve 60% dos problemas de instalação e conectividade.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">L2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Docs e FAQ — busca direcionada (10 min)</h4>
+            <p class="text-sm text-neutral-400">Se o self-fix não resolveu, FAQ e troubleshooting cobrem outros 25%. Inclui buscador com sinônimos ("não conecta" = "offline" = "sem internet").</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">L3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">Comunidade — fórum / Discord (1-24h)</h4>
+            <p class="text-sm text-neutral-400">Para dúvidas de uso avançado, customização e casos específicos. Outros usuários respondem mais rápido do que suporte oficial — e respostas ficam indexadas pra próxima pessoa.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">L4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Suporte técnico — tier pago (24-48h)</h4>
+            <p class="text-sm text-neutral-400">Bugs reais, problemas estruturais, integrações customizadas. Inclui upload de logs (<span class="font-mono text-amber-400">triad logs export</span>) e contexto da execução. Reservado pra problemas que comunidade não resolveu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-3 flex items-center">
+          <span class="mr-2">⚖️</span> Sinais de "subir um nível"
+        </h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">→</span><span>Comando de self-fix retornou erro persistente: vá pro L2</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">→</span><span>FAQ não tem sua dúvida ou resposta não bate: vá pro L3</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">→</span><span>Comunidade indicou que é bug do sistema: vá pro L4 com referência ao thread</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-0.5">→</span><span>Dados sensíveis ou conta comprometida: pule direto pro L4</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Códigos de erro acionáveis</span><p class="text-sm text-neutral-400 mt-1">Cada erro mapeia para 1-2 comandos de correção testados</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tempo máximo por nível</span><p class="text-sm text-neutral-400 mt-1">Evita usuário travado em loop infinito de self-help</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Comunidade como camada</span><p class="text-sm text-neutral-400 mt-1">Reduz carga do suporte e cria base de conhecimento orgânica</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Logs exportáveis</span><p class="text-sm text-neutral-400 mt-1">Suporte só consegue ajudar de verdade com contexto da execução</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">📊 Medindo adoção — como saber se o onboarding funcionou</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem métricas, "o onboarding está bom" é opinião. <strong class="text-amber-400">Quatro indicadores</strong> mostram se o usuário virou hábito — e onde o funil ainda vaza.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um painel de 4 métricas que cobre as fases críticas: ativação (primeira tarefa), profundidade (preenchimento do soul), engajamento recorrente (WAU/MAU) e satisfação (NPS aos 30 dias). Juntas, elas mostram onde o onboarding entrega e onde fura.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-2">⏱️ Time-to-first-Triad-task</h4>
+          <p class="text-sm text-neutral-400 mb-3">Tempo entre instalação e primeira tarefa concluída com sucesso.</p>
+          <p class="text-xs text-neutral-500">Meta: <span class="text-amber-400 font-semibold">menos de 5 minutos</span> · Alerta: acima de 30 min</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-2">📝 Soul.md completeness</h4>
+          <p class="text-sm text-neutral-400 mb-3">% de campos opcionais preenchidos além dos obrigatórios.</p>
+          <p class="text-xs text-neutral-500">Meta: <span class="text-amber-400 font-semibold">acima de 70%</span> · Alerta: abaixo de 40%</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-2">📈 WAU/MAU ratio</h4>
+          <p class="text-sm text-neutral-400 mb-3">Usuários ativos semanais sobre mensais — proxy de hábito.</p>
+          <p class="text-xs text-neutral-500">Meta: <span class="text-amber-400 font-semibold">acima de 0.5</span> · Alerta: abaixo de 0.3</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-2">💬 NPS aos 30 dias</h4>
+          <p class="text-sm text-neutral-400 mb-3">"Você recomendaria o TRIAD pra um colega?" (0-10).</p>
+          <p class="text-xs text-neutral-500">Meta: <span class="text-amber-400 font-semibold">NPS acima de 40</span> · Alerta: abaixo de 20</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Lendo o painel
+        </h3>
+        <p class="text-neutral-300">Métricas isoladas mentem. Use combinações: <strong>time-to-first alto + NPS alto</strong> = usuários pacientes, mas você está deixando dinheiro na mesa. <strong>WAU/MAU baixo + completeness alto</strong> = usuário gostou mas não voltou — falta gatilho de retorno (job overnight, lembrete semanal).</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Time-to-first como ativação</span><p class="text-sm text-neutral-400 mt-1">Métrica mais sensível pra detectar fricção no onboarding</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Completeness como engajamento</span><p class="text-sm text-neutral-400 mt-1">Quem preenche mais do soul investiu mais — e tende a ficar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">WAU/MAU como hábito</span><p class="text-sm text-neutral-400 mt-1">Acima de 0.5 indica que o TRIAD virou parte da rotina</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">NPS como sinal de boca-a-boca</span><p class="text-sm text-neutral-400 mt-1">Único indicador que prevê crescimento orgânico via indicação</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-2 flex items-center">
+          <span class="mr-3">🏆</span> Você completou o TRIAD
+        </h2>
+        <p class="text-neutral-400 mb-6">Trilha 4 encerrada — e com ela, o curso inteiro. Você agora tem o repertório completo para fundamentos, técnica, orquestração avançada e escala humana.</p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Gap de empatia mapeado</strong><span class="text-neutral-400"> — você sabe por que 80% dos usuários não passam do terminal e como costurar essa distância</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Soul form-based</strong><span class="text-neutral-400"> — wizard web traduz markdown em formulário, com placeholders concretos e validação inline</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Jornada de 7 dias</strong><span class="text-neutral-400"> — 4 marcos espaçados, uma vitória por dia, momento wow no job overnight</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Biblioteca de personas</strong><span class="text-neutral-400"> — Orpheus, Athena, Hermes-research e Apollo cobrem 80% dos casos não-técnicos</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">FAQ + matriz de escalada</strong><span class="text-neutral-400"> — self-fix, docs, comunidade, suporte técnico com critérios objetivos por nível</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Painel de adoção</strong><span class="text-neutral-400"> — time-to-first, completeness, WAU/MAU e NPS contam a história real do onboarding</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo passo:</h3>
+          <p class="text-neutral-300">Coloque em prática — escolha uma pessoa não-técnica do seu círculo, aplique a jornada de 7 dias e meça o time-to-first. O TRIAD só escala quando sai do seu terminal.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Voltar ao Curso →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -445,12 +761,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

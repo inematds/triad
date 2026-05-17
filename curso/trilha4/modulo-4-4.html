@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Integrações Externas — conectando Telegram, N8N e Zapier ao Hermes Agent">
-  <title>Integrações Externas | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Integrações externas — conecte o Hermes ao Telegram, N8N e Zapier para receber e enviar tarefas do mundo externo">
+  <title>Integrações externas | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -62,7 +62,6 @@
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -72,7 +71,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -91,7 +89,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -120,23 +117,23 @@
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.4</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔗 Integrações Externas</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Conectando o Hermes ao mundo — Telegram como interface mobile, N8N para orquestração e Zapier para integrações sem código.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔗 Integrações externas — Telegram, N8N, Zapier</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Conecte o Hermes ao mundo externo — receba e envie tarefas por Telegram, N8N e Zapier.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">7</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~40</div>
+          <div class="text-xl font-bold text-amber-400">~45</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Intermediário</div>
+          <div class="text-xl font-bold text-amber-400">Avançado</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Integração</div>
+          <div class="text-xl font-bold text-amber-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,285 +142,638 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🔗 Por que integrar Hermes com ferramentas externas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hermes isolado em um terminal é um app. <strong class="text-amber-400">Hermes integrado com Telegram, N8N e Zapier é um serviço</strong> — tarefas chegam de qualquer canal, executam em background e respondem onde fizer sentido. A mudança é arquitetural, não cosmética.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🌐</span>
-          <div>
-            <span class="font-medium">Por que integrar ferramentas externas</span>
-            <span class="text-neutral-500 text-sm ml-2">- Hermes como hub central de automação</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O Hermes sozinho é poderoso, mas seu impacto multiplica quando conectado ao restante do seu stack: Telegram para acionar tarefas do celular, N8N para orquestrar fluxos complexos com múltiplos sistemas, e Zapier para conectar centenas de ferramentas SaaS sem código. A integração transforma Hermes de ferramenta local em hub central de automação.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Sem integrações, o Hermes funciona apenas quando você está no terminal. Com integrações, qualquer evento em qualquer sistema pode disparar uma tarefa — o agente passa a trabalhar no contexto de todo o seu ecossistema digital.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como receptor de webhooks</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Integrações como canais de entrada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta via canal de origem ou arquivo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Stack de automação conectado</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Integração externa é a conversão do Hermes de um binário local interativo em um serviço acessível por webhook — capaz de receber tarefas via HTTP, dispatchar para o Triad em background e devolver o resultado no canal de origem (chat, email, planilha, CRM).</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">📱</span>
-          <div>
-            <span class="font-medium">Telegram — configurando o bot</span>
-            <span class="text-neutral-500 text-sm ml-2">- BotFather e token de acesso</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Para criar um bot Telegram conectado ao Hermes: (1) abra o BotFather no Telegram e envie /newbot, (2) defina nome e username do bot, (3) receba o token de acesso, (4) adicione TELEGRAM_BOT_TOKEN no arquivo .env do Hermes, (5) execute hermes integrations telegram enable para ativar o listener, (6) envie /start para o bot no Telegram para confirmar conexão.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Telegram é o canal de acesso mobile mais prático para o Hermes. Com o bot configurado, você delega tarefas de qualquer lugar — no celular, sem abrir terminal, enquanto está em trânsito ou numa reunião.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>BotFather para criação do bot</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>TELEGRAM_BOT_TOKEN no .env</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Listener ativado via hermes integrations</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona no mesmo chat</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">📨</span>
-          <div>
-            <span class="font-medium">Recebendo tarefas via Telegram webhook</span>
-            <span class="text-neutral-500 text-sm ml-2">- Do chat ao job executado</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Quando você envia uma mensagem ao bot Telegram, ela chega ao Hermes como um webhook POST. O Hermes identifica o chat_id do remetente (verificação de segurança), extrai o texto da mensagem, converte em instrução de job, executa, e responde de volta ao mesmo chat com o resultado — o ciclo completo fica transparente no chat.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Entender o fluxo técnico permite depurar quando algo falha e personalizar o comportamento — como adicionar comandos especiais (/resumo, /status, /jobs) que o bot reconhece como atalhos para ações frequentes.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Webhook POST do Telegram</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Verificação de chat_id autorizado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Comandos especiais como atalhos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona no chat de origem</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">⚡</span>
-          <div>
-            <span class="font-medium">N8N — visão geral e casos de uso</span>
-            <span class="text-neutral-500 text-sm ml-2">- Orquestração visual de automações</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">N8N é uma plataforma de automação open-source com interface visual de fluxos (nodes e edges). Diferente do Zapier (cloud-only, pago por tarefa), o N8N pode rodar localmente, é self-hosted e tem custo fixo. Com N8N você cria pipelines visuais que conectam qualquer serviço — e pode incluir o Hermes como um node via HTTP Request para o webhook.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">N8N resolve automações complexas que envolvem múltiplos sistemas e lógica condicional — coisa que um webhook simples não faz. É o orquestrador ideal para fluxos como "novo lead → enriquece dados → Hermes escreve email personalizado → envia via SendGrid".</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>N8N self-hosted vs cloud</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Fluxos visuais com nodes e edges</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como node via HTTP Request</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Lógica condicional e ramificações</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🔧</span>
-          <div>
-            <span class="font-medium">Conectando o Hermes ao N8N via webhook</span>
-            <span class="text-neutral-500 text-sm ml-2">- Configuração do node e autenticação</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">No N8N, adicione um node "HTTP Request" com método POST, URL apontando para o endpoint do Hermes (http://localhost:PORT/webhook), header Authorization com seu token e body JSON contendo task (instrução), skill (persona a usar) e callback_url (onde enviar o resultado). O Hermes processa e chama de volta o callback com o output.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">A configuração do node N8N é o único passo técnico necessário. Depois disso, qualquer fluxo que o N8N processa pode incluir o Hermes como etapa de inteligência — sem código adicional.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Endpoint http://localhost:PORT/webhook</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Header Authorization com token</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Body JSON com task, skill, callback_url</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona via callback</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">⚙️</span>
-          <div>
-            <span class="font-medium">Zapier como alternativa sem código</span>
-            <span class="text-neutral-500 text-sm ml-2">- Quando usar Zapier vs N8N</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Zapier é a alternativa cloud-managed ao N8N — mais simples de configurar (sem instalação), com mais de 5000 integrações nativas e plano gratuito para fluxos básicos. A limitação é custo variável por tarefa e execução em cloud da Zapier (sem controle total dos dados). Para o Hermes, usa o mesmo mecanismo: Zap com ação Webhook POST para o endpoint do Hermes.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Zapier é a escolha certa para equipes não-técnicas que precisam de integrações rápidas sem instalar N8N. O mesmo padrão de webhook funciona — a diferença é operacional, não técnica.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Zapier para equipes não-técnicas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>5000+ integrações nativas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Custo variável vs N8N self-hosted fixo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Mesmo padrão webhook funciona</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🔄</span>
-          <div>
-            <span class="font-medium">Pipeline completo: Telegram → Hermes → Triad → resposta</span>
-            <span class="text-neutral-500 text-sm ml-2">- Integrando todos os componentes</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O pipeline completo funciona assim: você envia "Analisa os dados de vendas desta semana e recomenda 3 ações" pelo Telegram → Hermes recebe via webhook, carrega soul.md + skill de análise → aciona padrão Triad (DeepSeek rascunha, Claude valida, GPT sintetiza) → Hermes consolida e envia a análise de volta para o Telegram → você lê no celular 5 minutos depois.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Ver o pipeline completo em operação é o momento em que tudo se conecta. Entender cada handoff — do Telegram ao Hermes ao Triad e de volta — permite otimizar a latência total e depurar exatamente onde uma falha ocorreu.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Telegram como interface de entrada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes orquestrando Triad</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta consolidada de volta ao canal</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Latência total do pipeline end-to-end</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🌐</span> Triad como serviço — três camadas
+        </h3>
+        <div class="space-y-3 text-neutral-300">
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Telegram como interface mobile</strong><span class="text-neutral-400"> — aciona tarefas de qualquer lugar sem terminal</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">①</span>
+            <span><strong>Canal de entrada</strong> — Telegram bot, formulário web, email parser, evento de calendário. Onde a tarefa nasce.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">N8N para fluxos complexos</strong><span class="text-neutral-400"> — orquestração visual com múltiplos sistemas</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">②</span>
+            <span><strong>Orquestrador</strong> — N8N ou Zapier. Recebe o evento, normaliza payload e despacha para o Hermes via HTTP.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Zapier para equipes não-técnicas</strong><span class="text-neutral-400"> — mesma lógica de webhook, zero instalação</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Pipeline end-to-end funcional</strong><span class="text-neutral-400"> — Telegram → Hermes → Triad → resposta</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">③</span>
+            <span><strong>Hermes + Triad</strong> — executa o trabalho real (Condutor → Worker → Crítico) e devolve o resultado por callback.</span>
           </div>
         </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">4.5 — Deploy no GitHub Pages: publicando o curso para o mundo</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.3</a>
-          <a href="modulo-4-5.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Sem integrações, você fica preso ao terminal. Com integrações, o Triad responde a tarefas que aparecem em qualquer lugar — uma reclamação de cliente vira briefing em 30s, um email importante vira resumo, um lead novo vira proposta. O Hermes deixa de ser ferramenta e vira backbone.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Triad como serviço</span><p class="text-sm text-neutral-400 mt-1">Não um app local, mas um endpoint acessível por qualquer cliente HTTP autenticado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Canal-agnóstico</span><p class="text-sm text-neutral-400 mt-1">A mesma execução serve Telegram, email, CRM ou planilha — depende só do orquestrador</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Background execution</span><p class="text-sm text-neutral-400 mt-1">Tarefas longas rodam async — o canal só recebe o callback final, sem bloquear</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Webhook como contrato</span><p class="text-sm text-neutral-400 mt-1">A interface estável entre o canal e o Hermes — POST JSON com task + callback_url</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-4-3.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.3: Automação Overnight</a>
-      <a href="modulo-4-5.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.5: Deploy GitHub Pages →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">💬 Telegram como canal de comunicação com o Hermes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Telegram é o canal mais rápido para começar — instalação móvel já existe, push notifications já funcionam, e a API é gratuita e estável. <strong class="text-amber-400">Você manda uma mensagem no celular, o Hermes despacha o Triad, e em minutos a resposta volta no chat.</strong>
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um bot Telegram conectado ao Hermes recebe mensagens de texto como tarefas, encaminha o payload por webhook ao serviço Hermes, e devolve o resultado da execução do Triad como mensagem no mesmo chat — tornando o celular o terminal de entrada/saída do sistema.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Interação assíncrona (Telegram)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Você dispara a tarefa de qualquer lugar, no celular</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Hermes executa em background no servidor</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Push notification quando o Triad termina</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Histórico do chat = log natural de execuções</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Interação síncrona (CLI local)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Você precisa estar na máquina onde o Hermes roda</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Terminal aberto durante toda a execução</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem notificação — você fica olhando o output</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Histórico depende de scrollback do terminal</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📱</span> Fluxo típico de uso móvel
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-amber-400">[14:02]</span> você → bot: "analise o concorrente xyz.com e gere 3 ângulos de diferenciação"</p>
+          <p><span class="text-amber-400">[14:02]</span> bot: ✅ Tarefa #842 recebida. Triad executando...</p>
+          <p><span class="text-amber-400">[14:11]</span> bot: 🎯 SHIP — 3 ângulos prontos:</p>
+          <p class="ml-4">1. Pricing tier abaixo do MVP deles...</p>
+          <p class="ml-4">2. Posicionamento em vertical não atendida...</p>
+          <p class="ml-4">3. Velocidade de onboarding (24h vs 2 semanas)...</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Interação assíncrona</span><p class="text-sm text-neutral-400 mt-1">Você dispara e segue a vida — push notification avisa quando termina</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Mobilidade real</span><p class="text-sm text-neutral-400 mt-1">Hermes acessível do supermercado, do Uber, da cama — qualquer lugar com Telegram</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Chat como histórico</span><p class="text-sm text-neutral-400 mt-1">A timeline do chat substitui logs — busca, scroll e contexto vêm de graça</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">API gratuita e estável</span><p class="text-sm text-neutral-400 mt-1">Bot API do Telegram não tem custo, não tem rate limit aprático e é bem documentada</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">🤖 Configurando um bot Telegram para receber tarefas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Criar o bot leva 4 minutos. <strong class="text-amber-400">BotFather emite o token, você registra o webhook no Hermes, e o bot passa a encaminhar mensagens automaticamente.</strong>
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Configurar um bot Telegram envolve três passos discretos: criar o bot via BotFather (obtendo o token), expor o endpoint webhook do Hermes em HTTPS público, e registrar esse endpoint no bot via setWebhook. A partir daí, toda mensagem ao bot chega como POST JSON no Hermes.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Criar o bot com @BotFather</h4>
+            <p class="text-sm text-neutral-400 mb-3">No Telegram, conversa com @BotFather → /newbot → escolhe nome e username. Ele devolve o token.</p>
+            <pre class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300 overflow-x-auto">/newbot
+Bot name: Hermes Triad
+Username: hermes_triad_bot
+Token: 7842931:AAEx9bF7-cQk2pL3mNx_vR8sT4yZ1uW0iJ</pre>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Expor o endpoint do Hermes em HTTPS</h4>
+            <p class="text-sm text-neutral-400 mb-3">Telegram só aceita webhooks em HTTPS. Use Cloudflare Tunnel, ngrok ou um servidor com Caddy/Let's Encrypt.</p>
+            <pre class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300 overflow-x-auto">hermes integrations add telegram --token=$TOKEN --webhook-port=8443
+# Hermes sobe servidor TLS local em 0.0.0.0:8443/telegram/webhook</pre>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Registrar o webhook no Telegram</h4>
+            <p class="text-sm text-neutral-400 mb-3">Uma chamada curl conecta o bot ao Hermes — daqui em diante, toda mensagem vira POST no endpoint.</p>
+            <pre class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300 overflow-x-auto">curl -X POST https://api.telegram.org/bot$BOT_TOKEN/setWebhook \
+  -d url=$HERMES_WEBHOOK_URL
+
+# resposta esperada
+{"ok":true,"result":true,"description":"Webhook was set"}</pre>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Validar com mensagem de teste</h4>
+            <p class="text-sm text-neutral-400 mb-3">Abra o chat com o bot e envie /start. O Hermes deve logar a entrada e responder com confirmação.</p>
+            <pre class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300 overflow-x-auto">hermes logs --tail --filter=telegram
+[INFO] telegram webhook hit: chat_id=489231 text="/start"
+[INFO] reply sent: "Hermes online — envie sua tarefa"</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📦</span> Payload recebido (formato Telegram)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">{
+  "update_id": 487231,
+  "message": {
+    "message_id": 14,
+    "from": { "id": 489231, "first_name": "Nei" },
+    "chat": { "id": 489231, "type": "private" },
+    "date": 1747486920,
+    "text": "analise o concorrente xyz.com"
+  }
+}</pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Whitelist de chat_ids
+        </h3>
+        <p class="text-neutral-300">Por padrão, qualquer um pode mandar mensagem ao bot — e disparar execução do Triad (caro). Sempre configure <code class="text-primary bg-primary/10 px-1 rounded">--allowed-chats=489231,512847</code> para limitar quem pode acionar o sistema. Mensagens fora da whitelist devem ser silenciosamente descartadas.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">BotFather</span><p class="text-sm text-neutral-400 mt-1">O bot oficial que cria outros bots — emite token, configura comandos, ajusta privacidade</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">HTTPS obrigatório</span><p class="text-sm text-neutral-400 mt-1">Telegram rejeita webhooks em HTTP puro — TLS via Caddy, Cloudflare ou ngrok</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">setWebhook</span><p class="text-sm text-neutral-400 mt-1">A chamada que conecta bot e endpoint — sem ela, as mensagens não chegam ao Hermes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Whitelist de chat_id</span><p class="text-sm text-neutral-400 mt-1">Lista de IDs autorizados — única defesa contra terceiros disparando o Triad</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">🔧 N8N como orquestrador de automações</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        N8N é a peça central quando o canal não é o Telegram — email, Google Sheets, Notion, Stripe, qualquer SaaS. <strong class="text-amber-400">Você desenha o workflow visualmente, e o N8N traduz cada evento em uma chamada HTTP para o Hermes.</strong>
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">N8N é uma plataforma open-source de automação baseada em workflows visuais. Cada workflow é um grafo de nodes — trigger (o que começa), processing (transformações) e action (HTTP request, email, DB write). Self-hostável, com 400+ integrações nativas e suporte first-class a webhooks.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🧩</span> Anatomia de um workflow N8N
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">•</span><span><strong>Trigger node</strong> — origem do evento. Webhook, cron, "new row in sheet", "new email matching X", "Stripe payment".</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">•</span><span><strong>Processing nodes</strong> — Set (renomeia campos), IF (branching), Function (JS custom), Merge (junta streams).</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">•</span><span><strong>Action nodes</strong> — HTTP Request (chama Hermes), Telegram (responde no chat), Notion (cria página), Postgres (grava).</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 mt-1">•</span><span><strong>Execution log</strong> — toda execução fica gravada com input/output de cada node. Debug visual, replay individual.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📂 Triggers comuns para acionar o Hermes</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Email Trigger</span><p class="text-neutral-400 mt-1">Email com subject "[triad]" vira tarefa — corpo do email é o briefing</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Google Sheets Trigger</span><p class="text-neutral-400 mt-1">Nova linha em "Tasks" dispara execução — colunas são parâmetros</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Cron Trigger</span><p class="text-neutral-400 mt-1">Tarefas recorrentes — "todo domingo 22h, gere resumo da semana"</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Webhook genérico</span><p class="text-neutral-400 mt-1">Qualquer sistema externo posta JSON — Stripe, Typeform, Calendly</p></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Workflow visual</span><p class="text-sm text-neutral-400 mt-1">Grafo de nodes — você arrasta blocos em vez de escrever cola entre APIs</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Self-hosted vs cloud</span><p class="text-sm text-neutral-400 mt-1">N8N self-hosted é grátis e roda em Docker — N8N cloud cobra por execução</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Execution log</span><p class="text-sm text-neutral-400 mt-1">Toda execução gravada com input/output por node — debug e replay instantâneos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">400+ integrações</span><p class="text-sm text-neutral-400 mt-1">Notion, Slack, Stripe, HubSpot, Postgres, S3 — sem escrever clients</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🔌 Conectando Hermes ao N8N via webhook</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O contrato é simples: <strong class="text-amber-400">N8N faz POST para o endpoint <code class="text-amber-400 bg-amber-500/10 px-1 rounded">/api/jobs</code> do Hermes com <code class="text-amber-400 bg-amber-500/10 px-1 rounded">{task, context, callback_url}</code>.</strong> Hermes responde 202 imediato, executa async, e bate de volta no callback quando termina.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A integração Hermes ↔ N8N usa dois webhooks: um do N8N para o Hermes (dispara o job) e um do Hermes para o N8N (callback com resultado). O modelo é assíncrono — N8N não fica esperando o Triad terminar, o que evita timeouts e libera worker slots.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📤</span> HTTP Request node (N8N → Hermes)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">{
+  "method": "POST",
+  "url": "https://your-hermes-host:8443/api/jobs",
+  "authentication": "headerAuth",
+  "headers": {
+    "Authorization": "Bearer {{ $env.HERMES_API_KEY }}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "task": "{{ $json.subject }}",
+    "context": "{{ $json.body }}",
+    "callback_url": "{{ $env.N8N_WEBHOOK_URL }}/hermes-callback",
+    "priority": "normal",
+    "metadata": { "source": "email", "from": "{{ $json.from }}" }
+  }
+}</pre>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📥</span> Resposta imediata do Hermes (202)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">HTTP/1.1 202 Accepted
+Content-Type: application/json
+
+{
+  "job_id": "j_8f2a91c0",
+  "status": "queued",
+  "estimated_duration_sec": 540,
+  "callback_url": "https://n8n.example.com/webhook/hermes-callback"
+}</pre>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📞</span> Callback do Hermes (quando termina)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">POST https://n8n.example.com/webhook/hermes-callback
+Content-Type: application/json
+X-Hermes-Signature: sha256=4a91...
+
+{
+  "job_id": "j_8f2a91c0",
+  "status": "ship",
+  "duration_sec": 487,
+  "iterations": 2,
+  "result": {
+    "verdict": "SHIP",
+    "angles": [ "...", "...", "..." ],
+    "critic_notes": "Premissa de cada ângulo verificável"
+  },
+  "tokens_used": { "input": 42910, "output": 8741 }
+}</pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🔐</span> Assinatura HMAC no callback
+        </h3>
+        <p class="text-neutral-300">Como o callback do Hermes para o N8N é um POST público, sempre assine o payload com HMAC-SHA256 (header <code class="text-primary bg-primary/10 px-1 rounded">X-Hermes-Signature</code>). No N8N, valide a assinatura em um Function node antes de processar — descarte o que não bater. Sem isso, qualquer um pode falsificar resultados.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">202 Accepted</span><p class="text-sm text-neutral-400 mt-1">Resposta imediata "recebi e enfileirei" — separa entrega de execução</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">callback_url</span><p class="text-sm text-neutral-400 mt-1">Para onde o Hermes manda o resultado — N8N escuta nesse endpoint</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">HMAC signature</span><p class="text-sm text-neutral-400 mt-1">Garante que o callback veio do Hermes e não foi adulterado em trânsito</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">metadata field</span><p class="text-sm text-neutral-400 mt-1">Campo livre que carrega contexto do canal — source, user, thread_id</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">⚡ Zapier para usuários não-técnicos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Zapier é a alternativa quando você não quer self-host nem escrever JSON. <strong class="text-amber-400">Setup em 5 minutos pelo navegador, sem servidor.</strong> Custa mais por execução e tem menos flexibilidade, mas para clientes ou times não-técnicos é o caminho mais curto.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Zapier é um SaaS de automação no-code. Cada automação é um "Zap" com um trigger e uma ou mais actions. Não precisa de servidor próprio, não precisa de Docker, não precisa de webhook handler — Zapier hospeda tudo e expõe uma UI de formulário para configurar.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ N8N — quando usar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Você sabe Docker / quer self-host</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Volume alto (&gt;1000 execuções/mês)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Precisa de Function nodes (JS custom)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Dados sensíveis não podem sair da rede</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Workflow tem branching complexo</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Zapier — quando usar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Sem infra própria / time não-técnico</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Volume baixo/médio (&lt;500 exec/mês)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Apenas glue simples entre SaaS</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Tempo de setup &lt; 10 min é prioridade</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Cliente quer editar os fluxos sozinho</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">⚙️</span> Zap mínimo: Email → Hermes → Reply
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">Step 1 — Trigger
+  App: Gmail
+  Event: New Email Matching Search
+  Search: subject:"[triad]" from:cliente@empresa.com
+
+Step 2 — Action
+  App: Webhooks by Zapier
+  Event: POST
+  URL: https://hermes.example.com/api/jobs
+  Headers: Authorization: Bearer {{HERMES_API_KEY}}
+  Body (JSON):
+    task:         {{1.Subject}}
+    context:      {{1.BodyPlain}}
+    callback_url: https://hooks.zapier.com/hooks/catch/.../hermes
+
+Step 3 — Action
+  App: Gmail
+  Event: Send Email Reply
+  To: {{1.FromEmail}}
+  Body: {{2.result.angles}}</pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💰</span> Custo por execução
+        </h3>
+        <p class="text-neutral-300">Zapier cobra por <em>task</em> (cada action conta como 1 task). Um zap de 3 steps = 3 tasks por execução. Plano Starter dá 750 tasks/mês — se você roda 50 tarefas Hermes/mês, gasta 150 tasks só com Zapier. N8N self-hosted, no mesmo cenário, custa o servidor (US$ 5–10/mês fixo).</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">No-code</span><p class="text-sm text-neutral-400 mt-1">Toda configuração em formulários — sem JSON, sem Docker, sem terminal</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Task-based pricing</span><p class="text-sm text-neutral-400 mt-1">Cada action é 1 task — fluxos longos consomem mais que parecem</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Webhooks by Zapier</span><p class="text-sm text-neutral-400 mt-1">Action genérica que faz HTTP — é por aqui que você bate no Hermes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Quando trocar para N8N</span><p class="text-sm text-neutral-400 mt-1">Quando o custo Zapier ultrapassa o custo de um VPS — geralmente em 6 meses</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🔁 Criando um pipeline — Telegram → Hermes → Triad → resposta</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Pipeline completo end-to-end: mensagem no Telegram chega, vira job, executa o Triad, e a resposta volta no mesmo chat — <strong class="text-amber-400">tudo async, sem você abrir o terminal.</strong> Esse é o caso de uso que justifica todo o capítulo.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um pipeline integrado é o fluxo completo de dados desde o canal de entrada até a entrega do resultado — passando por orquestração (N8N), execução (Hermes + Triad) e devolução pelo callback. É o padrão arquitetural canônico de uma integração de produção.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Telegram recebe a mensagem do usuário</h4>
+            <p class="text-sm text-neutral-400">Bot recebe "analise o concorrente xyz.com" → POST para webhook do N8N com chat_id e text.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">N8N valida chat_id e normaliza payload</h4>
+            <p class="text-sm text-neutral-400">IF node checa whitelist → Set node monta {task, context, callback_url, metadata.chat_id}.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">N8N posta no Hermes — recebe job_id (202)</h4>
+            <p class="text-sm text-neutral-400">HTTP node faz POST em /api/jobs → resposta 202 com job_id → N8N termina a execução do trigger.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">N8N responde ao Telegram com ACK imediato</h4>
+            <p class="text-sm text-neutral-400">"✅ Tarefa #842 recebida. Triad executando..." — usuário tem feedback em &lt; 2s.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Hermes executa o Triad (5–15 min)</h4>
+            <p class="text-sm text-neutral-400">Condutor monta briefing → Worker gera ângulos → Crítico avalia. Loop até SHIP ou FUNDAMENTAL FLAW.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">6</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Hermes bate no callback do N8N com resultado</h4>
+            <p class="text-sm text-neutral-400">POST com X-Hermes-Signature → N8N valida HMAC → extrai metadata.chat_id → formata mensagem.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">7</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">N8N envia resposta de volta ao Telegram</h4>
+            <p class="text-sm text-neutral-400">Telegram node usa sendMessage com o chat_id original → push notification no celular do usuário.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Workflow N8N completo (export JSON resumido)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 overflow-x-auto">{
+  "name": "Telegram → Hermes → Telegram",
+  "nodes": [
+    { "name": "Telegram Trigger", "type": "n8n-nodes-base.telegramTrigger",
+      "parameters": { "updates": ["message"] } },
+    { "name": "Allowed Chats?",   "type": "n8n-nodes-base.if",
+      "parameters": { "conditions": { "number": [
+        { "value1": "={{$json.message.chat.id}}", "operation": "equal", "value2": 489231 }
+      ] } } },
+    { "name": "POST /api/jobs",   "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://hermes.example.com:8443/api/jobs",
+        "method": "POST", "jsonBody": true,
+        "body": {
+          "task":         "={{$json.message.text}}",
+          "callback_url": "={{$env.N8N_URL}}/webhook/hermes-callback",
+          "metadata":     { "chat_id": "={{$json.message.chat.id}}" }
+        }
+      } },
+    { "name": "ACK Telegram",     "type": "n8n-nodes-base.telegram",
+      "parameters": { "text": "✅ Tarefa #{{$json.job_id}} em execução" } },
+
+    { "name": "Hermes Callback",  "type": "n8n-nodes-base.webhook",
+      "parameters": { "path": "hermes-callback", "responseMode": "onReceived" } },
+    { "name": "Verify HMAC",      "type": "n8n-nodes-base.function" },
+    { "name": "Reply Telegram",   "type": "n8n-nodes-base.telegram",
+      "parameters": {
+        "chatId": "={{$json.metadata.chat_id}}",
+        "text":   "🎯 {{$json.result.verdict}}\n\n{{$json.result.angles.join('\\n')}}"
+      } }
+  ]
+}</pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Por que o pipeline é assíncrono ponta-a-ponta
+        </h3>
+        <p class="text-neutral-300">Se você tentasse rodar tudo síncrono, o Telegram daria timeout em 60s e o N8N em 5 min — bem antes do Triad terminar. Separar entrega de execução (POST 202 + callback) é a única arquitetura que escala para tarefas longas sem perder feedback ao usuário.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">ACK imediato</span><p class="text-sm text-neutral-400 mt-1">Confirmação em &lt; 2s mata a ansiedade do usuário — o resultado pode demorar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">metadata.chat_id</span><p class="text-sm text-neutral-400 mt-1">O fio que conecta callback à conversa original — sem ele, não há como responder</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Pipeline async ponta-a-ponta</span><p class="text-sm text-neutral-400 mt-1">Única arquitetura viável para tarefas de 5–15 min sem hit em timeouts</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">N8N como cola</span><p class="text-sm text-neutral-400 mt-1">Telegram não fala com Hermes direto — N8N é quem traduz formatos e roteia callbacks</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Triad como serviço</strong><span class="text-neutral-400"> — integrações transformam o Hermes de app local em backbone acessível por qualquer canal</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Telegram bot em 4 minutos</strong><span class="text-neutral-400"> — BotFather, HTTPS, setWebhook e whitelist de chat_ids são todo o setup necessário</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">N8N para orquestração séria</strong><span class="text-neutral-400"> — self-hosted, workflows visuais, 400+ integrações, execution log nativo</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Contrato webhook {task, context, callback_url}</strong><span class="text-neutral-400"> — interface estável entre orquestrador e Hermes, com 202 + callback</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Zapier para non-tech</strong><span class="text-neutral-400"> — sem servidor, setup em 5 min, mas custa por task — troque por N8N quando o volume crescer</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Pipeline async ponta-a-ponta</strong><span class="text-neutral-400"> — única arquitetura que sobrevive a tarefas de 5–15 min sem hit em timeouts</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.5 — Deploy do Hermes em produção</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="modulo-4-5.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -445,12 +795,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

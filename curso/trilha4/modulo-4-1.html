@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Arquitetura do sistema TRIAD — como Hermes, OpenRouter, soul.md e os modelos se conectam">
-  <title>Arquitetura do Sistema | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Arquitetura completa do sistema Hermes + Triad — componentes, conexões e pontos de extensão">
+  <title>Arquitetura completa do sistema Hermes + Triad | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .font-mono, pre { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -120,15 +120,15 @@
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.1</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏗️ Arquitetura do Sistema</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Como os componentes do TRIAD se conectam — Hermes, OpenRouter, soul.md, Pantheon e Gemini CLI formando uma máquina coesa.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Arquitetura completa do sistema Hermes + Triad</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Todos os componentes, conexões e pontos de extensão do sistema TRIAD — o mapa antes de construir.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">8</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~40</div>
+          <div class="text-xl font-bold text-amber-400">~55</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
@@ -136,7 +136,7 @@
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Arquitetura</div>
+          <div class="text-xl font-bold text-amber-400">Teoria</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,318 +145,683 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🗺️ Mapa do sistema — todos os componentes e conexões</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes de escalar o Triad, você precisa enxergar o sistema inteiro de uma vez. <strong class="text-amber-400">Hermes + Triad não é um único agente</strong> — é uma rede de cinco peças que se conversam através de protocolos bem definidos. Esse mapa é a base de todas as decisões de extensão.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🧩</span>
-          <div>
-            <span class="font-medium">Os cinco componentes do TRIAD</span>
-            <span class="text-neutral-500 text-sm ml-2">- Hermes, Triad, OpenRouter, soul.md, Pantheon</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O sistema TRIAD tem cinco componentes fundamentais: Hermes Agent (orquestrador central), o padrão Triad (três modelos para decisões robustas), OpenRouter (gateway multi-modelo via BYOK), soul.md (memória persistente do contexto pessoal) e Pantheon (dashboard visual para gerenciar personas e prompts). Cada componente tem papel específico e se integra com os demais.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Entender a arquitetura completa permite diagnosticar problemas, otimizar cada camada e escalar o sistema com consciência. Sem o mapa mental dos componentes, você usa o sistema como caixa-preta e perde capacidade de customização.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como orquestrador central</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Triad como workflow de três modelos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>OpenRouter como hub de roteamento</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>soul.md como memória persistente</li>
-              </ul>
-            </div>
-          </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O mapa do sistema é a visão panorâmica de todos os componentes do ecossistema TRIAD — Hermes (orquestrador), Pantheon (interface de personas), soul.md (contexto pessoal), Skills (como Orpheus), OpenRouter (roteador de modelos) e Gemini CLI (ferramenta multimodal) — junto com as conexões que os ligam.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Diagrama panorâmico do sistema
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+                          ┌─────────┐
+                          │  User   │
+                          └────┬────┘
+                               │
+                        ┌──────▼──────┐
+              soul.md ──▶│   Hermes    │◀── Pantheon
+              (context)  │ (orchestr.) │    (personas)
+                        └──┬───────┬──┘
+                           │       │
+                  ┌────────▼─┐   ┌─▼─────────┐
+                  │  Skills  │   │  Tools    │
+                  │ (Orpheus,│   │ (Gemini   │
+                  │  ...)    │   │  CLI,...) │
+                  └────┬─────┘   └───────────┘
+                       │
+                 ┌─────▼──────┐
+                 │ Triad Loop │
+                 └─┬────┬───┬─┘
+                   │    │   │
+                 Opus DSV4 GPT
+                   │    │   │
+                   └────┴───┘
+                       │
+                       ▼
+                  OpenRouter
+                 (model layer)
+        </pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">🎯 Hermes</div>
+          <p class="text-sm text-neutral-400">Orquestrador central. Recebe o pedido, decide qual skill invocar, monta contexto e devolve a resposta final ao usuário.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">🎼 Pantheon</div>
+          <p class="text-sm text-neutral-400">Interface de personas e skills. É como o Hermes "vê" o catálogo de capacidades disponíveis.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">📄 soul.md</div>
+          <p class="text-sm text-neutral-400">Fonte única de contexto pessoal. Hermes lê toda vez para conhecer o usuário, suas preferências e histórico.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">🔀 OpenRouter</div>
+          <p class="text-sm text-neutral-400">Camada de abstração que roteia chamadas para Opus, DeepSeek V4, GPT, etc., com fallback automático.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">🎬 Gemini CLI</div>
+          <p class="text-sm text-neutral-400">Ferramenta multimodal — vídeo, imagem e áudio — invocada como tool quando o Triad precisa de mídia.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">🔁 Triad Loop</div>
+          <p class="text-sm text-neutral-400">O loop Condutor → Worker → Crítico que toda skill séria (como Orpheus) executa para garantir qualidade.</p>
         </div>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">🔀</span>
-          <div>
-            <span class="font-medium">OpenRouter — o hub de roteamento</span>
-            <span class="text-neutral-500 text-sm ml-2">- BYOK e acesso a todos os modelos</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">OpenRouter é um gateway que unifica o acesso a dezenas de modelos de IA (Claude, GPT, DeepSeek, Gemini, Llama) via uma única API. Com o modelo BYOK (Bring Your Own Keys), você conecta suas próprias chaves de cada provider e paga diretamente — sem markup da plataforma intermediária. Uma configuração, todos os modelos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">OpenRouter é o que torna o padrão Triad operacional. Sem ele, você precisaria gerenciar APIs separadas para cada modelo. Com ele, trocar de Claude para DeepSeek para GPT é uma mudança de uma linha no código.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>API unificada para múltiplos providers</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>BYOK — sem markup intermediário</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Roteamento dinâmico por modelo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Configuração via variável OPENROUTER_API_KEY</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">📄</span>
-          <div>
-            <span class="font-medium">soul.md — a memória persistente</span>
-            <span class="text-neutral-500 text-sm ml-2">- Contexto acumulado entre sessões</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">soul.md é um arquivo Markdown que vive em ~/.hermes/soul.md e funciona como o "estado persistente" do Hermes. Contém identidade profissional do usuário, metas, ritmo de trabalho, projetos ativos, personas preferidas, decisões tomadas e lições aprendidas. É carregado automaticamente como contexto em cada sessão.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">soul.md é o diferencial que transforma Hermes de chatbot em colaborador. Sem ele, cada sessão começa do zero. Com ele, o agente sempre conhece quem você é, o que importa e como você decide.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Arquivo em ~/.hermes/soul.md</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Carregamento automático em cada sessão</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Contexto pessoal estruturado em seções</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Atualização incremental conforme o agente aprende</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">🏛️</span>
-          <div>
-            <span class="font-medium">Pantheon — o dashboard de personas</span>
-            <span class="text-neutral-500 text-sm ml-2">- Gerenciamento visual de system prompts</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Pantheon é o painel visual do TRIAD — uma interface web local onde você gerencia todas as personas (skills), versiona system prompts, testa configurações e sincroniza com o Hermes. É o ponto de controle central para quem opera múltiplas personas e precisa de visibilidade sobre o que cada agente faz.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Sem Pantheon, gerenciar múltiplas personas é confuso — arquivos espalhados, sem histórico de versões, sem visão consolidada. Com Pantheon, você tem controle visual total sobre o ecossistema de agentes.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Interface web local para gestão de personas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Versionamento de system prompts</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sincronização com ~/.hermes/skills/</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Dashboard de atividade de personas</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">👁️</span>
-          <div>
-            <span class="font-medium">Gemini CLI — a camada multimodal</span>
-            <span class="text-neutral-500 text-sm ml-2">- Análise de imagens e vídeos localmente</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Gemini CLI é uma ferramenta de linha de comando que permite ao Hermes processar conteúdo multimodal — imagens, screenshots, vídeos curtos e documentos PDF — localmente, sem upload para a nuvem. Opera com tier gratuito generoso do Google AI Studio e se integra como ferramenta bash dentro do Hermes.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">A maioria dos agentes de texto não consegue analisar imagens ou vídeos. Gemini CLI preenche essa lacuna, permitindo que Hermes lide com conteúdo visual — analisar dashboards, capturar screenshots de sites, transcrever vídeos de reunião.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Processamento local de imagens e vídeos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tier gratuito do Google AI Studio</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Integração via ferramenta bash no Hermes</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Complemento multimodal ao stack de texto</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">⚙️</span>
-          <div>
-            <span class="font-medium">Fluxo completo de uma tarefa</span>
-            <span class="text-neutral-500 text-sm ml-2">- Do input ao resultado final</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Uma tarefa no TRIAD segue o fluxo: (1) usuário envia instrução ao Hermes, (2) Hermes carrega soul.md + skill relevante, (3) aciona modelo via OpenRouter com context adequado, (4) se tarefa complexa, executa padrão Triad com dois ou três modelos, (5) consolida resultado, (6) entrega e atualiza logs em ~/.hermes/jobs/.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Mapear o fluxo completo revela onde cada componente entra e onde podem ocorrer gargalos ou falhas. Com esse mapa, você otimiza inputs, escolhe o modelo certo para cada etapa e depura problemas com precisão.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Pipeline input → contexto → modelo → resultado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Carregamento condicional de skills</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Logs em ~/.hermes/jobs/</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Decisão de acionar padrão Triad</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🔌</span>
-          <div>
-            <span class="font-medium">Pontos de extensão da arquitetura</span>
-            <span class="text-neutral-500 text-sm ml-2">- Onde plugar novas ferramentas</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">A arquitetura TRIAD tem pontos de extensão deliberados: (1) novas skills via ~/.hermes/skills/, (2) novos modelos via OpenRouter sem mudar código, (3) webhooks de entrada via N8N ou Zapier, (4) ferramentas bash customizadas registradas no CLAUDE.md, e (5) novas seções no soul.md para novos tipos de contexto.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Conhecer os pontos de extensão corretos evita gambiarras. Em vez de modificar o núcleo do sistema, você expande de forma limpa e reversível — adicionando capacidades sem quebrar o que já funciona.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Skills como unidades de extensão</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Ferramentas bash customizadas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Webhooks como entradas externas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Modelos substituíveis via configuração</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 8 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">8</span>
-          <span class="text-lg">📊</span>
-          <div>
-            <span class="font-medium">Custos e dimensionamento</span>
-            <span class="text-neutral-500 text-sm ml-2">- Quanto custa operar o sistema em escala</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O TRIAD é projetado para custo mínimo: DeepSeek V4 processa tarefas pesadas overnight por cerca de 1% do custo de Claude Opus. Gemini CLI usa tier gratuito para multimodal. Claude Opus é reservado para decisões críticas. Uma operação de volume médio (50 tarefas/mês) custa menos de $10 com esse stack otimizado.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Planejar custos antecipadamente evita surpresas. Entender a relação custo-valor de cada modelo permite alocar o orçamento de IA de forma inteligente — usando modelos caros só quando o ROI justifica.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>DeepSeek V4 para volume overnight</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Claude Opus para decisões críticas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Gemini gratuito para multimodal</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Alocação de orçamento por tipo de tarefa</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Cinco componentes integrados</strong><span class="text-neutral-400"> — Hermes, Triad, OpenRouter, soul.md e Pantheon</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Fluxo de tarefa mapeado</strong><span class="text-neutral-400"> — do input ao resultado com rastreabilidade completa</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Extensível por design</strong><span class="text-neutral-400"> — skills, modelos, webhooks e ferramentas plugáveis</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Custo otimizado</strong><span class="text-neutral-400"> — modelo certo para cada tipo de tarefa</span></div>
-          </div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">4.2 — Pantheon Dashboard: gerenciamento visual de personas e system prompts</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 4</a>
-          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Sistema, não agente</span><p class="text-sm text-neutral-400 mt-1">TRIAD é uma rede de componentes, não um único modelo gigante</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Mapa antes de construir</span><p class="text-sm text-neutral-400 mt-1">Toda extensão começa por localizar onde no mapa ela se encaixa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Conexões via protocolo</span><p class="text-sm text-neutral-400 mt-1">Cada componente conversa com os outros por contratos explícitos, não acoplamento direto</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Hermes como hub</span><p class="text-sm text-neutral-400 mt-1">Tudo passa pelo Hermes — ele é o ponto de entrada e saída</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="index.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Trilha 4: Construção e Escala</a>
-      <a href="modulo-4-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.2: Pantheon Dashboard →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🎯 Hermes como orquestrador central — o que ele controla</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hermes não pensa pelo Triad — ele <strong class="text-amber-400">decide quem pensa, em que ordem, com qual contexto</strong>. Entender isso evita o erro clássico de tentar fazer o Hermes raciocinar quando o papel dele é roteamento.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Hermes é o orquestrador de toda a interação. Ele recebe a entrada do usuário, consulta soul.md para contexto, decide qual skill do Pantheon invocar, monta o briefing inicial, repassa controle, e finalmente compõe a resposta final que volta ao usuário.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🧭</span> As 5 responsabilidades de Hermes
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Parsing da intenção:</strong> traduz o pedido em linguagem natural num intent estruturado.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Carregamento de contexto:</strong> lê soul.md e injeta o que for relevante para o intent.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Seleção de skill:</strong> escolhe do Pantheon a skill ou persona certa para o intent.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Despacho e supervisão:</strong> invoca a skill, monitora execução, captura sinais como PARTIAL_DELIVERY.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Composição da resposta:</strong> integra o output da skill com tom e formato adequados ao usuário.</span></li>
+        </ul>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Hermes mal usado</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Hermes tentando ser Condutor, Worker e Crítico ao mesmo tempo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Lógica de negócio embutida no orquestrador</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Hermes "decidindo" o resultado em vez de delegar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Contexto criado dentro do Hermes (não em soul.md)</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Hermes bem usado</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Roteia, mas não raciocina sobre o domínio</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Lê soul.md, escolhe skill, devolve resposta</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Trata sinais de erro (PARTIAL, REVISE_LOOP) com regra clara</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Mantém prompts pequenos — toda lógica grande vai para skills</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Orquestrador, não pensador</span><p class="text-sm text-neutral-400 mt-1">Hermes roteia — o raciocínio mora nas skills</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">5 responsabilidades fixas</span><p class="text-sm text-neutral-400 mt-1">Parsing, contexto, seleção, despacho, composição — nada além disso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Supervisão de sinais</span><p class="text-sm text-neutral-400 mt-1">Hermes captura PARTIAL_DELIVERY, REVISE, FUNDAMENTAL FLAW e age</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Prompt enxuto</span><p class="text-sm text-neutral-400 mt-1">Quanto mais lógica no Hermes, mais frágil o sistema todo</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">🔀 OpenRouter como camada de abstração de modelos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Acoplar uma skill direto a "Opus" é uma armadilha de longo prazo. <strong class="text-amber-400">OpenRouter desacopla papel de provedor</strong> — você pede "modelo classe Condutor" e o roteador decide qual chamar baseado em custo, disponibilidade e fallback.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">OpenRouter é a camada que abstrai chamadas a modelos — Opus, DeepSeek V4, GPT-4, Mistral, etc. — atrás de uma única API. Permite trocar provedores sem alterar o código das skills, aplicar fallbacks automáticos quando um modelo falha, e centralizar controle de custos.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Diagrama da camada de modelos
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+   Skill (Orpheus)
+        │
+        │  request: { role: "conductor", task: ... }
+        ▼
+   ┌──────────────────┐
+   │   OpenRouter     │  ◀── policy: cost, latency, fallback
+   └────┬─────┬─────┬─┘
+        │     │     │
+        ▼     ▼     ▼
+     ┌────┐┌────┐┌────┐
+     │Opus││DSV4││ GPT│
+     └────┘└────┘└────┘
+        │     │     │
+        └─────┴─────┘
+              │
+              ▼
+       response → Skill
+        </pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que importa
+        </h3>
+        <p class="text-neutral-300">Sem OpenRouter, trocar Opus por outro modelo significa reescrever toda a skill. Com ele, você muda uma linha de configuração. É a diferença entre um sistema que envelhece bem e um que precisa ser refeito a cada novo modelo.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Papel vs provedor</span><p class="text-sm text-neutral-400 mt-1">Skill pede um papel ("conductor"), não um modelo específico</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Fallback automático</span><p class="text-sm text-neutral-400 mt-1">Se o modelo primário falha, OpenRouter tenta o secundário sem intervenção</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Controle central de custo</span><p class="text-sm text-neutral-400 mt-1">Todos os custos passam por um único ponto — auditoria e rate limit ficam triviais</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Desacoplamento de modelo</span><p class="text-sm text-neutral-400 mt-1">Trocar provedor = mudar config, não mudar código</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">📄 soul.md como fonte única de contexto pessoal</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Espalhar contexto pessoal em vários lugares é a forma mais rápida de criar inconsistência. <strong class="text-amber-400">soul.md é a fonte única da verdade</strong> sobre o usuário — preferências, histórico, restrições, vocabulário próprio. Todo componente lê dali; ninguém escreve em paralelo.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">soul.md é um arquivo markdown único que descreve o usuário em primeira pessoa — identidade, projetos ativos, preferências de comunicação, regras de colaboração, decisões já tomadas e vocabulário. Funciona como o "manual do usuário" que Hermes lê em toda interação.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📂</span> Estrutura típica de soul.md
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+   soul.md
+   ├── # Identidade
+   │     nome, papel, tom preferido
+   ├── # Projetos ativos
+   │     TRIAD, INEMA.CLUB, ...
+   ├── # Regras de colaboração
+   │     "responder em PT-BR", "nunca usar AskUserQuestion"
+   ├── # Decisões já tomadas
+   │     ADRs informais, escolhas técnicas
+   └── # Vocabulário
+         Condutor, Worker, Crítico, soul, pantheon
+        </pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que arquivo único
+        </h3>
+        <p class="text-neutral-300">Múltiplos arquivos de contexto = múltiplas fontes da verdade = inconsistência inevitável. Um único soul.md força você a manter coerência — se duas regras se contradizem, isso vira visível na hora da edição.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Single source of truth</span><p class="text-sm text-neutral-400 mt-1">Um arquivo, uma verdade — sem cópias paralelas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Manutenção manual</span><p class="text-sm text-neutral-400 mt-1">soul.md é editado por humano, não por modelo — preserva intenção</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Vocabulário compartilhado</span><p class="text-sm text-neutral-400 mt-1">Todos os componentes falam a mesma língua técnica</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Carregamento por Hermes</span><p class="text-sm text-neutral-400 mt-1">Só o Hermes lê soul.md — as skills recebem o recorte relevante</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🎼 O Pantheon como interface de controle de personas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Pantheon é o <strong class="text-amber-400">catálogo navegável de skills e personas</strong>. Sem ele, Hermes precisaria conhecer cada skill por nome — o que mata extensibilidade. Com Pantheon, adicionar uma nova capacidade é registrar uma entrada, sem tocar no código do orquestrador.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Pantheon é o registry de skills e personas disponíveis para Hermes. Cada entrada descreve uma capacidade — nome, descrição, triggers, entradas esperadas e modelo recomendado — de forma que Hermes pode escolher dinamicamente sem hardcode.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Pantheon como camada de descoberta
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+   Hermes
+     │
+     │  "preciso de skill que: analise mercado"
+     ▼
+   ┌─────────────────────────┐
+   │       Pantheon          │
+   │  ┌───────────────────┐  │
+   │  │ Orpheus (Triad)   │  │  ← match
+   │  │ MarketScout       │  │
+   │  │ DocWriter         │  │
+   │  │ CodeReviewer      │  │
+   │  │ ...               │  │
+   │  └───────────────────┘  │
+   └────────────┬────────────┘
+                │
+                ▼
+         Skill instance
+        </pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Skill</div>
+          <p class="text-sm text-neutral-400">Capacidade técnica — Orpheus, DocWriter. Executa uma tarefa, geralmente via Triad loop interno.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Persona</div>
+          <p class="text-sm text-neutral-400">Estilo + atitude — "estrategista", "professor", "pair-programmer". Modula tom da resposta.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Trigger</div>
+          <p class="text-sm text-neutral-400">Padrão de intent que aciona a skill. Pode ser palavra-chave, regex ou descrição semântica.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-5 border border-dark-600">
+          <div class="text-amber-400 font-bold mb-2">Registry</div>
+          <p class="text-sm text-neutral-400">Conjunto de entradas Pantheon. Adicionar skill = adicionar entrada, sem tocar Hermes.</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Registry navegável</span><p class="text-sm text-neutral-400 mt-1">Skills se anunciam, Hermes descobre — sem hardcode</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Skill vs persona</span><p class="text-sm text-neutral-400 mt-1">Skill = capacidade técnica, persona = estilo de entrega</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Extensibilidade plug-in</span><p class="text-sm text-neutral-400 mt-1">Nova skill = nova entrada no registry, deploy zero no Hermes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Triggers explícitos</span><p class="text-sm text-neutral-400 mt-1">Cada skill declara quando deve ser usada — Hermes só faz match</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🎬 Gemini CLI como ferramenta multimodal no ecossistema</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Triad é forte em texto, mas <strong class="text-amber-400">mídia exige tools especializadas</strong>. Gemini CLI entra como ferramenta multimodal — análise de imagem, vídeo, áudio — invocada pelas skills quando o briefing exige percepção além de texto.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Gemini CLI é uma ferramenta de linha de comando que dá acesso ao Gemini para tarefas multimodais — descrever imagens, transcrever áudio, sumarizar vídeo. No TRIAD ele é tratado como tool: chamado por skills, com input/output bem definidos, nunca como orquestrador.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🔧</span> Quando uma skill chama Gemini CLI
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Análise visual:</strong> descrever um screenshot, identificar UI, ler diagrama.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Transcrição de áudio:</strong> converter reunião gravada em texto para o Condutor processar.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Sumarização de vídeo:</strong> dar ao Triad o "miolo" de um vídeo sem precisar assistir tudo.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><strong>Verificação multimodal:</strong> o Crítico pode pedir leitura visual de um asset entregue.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🧩 Gemini CLI como cidadão do sistema</h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+   Skill (ex: Orpheus)
+        │
+        │  task: "analise este vídeo de demo e
+        │   liste 5 pontos de fricção UX"
+        ▼
+   ┌──────────────────┐
+   │  Triad Loop      │
+   │  ┌────────────┐  │
+   │  │ Conductor  │──┼──▶ briefing
+   │  └────────────┘  │
+   │  ┌────────────┐  │
+   │  │  Worker    │──┼──▶ tool: gemini-cli (vídeo)
+   │  └────────────┘  │       ▲
+   │  ┌────────────┐  │       │ multimodal
+   │  │  Critic    │  │       ▼
+   │  └────────────┘  │     resumo + tags
+   └──────────────────┘
+        </pre>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tool, não orquestrador</span><p class="text-sm text-neutral-400 mt-1">Gemini CLI é chamado por skills, nunca decide o fluxo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Multimodalidade sob demanda</span><p class="text-sm text-neutral-400 mt-1">Só aciona quando o briefing exige mídia</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Interface CLI = contratos claros</span><p class="text-sm text-neutral-400 mt-1">Input e output via arquivo/stdout, fácil de testar e auditar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Crítico multimodal</span><p class="text-sm text-neutral-400 mt-1">O Crítico pode pedir verificação visual via Gemini antes de SHIP</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🔁 Fluxo completo de uma tarefa do início ao fim</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Ver os componentes isolados não basta — você precisa rastrear <strong class="text-amber-400">uma tarefa real percorrendo o sistema inteiro</strong>. Esse é o teste de compreensão: se você consegue seguir cada salto, você entende o sistema.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O fluxo end-to-end é o caminho que uma tarefa percorre — desde o input do usuário até a resposta final — atravessando Hermes, soul.md, Pantheon, a skill escolhida, o Triad loop interno (Condutor → Worker → Crítico) e voltando.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">User envia pedido</h4>
+            <p class="text-sm text-neutral-400">"Quero três ângulos estratégicos para entrar no mercado local de odontologia premium." — Entra no Hermes.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Hermes parseia intent e carrega soul.md</h4>
+            <p class="text-sm text-neutral-400">Identifica intent: "análise estratégica de mercado". Lê soul.md, recorta seção "negócios ativos" e "vocabulário".</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Hermes consulta Pantheon e seleciona Orpheus</h4>
+            <p class="text-sm text-neutral-400">Trigger "análise estratégica" mapeia para Orpheus (skill Triad). Hermes invoca passando intent + contexto.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Orpheus aciona o Triad — Condutor monta briefing</h4>
+            <p class="text-sm text-neutral-400">Via OpenRouter, classe "conductor" → Opus. Condutor produz briefing com critérios mensuráveis e 3–5 ângulos.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Worker drafta ângulos com premissa diferente</h4>
+            <p class="text-sm text-neutral-400">Via OpenRouter, classe "worker" → DSV4. Produz drafts com raciocínio visível, sem julgar qual é melhor.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">6</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Crítico avalia — REVISE ou SHIP</h4>
+            <p class="text-sm text-neutral-400">Via OpenRouter, classe "critic" → GPT. Compara contra critérios do briefing. Pode iterar (REVISE) ou aprovar (SHIP).</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">7</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Hermes compõe resposta final e devolve ao user</h4>
+            <p class="text-sm text-neutral-400">Recebe output SHIPped, aplica tom de soul.md ("terse like caveman"), devolve resposta ao usuário.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Diagrama do fluxo end-to-end
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+   User ──▶ Hermes ──▶ soul.md (read)
+                │
+                ├──▶ Pantheon (lookup) ──▶ Orpheus
+                │                              │
+                │                              ▼
+                │                        ┌─Triad Loop─┐
+                │                        │ Conductor  │ via OpenRouter → Opus
+                │                        │     │      │
+                │                        │     ▼      │
+                │                        │  Worker    │ via OpenRouter → DSV4
+                │                        │     │      │
+                │                        │     ▼      │
+                │                        │  Critic    │ via OpenRouter → GPT
+                │                        │  SHIP/REV  │
+                │                        └─────┬──────┘
+                │                              │
+                │◀─────── output ──────────────┘
+                ▼
+              User
+        </pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Teste de compreensão
+        </h3>
+        <p class="text-neutral-300">Se você consegue desenhar esse fluxo de memória, com os nomes corretos em cada salto, você entende TRIAD o suficiente para começar a estendê-lo. Se travar em algum salto, esse é o tópico para reler.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">7 saltos do fluxo</span><p class="text-sm text-neutral-400 mt-1">User → Hermes → soul → Pantheon → Skill → Triad → resposta</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Triad como sub-loop da skill</span><p class="text-sm text-neutral-400 mt-1">O loop Condutor-Worker-Crítico vive dentro da skill, não no Hermes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">OpenRouter por papel</span><p class="text-sm text-neutral-400 mt-1">Cada papel do Triad é uma classe de modelo, não um provider fixo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tom aplicado no fim</span><p class="text-sm text-neutral-400 mt-1">Hermes aplica voz e formato apenas na composição final</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 8 -->
+    <section id="topico-8" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">8</span>
+        <h2 class="text-2xl font-bold">🧩 Pontos de extensão — onde o sistema pode crescer</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um sistema saudável tem <strong class="text-amber-400">pontos de extensão claros</strong> — onde adicionar capacidade é trivial e onde adicionar é um risco arquitetural. Saber a diferença evita reescritas dolorosas mais à frente.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Pontos de extensão são as fronteiras do sistema projetadas para receber novas capacidades sem refatoração — novas skills no Pantheon, novos modelos no OpenRouter, novas tools (como Gemini CLI). Pontos não-extensíveis (como o núcleo do Hermes) exigem cuidado redobrado para mudar.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Nova skill no Pantheon</h4>
+            <p class="text-sm text-neutral-400">Registre entrada com trigger, descrição e classe de modelo. Hermes a descobre automaticamente. Custo de extensão: baixo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Novo modelo no OpenRouter</h4>
+            <p class="text-sm text-neutral-400">Adicione config de provedor com policy (custo, latência, fallback). Skills não mudam. Custo: muito baixo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Nova tool (CLI multimodal, scraper, etc.)</h4>
+            <p class="text-sm text-neutral-400">Envelope a tool com input/output via stdin/stdout. Skills chamam diretamente. Custo: baixo a médio.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Nova persona</h4>
+            <p class="text-sm text-neutral-400">Pantheon aceita personas com mesmo formato de entrada das skills. Modula só o tom da resposta final. Custo: baixíssimo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Mudança no Hermes (núcleo)</h4>
+            <p class="text-sm text-neutral-400">Alterar as 5 responsabilidades do orquestrador afeta todo o sistema. Custo: alto. Faça apenas com motivo forte.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Mapa de extensibilidade
+        </h3>
+        <pre class="bg-dark-900/70 rounded-lg p-4 text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">
+                   ┌── BAIXO CUSTO ──┐
+                   │                  │
+   nova skill ───▶ Pantheon          OpenRouter ◀── novo modelo
+                   │                  │
+   nova persona ─▶ Pantheon          Tools  ◀── nova ferramenta
+                   │                  │
+                   └─────┬────────┬───┘
+                         │        │
+                         ▼        ▼
+                       Hermes (núcleo)
+                            │
+                            ▼
+                   ┌── ALTO CUSTO ───┐
+                   │  mudar parsing  │
+                   │  mudar despacho │
+                   │  mudar contexto │
+                   └─────────────────┘
+        </pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Heurística de extensão
+        </h3>
+        <p class="text-neutral-300">Antes de tocar em Hermes, pergunte: "Isso poderia ser uma nova skill no Pantheon?" Se sim, faça lá. O núcleo do orquestrador deve mudar muito devagar — extensões devem mudar rápido. É essa assimetria que mantém o sistema escalável.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Extensão barata vs cara</span><p class="text-sm text-neutral-400 mt-1">Pantheon/OpenRouter/Tools = barato; Hermes = caro</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Núcleo estável</span><p class="text-sm text-neutral-400 mt-1">Hermes muda devagar — toda capacidade nova tenta primeiro virar skill</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Bordas elásticas</span><p class="text-sm text-neutral-400 mt-1">Skills, modelos e tools são as bordas — projetadas para crescer rápido</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Assimetria como design</span><p class="text-sm text-neutral-400 mt-1">A diferença de custo entre extensão e mudança de núcleo é intencional</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">TRIAD é um sistema, não um agente</strong><span class="text-neutral-400"> — uma rede de componentes (Hermes, Pantheon, soul.md, Skills, OpenRouter, Tools) com protocolos claros</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Hermes orquestra, não pensa</strong><span class="text-neutral-400"> — parsing, contexto, seleção, despacho e composição. Lógica de domínio vive nas skills</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">OpenRouter desacopla papel de provedor</strong><span class="text-neutral-400"> — você pede "conductor", o roteador escolhe o modelo. Trocar provider = mudar config</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">soul.md é a fonte única da verdade</strong><span class="text-neutral-400"> — todo contexto pessoal mora num arquivo. Pantheon é o catálogo navegável de capacidades</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Gemini CLI é tool, não orquestrador</strong><span class="text-neutral-400"> — entra como ferramenta multimodal chamada por skills, com contratos claros</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Crescer pelas bordas, não pelo núcleo</strong><span class="text-neutral-400"> — novas skills, modelos e tools entram barato; mexer no Hermes é caro por design</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.2 — Pantheon visual: navegando o catálogo de skills e personas</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -478,12 +843,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

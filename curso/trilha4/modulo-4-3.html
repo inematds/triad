@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Automação Overnight — agendando tarefas para o Hermes executar enquanto você dorme">
-  <title>Automação Overnight | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Automação overnight — agendando trabalho pesado com Hermes, checkpoints e loops de melhoria contínua">
+  <title>Automação overnight — Agendando trabalho pesado | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -38,11 +38,14 @@
     .dark .border-dark-600 { border-color: #374151; }
     html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
 
+    /* Light mode amber */
     html:not(.dark) .text-amber-400 { color: #92400e; }
     html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
     html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
     html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .border-amber-500\/20 { border-color: rgba(217, 119, 6, 0.2); }
     html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+    html:not(.dark) .hover\:text-amber-300:hover { color: #b45309; }
 
     html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
     html:not(.dark) .text-primary { color: #a16207; }
@@ -50,6 +53,7 @@
     html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
     html:not(.dark) .text-sky-400 { color: #0369a1; }
     html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
     html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
     html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
 
@@ -62,7 +66,6 @@
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -72,7 +75,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -91,7 +93,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -120,23 +121,23 @@
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.3</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🌙 Automação Overnight</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Configurando o Hermes para trabalhar enquanto você dorme — agendamento de jobs, checkpoints e revisão matinal.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🌙 Automação overnight — Agendando trabalho pesado</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Configure jobs recorrentes, gerencie checkpoints e implemente loops de melhoria contínua enquanto dorme.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">7</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~35</div>
+          <div class="text-xl font-bold text-amber-400">~50</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Intermediário</div>
+          <div class="text-xl font-bold text-amber-400">Avançado</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Prático</div>
+          <div class="text-xl font-bold text-amber-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,285 +146,606 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🌙 O que pode ser feito enquanto você dorme</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Toda noite são <strong class="text-amber-400">8 horas de capacidade computacional</strong> desperdiçadas se você não programa nada. O Triad foi construído para esse turno — tarefas longas que precisam de paralelismo, iteração e crítica, mas não precisam de você no loop.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🎯</span>
-          <div>
-            <span class="font-medium">Casos de uso para automação overnight</span>
-            <span class="text-neutral-500 text-sm ml-2">- O que faz sentido rodar à noite</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Tarefas ideais para overnight são aquelas longas, não urgentes e que não precisam de input interativo: análise de concorrentes (pesquisar 20 sites), geração de relatórios semanais, revisão de métricas de múltiplos canais, rascunho de conteúdo em lote (10 posts), pesquisa de mercado com consolidação de fontes, e verificação de consistência em bases de dados ou documentação.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Nem toda tarefa é candidata a overnight. Identificar os padrões certos (longa, não interativa, tolerante a latência) permite montar uma fila noturna que multiplica sua produtividade real sem risco de erros por falta de supervisão.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tarefas longas e não interativas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tolerância a latência como critério</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Análise em lote vs análise pontual</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Revisão humana obrigatória no resultado</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Automação overnight é o uso da janela noturna (22h–6h tipicamente) para rodar tarefas Triad que consomem horas de loop Worker-Crítico e seriam impraticáveis durante o trabalho síncrono. Pesquisa profunda, varreduras de mercado, revisões de código em lote e geração de conteúdo em batch são candidatos naturais.</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">📅</span>
-          <div>
-            <span class="font-medium">hermes schedule add — agendando um job</span>
-            <span class="text-neutral-500 text-sm ml-2">- Sintaxe e opções do comando</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O comando <code class="bg-dark-600 px-1 rounded text-amber-400">hermes schedule add</code> cria um job agendado com os parâmetros: --name (identificador), --task (instrução em linguagem natural), --time (cron expression ou hora natural como "23:30"), --model (qual modelo usar, padrão deepseek), --output (onde salvar o resultado) e --notify (canal de notificação ao completar).</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Agendar um job leva menos de um minuto quando você conhece a sintaxe. A maioria das flags tem defaults inteligentes — na prática, você só precisa de --name, --task e --time para a maioria dos casos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Flags --name, --task, --time obrigatórias</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>--model padrão é deepseek para overnight</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Suporte a cron expression e linguagem natural</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>--output define onde o resultado é salvo</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">📋</span>
-          <div>
-            <span class="font-medium">Definindo inputs e outputs do job</span>
-            <span class="text-neutral-500 text-sm ml-2">- Como estruturar tarefas para execução autônoma</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Um job overnight eficaz precisa de inputs bem definidos (arquivos de referência, URLs, parâmetros fixos) e outputs claros (formato do resultado: JSON, Markdown, PDF). O task description deve ser completamente autocontido — o agente não pode pedir esclarecimento durante a execução, então a instrução precisa cobrir todos os cenários possíveis.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Jobs mal especificados falham silenciosamente ou produzem resultados inutilizáveis. A disciplina de definir inputs e outputs antes de agendar reduz drasticamente a taxa de falha e o trabalho de reprocessamento pela manhã.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Instrução autocontida sem ambiguidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Inputs como arquivos ou parâmetros fixos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Output format especificado explicitamente</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Fallback definido para casos de erro</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">💾</span>
-          <div>
-            <span class="font-medium">Checkpoints em ~/.hermes/jobs/</span>
-            <span class="text-neutral-500 text-sm ml-2">- Rastreabilidade e recuperação de falhas</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Durante a execução, o Hermes salva checkpoints periódicos em ~/.hermes/jobs/[job-name]/. Cada checkpoint é um arquivo JSON com o estado atual do job: progresso percentual, etapa em execução, outputs parciais e eventuais erros. Se o job falhar, os checkpoints permitem retomar de onde parou em vez de reiniciar do zero.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Jobs longos podem falhar por timeout, erro de API ou queda de conexão. Checkpoints são a diferença entre perder 2 horas de processamento e retomar de 80% de progresso — especialmente crítico em análises de alto volume.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Checkpoints automáticos em ~/.hermes/jobs/</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Estado salvo como JSON por etapa</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resume automático em caso de falha</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Outputs parciais consultáveis durante execução</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">☀️</span>
-          <div>
-            <span class="font-medium">Protocolo de revisão matinal</span>
-            <span class="text-neutral-500 text-sm ml-2">- Como revisar e aprovar resultados overnight</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O protocolo matinal começa com <code class="bg-dark-600 px-1 rounded text-amber-400">hermes jobs review</code> — um resumo de todos os jobs executados com status (concluído/falhou/parcial), tempo de execução e path dos outputs. Para cada job concluído, você aprova, rejeita ou solicita refinamento. Aprovações movem o output para o destino final; rejeições disparam re-execução com novo contexto.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Resultados overnight sem revisão humana são perigosos — modelos cometem erros sutis que passam despercebidos sem uma segunda leitura. O protocolo garante que você mantém controle sobre o que vai para produção, mesmo delegando o processamento.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>hermes jobs review como ponto de entrada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Aprovar / Rejeitar / Refinar como ações</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Re-execução com contexto adicional</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Revisão humana obrigatória antes de produção</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🔗</span>
-          <div>
-            <span class="font-medium">Webhooks N8N para automação avançada</span>
-            <span class="text-neutral-500 text-sm ml-2">- Disparando jobs a partir de eventos externos</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Além do agendamento por horário, o Hermes pode ser disparado por eventos via webhook N8N: novo formulário submetido, novo lead no CRM, post publicado, métrica atingindo threshold, ou qualquer evento de outra ferramenta. O N8N processa o evento, formata o payload e chama o endpoint webhook do Hermes — que executa o job correspondente.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Agendamento fixo por horário é limitado. Webhooks permitem automação reativa — o job roda quando o evento acontece, não numa janela de tempo pré-definida. Isso é crítico para fluxos que dependem de dados externos em tempo real.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Automação reativa vs programada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Endpoint webhook do Hermes</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>N8N como orquestrador de eventos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Payload formatado como instrução de job</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🔁</span>
-          <div>
-            <span class="font-medium">Loop de melhoria contínua dos jobs</span>
-            <span class="text-neutral-500 text-sm ml-2">- Refinando automações com base em resultados</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Cada ciclo de revisão matinal é uma oportunidade de melhorar os jobs. O Hermes registra metadados de performance: tempo de execução, tokens consumidos, número de re-tentativas, qualidade do output (você avalia). Com esses dados, você identifica jobs caros demais, lentos demais ou com outputs abaixo do esperado e refina a instrução ou troca o modelo.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Automações que não evoluem se tornam obsoletas. O loop de melhoria transforma cada noite em aprendizado — jobs que rodam 30 dias ficam progressivamente mais rápidos, baratos e precisos conforme você refina as instruções.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Metadados de performance por job</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Avaliação de qualidade pelo usuário</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Refinamento incremental de instruções</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Troca de modelo por custo-performance</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📋</span> Quatro categorias de trabalho overnight
+        </h3>
+        <div class="space-y-3 text-neutral-300">
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Jobs agendados com hermes schedule</strong><span class="text-neutral-400"> — instrução, modelo e horário em um comando</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">🔬</span>
+            <span><strong>Research profunda</strong> — análise competitiva de 12 concorrentes, deep dive em um tópico técnico, mapeamento de literatura. Tarefa que demoraria dias para você, demora uma noite no Triad.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Checkpoints para recuperação de falhas</strong><span class="text-neutral-400"> — nunca reinicia do zero após erro</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">✍️</span>
+            <span><strong>Geração de conteúdo em batch</strong> — 30 variações de copy, drafts de artigos para todo o pipeline editorial, descrições de produto para um catálogo inteiro.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Protocolo de revisão matinal</strong><span class="text-neutral-400"> — controle humano sobre o que vai para produção</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">🔍</span>
+            <span><strong>Code reviews em lote</strong> — varredura de segurança em todo o repositório, refatoração proposta para módulos legados, análise de débito técnico.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Loop de melhoria contínua</strong><span class="text-neutral-400"> — cada noite torna os jobs mais eficientes</span></div>
+            <span class="text-amber-400 mt-1 flex-shrink-0">📊</span>
+            <span><strong>Market scan recorrente</strong> — monitorar mudanças em preços de concorrentes, novas releases no segmento, menções de marca na web. Diário, automático.</span>
           </div>
         </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">4.4 — Integrações Externas: Telegram, N8N e Zapier conectados ao Hermes</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Boa tarefa overnight</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Critérios de sucesso testáveis e fechados</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Não exige decisão humana no meio</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Falha parcial ainda gera valor (5 de 12 análises = útil)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Saída inspecionável de manhã em &lt;15min</span></li>
+          </ul>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.2</a>
-          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Má tarefa overnight</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Requer aprovação intermediária do usuário</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Critério de sucesso depende de contexto vivo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Output enorme que você não vai revisar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem fallback se uma API externa cair</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">A janela overnight dobra sua capacidade efetiva sem dobrar seu custo cognitivo. Quem domina jobs agendados produz em uma semana o que outros produzem em um mês — porque o trabalho continua quando o operador para.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Janela overnight</span><p class="text-sm text-neutral-400 mt-1">22h–6h como turno computacional dedicado a tarefas longas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tarefa autocontida</span><p class="text-sm text-neutral-400 mt-1">Critérios fechados, sem necessidade de decisão humana no meio</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Falha parcial útil</span><p class="text-sm text-neutral-400 mt-1">Mesmo se incompleta, a tarefa ainda entrega valor verificável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Capacidade dobrada</span><p class="text-sm text-neutral-400 mt-1">8h de loop noturno ≈ 1 dia adicional de trabalho por dia</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-4-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.2: Pantheon</a>
-      <a href="modulo-4-4.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.4: Integrações Externas →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">⏰ Configurando jobs recorrentes no Hermes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Hermes expõe um agendador interno baseado em cron. <strong class="text-amber-400">A sintaxe é padrão Unix</strong> — minuto, hora, dia do mês, mês, dia da semana — e cada job recebe um nome para que você possa consultar histórico e logs depois.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O comando <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">hermes schedule</code> registra um job recorrente que dispara um comando Triad em horários definidos por expressão cron. O Hermes mantém o registro em <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.hermes/schedule.db</code> e o dispatcher dorme no background até o próximo trigger.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4 flex items-center"><span class="mr-2">⚙️</span> Comandos essenciais</h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># agendar um job overnight de research recorrente</span><br>
+            <span class="text-emerald-400">$</span> hermes schedule add \<br>
+            &nbsp;&nbsp;--name=overnight-research \<br>
+            &nbsp;&nbsp;--cron="0 22 * * *" \<br>
+            &nbsp;&nbsp;--command='hermes run job:research --topic="competitive landscape"'
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># briefing matinal as 6h</span><br>
+            <span class="text-emerald-400">$</span> hermes schedule add --name=morning-briefing --at="06:00" --command="hermes briefing"
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># listar, pausar, remover</span><br>
+            <span class="text-emerald-400">$</span> hermes schedule list<br>
+            <span class="text-emerald-400">$</span> hermes schedule pause overnight-research<br>
+            <span class="text-emerald-400">$</span> hermes schedule remove overnight-research
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🕐</span> Sintaxe cron — referência rápida
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-amber-400">┌─</span> minuto (0–59)</p>
+          <p><span class="text-amber-400">│ ┌─</span> hora (0–23)</p>
+          <p><span class="text-amber-400">│ │ ┌─</span> dia do mês (1–31)</p>
+          <p><span class="text-amber-400">│ │ │ ┌─</span> mês (1–12)</p>
+          <p><span class="text-amber-400">│ │ │ │ ┌─</span> dia da semana (0–6, dom=0)</p>
+          <p>* * * * * &lt;comando&gt;</p>
+          <p class="pt-2"><span class="text-emerald-400">0 22 * * *</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;todo dia às 22h</p>
+          <p><span class="text-emerald-400">0 22 * * 1-5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seg–sex às 22h</p>
+          <p><span class="text-emerald-400">0 */4 * * *</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a cada 4 horas</p>
+          <p><span class="text-emerald-400">30 23 * * 0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;domingo 23h30</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica de horário
+        </h3>
+        <p class="text-neutral-300">Distribua jobs em horários diferentes (22h, 23h, 1h, 3h) em vez de tudo às 22h. Evita pico de uso de API simultâneo, contorna rate limits e dá margem para retries sem competir consigo mesmo.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">hermes schedule add</span><p class="text-sm text-neutral-400 mt-1">Comando primário para registrar job recorrente com nome e cron expression</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Nome do job</span><p class="text-sm text-neutral-400 mt-1">Identificador estável usado em logs, histórico, pause/remove e checkpoints</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Distribuição de horários</span><p class="text-sm text-neutral-400 mt-1">Espaçar jobs evita pico de rate limit e competição entre tarefas próprias</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">schedule.db</span><p class="text-sm text-neutral-400 mt-1">Persistência local em ~/.hermes — sobrevive a reinicializações da máquina</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">📥 Definindo entradas e saídas esperadas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Job overnight sem contrato explícito de entrada/saída é uma caixa-preta — você acorda sem saber o que esperar. <strong class="text-amber-400">O manifesto YAML</strong> torna o contrato visível, versionável e auditável pelo Crítico antes da execução.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um job manifest é um arquivo YAML em <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.hermes/jobs/&lt;nome&gt;.yaml</code> que declara o nome do job, horário de execução, entradas esperadas (com tipos), saídas garantidas (com formato), frequência de checkpoint e política de retry. O Hermes carrega esse manifesto a cada execução.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📄</span> Exemplo: <code class="text-sm">overnight-research.yaml</code>
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1 overflow-x-auto">
+          <p><span class="text-amber-400">name:</span> overnight-research</p>
+          <p><span class="text-amber-400">runs_at:</span> <span class="text-emerald-400">"0 22 * * *"</span></p>
+          <p><span class="text-amber-400">timeout:</span> 8h</p>
+          <p><span class="text-amber-400">inputs:</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">topic:</span> <span class="text-sky-400">string</span> <span class="text-neutral-500"># obrigatório</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">depth:</span> <span class="text-sky-400">enum[shallow,medium,deep]</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">sources:</span> <span class="text-sky-400">list[url]</span></p>
+          <p><span class="text-amber-400">outputs:</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">format:</span> markdown</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">path:</span> <span class="text-emerald-400">"~/triad-out/research/{date}-{topic}.md"</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">min_sections:</span> 5</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">required_fields:</span> [summary, angles, sources, confidence]</p>
+          <p><span class="text-amber-400">checkpoint_every:</span> 15min</p>
+          <p><span class="text-amber-400">retry_on_failure:</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">max_attempts:</span> 3</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">backoff:</span> exponential</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📋 Anatomia do manifesto</h3>
+        <div class="space-y-4 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">name</span><span>identifica o job no Hermes e nos logs. Estável entre execuções.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">runs_at</span><span>expressão cron ou <code class="bg-dark-700 px-1 rounded">manual</code> para gatilho sob demanda.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">inputs</span><span>contrato tipado. O Hermes valida antes de chamar o Worker — input inválido falha cedo.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">outputs</span><span>formato, caminho de gravação e campos obrigatórios. O Crítico usa <code class="bg-dark-700 px-1 rounded">required_fields</code> como gate antes de SHIP.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">checkpoint_every</span><span>frequência de gravação de estado intermediário — chave para retomada após falha.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-amber-400 font-bold flex-shrink-0">retry_on_failure</span><span>quantas tentativas e qual estratégia de backoff em caso de erro recuperável.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Manifest YAML</span><p class="text-sm text-neutral-400 mt-1">Contrato declarativo do job — versionável no git, auditável antes da execução</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Inputs tipados</span><p class="text-sm text-neutral-400 mt-1">Validação antes do Worker — input inválido falha cedo, não no meio da noite</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">required_fields</span><p class="text-sm text-neutral-400 mt-1">Gate objetivo do Crítico — sem todos os campos, não emite SHIP</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Falha cedo</span><p class="text-sm text-neutral-400 mt-1">Validação no início economiza horas de execução desperdiçada</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">💾 Gerenciando memória para tarefas longas — checkpoints</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Tarefa de 6 horas que falha na quinta hora sem checkpoint = 5 horas perdidas. <strong class="text-amber-400">Checkpoints transformam falha catastrófica em retomada barata</strong> — o Hermes grava estado intermediário em disco e o Worker pode continuar do último ponto válido.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um checkpoint é um snapshot JSON do progresso do job — qual ângulo já foi processado, qual output parcial foi acumulado, qual decisão do Crítico está pendente — gravado em <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">~/.hermes/jobs/&lt;nome&gt;.checkpoint.json</code> a cada intervalo definido no manifesto.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📦</span> Exemplo de checkpoint
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 overflow-x-auto">
+          <p class="text-neutral-500"># ~/.hermes/jobs/overnight-research.checkpoint.json</p>
+          <p>{</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"job"</span>: <span class="text-emerald-400">"overnight-research"</span>,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"started_at"</span>: <span class="text-emerald-400">"2026-05-17T22:00:14Z"</span>,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"last_checkpoint_at"</span>: <span class="text-emerald-400">"2026-05-18T01:45:02Z"</span>,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"angles_total"</span>: 5,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"last_completed_angle"</span>: 3,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"current_angle"</span>: {</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-amber-400">"index"</span>: 4,</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-amber-400">"phase"</span>: <span class="text-emerald-400">"worker_drafting"</span>,</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-amber-400">"iteration"</span>: 2</p>
+          <p>&nbsp;&nbsp;},</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"partial_output"</span>: <span class="text-emerald-400">"~/triad-out/research/.partial-2026-05-17.md"</span>,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"tokens_consumed"</span>: 142300,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"resume_token"</span>: <span class="text-emerald-400">"ckpt_a8f3e91c"</span></p>
+          <p>}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Sem checkpoint</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>API cai às 4h → 6h de trabalho perdidas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Manhã: arquivo de output vazio, sem pistas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Retry recomeça do zero — gasta tokens duas vezes</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Impossível diagnosticar onde falhou</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Com checkpoint a cada 15min</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>API cai às 4h → no máximo 15min perdidos</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Manhã: ângulos 1–3 prontos, partial em disco</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><code class="bg-dark-700 px-1 rounded">hermes resume</code> retoma do último checkpoint</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Log mostra exatamente em que fase quebrou</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">⚙️ Retomada após falha</h3>
+        <div class="space-y-3">
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># ver status do último job</span><br>
+            <span class="text-emerald-400">$</span> hermes job status overnight-research
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># retomar do último checkpoint valido</span><br>
+            <span class="text-emerald-400">$</span> hermes job resume overnight-research
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300">
+            <span class="text-amber-400"># forçar restart limpo (descarta checkpoint)</span><br>
+            <span class="text-emerald-400">$</span> hermes job restart overnight-research --fresh
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Regra prática
+        </h3>
+        <p class="text-neutral-300">Checkpoint a cada 15min para jobs &lt;2h. A cada 5–10min para jobs longos. O custo é baixo (alguns KB em disco); o retorno em caso de falha é uma noite inteira preservada.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Snapshot incremental</span><p class="text-sm text-neutral-400 mt-1">JSON do progresso gravado em disco a cada N minutos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">resume_token</span><p class="text-sm text-neutral-400 mt-1">Identificador opaco que o Worker usa para retomar exatamente onde parou</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">hermes job resume</span><p class="text-sm text-neutral-400 mt-1">Retomada barata vs restart caro — preserva tokens já gastos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Falha catastrófica → retomada</span><p class="text-sm text-neutral-400 mt-1">Checkpoint converte perda total em perda do último intervalo</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">☀️ Revisão matinal — o protocolo <code class="text-xl">hermes morning</code></h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Não basta rodar a noite — você precisa ter um protocolo de manhã que decide rapidamente: o que vai pra produção, o que precisa de iteração, o que descarta. <strong class="text-amber-400">15 minutos por dia</strong> mantém o sistema rodando bem.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O comando <code class="text-amber-400 bg-dark-700 px-1.5 py-0.5 rounded text-sm">hermes morning</code> agrega o resultado de todos os jobs overnight em um resumo único — quais terminaram SHIP, quais terminaram em PARTIAL_DELIVERY, quais falharam, quais campos o Crítico flagou para revisão humana. Foi pensado para ser o primeiro comando do dia.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🌅</span> Output típico do <code>hermes morning</code>
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 overflow-x-auto">
+          <p class="text-emerald-400">$ hermes morning</p>
+          <p class="text-amber-400">━━━ Resumo da noite (2026-05-17 22:00 → 06:00) ━━━</p>
+          <p></p>
+          <p><span class="text-emerald-400">✓ SHIP</span> overnight-research (4h 12m, 3 iterações)</p>
+          <p>&nbsp;&nbsp;→ ~/triad-out/research/2026-05-17-competitive-landscape.md</p>
+          <p></p>
+          <p><span class="text-emerald-400">✓ SHIP</span> market-scan (1h 03m, 1 iteração)</p>
+          <p>&nbsp;&nbsp;→ 4 mudanças de preço detectadas</p>
+          <p></p>
+          <p><span class="text-yellow-400">⚠ PARTIAL</span> code-review-batch (5/8 módulos)</p>
+          <p>&nbsp;&nbsp;motivo: rate limit às 03:42, retomavel</p>
+          <p></p>
+          <p><span class="text-red-400">✗ FLAGGED</span> content-batch (precisa revisão humana)</p>
+          <p>&nbsp;&nbsp;Crítico: "premissa do ângulo 2 não verificável"</p>
+          <p></p>
+          <p class="text-amber-400">━━━ Ação sugerida ━━━</p>
+          <p>1. revisar content-batch (5 min)</p>
+          <p>2. <span class="text-emerald-400">hermes job resume code-review-batch</span></p>
+          <p>3. publicar overnight-research e market-scan</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">⏱️ Timeline da revisão matinal — 15 minutos</h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-4">
+            <span class="flex-shrink-0 w-12 text-center text-amber-400 font-bold">0–2'</span>
+            <div class="flex-1 bg-dark-700 rounded-lg p-3">
+              <p class="text-neutral-300"><strong class="text-amber-400">Trigger</strong> — rodar <code class="bg-dark-800 px-1 rounded">hermes morning</code> assim que abre o terminal. Visão geral em 30 segundos.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="flex-shrink-0 w-12 text-center text-amber-400 font-bold">2–5'</span>
+            <div class="flex-1 bg-dark-700 rounded-lg p-3">
+              <p class="text-neutral-300"><strong class="text-amber-400">Triagem</strong> — separar SHIP (publica), PARTIAL (retomar), FLAGGED (revisar agora). Decisão binária por item.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="flex-shrink-0 w-12 text-center text-amber-400 font-bold">5–12'</span>
+            <div class="flex-1 bg-dark-700 rounded-lg p-3">
+              <p class="text-neutral-300"><strong class="text-amber-400">Inspeção dos FLAGGED</strong> — abrir cada item flagueado, ler o motivo do Crítico, decidir: corrigir prompt ou aceitar com edit manual.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="flex-shrink-0 w-12 text-center text-amber-400 font-bold">12–15'</span>
+            <div class="flex-1 bg-dark-700 rounded-lg p-3">
+              <p class="text-neutral-300"><strong class="text-amber-400">Resume e ajuste</strong> — disparar <code class="bg-dark-800 px-1 rounded">hermes job resume</code> nos PARTIAL, ajustar manifesto se o mesmo flag se repete há 3 dias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Sinal de alerta
+        </h3>
+        <p class="text-neutral-300">Se a revisão matinal está consumindo mais de 30 minutos por dia, seus critérios de sucesso estão frouxos demais — o Crítico está deixando passar trabalho que deveria ter sido reprovado no loop noturno. Ajuste o manifesto.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">hermes morning</span><p class="text-sm text-neutral-400 mt-1">Comando único que agrega resultados da noite com ações sugeridas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Triagem em 3 buckets</span><p class="text-sm text-neutral-400 mt-1">SHIP (publica), PARTIAL (retoma), FLAGGED (revisa)</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">15 minutos como teto</span><p class="text-sm text-neutral-400 mt-1">Acima disso, o sistema está empurrando ruído para revisão humana</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Flag recorrente = ajuste</span><p class="text-sm text-neutral-400 mt-1">Mesmo flag 3 dias seguidos → corrigir manifesto, não corrigir o output</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🔗 Combinando Hermes com N8N para automações externas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Hermes lida bem com o que vive na sua máquina. <strong class="text-amber-400">O N8N é a ponte para o mundo externo</strong> — webhooks, APIs SaaS, sheets, e-mail, Slack. A combinação faz o Triad reagir a eventos do mundo real, não só ao relógio.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">N8N é uma plataforma de automação visual que orquestra integrações externas. Você pode chamar o Hermes a partir do N8N via webhook — útil quando o trigger não é horário (cron) mas sim um evento (e-mail chegou, planilha mudou, deploy terminou).</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🌉</span> Padrão: N8N → Hermes via webhook
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 overflow-x-auto">
+          <p class="text-neutral-500"># 1. expor o Hermes localmente</p>
+          <p><span class="text-emerald-400">$</span> hermes webhook serve --port=7842 --token=$HERMES_TOKEN</p>
+          <p></p>
+          <p class="text-neutral-500"># 2. no N8N, criar fluxo:</p>
+          <p class="text-neutral-500">#    Trigger (Gmail/Schedule/Webhook) → HTTP Request</p>
+          <p></p>
+          <p class="text-neutral-500"># 3. o nó HTTP Request chama:</p>
+          <p>POST http://localhost:7842/jobs/run</p>
+          <p>Headers: Authorization: Bearer $HERMES_TOKEN</p>
+          <p>Body: {</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"job"</span>: <span class="text-emerald-400">"on-demand-research"</span>,</p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">"inputs"</span>: { <span class="text-amber-400">"topic"</span>: <span class="text-emerald-400">"{{$json.subject}}"</span> }</p>
+          <p>}</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🎯 Quando usar N8N vs <code>hermes schedule</code></h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-dark-700 rounded-lg p-4">
+            <h4 class="font-bold text-amber-400 mb-2">hermes schedule</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Trigger é horário fixo (cron)</li>
+              <li>• Job vive 100% local</li>
+              <li>• Sem dependência de SaaS externo</li>
+              <li>• Ex: research diário às 22h</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700 rounded-lg p-4">
+            <h4 class="font-bold text-amber-400 mb-2">N8N → Hermes</h4>
+            <ul class="text-sm text-neutral-300 space-y-1">
+              <li>• Trigger é evento externo</li>
+              <li>• Precisa coletar inputs de APIs</li>
+              <li>• Saída precisa ir para Slack/Notion</li>
+              <li>• Ex: novo lead → dossiê automático</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🔒</span> Segurança do webhook
+        </h3>
+        <p class="text-neutral-300">Sempre exija token Bearer e rode o webhook em <code class="bg-dark-700 px-1 rounded">localhost</code> ou via túnel autenticado (Tailscale, Cloudflare Tunnel). Webhook do Hermes exposto sem auth é vetor de execução remota.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Webhook do Hermes</span><p class="text-sm text-neutral-400 mt-1">Endpoint HTTP local que dispara jobs sob demanda</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">N8N como front-end de eventos</span><p class="text-sm text-neutral-400 mt-1">Coleta triggers do mundo, normaliza payload, chama Hermes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Trigger horário vs evento</span><p class="text-sm text-neutral-400 mt-1">Cron para o que repete; webhook para o que reage</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Token Bearer obrigatório</span><p class="text-sm text-neutral-400 mt-1">Webhook sem auth = porta aberta para execução remota</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🔁 Criando um loop de melhoria contínua</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O nível mais alto da automação overnight: <strong class="text-amber-400">o Triad iterando sobre o output anterior do próprio Triad</strong>. Cada noite o sistema lê o que produziu antes, critica, e produz uma versão melhor. Composição de loops em escala de dias.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um loop de melhoria contínua é um job overnight cujo input é o output da noite anterior. O Condutor formula um briefing de "como melhorar o draft de ontem"; o Worker propõe melhorias; o Crítico aplica SHIP/REVISE. Após 5–7 ciclos, a saída converge para algo significativamente superior à versão inicial.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">♾️</span> O ciclo de uma noite
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">1</span><span><strong>22:00 — Carrega draft anterior</strong> de <code class="bg-dark-700 px-1 rounded">~/triad-out/iter/draft-N.md</code> mais o log de críticas acumuladas das noites passadas.</span></div>
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">2</span><span><strong>22:15 — Condutor formula briefing</strong> "preserve o que já está SHIP; ataque os 3 pontos mais fracos do draft-N segundo histórico do Crítico".</span></div>
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">3</span><span><strong>22:30–04:00 — Worker propõe 3 melhorias</strong> em paralelo, cada uma atacando um ponto fraco; Crítico avalia uma a uma.</span></div>
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">4</span><span><strong>04:00–05:30 — Merge</strong> das melhorias aprovadas em <code class="bg-dark-700 px-1 rounded">draft-(N+1).md</code>, regressão de critérios já passados.</span></div>
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">5</span><span><strong>05:30 — Atualiza log de progresso</strong> em <code class="bg-dark-700 px-1 rounded">~/triad-out/iter/log.jsonl</code> com diff de qualidade e novos pontos fracos identificados.</span></div>
+          <div class="flex items-start space-x-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm flex items-center justify-center">6</span><span><strong>06:00 — hermes morning</strong> apresenta o diff antes/depois para o operador decidir se continua o loop ou congela a versão atual.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📄 Manifesto do loop iterativo</h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 overflow-x-auto">
+          <p><span class="text-amber-400">name:</span> continuous-improvement</p>
+          <p><span class="text-amber-400">runs_at:</span> <span class="text-emerald-400">"0 22 * * *"</span></p>
+          <p><span class="text-amber-400">inputs:</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">previous_draft:</span> <span class="text-emerald-400">"~/triad-out/iter/draft-latest.md"</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">critique_history:</span> <span class="text-emerald-400">"~/triad-out/iter/log.jsonl"</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">max_iterations:</span> 7&nbsp;&nbsp;<span class="text-neutral-500"># para automaticamente</span></p>
+          <p><span class="text-amber-400">outputs:</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">next_draft:</span> <span class="text-emerald-400">"~/triad-out/iter/draft-{N+1}.md"</span></p>
+          <p>&nbsp;&nbsp;<span class="text-amber-400">improvement_diff:</span> <span class="text-emerald-400">"~/triad-out/iter/diff-{N+1}.md"</span></p>
+          <p><span class="text-amber-400">stop_conditions:</span></p>
+          <p>&nbsp;&nbsp;- <span class="text-emerald-400">"no_new_critiques_for_2_iterations"</span></p>
+          <p>&nbsp;&nbsp;- <span class="text-emerald-400">"max_iterations_reached"</span></p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🛑</span> Saiba parar o loop
+        </h3>
+        <p class="text-neutral-300">Loops infinitos viram desperdício. Use <code class="bg-dark-700 px-1 rounded">stop_conditions</code> claros: número máximo de iterações, ausência de novas críticas por 2 ciclos, custo cumulativo acima de um teto. Sem parada, o sistema gira mesmo quando já convergiu.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Output como input</span><p class="text-sm text-neutral-400 mt-1">Cada noite consome o draft da noite anterior e produz uma versão melhor</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">critique_history</span><p class="text-sm text-neutral-400 mt-1">Log acumulado das críticas — o Condutor usa para priorizar próximos ataques</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">stop_conditions</span><p class="text-sm text-neutral-400 mt-1">Critérios objetivos para encerrar o loop quando ele converge</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Convergência em 5–7 ciclos</span><p class="text-sm text-neutral-400 mt-1">Tempo típico até o sistema deixar de produzir críticas novas</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">A janela overnight dobra a capacidade</strong><span class="text-neutral-400"> — research, geração em batch, code review e market scan rodam enquanto você dorme</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">hermes schedule + cron</strong><span class="text-neutral-400"> — registra jobs recorrentes com nome estável e expressão cron padrão Unix</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Manifesto YAML tipado</strong><span class="text-neutral-400"> — declara inputs, outputs, checkpoint_every e retry_on_failure — falha cedo em vez de tarde</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Checkpoints a cada 15min</strong><span class="text-neutral-400"> — convertem falha catastrófica em retomada barata via hermes job resume</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Protocolo hermes morning</strong><span class="text-neutral-400"> — 15 minutos diários para triar SHIP, PARTIAL e FLAGGED; acima disso, ajuste critérios</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Loop de melhoria contínua</strong><span class="text-neutral-400"> — Triad iterando sobre o próprio output, com stop_conditions claros para evitar desperdício</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.4 — Integrações: conectando o Triad ao resto do seu stack</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -445,12 +767,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

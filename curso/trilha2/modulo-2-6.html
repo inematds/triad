@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="soul.md na prática — preenchendo e ativando sua memória pessoal no Hermes">
-  <title>soul.md na Prática | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="soul.md na prática — preenchendo Identity, Mission, Business, Voice, Rhythm e Memory do template em branco ao contexto pessoal completo">
+  <title>soul.md na prática | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,9 +19,10 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
+    .font-mono, pre, code { font-family: 'JetBrains Mono', monospace; }
     .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
@@ -51,15 +52,16 @@
     html:not(.dark) .text-yellow-400 { color: #a16207; }
     html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
     html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
     html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
 
+  <!-- NAV -->
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -69,7 +71,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -88,7 +89,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -102,6 +102,7 @@
     </div>
   </nav>
 
+  <!-- BREADCRUMB -->
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
     <div class="flex items-center space-x-2 text-sm text-neutral-400">
       <a href="../../index.html" class="hover:text-blue-400">Início</a>
@@ -112,347 +113,533 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.6</span>
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.6 · ÚLTIMO DA TRILHA 2</span>
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">📋 soul.md na prática — Preenchendo e ativando</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Do template em branco ao contexto pessoal completo — Identity, Mission, Business, Voice, Rhythm e Memory configurados com dados reais que fazem o Hermes trabalhar para você.</p>
+      <p class="text-lg text-neutral-400 max-w-3xl">Do template em branco ao contexto pessoal completo — Identity, Mission, Business, Voice, Rhythm e Memory.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
-        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Config</div><div class="text-xs text-neutral-400">Tipo</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">~40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Básico</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Prática</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- T1 -->
+    <!-- TÓPICO 1 -->
     <section id="topico-1" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
-        <h2 class="text-2xl font-bold">📥 Baixando e abrindo o template soul.md</h2>
+        <h2 class="text-2xl font-bold">📄 Baixando e abrindo o template soul.md</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">O template soul.md está disponível no repositório do Hermes. <strong class="text-blue-400">Um soul.md no local errado é ignorado silenciosamente</strong> — sem mensagem de erro, sem indicação do problema, apenas respostas genéricas.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O <code class="text-blue-400">soul.md</code> é o arquivo de contexto pessoal que o Hermes lê toda vez que abre uma sessão. <strong class="text-blue-400">O local correto é <code>~/.hermes/soul.md</code></strong> — não <code>~/Documents</code>, não dentro do projeto. Fora desse caminho, o Hermes não carrega.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O template soul.md é o arquivo de contexto pessoal do Hermes — um documento Markdown que deve estar em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/soul.md</code> para ser carregado automaticamente a cada sessão.</p>
+        <p class="text-neutral-300">Um arquivo Markdown único em <code class="text-blue-400">~/.hermes/soul.md</code> com seis seções fixas: Identity, Mission, Business, Voice, Rhythm e Memory. O Hermes faz parse dessas seções no boot e injeta como contexto persistente em todas as sessões.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">📁 Localização e abertura</h3>
-        <div class="space-y-3">
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Local correto:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">~/.hermes/soul.md</code>
-          </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Abrir para edição:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">code ~/.hermes/soul.md</code>
-            <p class="text-sm text-neutral-400 mt-2">Ou abra com qualquer editor de texto. As seções em itálico são instruções a substituir pelo seu conteúdo real — não são exemplos a manter.</p>
-          </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">⬇️</span> Baixando o template
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500">$</span> mkdir -p ~/.hermes</p>
+          <p><span class="text-neutral-500">$</span> curl -o ~/.hermes/soul.md https://hermes.inema.club/soul.template.md</p>
+          <p><span class="text-neutral-500">$</span> $EDITOR ~/.hermes/soul.md</p>
         </div>
       </div>
-      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-red-400 mb-3">⚠️ Erro silencioso mais comum</h3>
-        <p class="text-neutral-300 text-sm">Se o Hermes responde de forma genérica mesmo após preencher o soul.md, a causa mais comum é o arquivo estar no local errado. Verifique: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">ls ~/.hermes/soul.md</code> — deve retornar o caminho sem erro.</p>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-blue-400">📝 Estrutura do template em branco</h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-xs text-neutral-300 overflow-x-auto"># soul.md — contexto pessoal do operador
+
+## Identity
+name:
+location:
+role:
+channels:
+
+## Mission
+Goal:
+Pillars:
+Not goals:
+
+## Business
+revenue:
+costs:
+runway:
+metrics:
+
+## Voice
+tone:
+forbidden:
+hard_nos:
+
+## Rhythm
+deep_work_windows:
+creation_days:
+energy_curve:
+
+## Memory
+decisions:
+people:
+tools:</pre>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que esse caminho exato
+        </h3>
+        <p class="text-neutral-300">O Hermes procura <code>soul.md</code> em um único lugar: <code>~/.hermes/</code>. Diretório oculto, fora do projeto, fora do Drive sincronizado. Mantém o contexto privado, evita commits acidentais e funciona em qualquer projeto onde você invocar Hermes.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">~/.hermes/soul.md</span><p class="text-sm text-neutral-400 mt-1">Localização padrão que o Hermes carrega automaticamente ao iniciar</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Carregamento automático</span><p class="text-sm text-neutral-400 mt-1">O Hermes lê o soul.md a cada sessão sem comandos adicionais</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Itálico = instrução</span><p class="text-sm text-neutral-400 mt-1">Texto em itálico no template são placeholders a substituir, não exemplos</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Localização correta</span><p class="text-sm text-neutral-400 mt-1">Verificar com ls antes de preencher para evitar o erro silencioso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">~/.hermes/soul.md</span><p class="text-sm text-neutral-400 mt-1">Único caminho válido — qualquer outro local não é carregado pelo runtime</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Seis seções fixas</span><p class="text-sm text-neutral-400 mt-1">Identity, Mission, Business, Voice, Rhythm, Memory — ordem e nomes importam para o parser</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Diretório oculto</span><p class="text-sm text-neutral-400 mt-1">Fora do projeto evita commit acidental e mantém o contexto pessoal privado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Boot-time parse</span><p class="text-sm text-neutral-400 mt-1">Hermes lê o arquivo a cada sessão — edição requer reload, não restart</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T2 -->
+    <!-- TÓPICO 2 -->
     <section id="topico-2" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
-        <h2 class="text-2xl font-bold">👤 Preenchendo Identity e Mission com seus dados reais</h2>
+        <h2 class="text-2xl font-bold">🆔 Preenchendo Identity e Mission com seus dados reais</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Identity e Mission são as seções com maior impacto na qualidade das sugestões do Hermes. <strong class="text-blue-400">Um headline goal vago produz sugestões genéricas</strong> — um headline específico produz sugestões acionáveis.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Identity responde <em>quem você é</em> em termos operacionais. Mission responde <em>para onde você está indo</em> em <strong class="text-blue-400">headline goal sem suavizações</strong>. Vagueza aqui contamina todo o resto do contexto.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">As seções Identity e Mission do soul.md — onde você registra quem é (nome, pronomes, localização, papel profissional, brand voice) e qual é seu objetivo principal (headline específico com métrica, canal e prazo).</p>
+        <p class="text-neutral-300">Identity é o cartão de visita operacional: nome, fuso, papel, canais de contato. Mission é o objetivo de horizonte (12 meses) descrito como meta numérica, pilares mensuráveis e — crucial — uma lista explícita do que NÃO é objetivo, para o modelo recusar caminhos errados.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">📝 Estrutura de Identity</h3>
-        <div class="space-y-3 text-sm text-neutral-300">
-          <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white">Nome e pronomes</strong><p class="mt-1 text-neutral-400">Como você quer ser referenciado em conversas</p></div>
-          <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white">Localização e fuso horário</strong><p class="mt-1 text-neutral-400">Ex: "São Paulo, BR · BRT / UTC-3" — afeta sugestões de horário e agendamento</p></div>
-          <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white">Papel profissional em uma frase</strong><p class="mt-1 text-neutral-400">"fundador e criador de conteúdo sobre IA aplicada"</p></div>
-          <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white">3 adjetivos de brand voice</strong><p class="mt-1 text-neutral-400">"direto, prático, sem jargão" — define o tom dos outputs do Hermes</p></div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Identity preenchido (exemplo real)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Identity
+name: Nei Maldaner
+location: Caxias do Sul, BR (UTC-3)
+role: Founder + Operator @ INEMA
+channels: hermes@inema.club, +55 54 ..., @neimaldaner</pre>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> Mission preenchida (headline sem suavização)
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Mission 2026
+Goal: 10x revenue via TRIAD + INEMA platform
+Pillars: (1) course launches Q2, (2) consulting Q3, (3) SaaS Q4
+Not goals: enterprise sales, agency model</pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Mission suavizada (inútil)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Crescer o negócio de forma sustentável"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Lançar mais produtos em 2026"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Explorar oportunidades de receita"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem lista de <em>Not goals</em></span></li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Mission headline (válida)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"10x revenue via TRIAD + INEMA"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>3 pilares datados (Q2, Q3, Q4)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Not goals explícito: enterprise, agency</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Número mensurável (10x) — testável</span></li>
+          </ul>
         </div>
       </div>
-      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🎯 Estrutura de Mission</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <h4 class="font-semibold text-red-400 text-sm mb-2">✗ Headline vago</h4>
-            <p class="text-sm text-neutral-300 italic bg-dark-800 p-3 rounded-lg">"crescer minha marca nas redes sociais"</p>
-          </div>
-          <div>
-            <h4 class="font-semibold text-blue-400 text-sm mb-2">✓ Headline específico</h4>
-            <p class="text-sm text-neutral-300 italic bg-dark-800 p-3 rounded-lg">"atingir 10k seguidores no LinkedIn até dezembro vendendo consultoria de IA B2B"</p>
-          </div>
-        </div>
-      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Fuso horário explícito</span><p class="text-sm text-neutral-400 mt-1">Permite ao Hermes sugerir horários relevantes para sua realidade</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">3 adjetivos de brand voice</span><p class="text-sm text-neutral-400 mt-1">Define o estilo dos textos e respostas gerados pelo Hermes</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Headline sem suavizações</span><p class="text-sm text-neutral-400 mt-1">Sem hedging — objetivo claro com métrica, canal e prazo</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Out-of-scope como proteção</span><p class="text-sm text-neutral-400 mt-1">Lista do que está fora do foco este ano — evita sugestões irrelevantes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Fuso horário explícito</span><p class="text-sm text-neutral-400 mt-1">UTC-3 evita que o Hermes agende reuniões em horários errados</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Headline goal numérico</span><p class="text-sm text-neutral-400 mt-1">"10x revenue" é testável, "crescer" não — sem número, sem Mission</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Not goals como filtro ativo</span><p class="text-sm text-neutral-400 mt-1">A lista do que NÃO fazer protege contra sugestões fora de escopo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Pilares datados</span><p class="text-sm text-neutral-400 mt-1">Cada pilar com trimestre — transforma Mission em plano executável</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T3 -->
+    <!-- TÓPICO 3 -->
     <section id="topico-3" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
-        <h2 class="text-2xl font-bold">💰 Documentando seu negócio — receita, custos, métricas</h2>
+        <h2 class="text-2xl font-bold">💼 Documentando seu negócio — receita, custos, runway</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Sem contexto financeiro, o Hermes recomenda o que é tecnicamente possível — não o que é viável para seu estágio. <strong class="text-blue-400">"Contrate mais 3 pessoas" é uma sugestão ruim se você tem 2 meses de runway</strong> — o Hermes precisa saber o runway para calibrar recomendações.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem números reais, o Hermes sugere movimentos que ignoram sua realidade financeira. <strong class="text-blue-400">Runway é a restrição mais importante</strong> — toda sugestão estratégica precisa caber dentro dela.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A seção Business do soul.md — onde você documenta a estrutura jurídica, modelo de receita, faturamento atual com tendência MoM, custos por categoria e runway em meses para calibrar a viabilidade das sugestões do Hermes.</p>
+        <p class="text-neutral-300">Business é a seção de números do soul.md: MRR atual, custos fixos mensais, runway em meses e métricas-chave que você acompanha (CAC, LTV, churn). Esses números entram nas decisões do Hermes como restrições duras, não como contexto opcional.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">📊 O que preencher em Business</h3>
-        <div class="space-y-3 text-sm">
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold flex-shrink-0">→</span>
-            <div><strong class="text-white">Entidade legal</strong><p class="text-neutral-400 mt-1">Nome e estrutura jurídica (MEI, SAS, LLC, etc.)</p></div>
-          </div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold flex-shrink-0">→</span>
-            <div><strong class="text-white">Modelo de receita</strong><p class="text-neutral-400 mt-1">SaaS / agência / cursos / consultoria — um ou combinação</p></div>
-          </div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold flex-shrink-0">→</span>
-            <div><strong class="text-white">Receita mensal atual + tendência MoM</strong><p class="text-neutral-400 mt-1">Ex: "R$18k/mês, +12% MoM nos últimos 3 meses"</p></div>
-          </div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold flex-shrink-0">→</span>
-            <div><strong class="text-white">Custos detalhados</strong><p class="text-neutral-400 mt-1">Ferramentas, pessoal, infraestrutura — por categoria</p></div>
-          </div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg">
-            <span class="text-blue-400 font-bold flex-shrink-0">→</span>
-            <div><strong class="text-white">Runway em meses</strong><p class="text-neutral-400 mt-1">Quanto tempo você sobrevive se receita cair a zero</p></div>
-          </div>
-        </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">💰</span> Business preenchido
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Business
+revenue: MRR R$ 28k (Apr/26), trending +12% MoM
+costs: R$ 11k/mo fixed (infra R$ 2.1k + team R$ 8.9k)
+runway: 9 months at current burn (cap: R$ 150k)
+metrics:
+  - CAC: R$ 340 (course funnel)
+  - LTV: R$ 1.9k (12-mo cohort)
+  - churn: 4.2% monthly</pre>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⛔</span> Runway como restrição dura
+        </h3>
+        <p class="text-neutral-300">Quando você pede ao Hermes "estratégia para próximos 6 meses", ele cruza com runway: 9 meses. Sugestões que exigem investimento upfront acima de 30% do cap são automaticamente flagueadas. Sem o número, ele assume runway infinito e propõe gastos que você não tem.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Receita e tendência MoM</span><p class="text-sm text-neutral-400 mt-1">Contexto de crescimento que calibra se sugestões são conservadoras ou agressivas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Runway como restrição real</span><p class="text-sm text-neutral-400 mt-1">Dado que muda completamente o perfil de risco das sugestões do Hermes</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Custo por categoria</span><p class="text-sm text-neutral-400 mt-1">Ferramentas, pessoal e infra separados permitem sugestões de otimização específicas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Calibra viabilidade</span><p class="text-sm text-neutral-400 mt-1">Contexto financeiro transforma sugestões técnicas em recomendações viáveis</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Números reais, não estimativas</span><p class="text-sm text-neutral-400 mt-1">Use o valor do último fechamento — números arredondados perdem a função</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Runway como guard-rail</span><p class="text-sm text-neutral-400 mt-1">Hermes recusa sugestões que estouram o cap definido</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">CAC, LTV, churn</span><p class="text-sm text-neutral-400 mt-1">Três métricas mínimas — sem elas, recomendações de growth são chutes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Atualização mensal</span><p class="text-sm text-neutral-400 mt-1">Business é a única seção que muda mensalmente — agende reload</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T4 -->
+    <!-- TÓPICO 4 -->
     <section id="topico-4" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
-        <h2 class="text-2xl font-bold">🗣️ Definindo sua voz e seus hard nos</h2>
+        <h2 class="text-2xl font-bold">🎤 Definindo sua voz e seus hard nos</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Voice e Hard nos são as seções que mais evitam retrabalho. <strong class="text-blue-400">Sem elas, você passa horas pedindo ao Hermes para mudar o formato</strong>, o tom ou retirar informações que nunca deveria ter incluído.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Voice é o que protege seu posicionamento. <strong class="text-blue-400">Palavras proibidas e hard nos</strong> dizem ao Hermes o que nunca aparecer no output — independentemente do contexto da tarefa.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">As seções Voice e Hard nos do soul.md — Voice define o formato padrão das respostas (comprimento, tom, ortografia), enquanto Hard nos lista o que o Hermes nunca deve fazer, como afirmar métricas não compartilhadas ou sugerir abordagens já descartadas.</p>
+        <p class="text-neutral-300">Voice define tom (formal/informal, técnico/acessível), uma lista de palavras proibidas (jargão que diluiu sua marca) e <em>hard nos</em> — compromissos operacionais que você nunca aceita, independente do quão tentadora seja a proposta.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🎙️ Seção Voice — como você quer ser respondido</h3>
-        <div class="space-y-2 text-sm text-neutral-300">
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg"><span class="text-blue-400">•</span>Curto por padrão — sem introduções longas</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg"><span class="text-blue-400">•</span>Uma pergunta por vez — nunca liste 5 perguntas de uma vez</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg"><span class="text-blue-400">•</span>Sem emojis em respostas de trabalho — só em contextos informais</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg"><span class="text-blue-400">•</span>Ortografia brasileira — "você" não "voce", "análise" não "analise"</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg"><span class="text-blue-400">•</span>Tom direto — sem hedging ("talvez", "pode ser", "possivelmente")</div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">🚫</span> Voice + Hard Nos preenchidos
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Voice
+tone: direto, técnico, sem suavizações; PT-BR primário
+forbidden: ["sinergia", "alavancar", "ecossistema", "jornada"]
+
+## Hard Nos
+- Never commit to deadlines under 48h
+- Never email cold leads (warm intros only)
+- Never schedule meetings before 10am
+- Never discount published prices
+- Never accept retainer + scope creep combo</pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Goal suavizado</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Tentar evitar reuniões cedo"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Prazos curtos só se possível"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Preferir warm intros"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Modelo continua negociando</span></li>
+          </ul>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6">
+          <h4 class="font-bold text-blue-400 mb-4">✓ Hard No real</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Never schedule meetings before 10am"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Never commit under 48h"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>"Never email cold leads"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-blue-400">✓</span><span>Modelo recusa imediatamente</span></li>
+          </ul>
         </div>
       </div>
-      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-red-400 mb-4">🚫 Hard nos — o que nunca fazer</h3>
-        <div class="space-y-2 text-sm text-neutral-300">
-          <div class="flex items-start gap-3 p-3 bg-dark-900/50 rounded-lg"><span class="text-red-400">✗</span>Nunca afirmar métricas que não foram compartilhadas explicitamente</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-900/50 rounded-lg"><span class="text-red-400">✗</span>Nunca mencionar concorrentes específicos pelo nome</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-900/50 rounded-lg"><span class="text-red-400">✗</span>Nunca sugerir abordagens já testadas e descartadas (documentadas em Memory)</div>
-          <div class="flex items-start gap-3 p-3 bg-dark-900/50 rounded-lg"><span class="text-red-400">✗</span>Nunca recomendar ferramentas que não passaram pelo critério de uso real</div>
-        </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🛡️</span> Por que "never" em vez de "preferir"
+        </h3>
+        <p class="text-neutral-300">Modelos de linguagem negociam preferências. Não negociam "never". Use o verbo absoluto — é a única forma que sobrevive a uma proposta tentadora que o Hermes esteja avaliando.</p>
       </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Formato padrão</span><p class="text-sm text-neutral-400 mt-1">Define como o Hermes estrutura respostas sem precisar pedir toda vez</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Palavras proibidas</span><p class="text-sm text-neutral-400 mt-1">Lista de termos que o Hermes deve evitar em todos os contextos</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Hard no como proteção</span><p class="text-sm text-neutral-400 mt-1">Evita sugestões que violam seu posicionamento ou contradizem experiência passada</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Ortografia como identidade</span><p class="text-sm text-neutral-400 mt-1">Erros de ortografia nos outputs mancham a qualidade percebida do trabalho</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Forbidden words</span><p class="text-sm text-neutral-400 mt-1">Lista de jargão diluído — protege voz da marca em qualquer output</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">"Never" vs "preferir"</span><p class="text-sm text-neutral-400 mt-1">Verbo absoluto não é negociável pelo modelo — preferência sim</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Hard nos como proteção</span><p class="text-sm text-neutral-400 mt-1">Cada hard no é uma porta fechada — Hermes não negocia o que está bloqueado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Posicionamento defendido</span><p class="text-sm text-neutral-400 mt-1">Voice + hard nos juntos garantem coerência entre o que você diz e faz</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T5 -->
+    <!-- TÓPICO 5 -->
     <section id="topico-5" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
-        <h2 class="text-2xl font-bold">⏰ Mapeando seu ritmo de trabalho — janelas, dias, energia</h2>
+        <h2 class="text-2xl font-bold">⏰ Mapeando seu ritmo de trabalho</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">O Hermes usa o ritmo para sugerir quando executar diferentes tipos de tarefas. <strong class="text-blue-400">Uma análise profunda sugerida para as 16h vai ser ignorada</strong>. A mesma análise sugerida para amanhã às 7h tem chance real de ser feita.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Rhythm diz ao Hermes <strong class="text-blue-400">quando você está disponível para qual tipo de trabalho</strong>. Sem isso, ele agenda reunião na sua janela de deep work e tarefa criativa quando sua energia está no chão.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A seção Rhythm do soul.md — onde você documenta sua janela de trabalho profundo, dias por tipo de trabalho, curva de energia ao longo do dia e rituais de recuperação para que o Hermes alinhe sugestões à sua realidade operacional.</p>
+        <p class="text-neutral-300">Rhythm define três coisas: janelas de deep work (faixas horárias intocáveis), dias da semana reservados para criação (vs. reuniões/operação) e a curva de energia ao longo do dia. O Hermes usa isso para sugerir o horário certo para cada tipo de tarefa.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">📅 O que mapear em Rhythm</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-3">
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Janela de trabalho profundo</strong>
-              <p class="text-xs text-neutral-400 mt-1">Quando você tem energia máxima para trabalho criativo — ex: 6h-9h</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Dias por tipo de trabalho</strong>
-              <p class="text-xs text-neutral-400 mt-1">Segunda/Terça = criação · Quarta/Quinta = execução · Sexta = revisão</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Dias sem reuniões</strong>
-              <p class="text-xs text-neutral-400 mt-1">Dias bloqueados para deep work que o Hermes não deve sugerir ocupar</p>
-            </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Rhythm preenchido
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Rhythm
+deep_work_windows:
+  - 10:00–13:00 (peak focus, no meetings)
+  - 15:30–17:00 (writing, code)
+creation_days: Mon, Tue, Wed (no external meetings)
+meeting_days: Thu, Fri (batched, 14:00–17:00)
+energy_curve:
+  morning: HIGH (creative/strategic)
+  afternoon: MEDIUM (execution/admin)
+  evening: LOW (no decisions after 19:00)</pre>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">1</span>
           </div>
-          <div class="space-y-3">
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Check de mensagens</strong>
-              <p class="text-xs text-neutral-400 mt-1">Duas vezes por dia (9h e 17h) — não em tempo real</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Curva de energia</strong>
-              <p class="text-xs text-neutral-400 mt-1">Manhã: criativo · Tarde: operacional · Noite: revisão e leitura</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg">
-              <strong class="text-white text-sm">Rituais de recuperação</strong>
-              <p class="text-xs text-neutral-400 mt-1">Exercício, descanso, leitura — o que protege sua capacidade de foco</p>
-            </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Defina deep work windows com horário fechado</h4>
+            <p class="text-sm text-neutral-400">Faixas específicas (10:00–13:00), não conceitos ("manhã"). Hermes precisa de timestamps para comparar com pedidos de agendamento.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Separe creation days de meeting days</h4>
+            <p class="text-sm text-neutral-400">Bloqueia segunda a quarta para output, agrupa reuniões em quinta-sexta. Reduz context-switching que destrói produtividade criativa.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Documente a curva de energia honestamente</h4>
+            <p class="text-sm text-neutral-400">Manhã HIGH/tarde MEDIUM/noite LOW não é universal — é seu. Hermes aloca tipo de tarefa à faixa de energia certa quando você lhe dá esse mapa.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Inclua "no decisions after X"</h4>
+            <p class="text-sm text-neutral-400">Hora-limite para decisões importantes. Hermes adia qualquer pedido decisório recebido após esse horário para o dia seguinte.</p>
           </div>
         </div>
       </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Janela de trabalho profundo</span><p class="text-sm text-neutral-400 mt-1">Período de energia máxima — protegido e reservado para deep work</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Dias de criação vs execução</span><p class="text-sm text-neutral-400 mt-1">Separar tipos de trabalho por dia aumenta a produtividade real</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Check em batch</span><p class="text-sm text-neutral-400 mt-1">Mensagens em horários fixos reduz interrupções e preserva foco</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Curva de energia</span><p class="text-sm text-neutral-400 mt-1">O Hermes sugere tarefas cognitivamente alinhadas com sua energia atual</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Timestamps, não conceitos</span><p class="text-sm text-neutral-400 mt-1">10:00–13:00 é parseável; "de manhã" não — o Hermes precisa de horários</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Creation vs meeting days</span><p class="text-sm text-neutral-400 mt-1">Agrupar reuniões protege janelas de deep work do context-switching</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Curva de energia pessoal</span><p class="text-sm text-neutral-400 mt-1">Documenta sua biologia — Hermes aloca tarefa certa à faixa de energia certa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Cutoff de decisão</span><p class="text-sm text-neutral-400 mt-1">"No decisions after 19:00" — Hermes adia pedidos decisórios automaticamente</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T6 -->
+    <!-- TÓPICO 6 -->
     <section id="topico-6" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
-        <h2 class="text-2xl font-bold">🧠 Registrando decisões, pessoas e ferramentas na seção Memory</h2>
+        <h2 class="text-2xl font-bold">🧠 Registrando decisões, pessoas e ferramentas em Memory</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Memory é a seção que cresce mais em valor com o tempo. <strong class="text-blue-400">Registrar uma decisão hoje evita que o Hermes sugira a mesma abordagem daqui a seis meses</strong> — depois que você esqueceu por que descartou.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Memory é onde decisões passadas viram <strong class="text-blue-400">anti-sugestões automáticas</strong>. Você já testou X e descartou? Documente — assim o Hermes não te sugere X de novo daqui a três meses.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">A seção Memory do soul.md — dividida em Decisões (o que não sugerir de novo), Pessoas (contexto de relacionamentos), Ferramentas (apenas as em uso real) e Lições trimestrais (o que funcionou e o que não funcionou).</p>
+        <p class="text-neutral-300">Memory tem três sub-listas: decisions (escolhas estratégicas já feitas e seu raciocínio), people (rede de contatos com contexto de relacionamento), tools (stack atual com motivo de cada escolha). Cada item documenta o "porquê" para evitar re-debater no futuro.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">📚 As quatro sub-seções de Memory</h3>
-        <div class="space-y-4">
-          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
-            <h4 class="font-semibold text-white mb-2">1. Decisões</h4>
-            <p class="text-sm text-neutral-300 mb-2">O que você tentou, por que não funcionou e o que não sugerir de novo.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
-              <div class="bg-dark-700 p-2 rounded"><span class="text-red-400">✗ Inútil:</span><p class="text-neutral-400 mt-1">"inglês não funciona"</p></div>
-              <div class="bg-dark-700 p-2 rounded"><span class="text-blue-400">✓ Útil:</span><p class="text-neutral-400 mt-1">"landing pages em inglês: CTR 40% menor que em português nos testes de Q1/2025"</p></div>
-            </div>
-          </div>
-          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
-            <h4 class="font-semibold text-white mb-2">2. Pessoas</h4>
-            <p class="text-sm text-neutral-300">Nomes, papel, última interação e o que você deve / elas devem a você. Contexto de relacionamentos que o Hermes pode usar ao preparar comunicações.</p>
-          </div>
-          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
-            <h4 class="font-semibold text-white mb-2">3. Ferramentas</h4>
-            <p class="text-sm text-neutral-300">Apenas as que sobreviveram ao uso real — não as que você assinou e abandonou. Stack real, não stack aspiracional.</p>
-          </div>
-          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
-            <h4 class="font-semibold text-white mb-2">4. Lições trimestrais</h4>
-            <p class="text-sm text-neutral-300">O que funcionou, o que não funcionou, o que surpreendeu — atualizado a cada trimestre.</p>
-          </div>
-        </div>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">📚</span> Memory preenchido
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto">## Memory
+
+### decisions
+- 2025-Q4: rejected Substack migration
+  reason: lock-in + comissão; mantemos Ghost self-hosted
+- 2026-Q1: dropped enterprise tier from roadmap
+  reason: sales cycle 6+ meses não cabe em runway atual
+- 2026-Q1: TRIAD pricing tiered (R$ 297 / 997 / 2.997)
+  reason: anchor + upsell path validado em 3 cohorts
+
+### people
+- @marina_ux — designer parceira, projetos visuais
+- @rafa.dev — co-founder técnico, decisões de stack
+- @clara_growth — consultora paid ads, contratar Q3
+
+### tools
+- Claude Code (Opus 4.7) — primary dev/writing
+- Ghost self-hosted — newsletter + courses
+- Stripe BR — pagamentos (alt: Pagar.me se Stripe cair)
+- Supabase — backend SaaS layer (Q4)</pre>
       </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🔁</span> Anti-sugestão por decisão documentada
+        </h3>
+        <p class="text-neutral-300">Cada decisão em Memory inclui o <em>motivo</em>. Quando o Hermes está prestes a sugerir algo que você já descartou, ele cruza com a lista, encontra a entrada, e em vez de propor X, propõe <strong>Y considerando que X foi rejeitado por motivo Z</strong>. Sem o motivo, ele esquece — e sugere de novo.</p>
+      </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Anti-sugestão</span><p class="text-sm text-neutral-400 mt-1">Decisões documentadas impedem que o Hermes sugira abordagens já descartadas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Stack real vs aspiracional</span><p class="text-sm text-neutral-400 mt-1">Apenas ferramentas em uso ativo — evita sugestões baseadas em assinaturas fantasmas</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Especificidade como requisito</span><p class="text-sm text-neutral-400 mt-1">Dados específicos ("CTR 40% menor") são úteis — generalizações ("não funciona") são inúteis</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Lições trimestrais</span><p class="text-sm text-neutral-400 mt-1">Revisão periódica que mantém o contexto atualizado e relevante</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Decisão + motivo</span><p class="text-sm text-neutral-400 mt-1">Nunca registre só a decisão — o "porquê" é o que vira anti-sugestão</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">People com contexto</span><p class="text-sm text-neutral-400 mt-1">Não basta o handle — papel e tipo de relacionamento ativam introduções certas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Tools com fallback</span><p class="text-sm text-neutral-400 mt-1">"Stripe BR (alt: Pagar.me)" — Hermes sabe para onde migrar em incidente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Datas em decisions</span><p class="text-sm text-neutral-400 mt-1">Decisões antigas (>12 meses) viram candidatas a revisão automática</p></div>
         </div>
       </div>
     </section>
 
-    <!-- T7 -->
+    <!-- TÓPICO 7 -->
     <section id="topico-7" class="mb-16">
       <div class="flex items-center space-x-4 mb-6">
         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">7</span>
-        <h2 class="text-2xl font-bold">✅ Fazendo Hermes carregar o soul.md — verificação final</h2>
+        <h2 class="text-2xl font-bold">🔄 Fazendo Hermes carregar o soul.md — verificação final</h2>
       </div>
-      <p class="text-neutral-300 mb-6 leading-relaxed">Com o soul.md preenchido, reinicie o Hermes e execute a verificação final. <strong class="text-blue-400">Um soul.md mal posicionado é silenciosamente ignorado</strong> — a verificação fecha o loop e confirma que tudo funciona.</p>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Preencher não é ativar. <strong class="text-blue-400">Você precisa forçar reload e diagnosticar</strong> — caso contrário, fica achando que o Hermes lê o arquivo enquanto ele ainda está com o estado vazio em memória.
+      </p>
+
       <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
         <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
-        <p class="text-neutral-300">O processo de verificação final via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes reload soul</code> seguido de uma pergunta de teste que confirma se o Hermes carregou corretamente os dados do soul.md — e o diagnóstico caso a resposta seja genérica.</p>
+        <p class="text-neutral-300">A sequência de ativação: <code class="text-blue-400">hermes reload soul</code> força releitura do arquivo, <code class="text-blue-400">hermes diagnose</code> mostra quais seções foram parseadas com sucesso e quais ficaram vazias. Sem rodar os dois, o soul.md pode estar editado em disco mas não em memória.</p>
       </div>
+
       <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-blue-400 mb-4">🔄 Processo de verificação</h3>
-        <div class="space-y-4">
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Opção 1 — Recarregar sem reiniciar:</p>
-            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">hermes reload soul</code>
+        <h3 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+          <span class="mr-2">⚡</span> Comandos de ativação e verificação
+        </h3>
+        <pre class="bg-dark-700/50 rounded-lg p-4 text-sm text-neutral-300 overflow-x-auto"># 1. Forçar reload do soul.md
+$ hermes reload soul
+✓ soul.md reloaded from ~/.hermes/soul.md
+✓ 6 sections parsed (Identity, Mission, Business, Voice, Rhythm, Memory)
+
+# 2. Diagnosticar estado em memória
+$ hermes diagnose
+[soul.md]
+  Identity ........... ✓ 4 fields
+  Mission ............ ✓ Goal set, 3 pillars, 2 not-goals
+  Business ........... ✓ MRR/runway/3 metrics
+  Voice .............. ✓ tone + 4 forbidden + 5 hard_nos
+  Rhythm ............. ✓ 2 windows + creation_days + curve
+  Memory ............. ✓ 3 decisions + 3 people + 4 tools
+
+# 3. Teste com pergunta de contexto
+$ hermes ask "qual meu runway atual?"
+→ 9 months (cap R$ 150k, burn R$ 11k/mo) — Apr/26</pre>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">1</span>
           </div>
-          <div>
-            <p class="text-sm text-neutral-400 mb-1">Pergunta de verificação:</p>
-            <p class="text-sm text-neutral-300 italic bg-dark-800 p-3 rounded-lg">"Hermes, o que você sabe sobre mim? Resuma meu perfil com base no que tem no soul.md."</p>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Salve o arquivo no editor</h4>
+            <p class="text-sm text-neutral-400">Edição em disco não é leitura em memória — o Hermes ainda está com a versão antiga até você rodar reload.</p>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-            <div class="p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
-              <h4 class="font-bold text-blue-400 mb-2 text-sm">✓ Resposta = sucesso</h4>
-              <p class="text-sm text-neutral-300">Hermes menciona detalhes específicos que você preencheu — nome, objetivo, modelo de negócio, etc.</p>
-            </div>
-            <div class="p-4 bg-red-900/20 rounded-lg border border-red-500/30">
-              <h4 class="font-bold text-red-400 mb-2 text-sm">✗ Resposta genérica = problema</h4>
-              <p class="text-sm text-neutral-300">Hermes responde de forma vaga — verifique o caminho do arquivo e a sintaxe do Markdown.</p>
-            </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Rode <code>hermes reload soul</code></h4>
+            <p class="text-sm text-neutral-400">Comando explícito de releitura. Output confirma quantas seções foram parseadas — se vier menos de 6, há erro de sintaxe no Markdown.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Rode <code>hermes diagnose</code></h4>
+            <p class="text-sm text-neutral-400">Mostra estado atual em memória, campo a campo. Qualquer seção marcada como vazia (✗) indica que o parser não conseguiu ler — corrija e reload de novo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+            <span class="text-blue-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-blue-400">Teste com pergunta de contexto</h4>
+            <p class="text-sm text-neutral-400">"Qual meu runway?" / "Quais meus hard nos?" — se o Hermes responde com o valor correto, está ativo. Se responde genericamente, reload falhou silenciosamente.</p>
           </div>
         </div>
       </div>
+
       <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
-        <h3 class="text-lg font-semibold text-primary mb-3">💡 Diagnóstico de problema</h3>
-        <p class="text-neutral-300 text-sm mb-2">Se a resposta for genérica, verifique em ordem:</p>
-        <ol class="space-y-1 text-sm text-neutral-300">
-          <li>1. <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">ls ~/.hermes/soul.md</code> — o arquivo existe no local correto?</li>
-          <li>2. Abra o arquivo e verifique se está em Markdown válido (sem erros de formatação)</li>
-          <li>3. Execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes reload soul</code> novamente</li>
-          <li>4. Se persistir, reinicie o Hermes completamente</li>
-        </ol>
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Critério de sucesso da ativação
+        </h3>
+        <p class="text-neutral-300"><code>hermes diagnose</code> mostra ✓ em todas as 6 seções, e uma pergunta de contexto retorna o valor exato do soul.md. Se um desses dois falha, o soul.md não está ativo — independentemente do que está salvo em disco.</p>
       </div>
+
       <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
         <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes reload soul</span><p class="text-sm text-neutral-400 mt-1">Recarrega o soul.md sem precisar reiniciar o Hermes completamente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Pergunta de verificação</span><p class="text-sm text-neutral-400 mt-1">Teste padrão que confirma se o contexto foi carregado corretamente</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Resposta específica = sucesso</span><p class="text-sm text-neutral-400 mt-1">Detalhes do seu perfil na resposta confirmam carregamento bem-sucedido</p></div>
-          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Diagnóstico de caminho</span><p class="text-sm text-neutral-400 mt-1">Verificação do caminho exato é o primeiro passo quando algo não funciona</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Disco ≠ memória</span><p class="text-sm text-neutral-400 mt-1">Salvar no editor não recarrega o Hermes — reload explícito é obrigatório</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes reload soul</span><p class="text-sm text-neutral-400 mt-1">Força releitura e reporta quantas seções foram parseadas com sucesso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes diagnose</span><p class="text-sm text-neutral-400 mt-1">Snapshot do estado em memória — fonte da verdade do que está ativo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Teste de pergunta</span><p class="text-sm text-neutral-400 mt-1">Verificação funcional — se a resposta tem o valor exato, soul.md está ativo</p></div>
         </div>
       </div>
     </section>
@@ -460,31 +647,58 @@
     <!-- RESUMO -->
     <section class="mb-12">
       <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo 2.6</h2>
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">🎓</span> Resumo do Módulo — e fim da Trilha 2
+        </h2>
+
+        <p class="text-neutral-300 mb-6">Você completou a Trilha 2 (Técnica). Saiu de "ouvi falar do soul.md" para um arquivo preenchido, parseado e ativo, governando todas as suas sessões com o Hermes.</p>
+
         <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Template soul.md no local correto</strong><span class="text-neutral-400"> — ~/.hermes/soul.md verificado com ls</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Identity e Mission preenchidos</strong><span class="text-neutral-400"> — headline específico, brand voice e out-of-scope definidos</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Business documentado</strong><span class="text-neutral-400"> — receita, custos, runway e métricas que calibram viabilidade das sugestões</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Voice e Hard nos definidos</strong><span class="text-neutral-400"> — formato padrão, palavras proibidas e proteções de posicionamento</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Rhythm mapeado</strong><span class="text-neutral-400"> — janelas de energia, dias por tipo de trabalho e curva de produtividade</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Memory iniciada</strong><span class="text-neutral-400"> — decisões, pessoas, ferramentas reais e primeira lição trimestral</span></div></div>
-          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Verificação final executada</strong><span class="text-neutral-400"> — Hermes responde com detalhes específicos do perfil</span></div></div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">~/.hermes/soul.md é o único caminho válido</strong><span class="text-neutral-400"> — fora dele o Hermes não carrega o contexto</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Identity + Mission sem suavização</strong><span class="text-neutral-400"> — headline goal com número e Not goals explícito</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Business com runway como restrição dura</strong><span class="text-neutral-400"> — MRR, custos, runway, CAC/LTV/churn reais</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Voice + Hard Nos em "never" absoluto</strong><span class="text-neutral-400"> — palavras proibidas e compromissos não-negociáveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Rhythm com timestamps reais</strong><span class="text-neutral-400"> — janelas, dias de criação, curva de energia documentada</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-400 mt-1">✓</span>
+            <div><strong class="text-white">Memory como anti-sugestão</strong><span class="text-neutral-400"> — decisões com motivo, people com contexto, tools com fallback. Reload + diagnose confirmam ativação.</span></div>
+          </div>
         </div>
 
-        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-8">
-          <h3 class="font-semibold text-blue-400 mb-3">🎉 Trilha 2 completa</h3>
-          <p class="text-neutral-300 text-sm">Com este módulo, você completou a Trilha 2 — Implementação Técnica. Seu ambiente está configurado: Hermes instalado, OpenRouter conectado, DeepSeek com BYOK ativo, Gemini CLI integrado, persona Orpheus criada e soul.md preenchido. O sistema Triad está pronto para uso em trabalho real.</p>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próxima Trilha: Trilha 3 — Avançado</h3>
+          <p class="text-neutral-300">Com soul.md ativo, você está pronto para engenharia de prompts, controle de custos, observabilidade e arquitetura multi-agente.</p>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-2-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.5</a>
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Ver Trilha 2 completa</a>
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 2
+          </a>
+          <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">
+            Trilha 3: Avançado →
+          </a>
         </div>
       </div>
     </section>
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="border-t border-dark-600 py-8 mt-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
       <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
@@ -496,12 +710,14 @@
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
     const html = document.documentElement;
+
     if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
       themeToggleDarkIcon.classList.remove('hidden');
       html.classList.remove('dark');
     } else {
       themeToggleLightIcon.classList.remove('hidden');
     }
+
     themeToggle.addEventListener('click', () => {
       themeToggleDarkIcon.classList.toggle('hidden');
       themeToggleLightIcon.classList.toggle('hidden');
@@ -509,5 +725,6 @@
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
   </script>
+
 </body>
 </html>

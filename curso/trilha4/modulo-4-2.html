@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pantheon Dashboard — gerenciamento visual de personas, system prompts e sincronização com Hermes">
-  <title>Pantheon Dashboard | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Construindo o Pantheon visual — dashboard de personas do Hermes com criação, edição, versionamento e integração com Claude Code.">
+  <title>Construindo o Pantheon visual | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -22,8 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -42,6 +41,7 @@
     html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
     html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
     html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .border-amber-500\/20 { border-color: rgba(217, 119, 6, 0.2); }
     html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
 
     html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
@@ -62,7 +62,6 @@
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -72,7 +71,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -91,7 +89,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -120,23 +117,23 @@
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.2</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏛️ Pantheon Dashboard</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">O painel de controle visual do TRIAD — gerenciando personas, versionando system prompts e sincronizando com o Hermes em tempo real.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎛️ Construindo o Pantheon visual — Dashboard de personas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">O painel de controle do Hermes — criando, editando e gerenciando personas com interface visual.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">7</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~35</div>
+          <div class="text-xl font-bold text-amber-400">~50</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Intermediário</div>
+          <div class="text-xl font-bold text-amber-400">Avançado</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Prático</div>
+          <div class="text-xl font-bold text-amber-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,285 +142,610 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🖥️ O que é o Pantheon e por que ter uma interface visual</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Hermes funciona perfeitamente via CLI, mas escalar 10+ personas no terminal vira caos — arquivos JSON espalhados, edições manuais, sem histórico. <strong class="text-amber-400">O Pantheon é a interface visual</strong> que centraliza todas as personas em um painel único, com edição, versionamento e telemetria.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🎯</span>
-          <div>
-            <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-            <span class="text-neutral-500 text-sm ml-2">- Por que um dashboard para personas</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Pantheon é uma interface web local (roda em localhost) que centraliza o gerenciamento de todas as personas do seu ecossistema TRIAD. Em vez de editar arquivos .md manualmente espalhados em ~/.hermes/skills/, você tem um painel visual com grid de personas, editor integrado, histórico de versões e botão de sincronização com o Hermes ativo.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Quando você tem 5 ou mais personas ativas, gerenciar via terminal fica impraticável. Pantheon resolve isso com visibilidade — você vê todas as personas, quais estão ativas, quando foram modificadas e qual versão está em uso.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Interface web local em localhost</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Grid visual de personas ativas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Editor integrado de system prompts</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sincronização com ~/.hermes/skills/</li>
-              </ul>
-            </div>
-          </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O Pantheon é uma webapp local servida pelo Hermes (porta 3737 por padrão) que renderiza um dashboard de personas — cada persona aparece como um card editável, com system prompt, modelo, tools, histórico de versões e métricas de uso. É a camada visual sobre os arquivos JSON que o Hermes já lê.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🚀</span> Como abrir o Pantheon
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-amber-400">$</span> hermes pantheon</p>
+          <p class="text-neutral-500">→ Pantheon servido em http://localhost:3737</p>
+          <p class="text-neutral-500">→ Carregando personas de ~/.hermes/pantheon/personas/</p>
+          <p class="text-neutral-500">→ 12 personas carregadas · sync ativo · pressione Ctrl+C para encerrar</p>
         </div>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">📐</span>
-          <div>
-            <span class="font-medium">Estrutura do dashboard — os quatro painéis</span>
-            <span class="text-neutral-500 text-sm ml-2">- Grid, Editor, Histórico, Sincronização</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O Pantheon é organizado em quatro painéis principais: (1) Grid de Personas — cards com nome, descrição, status e data de modificação; (2) Editor de Prompts — editor Markdown com syntax highlighting; (3) Histórico de Versões — timeline de mudanças por persona com diff visual; (4) Painel de Sincronização — status de quais personas estão carregadas no Hermes ativo.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Cada painel resolve um problema específico do ciclo de vida de personas. Entender a estrutura permite navegar com eficiência e saber onde ir para cada tipo de tarefa — editar, revisar histórico ou sincronizar.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Grid de Personas com cards informativos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Editor Markdown com syntax highlighting</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Histórico de versões com diff visual</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Status de sincronização em tempo real</li>
-              </ul>
-            </div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Sem Pantheon (CLI only)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Editar JSON na mão sem validação</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem histórico de versões — uma edição ruim apaga a anterior</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem visão consolidada de spend por persona</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Onboarding de novos times é lento</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Com Pantheon visual</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Editor com validação de schema em tempo real</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Versionamento automático a cada salvamento</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Spend e iterações por persona no top bar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Onboarding em minutos via link compartilhado</span></li>
+          </ul>
         </div>
       </div>
 
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">➕</span>
-          <div>
-            <span class="font-medium">Adicionando personas passo a passo</span>
-            <span class="text-neutral-500 text-sm ml-2">- Do rascunho ao deploy em minutos</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">O fluxo para adicionar uma nova persona no Pantheon: (1) clique em "Nova Persona", (2) defina nome e descrição curta, (3) escreva o system prompt no editor (usando template sugerido), (4) adicione metadados — modelo preferido, temperatura, casos de uso, (5) clique em "Testar" para validar com uma pergunta de exemplo, (6) "Publicar" sincroniza para ~/.hermes/skills/ e ativa no Hermes.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">O fluxo guiado do Pantheon reduz o tempo de criar uma nova persona de 20+ minutos (editar arquivos manualmente) para menos de 5 minutos, com garantia de que o formato está correto e a persona está ativa.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Template de system prompt integrado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Metadados de persona (modelo, temperatura)</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Teste antes de publicar</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Deploy com um clique em Publicar</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">🗂️</span>
-          <div>
-            <span class="font-medium">Versionamento de system prompts</span>
-            <span class="text-neutral-500 text-sm ml-2">- Histórico, rollback e comparação de versões</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Cada alteração salva em uma persona cria automaticamente uma versão numerada com timestamp e comentário opcional. O painel de Histórico mostra todas as versões em ordem cronológica, permite comparar duas versões (diff visual) e fazer rollback para qualquer versão anterior com um clique — sem perder o histórico.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">System prompts evoluem — e às vezes uma mudança quebra o comportamento esperado. Versionamento com rollback permite experimentar com segurança: se a nova versão piorou os resultados, você volta à anterior em segundos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Versão numerada com timestamp automático</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Diff visual entre versões</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Rollback sem perda de histórico</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Comentário de versão para rastreabilidade</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🔄</span>
-          <div>
-            <span class="font-medium">Sincronização com o Hermes ativo</span>
-            <span class="text-neutral-500 text-sm ml-2">- Hot reload de personas sem reiniciar</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Quando você publica uma persona ou atualiza uma existente no Pantheon, o sistema envia um sinal para o Hermes Agent em execução para recarregar aquela skill específica. Isso permite hot reload — a persona atualizada fica disponível na próxima invocação sem precisar reiniciar o Hermes ou reabrir o terminal.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Sem sincronização em tempo real, editar uma persona requereria reiniciar o Hermes — interrompendo tarefas em andamento. O hot reload permite iterar no prompt enquanto o agente continua operando.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hot reload de skills individuais</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sinal de sincronização para Hermes ativo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sem interrupção de tarefas em andamento</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Status de sincronização visível no painel</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">💻</span>
-          <div>
-            <span class="font-medium">Integração com Claude Code</span>
-            <span class="text-neutral-500 text-sm ml-2">- Pantheon como fonte de verdade para skills</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Pantheon exporta skills no formato compatível com o diretório userSettings do Claude Code (~/.claude/skills/). Quando você edita uma persona no Pantheon e ativa a integração com Claude Code, a skill fica disponível tanto no Hermes quanto no Claude Code com o mesmo prompt — mantendo consistência sem duplicação manual.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Manter personas em dois lugares (Hermes e Claude Code) manualmente leva a divergência. Pantheon como fonte única de verdade garante que a persona Orpheus, por exemplo, tem exatamente o mesmo system prompt nos dois contextos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Exportação para ~/.claude/skills/</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Fonte única de verdade para system prompts</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sem divergência entre Hermes e Claude Code</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sincronização bidirecional configurável</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🎨</span>
-          <div>
-            <span class="font-medium">Customização e temas do Pantheon</span>
-            <span class="text-neutral-500 text-sm ml-2">- Adaptando o dashboard ao seu fluxo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Pantheon suporta customizações de layout e fluxo: reordenar painéis, filtrar personas por tag ou projeto, criar grupos de personas relacionadas, configurar atalhos de teclado para ações frequentes e exportar configurações para compartilhar com outros membros da equipe que usam o mesmo sistema TRIAD.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">À medida que o ecossistema cresce (15, 20+ personas), organização é essencial. Agrupamento por projeto e tags reduz o tempo de encontrar a persona certa de minutos para segundos.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tags e grupos de personas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Filtros por projeto ou categoria</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Atalhos de teclado configuráveis</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Export de configurações para equipe</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Dashboard visual completo</strong><span class="text-neutral-400"> — Grid, Editor, Histórico e Sincronização em uma interface</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Versionamento automático</strong><span class="text-neutral-400"> — rollback a qualquer versão anterior sem perder histórico</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Hot reload sem reiniciar</strong><span class="text-neutral-400"> — personas atualizadas disponíveis imediatamente</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Fonte única de verdade</strong><span class="text-neutral-400"> — Hermes e Claude Code com os mesmos prompts</span></div>
-          </div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">4.3 — Automação Overnight: agendando tarefas para executar enquanto você dorme</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-4-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.1</a>
-          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Camada visual sobre JSON</span><p class="text-sm text-neutral-400 mt-1">Pantheon não substitui os arquivos — renderiza e edita os mesmos JSONs que o Hermes lê</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">localhost:3737</span><p class="text-sm text-neutral-400 mt-1">Servido localmente — nenhum dado sai da máquina sem comando explícito</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Sync bidirecional</span><p class="text-sm text-neutral-400 mt-1">Edição no Pantheon = arquivo atualizado; edição no arquivo = UI atualiza via watcher</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Quando ativar</span><p class="text-sm text-neutral-400 mt-1">A partir de ~5 personas ou quando mais de uma pessoa edita o Hermes</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-4-1.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.1: Arquitetura</a>
-      <a href="modulo-4-3.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.3: Automação Overnight →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🧭 Estrutura do dashboard — personas, skills, histórico, spend</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Pantheon é organizado em <strong class="text-amber-400">quatro zonas funcionais</strong> — cada uma resolvendo um problema específico de gestão. Entender a estrutura é o que diferencia uso casual de domínio operacional.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O layout padrão do Pantheon usa três colunas e um top bar fixo. A sidebar à esquerda lista personas e skills; o centro hospeda o editor; a direita mostra metadata e histórico; o top bar exibe spend agregado, status do sync e o seletor de workspace.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🪟</span> Layout visual
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-xs text-neutral-300 leading-relaxed">
+          <p>┌──────────────────────────────────────────────────────────────┐</p>
+          <p>│ 🎛️ Pantheon   ·   spend hoje: $12.40   ·   sync: ✓   ·   ws: prod │</p>
+          <p>├──────────────┬──────────────────────────────┬──────────────────┤</p>
+          <p>│ PERSONAS     │ # Orpheus                    │ MODEL            │</p>
+          <p>│ ▸ Orpheus  ● │                              │ claude-opus-4-7  │</p>
+          <p>│ ▸ Hermes     │ You are Orpheus, a strategic │                  │</p>
+          <p>│ ▸ Apollo     │ critic. Your job is to...    │ TOOLS            │</p>
+          <p>│ ▸ Athena     │                              │ ✓ gemini         │</p>
+          <p>│              │ [markdown editor centralizado]│ ✓ github         │</p>
+          <p>│ SKILLS       │                              │ ✗ shell          │</p>
+          <p>│ ▸ critic     │                              │                  │</p>
+          <p>│ ▸ planner    │                              │ HISTÓRICO        │</p>
+          <p>│ ▸ refactor   │                              │ v3 · agora       │</p>
+          <p>│              │                              │ v2 · 2h atrás    │</p>
+          <p>│              │ [Salvar]  [Testar prompt]    │ v1 · ontem       │</p>
+          <p>└──────────────┴──────────────────────────────┴──────────────────┘</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Sidebar — personas + skills</h4>
+            <p class="text-sm text-neutral-400">Lista navegável com busca. Personas têm bolinha colorida indicando status (ativa, em edição, com erro de schema). Skills aparecem agrupadas abaixo — são pedaços reusáveis injetáveis em qualquer persona.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Editor central — markdown do system prompt</h4>
+            <p class="text-sm text-neutral-400">Editor full-markdown com syntax highlighting, contagem de tokens em tempo real e atalhos para inserir skills (<code class="text-amber-400">/skill nome</code>). Suporta preview lado a lado.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Painel direito — metadata e histórico</h4>
+            <p class="text-sm text-neutral-400">Modelo, tools, temperatura, limites de tokens. Lista versões anteriores com diff inline ao clicar — você pode comparar v2 vs v3 e reverter com um clique.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Top bar — spend, sync, workspace</h4>
+            <p class="text-sm text-neutral-400">Visão agregada: gasto do dia, status do sync com o filesystem, e seletor de workspace (dev/staging/prod). É onde você detecta um runaway antes de receber a fatura.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Três colunas + top bar</span><p class="text-sm text-neutral-400 mt-1">Padrão de IDE — sidebar de navegação, editor central, painel contextual à direita</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Skills como peças reusáveis</span><p class="text-sm text-neutral-400 mt-1">Fragmentos de prompt injetáveis em múltiplas personas — DRY aplicado a prompting</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Spend no topo</span><p class="text-sm text-neutral-400 mt-1">Sempre visível — feedback contínuo previne runaways de custo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Workspaces separados</span><p class="text-sm text-neutral-400 mt-1">dev/staging/prod isolam ambientes — você não testa prompts experimentais em produção</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">➕ Adicionando personas pelo painel — passo a passo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Criar uma persona no Pantheon leva menos de um minuto e <strong class="text-amber-400">elimina três fontes comuns de erro</strong>: JSON malformado, model ID inválido e tools inexistentes. O wizard valida cada passo antes de gravar.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O fluxo "+ Nova Persona" abre um modal de quatro passos: identidade (nome e descrição), modelo (lista validada contra o catálogo), tools (checkboxes a partir das ferramentas instaladas) e system prompt inicial (template opcional). Ao salvar, o JSON correspondente é gravado em <code class="text-amber-400">~/.hermes/pantheon/personas/</code>.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Clicar em "+ Nova Persona" na sidebar</h4>
+            <p class="text-sm text-neutral-400">Abre o modal com o primeiro passo selecionado. O foco vai automaticamente para o campo "nome" — você nunca precisa pegar o mouse para começar.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Identidade — nome + descrição curta</h4>
+            <p class="text-sm text-neutral-400">Nome vira o slug do arquivo (Orpheus → <code class="text-amber-400">orpheus.v1.json</code>). Descrição aparece no tooltip e no top bar quando a persona está ativa. Nomes duplicados são bloqueados.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Modelo — dropdown validado</h4>
+            <p class="text-sm text-neutral-400">Lista carregada do catálogo Hermes: <code class="text-amber-400">anthropic/claude-opus-4-7</code>, <code class="text-amber-400">anthropic/claude-sonnet-4-6</code>, <code class="text-amber-400">openai/gpt-5</code>, etc. Você não digita o ID — escolhe da lista, eliminando typos.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Tools — checkboxes do que está instalado</h4>
+            <p class="text-sm text-neutral-400">Lista apenas as MCPs e ferramentas detectadas no ambiente. Não há como marcar uma tool que não existe — falhas silenciosas em runtime ficam impossíveis.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">System prompt — template ou em branco</h4>
+            <p class="text-sm text-neutral-400">Você pode partir de um template (Crítico, Planejador, Refactor) ou começar do zero. Ao salvar, a persona aparece imediatamente na sidebar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📄</span> JSON resultante (~/.hermes/pantheon/personas/orpheus.v1.json)
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>{</p>
+          <p class="ml-4"><span class="text-amber-400">"name"</span>: <span class="text-emerald-400">"Orpheus"</span>,</p>
+          <p class="ml-4"><span class="text-amber-400">"description"</span>: <span class="text-emerald-400">"Strategic critic — questions premises"</span>,</p>
+          <p class="ml-4"><span class="text-amber-400">"model"</span>: <span class="text-emerald-400">"anthropic/claude-opus-4-7"</span>,</p>
+          <p class="ml-4"><span class="text-amber-400">"system_prompt"</span>: <span class="text-emerald-400">"You are Orpheus, a strategic critic..."</span>,</p>
+          <p class="ml-4"><span class="text-amber-400">"tools"</span>: [<span class="text-emerald-400">"gemini"</span>, <span class="text-emerald-400">"github"</span>],</p>
+          <p class="ml-4"><span class="text-amber-400">"version"</span>: <span class="text-sky-400">1</span>,</p>
+          <p class="ml-4"><span class="text-amber-400">"created_at"</span>: <span class="text-emerald-400">"2026-05-17T06:40:00Z"</span></p>
+          <p>}</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">O wizard elimina três classes de erro que somam mais de 70% dos incidentes em Hermes operados via CLI: JSON malformado, model ID com typo e tool inexistente. Validação no input previne falhas em runtime.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Wizard de 5 passos</span><p class="text-sm text-neutral-400 mt-1">Identidade, modelo, tools, prompt, confirmação — validação por etapa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Slug = nome do arquivo</span><p class="text-sm text-neutral-400 mt-1">Convenção previsível: nome da persona vira nome do JSON em disco</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Validação contra catálogo</span><p class="text-sm text-neutral-400 mt-1">Modelo e tools só aceitam valores presentes no ambiente — sem typos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Templates iniciais</span><p class="text-sm text-neutral-400 mt-1">Crítico, planejador, refactor — pontos de partida testados em produção</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">✏️ Editando e versionando system prompts de personas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Edição sem versionamento é roleta russa — uma alteração ruim apaga a anterior, e você descobre o problema depois que três workflows falharam. <strong class="text-amber-400">O Pantheon versiona automaticamente cada salvamento</strong> e mantém histórico navegável com diff e revert.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A cada save, o Pantheon grava um snapshot incremental em <code class="text-amber-400">~/.hermes/pantheon/personas/orpheus.v{N}.json</code> e atualiza o ponteiro <code class="text-amber-400">orpheus.current</code>. O histórico mostra autor, timestamp, diff inline e botão de revert — semântica de git sem precisar de git.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🗂️</span> Estrutura de versões em disco
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p>~/.hermes/pantheon/personas/</p>
+          <p class="ml-4">├── orpheus.current      <span class="text-neutral-500"># symlink para a versão ativa</span></p>
+          <p class="ml-4">├── orpheus.v1.json      <span class="text-neutral-500"># inicial</span></p>
+          <p class="ml-4">├── orpheus.v2.json      <span class="text-neutral-500"># ajuste de tone</span></p>
+          <p class="ml-4">├── orpheus.v3.json      <span class="text-neutral-500"># versão atual ●</span></p>
+          <p class="ml-4">└── orpheus.meta.json    <span class="text-neutral-500"># autores, timestamps, notas</span></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Edição via terminal (sem versão)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><code>vim orpheus.json</code> sobrescreve o anterior</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem diff entre antes/depois</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Revert exige backup manual prévio</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem registro de quem editou</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Edição via Pantheon (versionada)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Snapshot automático a cada save</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Diff inline v(n-1) ↔ v(n)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Revert com um clique</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Autor + nota de mudança gravados</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Dica de produção
+        </h3>
+        <p class="text-neutral-300">Configure o Pantheon para exigir nota de mudança em saves no workspace <code class="text-amber-400">prod</code> — isso vira changelog operacional sem custo adicional. No <code class="text-amber-400">dev</code>, deixe livre para iteração rápida.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Versionamento automático</span><p class="text-sm text-neutral-400 mt-1">Cada save = snapshot imutável; o ponteiro current decide a versão ativa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Diff inline</span><p class="text-sm text-neutral-400 mt-1">Comparar duas versões diretamente no painel direito sem ferramentas externas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Revert seguro</span><p class="text-sm text-neutral-400 mt-1">Reverter não apaga versões — apenas move o ponteiro current</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Notas de mudança em prod</span><p class="text-sm text-neutral-400 mt-1">Obrigatórias no workspace prod — viram changelog operacional automático</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🔄 Conectando o Pantheon ao Hermes via sincronização</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Pantheon e o Hermes compartilham o mesmo diretório de personas, mas isso não é suficiente — sem um <strong class="text-amber-400">protocolo de sincronização explícito</strong>, edições conflitam silenciosamente. O comando <code class="text-amber-400">hermes pantheon sync</code> resolve isso com diff e merge auditáveis.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A sincronização é um protocolo que detecta divergências entre a versão em memória do Pantheon e o estado em disco — provocadas por edições externas (git pull, scripts, outro editor). Em vez de sobrescrever, abre um diálogo de merge.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Watcher detecta mudança no filesystem</h4>
+            <p class="text-sm text-neutral-400">O Pantheon mantém um watcher (fsnotify/chokidar) sobre <code class="text-amber-400">~/.hermes/pantheon/</code>. Qualquer alteração externa dispara um evento de sync pendente.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Top bar muda sync ✓ para sync ⚠</h4>
+            <p class="text-sm text-neutral-400">Indicador visual imediato — quem está editando vê que precisa pausar e resolver a divergência antes do próximo save.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Rodar hermes pantheon sync</h4>
+            <p class="text-sm text-neutral-400">Comando lista divergências por persona com diff lado a lado e três opções: aceitar local, aceitar disco, ou abrir merge manual no editor.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Resolução gera versão de merge</h4>
+            <p class="text-sm text-neutral-400">O resultado da resolução vira uma nova versão (v(n+1)) com marca <code class="text-amber-400">"merged": true</code> no meta — auditável depois.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">⌨️</span> Comandos de sync úteis
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2">
+          <p><span class="text-amber-400">$</span> hermes pantheon sync             <span class="text-neutral-500"># detecta e resolve divergências</span></p>
+          <p><span class="text-amber-400">$</span> hermes pantheon sync --dry-run   <span class="text-neutral-500"># só lista, sem aplicar</span></p>
+          <p><span class="text-amber-400">$</span> hermes pantheon sync --accept-disk <span class="text-neutral-500"># aceita tudo do filesystem</span></p>
+          <p><span class="text-amber-400">$</span> hermes pantheon sync --watch     <span class="text-neutral-500"># sync contínuo em background</span></p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Watcher de filesystem</span><p class="text-sm text-neutral-400 mt-1">Eventos em tempo real detectam edições externas — git pull, scripts, IDEs</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Indicador visual de divergência</span><p class="text-sm text-neutral-400 mt-1">sync ⚠ no top bar evita save destrutivo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Merge auditável</span><p class="text-sm text-neutral-400 mt-1">Versão de merge marcada no meta — você consegue rastrear depois</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">--dry-run antes de --accept</span><p class="text-sm text-neutral-400 mt-1">Sempre revise a lista antes de aceitar em lote</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🔗 Integrando dados do Claude Code ao Pantheon</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Claude Code já tem skills, agentes e histórico de uso valioso — mas isolado. <strong class="text-amber-400">A bridge Pantheon ↔ Claude Code</strong> traz métricas de uso, skills exportadas e settings.json para dentro do dashboard, eliminando a navegação entre duas UIs.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um plugin (<code class="text-amber-400">hermes-bridge</code>) instalado no Claude Code que expõe um endpoint local consultado pelo Pantheon — trazendo skills, agentes, transcripts e configuração do <code class="text-amber-400">~/.claude/settings.json</code>. Bi-direcional: você cria uma skill no Pantheon e ela aparece no Claude Code automaticamente.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">⚙️</span> Configuração da bridge
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># ~/.claude/settings.json</span></p>
+          <p>{</p>
+          <p class="ml-4"><span class="text-amber-400">"plugins"</span>: {</p>
+          <p class="ml-8"><span class="text-amber-400">"hermes-bridge"</span>: {</p>
+          <p class="ml-12"><span class="text-amber-400">"enabled"</span>: <span class="text-sky-400">true</span>,</p>
+          <p class="ml-12"><span class="text-amber-400">"endpoint"</span>: <span class="text-emerald-400">"http://localhost:3737/bridge"</span>,</p>
+          <p class="ml-12"><span class="text-amber-400">"share"</span>: [<span class="text-emerald-400">"skills"</span>, <span class="text-emerald-400">"agents"</span>, <span class="text-emerald-400">"usage"</span>]</p>
+          <p class="ml-8">}</p>
+          <p class="ml-4">}</p>
+          <p>}</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Skills do Claude Code aparecem na sidebar</h4>
+            <p class="text-sm text-neutral-400">A seção SKILLS lista também as skills do Claude Code (com badge <code class="text-amber-400">cc</code>). Você pode injetar qualquer uma em uma persona Hermes com um clique.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Telemetria unificada no top bar</h4>
+            <p class="text-sm text-neutral-400">Spend agregado mostra Hermes + Claude Code numa única linha, com breakdown por origem ao hover. Detecta runaways em qualquer um dos dois sistemas.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+            <span class="text-amber-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-amber-400">Persona Hermes invocável via slash command</h4>
+            <p class="text-sm text-neutral-400">Cada persona ativa vira um slash command no Claude Code (<code class="text-amber-400">/orpheus</code>, <code class="text-amber-400">/apollo</code>), automaticamente registrado pela bridge.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">A bridge elimina a fronteira artificial entre Hermes (orquestração) e Claude Code (execução). Skills, agentes e telemetria viram um pool único — e você toma decisões com a visão completa do sistema.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Plugin hermes-bridge</span><p class="text-sm text-neutral-400 mt-1">Endpoint local que expõe skills, agentes e telemetria ao Pantheon</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">settings.json como contrato</span><p class="text-sm text-neutral-400 mt-1">Configuração declarativa do que é compartilhado entre os dois sistemas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Slash commands automáticos</span><p class="text-sm text-neutral-400 mt-1">Personas Hermes viram comandos no Claude Code sem configuração extra</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Spend unificado</span><p class="text-sm text-neutral-400 mt-1">Visão única de custos elimina blind spots entre os dois sistemas</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🎨 Customizando o dashboard para o seu fluxo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O layout padrão funciona, mas <strong class="text-amber-400">cada time tem um fluxo dominante</strong> — uns vivem no editor, outros no histórico, outros monitorando spend. Customizar painéis, atalhos e widgets corta segundos por interação que viram horas no fim do mês.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A customização do Pantheon é feita via <code class="text-amber-400">~/.hermes/pantheon/config.json</code> — define layout (largura das colunas, painéis visíveis), atalhos (keybindings), widgets do top bar (spend, taxa de erro, latência) e tema. Suporta presets compartilháveis entre times.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Exemplo: layout "editor-focado"
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1">
+          <p><span class="text-neutral-500"># ~/.hermes/pantheon/config.json</span></p>
+          <p>{</p>
+          <p class="ml-4"><span class="text-amber-400">"layout"</span>: {</p>
+          <p class="ml-8"><span class="text-amber-400">"sidebar_width"</span>: <span class="text-sky-400">200</span>,</p>
+          <p class="ml-8"><span class="text-amber-400">"editor_width"</span>: <span class="text-emerald-400">"flex"</span>,</p>
+          <p class="ml-8"><span class="text-amber-400">"right_panel_collapsed"</span>: <span class="text-sky-400">true</span></p>
+          <p class="ml-4">},</p>
+          <p class="ml-4"><span class="text-amber-400">"top_bar_widgets"</span>: [<span class="text-emerald-400">"spend"</span>, <span class="text-emerald-400">"error_rate"</span>],</p>
+          <p class="ml-4"><span class="text-amber-400">"keybindings"</span>: {</p>
+          <p class="ml-8"><span class="text-amber-400">"save"</span>: <span class="text-emerald-400">"cmd+s"</span>,</p>
+          <p class="ml-8"><span class="text-amber-400">"test_prompt"</span>: <span class="text-emerald-400">"cmd+enter"</span>,</p>
+          <p class="ml-8"><span class="text-amber-400">"toggle_history"</span>: <span class="text-emerald-400">"cmd+h"</span></p>
+          <p class="ml-4">},</p>
+          <p class="ml-4"><span class="text-amber-400">"theme"</span>: <span class="text-emerald-400">"amber-dark"</span></p>
+          <p>}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">📝 Preset "Prompt Engineer"</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Editor central com 75% da largura</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Histórico colapsado, sidebar minimal</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Atalho test_prompt em destaque</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">📊 Preset "Ops"</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Top bar com spend + error_rate + latency</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Histórico expandido, editor secundário</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">•</span><span>Notificações de runaway em primeiro plano</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Dica de adoção
+        </h3>
+        <p class="text-neutral-300">Comece com o layout padrão por uma semana, anote o que você abre/fecha o tempo todo, e só então crie um preset. Customização prematura cria atrito desnecessário — o padrão foi medido em produção.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">config.json declarativo</span><p class="text-sm text-neutral-400 mt-1">Layout, widgets, atalhos e tema configurados em um único arquivo versionável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Presets por papel</span><p class="text-sm text-neutral-400 mt-1">Prompt Engineer, Ops, Pesquisa — cada papel tem uma configuração ótima</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Customização baseada em uso</span><p class="text-sm text-neutral-400 mt-1">Observe seu fluxo antes de customizar — evita atrito de configurações prematuras</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Configs compartilháveis</span><p class="text-sm text-neutral-400 mt-1">Times podem versionar config.json no repo para padronizar o ambiente</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Pantheon é a camada visual</strong><span class="text-neutral-400"> — webapp local em localhost:3737 que centraliza personas, skills, histórico e spend</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Layout de três colunas + top bar</strong><span class="text-neutral-400"> — sidebar de personas, editor central markdown, painel de metadata, indicadores no topo</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Wizard "+ Nova Persona"</strong><span class="text-neutral-400"> — cinco passos com validação contra catálogo, elimina 70% dos erros comuns</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Versionamento automático</strong><span class="text-neutral-400"> — snapshot a cada save, diff inline, revert seguro sem perda de histórico</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">hermes pantheon sync</strong><span class="text-neutral-400"> — protocolo explícito de merge que previne sobrescrita silenciosa em ambientes multi-editor</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Bridge com Claude Code</strong><span class="text-neutral-400"> — plugin hermes-bridge unifica skills, telemetria e slash commands entre os dois sistemas</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.3 — Overnight: executando workflows longos sem supervisão</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -445,12 +767,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

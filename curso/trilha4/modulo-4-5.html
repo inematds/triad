@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Deploy no GitHub Pages — publicando o curso TRIAD para o mundo com CI/CD automático">
-  <title>Deploy GitHub Pages | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="Deploy técnico do TRIAD — GitHub Pages, GitHub Actions, versionamento semver e distribuição para equipe">
+  <title>Deploy técnico — GitHub Pages e distribuição | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -62,7 +62,6 @@
   <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-14">
-        <!-- Logo + INEMA.CLUB -->
         <div class="flex items-center space-x-4">
           <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
             <span class="text-2xl">⚡</span>
@@ -72,7 +71,6 @@
           <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
         </div>
 
-        <!-- Trilhas + Theme Toggle -->
         <div class="flex items-center space-x-1 sm:space-x-2">
           <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
             <span class="sm:hidden">T1</span>
@@ -91,7 +89,6 @@
             <span class="hidden sm:inline">Escala</span>
           </a>
 
-          <!-- Theme Toggle -->
           <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
             <svg id="theme-toggle-dark-icon" aria-hidden="true" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -120,23 +117,23 @@
   <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.5</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Deploy no GitHub Pages</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Publicando o curso TRIAD para o mundo — do repositório local ao site público com CI/CD automático e zero custo de hospedagem.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Deploy técnico — GitHub Pages e distribuição</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Publique o curso TRIAD no GitHub Pages, versione releases e monitore adoção após o deploy.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-amber-400">7</div>
           <div class="text-xs text-neutral-400">Tópicos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">~30</div>
+          <div class="text-xl font-bold text-amber-400">~40</div>
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Básico</div>
+          <div class="text-xl font-bold text-amber-400">Intermediário</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-amber-400">Deploy</div>
+          <div class="text-xl font-bold text-amber-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -145,285 +142,597 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">📦 Preparando o repositório para produção</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Antes do primeiro deploy, o repositório precisa estar <strong class="text-amber-400">limpo, documentado e estruturado</strong>. Um <code class="text-amber-400">.gitignore</code> ausente vaza chaves; um README ausente trava o onboarding de novos colaboradores.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">📦</span>
-          <div>
-            <span class="font-medium">Preparação do repositório</span>
-            <span class="text-neutral-500 text-sm ml-2">- git init, estrutura e primeiro push</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Para preparar o repositório: (1) na pasta raiz do projeto execute <code class="bg-dark-600 px-1 rounded text-amber-400">git init</code>, (2) crie um .gitignore excluindo .env, node_modules e arquivos temporários, (3) <code class="bg-dark-600 px-1 rounded text-amber-400">git add .</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git commit -m "initial commit"</code>, (4) crie o repositório no GitHub (público, sem README), (5) <code class="bg-dark-600 px-1 rounded text-amber-400">git remote add origin</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git push -u origin main</code>.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">O .gitignore correto é crítico — sem ele, você pode acidentalmente publicar tokens de API, configurações de modelos ou dados pessoais do soul.md. A preparação do repositório é a fundação de um deploy seguro.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>.gitignore cobrindo .env e dados sensíveis</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Repositório público para GitHub Pages</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Branch main como fonte do Pages</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Commit semântico para histórico claro</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Preparar para produção é o conjunto de garantias mínimas — arquivos ignorados no controle de versão, README com instruções de uso, estrutura de pastas previsível — que permite que o repositório seja publicado, clonado e mantido sem fricção operacional.</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">⚙️</span>
-          <div>
-            <span class="font-medium">Configuração do GitHub Pages</span>
-            <span class="text-neutral-500 text-sm ml-2">- .nojekyll obrigatório e settings</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">No GitHub, acesse Settings → Pages → Source: Deploy from branch → Branch: main → folder: / (root). CRÍTICO: crie um arquivo vazio chamado <code class="bg-dark-600 px-1 rounded text-amber-400">.nojekyll</code> na raiz do repositório. Sem ele, o GitHub Pages tenta processar o HTML com Jekyll e pode quebrar caminhos de arquivos com underscores ou diretórios especiais.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">O .nojekyll é o erro mais comum em deploys no GitHub Pages com HTML puro. Sem ele, arquivos em pastas começando com underscore ou underlines nos nomes podem não ser servidos corretamente.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>.nojekyll na raiz — obrigatório para HTML puro</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Settings → Pages → Deploy from branch</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>URL gerada: usuario.github.io/repo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Deploy automático em cada push para main</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🧱</span> Checklist pré-deploy
+        </h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><code class="text-amber-400">.gitignore</code> cobrindo <code>.env</code>, <code>node_modules/</code>, <code>.DS_Store</code>, <code>dist/</code> e qualquer artefato local</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><code class="text-amber-400">README.md</code> com badge de deploy, link do site publicado, passos de instalação local</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span><code class="text-amber-400">LICENSE</code> definido (MIT, Apache-2.0) — repositórios públicos sem licença bloqueiam reuso legal</span></li>
+          <li class="flex items-start space-x-2"><span class="text-amber-400 mt-1">•</span><span>Estrutura previsível: <code>curso/</code>, <code>assets/</code>, <code>index.html</code> na raiz</span></li>
+        </ul>
       </div>
 
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">🗂️</span>
-          <div>
-            <span class="font-medium">Estrutura de arquivos para Pages</span>
-            <span class="text-neutral-500 text-sm ml-2">- Links relativos e caminhos corretos</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">GitHub Pages serve arquivos estáticos a partir da raiz do repositório. Todas as referências entre páginas devem usar caminhos relativos (href="curso/trilha1/index.html", não href="/curso/trilha1/index.html"). Links absolutos com barra inicial falham porque o repositório serve em /nome-do-repo/, não na raiz do domínio.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Links absolutos quebram silenciosamente no Pages — a página carrega mas a navegação falha. Links relativos funcionam tanto localmente quanto no Pages sem nenhuma mudança, tornando o desenvolvimento e o deploy intercambiáveis.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sempre usar caminhos relativos em href</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Nunca usar / no início de links internos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>../index.html para navegar para cima</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Teste local com Live Server antes do push</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">.gitignore</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code># Secrets
+.env
+.env.local
+*.key
+
+# Build artifacts
+dist/
+build/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/</code></pre>
       </div>
 
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">🤖</span>
-          <div>
-            <span class="font-medium">GitHub Actions para CI/CD automático</span>
-            <span class="text-neutral-500 text-sm ml-2">- Workflow de deploy em cada commit</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Com GitHub Actions, você cria um workflow em .github/workflows/deploy.yml que roda automaticamente em cada push para main: valida a estrutura HTML, verifica links quebrados com htmlproofer, e faz o deploy para Pages. Para projetos simples de HTML estático, o deploy automático via Settings → Pages já é suficiente — Actions é para quem quer validação antes do deploy.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">CI/CD automatiza a garantia de qualidade — você nunca publica acidentalmente HTML inválido ou links quebrados. Para um curso com dezenas de páginas, a validação automática é essencial para manter credibilidade.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Workflow em .github/workflows/deploy.yml</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Trigger em push para main</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>htmlproofer para validar links</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Deploy bloqueado se validação falha</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">O custo de um secret vazado em commit público é altíssimo — rotação de chaves, auditoria de acessos, possível invasão. Cinco minutos configurando <code>.gitignore</code> previnem horas de remediação.</p>
       </div>
 
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🏷️</span>
-          <div>
-            <span class="font-medium">Versionamento com tags e releases</span>
-            <span class="text-neutral-500 text-sm ml-2">- Marcando versões estáveis do curso</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Tags git marcam pontos estáveis no histórico: <code class="bg-dark-600 px-1 rounded text-amber-400">git tag -a v1.0 -m "Trilha 1 completa"</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git push origin v1.0</code>. No GitHub, você pode criar Releases a partir de tags — com notas de versão, changelog e arquivos para download. Isso permite que alunos saibam exatamente quando o conteúdo foi atualizado e o que mudou.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Releases dão transparência ao aluno — ele vê que a Trilha 4 foi adicionada na versão 4.0, que um módulo foi corrigido na 4.1. Isso aumenta confiança no material e facilita acompanhar as atualizações.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tags anotadas para versões estáveis</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Releases com notas de mudanças</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Semantic versioning para o curso</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Changelog visível para alunos</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">👥</span>
-          <div>
-            <span class="font-medium">Distribuição para equipes</span>
-            <span class="text-neutral-500 text-sm ml-2">- CONTRIBUTING.md e branch protection</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Para equipes, o repositório precisa de: CONTRIBUTING.md com guia de como adicionar ou editar módulos (seguindo o design system), branch protection em main exigindo Pull Request aprovado antes de merge, e branch naming convention (feature/modulo-X-Y para novos módulos, fix/modulo-X-Y para correções). Isso garante que todos os colaboradores seguem o mesmo padrão.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Sem governança, colaboradores introduzem inconsistências que desviam do design system. CONTRIBUTING.md e branch protection garantem qualidade independente de quem contribui.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>CONTRIBUTING.md com guia do design system</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Branch protection exigindo PR aprovado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Naming convention para branches</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Review obrigatório antes de merge em main</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">📊</span>
-          <div>
-            <span class="font-medium">Analytics e monitoramento do site</span>
-            <span class="text-neutral-500 text-sm ml-2">- Medindo engajamento sem custo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
-              <p class="text-neutral-300 text-sm mt-1">Para monitorar o curso no GitHub Pages, integre o Google Analytics (gratuito) adicionando o snippet gtag.js no head de todas as páginas. Acompanhe: pages mais visitadas, tempo médio por módulo, taxa de conclusão (via eventos de scroll depth), e origem do tráfego. Uma alternativa sem cookies é o Plausible Analytics — open-source e compatível com LGPD.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
-              <p class="text-neutral-300 text-sm mt-1">Analytics transforma o curso de estático para melhorado por dados. Se o Módulo 1.3 tem abandono alto, talvez seja longo demais. Se o Módulo 4.1 recebe mais tráfego, talvez mereça mais conteúdo. Dados informam as próximas versões.</p>
-            </div>
-            <div>
-              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Google Analytics via gtag.js no head</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Eventos de scroll depth por módulo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Plausible como alternativa sem cookies</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Dados informando evolução do conteúdo</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">.nojekyll é obrigatório</strong><span class="text-neutral-400"> — sem ele o Pages processa Jekyll e pode quebrar</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Sempre links relativos</strong><span class="text-neutral-400"> — nunca use / no início de links internos</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">CI/CD com GitHub Actions</strong><span class="text-neutral-400"> — valida antes de publicar</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-amber-400 mt-1">✓</span>
-            <div><strong class="text-white">Analytics desde o primeiro dia</strong><span class="text-neutral-400"> — dados informam evolução do conteúdo</span></div>
-          </div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">4.6 — Onboarding Não-Técnico: facilitando a adoção para quem não programa</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.4</a>
-          <a href="modulo-4-6.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">.gitignore antes do primeiro commit</span><p class="text-sm text-neutral-400 mt-1">Adicionar depois não remove segredos já versionados — exige reescrita de histórico</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">README como onboarding</span><p class="text-sm text-neutral-400 mt-1">Primeiro arquivo que um colaborador lê — define se ele consegue rodar localmente em 5 min</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Licença explícita</span><p class="text-sm text-neutral-400 mt-1">Sem LICENSE, o código é "todos os direitos reservados" por padrão — bloqueia reuso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Estrutura previsível</span><p class="text-sm text-neutral-400 mt-1"><code>index.html</code> na raiz é convenção esperada pelo GitHub Pages</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-4-4.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.4: Integrações</a>
-      <a href="modulo-4-6.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.6: Onboarding Não-Técnico →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">⚙️ Configurando GitHub Pages</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        GitHub Pages serve arquivos estáticos diretamente do repositório — gratuito, com HTTPS e CDN global. <strong class="text-amber-400">Três decisões definem o setup:</strong> qual branch publica, qual diretório serve, se HTTPS está enforced.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">GitHub Pages é o serviço de hospedagem estática integrado ao GitHub — publica HTML/CSS/JS diretamente de um branch e diretório do repositório em <code>https://&lt;org&gt;.github.io/&lt;repo&gt;/</code> com CDN, HTTPS gratuito e suporte a domínio customizado.</p>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">Setup via gh CLI</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code># Criar repositório público
+gh repo create inematds/triad --public --source=. --push
+
+# Habilitar GitHub Pages no branch main, diretório raiz
+gh api -X POST repos/inematds/triad/pages \
+  -f source[branch]=main \
+  -f source[path]=/
+
+# Forçar HTTPS (sempre)
+gh api -X PUT repos/inematds/triad/pages \
+  -F https_enforced=true
+
+# Verificar status
+gh api repos/inematds/triad/pages</code></pre>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🎛️</span> As três decisões
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">1.</span>
+            <span><strong>Branch:</strong> <code class="text-amber-400">main</code> para projetos simples. Para builds, use <code>gh-pages</code> alimentado por CI.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">2.</span>
+            <span><strong>Diretório:</strong> <code class="text-amber-400">/</code> (raiz) é o padrão. <code>/docs</code> isola conteúdo público do código.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">3.</span>
+            <span><strong>HTTPS enforced:</strong> sempre <code>true</code>. Sem isso, o site é servido em HTTP e navegadores marcam como inseguro.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Pages é estático</span><p class="text-sm text-neutral-400 mt-1">Não roda backend — só HTML/CSS/JS. Para lógica, use Cloudflare Workers ou Vercel Functions</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">HTTPS enforced sempre</span><p class="text-sm text-neutral-400 mt-1">Sem cost, sem trade-off — único motivo para não enforced é compatibilidade legada</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">URL previsível</span><p class="text-sm text-neutral-400 mt-1"><code>&lt;user&gt;.github.io/&lt;repo&gt;</code> — ou domínio custom via CNAME</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">CDN incluído</span><p class="text-sm text-neutral-400 mt-1">Fastly por trás — latência baixa global sem configuração</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">📁 Estrutura de arquivos para deploy correto</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O erro mais comum em primeiro deploy: <strong class="text-amber-400">caminhos absolutos quebram</strong> quando o site é servido em subpath (<code>/triad/</code> em vez de <code>/</code>). A regra é simples: paths relativos, <code>index.html</code> na raiz.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A estrutura de arquivos para deploy é o layout esperado pelo GitHub Pages — <code>index.html</code> na raiz do diretório servido, assets referenciados por caminhos relativos (<code>./assets/</code>) ou via <code>&lt;base&gt;</code> quando o site fica em subpath.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Paths absolutos (quebram)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm font-mono">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>&lt;link href="/style.css"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>&lt;img src="/assets/logo.png"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>&lt;a href="/curso/trilha1"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>fetch("/api/data.json")</span></li>
+          </ul>
+          <p class="text-xs text-neutral-400 mt-3">Em <code>user.github.io/triad/</code>, <code>/style.css</code> aponta para <code>user.github.io/style.css</code> — 404.</p>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Paths relativos (funcionam)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm font-mono">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>&lt;link href="./style.css"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>&lt;img src="./assets/logo.png"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>&lt;a href="../trilha1/index.html"&gt;</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>fetch("./data.json")</span></li>
+          </ul>
+          <p class="text-xs text-neutral-400 mt-3">Funciona em qualquer subpath — local, staging, produção.</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">Estrutura recomendada</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code>triad/
+├── index.html              # entrada — raiz do site
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # CI/CD
+├── curso/
+│   ├── trilha1/
+│   ├── trilha2/
+│   ├── trilha3/
+│   └── trilha4/
+└── assets/
+    ├── css/
+    └── img/</code></pre>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Path relativo por padrão</span><p class="text-sm text-neutral-400 mt-1">Funciona idêntico em local, staging e produção sem variáveis de ambiente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">index.html na raiz</span><p class="text-sm text-neutral-400 mt-1">Convenção do Pages — outras pastas precisam do próprio <code>index.html</code> para pretty URLs</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Subpath em projetos não-user</span><p class="text-sm text-neutral-400 mt-1">Repos de organização ficam em <code>org.github.io/repo</code>, não <code>org.github.io</code></p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">404.html opcional</span><p class="text-sm text-neutral-400 mt-1">Pages serve <code>404.html</code> automaticamente para rotas inexistentes</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">🤖 Automatizando deploy com GitHub Actions</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Push to main → deploy automático. <strong class="text-amber-400">GitHub Actions elimina o passo manual</strong> de buildar, copiar e publicar — todo commit em main vira release em produção em menos de 60 segundos.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">GitHub Actions é o sistema de CI/CD nativo do GitHub — um workflow YAML em <code>.github/workflows/</code> que dispara em eventos (push, PR, schedule), roda passos em runners gerenciados e publica artefatos. Para Pages, é o mecanismo oficial de deploy desde 2022.</p>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">.github/workflows/deploy.yml</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code>name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4</code></pre>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Sem CI</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Deploy manual — fácil esquecer</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Estado do site ≠ estado do main</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Sem trilha de auditoria de releases</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Rollback exige saber o último estado bom</span></li>
+          </ul>
+        </div>
+        <div class="bg-amber-900/20 rounded-xl border border-amber-500/30 p-6">
+          <h4 class="font-bold text-amber-400 mb-4">✓ Com CI</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Push em main = deploy automático</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Estado do site = estado do main, sempre</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Histórico de runs com timestamp e SHA</span></li>
+            <li class="flex items-start space-x-2"><span class="text-amber-400">✓</span><span>Rollback = re-run de workflow anterior</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Deploy manual é a fonte número um de drift entre código e produção. Quando o deploy é automático, o repositório se torna a única fonte de verdade — e o time confia que o que está em main está no ar.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Workflow como código</span><p class="text-sm text-neutral-400 mt-1">YAML versionado junto com o projeto — quem revisa código revisa o pipeline</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Concurrency: pages</span><p class="text-sm text-neutral-400 mt-1">Cancela deploy anterior se um novo chega — evita race condition</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Permissions mínimas</span><p class="text-sm text-neutral-400 mt-1">Só <code>pages: write</code> e <code>id-token: write</code> — princípio do menor privilégio</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">workflow_dispatch</span><p class="text-sm text-neutral-400 mt-1">Permite re-deploy manual via UI sem precisar de novo commit</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🏷️ Versionamento do sistema</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Tags transformam commits anônimos em marcos rastreáveis. <strong class="text-amber-400">SemVer (<code>MAJOR.MINOR.PATCH</code>)</strong> comunica intenção: incompatível, novo recurso, correção — três palavras que orientam o consumidor a atualizar com confiança.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Versionamento semântico (SemVer) é a convenção <code>vMAJOR.MINOR.PATCH</code> — incrementa MAJOR em mudanças incompatíveis, MINOR em adições compatíveis, PATCH em correções. Combinado com <code>git tag</code> e <code>gh release</code>, cria pontos de restauração imutáveis.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> Como decidir o incremento
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3">
+            <span class="bg-red-500/20 text-red-400 px-2 py-0.5 rounded font-mono text-xs flex-shrink-0 mt-1">MAJOR</span>
+            <span><code class="text-amber-400">v1.x.x → v2.0.0</code> — quebra compatibilidade. Estrutura de URLs mudou, formato do soul.md mudou, links antigos quebram.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded font-mono text-xs flex-shrink-0 mt-1">MINOR</span>
+            <span><code class="text-amber-400">v1.0.x → v1.1.0</code> — novo conteúdo compatível. Nova trilha, novo módulo, novos componentes sem quebrar nada existente.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-mono text-xs flex-shrink-0 mt-1">PATCH</span>
+            <span><code class="text-amber-400">v1.0.0 → v1.0.1</code> — correção. Typo, bug visual, link quebrado, ajuste de cor light-mode.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">Fluxo de release</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code># Tag local anotada
+git tag -a v1.0.0 -m "Initial release — 4 trilhas, 24 módulos"
+
+# Publicar tag
+git push --tags
+
+# Criar release com notas
+gh release create v1.0.0 \
+  --title "TRIAD v1.0 — Initial release" \
+  --notes "Primeira versão estável do curso TRIAD.
+
+  Inclui:
+  - Trilha 1 (Fundamentos) — 6 módulos
+  - Trilha 2 (Técnica) — 6 módulos
+  - Trilha 3 (Avançado) — 6 módulos
+  - Trilha 4 (Escala) — 6 módulos
+
+  Deploy: https://inematds.github.io/triad/"
+
+# Patch posterior
+git tag -a v1.0.1 -m "Fix light-mode amber contrast"
+git push --tags
+gh release create v1.0.1 --notes "Ajuste de contraste WCAG AA em light mode"</code></pre>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Tag anotada (-a)</span><p class="text-sm text-neutral-400 mt-1">Inclui autor, data, mensagem — diferente de lightweight tag que é só um ponteiro</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Release ≠ Tag</span><p class="text-sm text-neutral-400 mt-1">Tag é git puro; Release é GitHub feature com notas, assets, discussão</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">SemVer comunica risco</span><p class="text-sm text-neutral-400 mt-1">PATCH é seguro; MAJOR exige migração — o número escolhido ensina como atualizar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Imutabilidade da tag</span><p class="text-sm text-neutral-400 mt-1">Reescrever tag publicada é veneno — força os consumidores a re-clonar</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">👥 Distribuindo para uma equipe</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Deploy técnico só é completo quando outro humano consegue replicar o ambiente. <strong class="text-amber-400">O guia de onboarding</strong> é o contrato entre o sistema e o time — clone, instalar Hermes, configurar soul, validar.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O onboarding técnico é a sequência mínima de comandos que leva um colaborador de zero (máquina vazia) a operacional (Triad rodando localmente com soul carregado) em menos de 15 minutos — documentado como bloco copy-paste no README.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">🛤️</span> Timeline do onboarding (15 min)
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <span class="bg-amber-500/20 text-amber-400 font-mono text-xs px-2 py-1 rounded flex-shrink-0">0–3 min</span>
+            <div class="flex-1">
+              <p class="font-semibold text-neutral-200">Clone + dependências base</p>
+              <p class="text-sm text-neutral-400">Git, Node 20+, gh CLI autenticado</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="bg-amber-500/20 text-amber-400 font-mono text-xs px-2 py-1 rounded flex-shrink-0">3–8 min</span>
+            <div class="flex-1">
+              <p class="font-semibold text-neutral-200">Instalar Hermes Agent</p>
+              <p class="text-sm text-neutral-400"><code>npm install -g hermes-agent</code> + autenticação com chave Anthropic</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="bg-amber-500/20 text-amber-400 font-mono text-xs px-2 py-1 rounded flex-shrink-0">8–12 min</span>
+            <div class="flex-1">
+              <p class="font-semibold text-neutral-200">Carregar soul.md</p>
+              <p class="text-sm text-neutral-400"><code>hermes init</code> + apontar para o soul do projeto</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <span class="bg-amber-500/20 text-amber-400 font-mono text-xs px-2 py-1 rounded flex-shrink-0">12–15 min</span>
+            <div class="flex-1">
+              <p class="font-semibold text-neutral-200">Smoke test</p>
+              <p class="text-sm text-neutral-400">Rodar tarefa de referência e validar saída SHIP do Crítico</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">Onboarding — bloco copy-paste do README</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code># 1. Clone
+git clone https://github.com/inematds/triad.git
+cd triad
+
+# 2. Instalar Hermes globalmente
+npm install -g hermes-agent
+
+# 3. Autenticar com Anthropic
+export ANTHROPIC_API_KEY="sk-ant-..."
+hermes auth
+
+# 4. Inicializar projeto e carregar soul
+hermes init
+hermes soul load ./soul.md
+
+# 5. Smoke test — tarefa de referência
+hermes run --task "Analise o mercado de cursos de IA"
+
+# 6. Validar — deve retornar SHIP em &lt;3 iterações
+hermes status</code></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Um sistema que só roda na máquina de quem construiu não escala. O onboarding como contrato testável — quinze minutos, comandos copy-paste, smoke test claro — é o que transforma o Triad de projeto pessoal em sistema de equipe.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Smoke test obrigatório</span><p class="text-sm text-neutral-400 mt-1">Tarefa de referência confirma que cada peça funciona antes de uso real</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Copy-paste &gt; prosa</span><p class="text-sm text-neutral-400 mt-1">Comandos em bloco eliminam ambiguidade de "instale e configure"</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Quinze minutos como benchmark</span><p class="text-sm text-neutral-400 mt-1">Acima disso, há fricção escondida — algum passo está implícito</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Secrets fora do repo</span><p class="text-sm text-neutral-400 mt-1">Chave Anthropic em <code>.env</code> local — nunca em commit</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">📊 Monitorando uso após o deploy</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Deploy sem métricas é deploy cego. <strong class="text-amber-400">Adoção real</strong> — quantas pessoas chegaram, quantas terminaram, de onde vieram — é o sinal que valida ou refuta o trabalho dos módulos anteriores.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-amber-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Monitorar adoção é coletar e ler três fontes de sinal: tráfego GitHub (clones, views do repo), analytics web (visitantes únicos, páginas mais lidas, tempo na página) e taxa de conclusão (proxy: profundidade média de navegação dentro do curso).</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-amber-900/30 to-dark-800 rounded-xl border border-amber-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-amber-400 mb-4 flex items-center">
+          <span class="mr-2">📡</span> Três camadas de sinal
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">1.</span>
+            <span><strong>GitHub Traffic</strong> — <code>gh api repos/inematds/triad/traffic/views</code> retorna views únicas e totais dos últimos 14 dias. Indica curiosidade técnica.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">2.</span>
+            <span><strong>Web Analytics</strong> — Cloudflare ou Plausible: visitantes únicos, top pages, referrers. Sem cookies, sem GDPR-pain. Indica adoção real.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 font-bold flex-shrink-0">3.</span>
+            <span><strong>Conclusão</strong> — profundidade de navegação. Quem chega no <code>modulo-4-6</code> terminou o curso. Razão entre views do <code>index</code> e do último módulo = taxa de conclusão aproximada.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">Plausible / Cloudflare Web Analytics no &lt;head&gt;</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code>&lt;!-- Plausible (self-hosted ou cloud) --&gt;
+&lt;script defer
+  data-domain="inematds.github.io"
+  src="https://plausible.io/js/script.js"&gt;&lt;/script&gt;
+
+&lt;!-- OU Cloudflare Web Analytics --&gt;
+&lt;script defer
+  src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "abc123..."}'&gt;&lt;/script&gt;</code></pre>
+      </div>
+
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-5 mb-6">
+        <p class="text-xs text-neutral-500 mb-2 font-mono">GitHub Traffic via gh CLI</p>
+        <pre class="text-sm text-neutral-300 font-mono leading-relaxed"><code># Views das últimas 2 semanas
+gh api repos/inematds/triad/traffic/views
+
+# Clones — quem está clonando para uso local
+gh api repos/inematds/triad/traffic/clones
+
+# Referrers — de onde estão chegando
+gh api repos/inematds/triad/traffic/popular/referrers
+
+# Páginas mais visitadas
+gh api repos/inematds/triad/traffic/popular/paths</code></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Benchmark inicial
+        </h3>
+        <p class="text-neutral-300">Após o lançamento, monitore semanalmente por 4 semanas. Sinal saudável: visitantes únicos crescem, taxa de conclusão (último módulo / index) acima de 5%, referrers diversos (não só Twitter ou só LinkedIn).</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Analytics sem cookies</span><p class="text-sm text-neutral-400 mt-1">Plausible e Cloudflare evitam GDPR/LGPD pain — sem banner, sem consentimento</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Conclusão como proxy</span><p class="text-sm text-neutral-400 mt-1">Razão último módulo / index é o sinal mais honesto sobre se o conteúdo segura atenção</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">GitHub Traffic ≠ Web Analytics</span><p class="text-sm text-neutral-400 mt-1">Um conta acessos ao repo, outro ao site — meça ambos para visão completa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-amber-400 font-semibold">Janela de 14 dias</span><p class="text-sm text-neutral-400 mt-1">GitHub Traffic mantém apenas últimas duas semanas — exporte se quiser histórico longo</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Repositório pronto para produção</strong><span class="text-neutral-400"> — <code>.gitignore</code>, README, LICENSE e estrutura previsível são pré-requisitos não negociáveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">GitHub Pages com HTTPS enforced</strong><span class="text-neutral-400"> — branch main, diretório raiz, sempre HTTPS. Hospedagem estática gratuita com CDN global</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Paths relativos sempre</strong><span class="text-neutral-400"> — caminhos absolutos quebram em subpath. <code>index.html</code> na raiz, assets via <code>./</code></span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">CI/CD com GitHub Actions</strong><span class="text-neutral-400"> — push em main vira deploy automático. Estado do site = estado do main, sempre</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">SemVer + releases anotados</strong><span class="text-neutral-400"> — MAJOR.MINOR.PATCH comunica risco. Tags imutáveis criam pontos de restauração</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Onboarding de 15 min + analytics</strong><span class="text-neutral-400"> — guia copy-paste para a equipe, métricas de adoção para validar o investimento</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.6 — Onboarding não-técnicos: levando o Triad para quem não escreve código</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 4
+          </a>
+          <a href="modulo-4-6.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -445,12 +754,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>
