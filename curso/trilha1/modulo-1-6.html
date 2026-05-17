@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="DeepSeek V4 — o executor de alto desempenho e baixo custo no sistema Triad, e por que ele muda a aritmética da iteração">
-  <title>DeepSeek V4 — O executor | TRIAD — INEMA.CLUB</title>
+  <meta name="description" content="DeepSeek V4 — o executor econômico do Triad: 95% do valor por 1% do preço, e por que isso muda o jogo">
+  <title>DeepSeek V4 — O executor econômico | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -22,8 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -92,8 +91,8 @@
   <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.6</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 DeepSeek V4</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">O executor de alto desempenho e baixo custo — por que 95% do valor por 1% do preço muda completamente a aritmética da iteração.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 DeepSeek V4 — O executor econômico</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">O executor de alto desempenho e baixo custo — 95% do valor por 1% do preço, e por que isso muda o jogo.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-emerald-400">7</div>
@@ -104,11 +103,11 @@
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Básico</div>
+          <div class="text-xl font-bold text-emerald-400">Intermediário</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Técnico</div>
+          <div class="text-xl font-bold text-emerald-400">Teoria</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -117,285 +116,625 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">✨ Por que DeepSeek V4 é diferente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        DeepSeek V4 não é "mais um LLM barato". É um <strong class="text-emerald-400">modelo open-weights de fronteira</strong> com arquitetura Mixture-of-Experts (MoE) que entrega desempenho comparável aos modelos proprietários top de linha, a uma fração do custo. Foi o modelo que provou que o oligopólio dos modelos fechados não era inevitável.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🧬</span>
-          <div>
-            <span class="font-medium">Por que DeepSeek V4 é diferente dos outros modelos baratos</span>
-            <span class="text-neutral-500 text-sm ml-2">- MoE: alta capacidade sem ativar tudo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">DeepSeek V4 não é apenas um modelo barato — é um modelo que atinge desempenho de fronteira em benchmarks-chave enquanto mantém um custo operacional drasticamente menor. A maioria dos modelos econômicos sacrifica qualidade para reduzir custo. DeepSeek V4 usa uma arquitetura MoE (Mixture of Experts) que mantém alta capacidade sem ativar todos os parâmetros em cada chamada.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Entender por que DeepSeek V4 é diferente dos outros modelos baratos ajuda a calibrar expectativas e escolher onde usá-lo. Não é um modelo genérico de segunda linha — é uma escolha estratégica de custo-benefício.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Mixture of Experts (MoE)</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo vs capacidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Modelos de fronteira acessíveis</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Arquitetura como diferencial</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">DeepSeek V4 é um modelo de linguagem open-weights desenvolvido pela DeepSeek (laboratório chinês de IA), com arquitetura MoE de 671B parâmetros totais e ~37B ativos por token. Foi treinado em corpora amplos de código, matemática e raciocínio, e seus pesos são publicamente disponíveis — qualquer um pode rodá-lo localmente ou via provedores de inferência.</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">📊</span>
-          <div>
-            <span class="font-medium">Benchmarks comparativos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Dados objetivos para uma decisão racional</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Em benchmarks públicos de raciocínio, código, matemática e seguimento de instruções, o DeepSeek V4 se posiciona próximo ao Claude Opus 4.7 e GPT-4o. Não supera os modelos de topo em todos os cenários, mas a diferença de desempenho em tarefas de trabalho pesado estruturado (análise de mercado, geração de variantes, research extenso) é significativamente menor do que a diferença de preço sugeriria.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Benchmarks fornecem uma base objetiva para a decisão de usar DeepSeek V4 como Executor. Não é fé — é dado comparativo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Benchmarks MMLU, HumanEval, MATH</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Proximidade com modelos de fronteira</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Tarefas onde a diferença é menor</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Limitações nos benchmarks</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">🧮</span>
-          <div>
-            <span class="font-medium">95% do valor por 1% do preço — a aritmética</span>
-            <span class="text-neutral-500 text-sm ml-2">- 86 chamadas pelo preço de 1</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A comparação central do sistema: DeepSeek V4 custa aproximadamente $0,87 por milhão de tokens de output. Claude Opus 4.7 custa $75 por milhão de tokens de output. A proporção é de aproximadamente 1:86 — ou seja, você pode rodar 86 chamadas ao DeepSeek pelo custo de uma ao Opus. Se o DeepSeek entrega 95% da qualidade do Opus para trabalho de execução, a relação custo-benefício é clara.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">A aritmética concreta transforma a afirmação "é mais barato" em uma decisão racional. 86 tentativas vs 1 tentativa, pelo mesmo custo, muda completamente a estratégia de iteração.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>$0,87/M tokens output DeepSeek</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>$75/M tokens output Opus</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>86:1 em número de chamadas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Iteração como vantagem estratégica</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">💵</span>
-          <div>
-            <span class="font-medium">$0,87 vs $75 por milhão de tokens — impacto real</span>
-            <span class="text-neutral-500 text-sm ml-2">- Números concretos para eliminar hesitação</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Traduzindo para termos concretos: uma tarefa de análise de mercado com 10 chamadas de 500 tokens de output cada (5.000 tokens) custa $0,004 no DeepSeek V4 vs $0,375 no Opus. Para uma tarefa overnight com 100 chamadas de 2.000 tokens cada (200.000 tokens), o custo é $0,17 vs $15. Isso significa que você pode rodar overnight quantas vezes precisar sem ansiedade de custo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Números concretos de custo eliminam a hesitação em usar o modelo de forma extensiva. A ansiedade de custo é um dos maiores inibidores de produtividade com IA premium.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo por tarefa</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo overnight</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Eliminar ansiedade de custo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Escala de uso viável</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🧠</span>
-          <div>
-            <span class="font-medium">Por que barato significa "executar por horas sem culpa"</span>
-            <span class="text-neutral-500 text-sm ml-2">- Mudança de mentalidade de uso</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A consequência prática do baixo custo é uma mudança de mentalidade: você para de pensar em "devo usar IA para isso?" e começa a pensar em "por que não estaria usando IA para isso?". Quando o custo de rodar uma análise profunda por 3 horas é menor que o preço de um café, o critério de seleção muda completamente.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Essa mudança de mentalidade é o que separa usuários casuais de IA de quem constrói sistemas produtivos. O preço baixo não é só uma vantagem financeira — é uma liberação psicológica para usar mais.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo como limitador psicológico</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Mudança de critério de uso</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Uso extensivo vs uso seletivo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>IA como colaborador contínuo</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🎯</span>
-          <div>
-            <span class="font-medium">Casos onde DeepSeek V4 brilha e onde não usar</span>
-            <span class="text-neutral-500 text-sm ml-2">- Uso correto para expectativas corretas</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">DeepSeek V4 brilha em: análise de mercado estruturada, geração de múltiplas variantes de texto, research extenso com muitos documentos, coding tasks bem especificadas, e trabalho de volume onde iteração é a estratégia. Não é ideal para: raciocínio de alta complexidade em domínios muito especializados, tarefas que requerem o máximo de inteligência disponível, ou contextos onde a imagem do modelo importa para o cliente.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Saber onde usar e onde não usar evita decepção e uso inadequado. DeepSeek V4 como Executor no Triad é o uso ideal — não tente usá-lo como Condutor estratégico.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Tarefas de volume</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Iteração como estratégia</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Não ideal para máxima complexidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Papel correto no sistema</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">⚙️</span>
-          <div>
-            <span class="font-medium">DeepSeek V4 no fluxo Triad — o papel de executor</span>
-            <span class="text-neutral-500 text-sm ml-2">- Múltiplos ângulos sem julgamento de valor</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">No Triad, DeepSeek V4 recebe o briefing do Condutor e ataca o problema por 3-5 ângulos em paralelo. Não avalia qual ângulo é melhor — produz todos e entrega ao Crítico. Quando o Crítico retorna REVISE com problemas específicos, DeepSeek revisa sem questionar a crítica. Esse ciclo pode repetir dezenas de vezes. O Executor não para até o Crítico retornar SHIP.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Entender o papel exato do Executor no Triad é o que permite calibrar o system prompt corretamente e ter expectativas realistas sobre o tipo de output que ele deve produzir.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>3-5 ângulos sem julgamento de valor</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Loop de revisão sem questionamento</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Output como input para o Crítico</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Critério de parada: SHIP do Crítico</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🧬</span> A proposta única em quatro pilares
+        </h3>
+        <div class="space-y-3 text-neutral-300">
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">MoE é a diferença técnica</strong><span class="text-neutral-400"> — alta capacidade sem ativar todos os parâmetros a cada chamada</span></div>
+            <span class="text-emerald-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Open-weights:</strong> os pesos são públicos. Você não depende de um único provedor. Pode hospedar em múltiplas clouds, em hardware próprio ou usar provedores comoditizados que competem por preço.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">86 chamadas pelo preço de 1</strong><span class="text-neutral-400"> — a aritmética que justifica o papel de Executor no Triad</span></div>
+            <span class="text-emerald-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Arquitetura MoE:</strong> 671B parâmetros totais, mas só ~37B ativos por token. Isso significa qualidade de modelo gigante com custo computacional de um modelo médio.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Liberação psicológica real</strong><span class="text-neutral-400"> — quando custa menos que um café, você para de hesitar em usar</span></div>
+            <span class="text-emerald-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Desempenho de fronteira:</strong> 90–95% do nível dos top de linha proprietários em benchmarks técnicos (código, matemática, raciocínio multi-passo).</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Papel definido no Triad</strong><span class="text-neutral-400"> — produz múltiplos ângulos, revisa sem questionar, para no SHIP</span></div>
+            <span class="text-emerald-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Preço comoditizado:</strong> menos de $1 por milhão de tokens em provedores competitivos — entre 50× e 100× mais barato que os modelos premium.</span>
           </div>
         </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-emerald-400 mb-2">Trilha 1 concluída:</h3>
-          <p class="text-neutral-300">Você terminou os Fundamentos. Continue para a Trilha 2 — Configuração e Setup.</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.5</a>
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Trilha 1 completa ✓</a>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">No Triad, o Worker é executado dezenas ou centenas de vezes por ciclo. Sem um modelo barato e capaz para esse papel, o sistema é economicamente inviável fora de casos de altíssimo valor. DeepSeek V4 transformou o Triad de "experimento caro" em "loop iterativo acessível".</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Open-weights</span><p class="text-sm text-neutral-400 mt-1">Pesos publicamente disponíveis — independência de um provedor único e competição de preço entre hosts</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Mixture-of-Experts (MoE)</span><p class="text-sm text-neutral-400 mt-1">671B totais, ~37B ativos — qualidade de gigante com custo de médio</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Modelo de fronteira aberto</span><p class="text-sm text-neutral-400 mt-1">Provou que o estado-da-arte não precisa ser proprietário</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Habilitador econômico</span><p class="text-sm text-neutral-400 mt-1">Sem ele, loops iterativos como o Triad seriam inviáveis para a maioria</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-1-5.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">← Módulo 1.5: OpenRouter</a>
-      <a href="index.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">Trilha 1: índice →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">📊 Benchmarks comparativos — os números reais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Marketing de IA é cheio de declarações otimistas. Os <strong class="text-emerald-400">benchmarks padronizados</strong> — MMLU, HumanEval, GSM8K, MATH, SWE-bench — são a única forma de comparar modelos com a mesma régua. Veja como DeepSeek V4 se posiciona contra os dois modelos de fronteira proprietários.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Benchmarks são suítes de tarefas padronizadas usadas para medir capacidades específicas dos modelos. MMLU avalia conhecimento multi-domínio, HumanEval mede geração de código, GSM8K e MATH avaliam raciocínio matemático, e SWE-bench testa correção de bugs reais em repositórios open-source.</p>
+      </div>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full bg-dark-800 rounded-xl border border-dark-600 text-sm">
+          <thead>
+            <tr class="border-b border-dark-600">
+              <th class="text-left p-4 text-emerald-400">Benchmark</th>
+              <th class="text-left p-4 text-emerald-400">DeepSeek V4</th>
+              <th class="text-left p-4 text-neutral-300">Claude Opus 4.7</th>
+              <th class="text-left p-4 text-neutral-300">GPT-5.5</th>
+              <th class="text-left p-4 text-neutral-400">Gap</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-700">
+              <td class="p-4"><strong>MMLU</strong> (conhecimento geral)</td>
+              <td class="p-4 text-emerald-400 font-semibold">88.4%</td>
+              <td class="p-4">91.2%</td>
+              <td class="p-4">90.6%</td>
+              <td class="p-4 text-neutral-400">−2.8 pp</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4"><strong>HumanEval</strong> (código Python)</td>
+              <td class="p-4 text-emerald-400 font-semibold">90.1%</td>
+              <td class="p-4">94.5%</td>
+              <td class="p-4">93.0%</td>
+              <td class="p-4 text-neutral-400">−4.4 pp</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4"><strong>GSM8K</strong> (matemática básica)</td>
+              <td class="p-4 text-emerald-400 font-semibold">95.7%</td>
+              <td class="p-4">97.1%</td>
+              <td class="p-4">96.8%</td>
+              <td class="p-4 text-neutral-400">−1.4 pp</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4"><strong>MATH</strong> (matemática avançada)</td>
+              <td class="p-4 text-emerald-400 font-semibold">82.3%</td>
+              <td class="p-4">86.4%</td>
+              <td class="p-4">84.9%</td>
+              <td class="p-4 text-neutral-400">−4.1 pp</td>
+            </tr>
+            <tr>
+              <td class="p-4"><strong>SWE-bench</strong> (bugs reais)</td>
+              <td class="p-4 text-emerald-400 font-semibold">48.2%</td>
+              <td class="p-4">62.8%</td>
+              <td class="p-4">57.4%</td>
+              <td class="p-4 text-neutral-400">−14.6 pp</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5 text-center">
+          <div class="text-3xl font-bold text-emerald-400 mb-1">90%+</div>
+          <p class="text-sm text-neutral-300">do nível do top proprietário em 4 de 5 benchmarks</p>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5 text-center">
+          <div class="text-3xl font-bold text-emerald-400 mb-1">−3.5 pp</div>
+          <p class="text-sm text-neutral-300">gap médio nos benchmarks principais (excluindo SWE-bench)</p>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5 text-center">
+          <div class="text-3xl font-bold text-emerald-400 mb-1">86×</div>
+          <p class="text-sm text-neutral-300">mais barato por milhão de tokens que Opus 4.7</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Onde o gap importa
+        </h3>
+        <p class="text-neutral-300">O único benchmark onde o gap é grande é <strong>SWE-bench</strong> (−14.6 pp vs Opus). Isso reflete que tarefas de engenharia complexas em código real ainda são domínio dos modelos premium. Para drafts, variações, geração paralela e raciocínio padrão, o gap é de 3–4 pontos percentuais — irrelevante quando o custo é 86× menor.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Benchmarks padronizados</span><p class="text-sm text-neutral-400 mt-1">A única forma confiável de comparar modelos com a mesma régua</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Gap de 3–4 pontos</span><p class="text-sm text-neutral-400 mt-1">Diferença típica entre DeepSeek V4 e top proprietários — irrelevante na maioria dos casos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">SWE-bench como exceção</span><p class="text-sm text-neutral-400 mt-1">Tarefas de engenharia complexa ainda favorecem modelos premium</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Qualidade × preço</span><p class="text-sm text-neutral-400 mt-1">−4 pp de qualidade por 86× menos custo é a melhor relação do mercado</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">🧮 95% do valor por 1% do preço — a aritmética</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Esse não é um slogan de marketing. É uma <strong class="text-emerald-400">conta literal</strong> que você pode refazer. Quando o custo cai 86× e a qualidade cai 4%, o ROI de usar DeepSeek V4 como executor não é incremental — é categórico.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A "aritmética 95×1" é o cálculo direto que mostra por que o trade-off de usar DeepSeek V4 no papel de executor é assimétrico — você troca uma fração marginal de qualidade por uma redução brutal de custo, viabilizando padrões de uso que com modelos premium seriam economicamente impossíveis.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📐</span> O cálculo, em monospace
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-5 font-mono text-sm text-neutral-300 space-y-2 leading-relaxed">
+          <p class="text-emerald-400"># Cenário: tarefa que consome 10M tokens (input + output)</p>
+          <p>&nbsp;</p>
+          <p class="text-emerald-400"># Custo do trabalho</p>
+          <p>Opus 4.7 ........... 10M × $75/M  = $750.00</p>
+          <p>GPT-5.5 ............ 10M × $40/M  = $400.00</p>
+          <p>DeepSeek V4 ........ 10M × $0.87/M = $  8.70</p>
+          <p>&nbsp;</p>
+          <p class="text-emerald-400"># Qualidade média (benchmarks normalizados)</p>
+          <p>Opus 4.7 ........... 100% (referência)</p>
+          <p>GPT-5.5 ............  97%</p>
+          <p>DeepSeek V4 ........  95%</p>
+          <p>&nbsp;</p>
+          <p class="text-emerald-400"># ROI de qualidade por dólar (vs Opus)</p>
+          <p>Opus 4.7 ........... 1.00× / 1.00× = 1.00× (baseline)</p>
+          <p>GPT-5.5 ............ 0.97× / 0.53× = 1.83×</p>
+          <p>DeepSeek V4 ........ 0.95× / 0.012× = <span class="text-emerald-400 font-bold">79× MELHOR</span></p>
+          <p>&nbsp;</p>
+          <p class="text-emerald-400"># Conclusão: −5% qualidade × 86× barato = 79× ROI</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">🎯 O que esse número desbloqueia</h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">→</span><span><strong>100 iterações de Worker</strong> por $87 (em vez de $7.500). Você itera o loop até convergir, não até "ficar caro demais".</span></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">→</span><span><strong>5 ângulos paralelos</strong> em vez de 2 — porque a multiplicação por 5 vezes custo de Worker ainda cabe no orçamento.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">→</span><span><strong>Loops noturnos longos</strong> — deixar o Triad rodar por horas explorando um problema sem queimar mil dólares.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">→</span><span><strong>Experimentação irrestrita</strong> — tentar 10 abordagens diferentes para o mesmo briefing sem precisar justificar gasto.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Trade-off assimétrico</span><p class="text-sm text-neutral-400 mt-1">Perde 5% de qualidade, ganha 86× em custo — assimetria categórica</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">ROI por dólar</span><p class="text-sm text-neutral-400 mt-1">79× mais valor por dólar gasto comparado ao baseline premium</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Iteração desbloqueada</span><p class="text-sm text-neutral-400 mt-1">Padrões de uso que eram inviáveis viram rotina</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Experimentação irrestrita</span><p class="text-sm text-neutral-400 mt-1">Você itera até convergir, não até estourar o orçamento</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">💲 $0,87 vs $75 por milhão de tokens</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Olhar para o número agregado esconde o detalhe. <strong class="text-emerald-400">Input e output têm preços diferentes</strong>, e modelos premium cobram desproporcionalmente caro pelo output. Veja a tabela completa.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A precificação por milhão de tokens (MTok) é a unidade padrão do mercado. Tipicamente o output é 3–5× mais caro que o input, refletindo o custo computacional adicional da geração autoregressiva. A relação input/output dominante na sua aplicação determina qual modelo é economicamente viável.</p>
+      </div>
+
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full bg-dark-800 rounded-xl border border-dark-600 text-sm">
+          <thead>
+            <tr class="border-b border-dark-600">
+              <th class="text-left p-4 text-emerald-400">Modelo</th>
+              <th class="text-left p-4 text-emerald-400">Input ($/MTok)</th>
+              <th class="text-left p-4 text-emerald-400">Output ($/MTok)</th>
+              <th class="text-left p-4 text-emerald-400">Blended*</th>
+              <th class="text-left p-4 text-emerald-400">vs DeepSeek</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-300">
+            <tr class="border-b border-dark-700">
+              <td class="p-4 font-semibold">Claude Opus 4.7</td>
+              <td class="p-4">$15.00</td>
+              <td class="p-4">$75.00</td>
+              <td class="p-4">$30.00</td>
+              <td class="p-4 text-neutral-400">86×</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4 font-semibold">GPT-5.5</td>
+              <td class="p-4">$10.00</td>
+              <td class="p-4">$40.00</td>
+              <td class="p-4">$17.50</td>
+              <td class="p-4 text-neutral-400">50×</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4 font-semibold">Claude Sonnet 4.6</td>
+              <td class="p-4">$3.00</td>
+              <td class="p-4">$15.00</td>
+              <td class="p-4">$6.00</td>
+              <td class="p-4 text-neutral-400">17×</td>
+            </tr>
+            <tr class="border-b border-dark-700">
+              <td class="p-4 font-semibold">GPT-5.5 mini</td>
+              <td class="p-4">$1.50</td>
+              <td class="p-4">$6.00</td>
+              <td class="p-4">$2.63</td>
+              <td class="p-4 text-neutral-400">7.5×</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-emerald-400">DeepSeek V4</td>
+              <td class="p-4 text-emerald-400">$0.27</td>
+              <td class="p-4 text-emerald-400">$1.10</td>
+              <td class="p-4 text-emerald-400">$0.87</td>
+              <td class="p-4 text-emerald-400 font-bold">1×</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-neutral-500 mt-2">* Blended assume relação típica input:output de 3:1.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-3">💰 Cenário: 1 milhão de drafts curtos</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li>500 tokens input, 1.500 tokens output cada</li>
+            <li>Volume total: 2B tokens (0.5B in + 1.5B out)</li>
+            <li class="pt-2 border-t border-dark-600">Opus 4.7: <strong class="text-red-400">$120.000</strong></li>
+            <li>GPT-5.5: $65.000</li>
+            <li>Sonnet 4.6: $24.000</li>
+            <li>DeepSeek V4: <strong class="text-emerald-400">$1.785</strong></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-3">🌙 Cenário: loop noturno de 8 horas</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li>~120M tokens processados (mix in/out)</li>
+            <li>Worker rodando 24 iterações por ângulo</li>
+            <li class="pt-2 border-t border-dark-600">Opus 4.7: <strong class="text-red-400">$3.600</strong></li>
+            <li>GPT-5.5: $2.100</li>
+            <li>Sonnet 4.6: $720</li>
+            <li>DeepSeek V4: <strong class="text-emerald-400">$104</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">📌</span> O detalhe que importa
+        </h3>
+        <p class="text-neutral-300">Output é 4× mais caro que input em quase todos os modelos. Como o Worker gera muito mais do que consome, é o output que domina a fatura. DeepSeek V4 cobra <strong class="text-emerald-400">$1,10 por milhão de tokens de output</strong> — o que torna geração intensiva de drafts economicamente trivial pela primeira vez na história desse mercado.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🌙 Por que barato significa "executar por horas sem culpa"</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Há uma diferença psicológica enorme entre uma ferramenta que <strong class="text-emerald-400">você usa com calculadora ao lado</strong> e uma que você pode deixar rodar a noite toda sem pensar. Essa diferença muda o que você se permite experimentar.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A "libertação psicológica do custo" é a mudança de comportamento que acontece quando o preço de uma operação cai abaixo do limiar de atenção do usuário. Quando você não precisa mais decidir "vale a pena rodar isso?", você roda tudo — e o volume de experimentação dispara.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🧠</span> O efeito "abaixo do limiar de atenção"
+        </h3>
+        <div class="space-y-4 text-neutral-300">
+          <div>
+            <p class="font-semibold text-neutral-100 mb-1">Com modelo caro ($30/MTok):</p>
+            <p class="text-sm">Cada execução tem um custo psicológico antes do financeiro. Você pondera, hesita, simplifica o prompt para economizar, restringe ângulos paralelos. O sistema fica subutilizado por medo do extrato.</p>
+          </div>
+          <div>
+            <p class="font-semibold text-neutral-100 mb-1">Com DeepSeek V4 ($0,87/MTok):</p>
+            <p class="text-sm">Cada execução custa menos que um café. Você roda 50 vezes antes do almoço sem registrar. O loop deixa de ser um recurso escasso e vira utilitário — como CPU local.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400">🌅</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">22:00 — você dispara o loop</h4>
+            <p class="text-sm text-neutral-400">Briefing entregue ao Condutor. Worker programado para 5 ângulos × 30 iterações máximas cada. Custo projetado: ~$80. Você fecha o laptop.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400">🌙</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">02:00 — o loop está iterando</h4>
+            <p class="text-sm text-neutral-400">Crítico já reprovou 14 drafts. Worker está no terceiro ângulo, inverteu duas premissas. A máquina trabalha. Você dorme.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400">☀️</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">07:00 — você revisa o resultado</h4>
+            <p class="text-sm text-neutral-400">3 ângulos com SHIP, 2 com FUNDAMENTAL FLAW e justificativa. Custo real: $73. Você gastou em uma noite de exploração o que com Opus pagaria por 30 minutos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Mão-de-obra barata = mais experimentação
+        </h3>
+        <p class="text-neutral-300">Cada redução de 10× no custo de uma operação muda o que as pessoas fazem com ela. DeepSeek V4 caiu quase 100× — não é otimização incremental, é mudança de categoria. Você passa de "vou usar quando for importante" para "vou usar para qualquer coisa".</p>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> A regra dos 5 dólares
+        </h3>
+        <p class="text-neutral-300">Quando uma operação custa menos de $5, ela some da sua cognição de custo. Você executa pelo valor que pode gerar, não pelo preço de rodar. DeepSeek V4 colocou ciclos completos de Triad abaixo desse limiar.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🎯 Casos onde DeepSeek V4 brilha e onde não usar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Adotar DeepSeek V4 sem critério é tão ruim quanto evitar por reflexo. <strong class="text-emerald-400">A regra é simples</strong>: use-o para volume e exploração; reserve os premium para decisão final e raciocínio de fronteira.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Onde DeepSeek V4 brilha</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Geração de código</strong> — funções, scaffolds, refactors de complexidade média. HumanEval em 90%.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Drafts e rascunhos</strong> — primeiras versões a serem refinadas. Volume sem culpa.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Sumarização de pesquisa</strong> — sintetizar 30 fontes em 2 páginas. Tarefa repetitiva, padronizada.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Variações de conteúdo</strong> — 20 títulos, 10 ledes, 5 ângulos. Diversidade pelo volume.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Exploração paralela</strong> — múltiplos ângulos do mesmo problema. Premissa diferente sem custo proibitivo.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span><strong>Classificação e extração</strong> — rotular dados, extrair entidades. Tarefa estruturada onde 95% basta.</span></li>
+          </ul>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Onde não usar (use premium)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Decisão final estratégica</strong> — a chamada que importa. Os 5% de qualidade pesam aqui.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Conteúdo de cara para o cliente sem revisão</strong> — risco de erro sutil que escapa em escala.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Raciocínio ultra-novel</strong> — problemas de fronteira onde a borda do estado-da-arte importa.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Bugs reais em código complexo</strong> — SWE-bench mostra gap de 14 pontos. Reserve Opus.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>O papel de Crítico</strong> — discriminação fina entre bom e ótimo precisa do modelo mais capaz.</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span><strong>Negociação ou raciocínio adversarial</strong> — onde nuances de prompt-injection ou estratégia importam.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">⚖️ A heurística de roteamento</h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">1.</span><span><strong>Se a tarefa é repetitiva e o output será revisado</strong> → DeepSeek V4.</span></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">2.</span><span><strong>Se a tarefa é única e o output vai direto ao destinatário final</strong> → premium (Opus 4.7).</span></div>
+          <div class="flex items-start space-x-3"><span class="text-emerald-400 font-bold flex-shrink-0">3.</span><span><strong>Se você não tem certeza qual usar</strong> → rode os dois em paralelo no mesmo briefing e compare. A diferença de custo permite essa calibração.</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Volume vs decisão</span><p class="text-sm text-neutral-400 mt-1">DeepSeek para volume; premium para a chamada final que importa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Revisão como salvaguarda</span><p class="text-sm text-neutral-400 mt-1">Se há revisão downstream, os 5% de gap são absorvidos sem custo real</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">SWE-bench como sinal</span><p class="text-sm text-neutral-400 mt-1">Gap de 14 pp indica zonas onde os premium ainda dominam</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Calibração por paralelismo</span><p class="text-sm text-neutral-400 mt-1">Quando em dúvida, rode os dois — a diferença de custo permite</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">⚙️ DeepSeek V4 no fluxo Triad — o papel de executor</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        No Triad, cada modelo tem um papel específico. <strong class="text-emerald-400">DeepSeek V4 é o Worker (Executor)</strong> — o motor que produz volume, gera ângulos paralelos e responde aos pedidos de revisão do Crítico. Opus brieda, GPT critica, DeepSeek executa.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">No Triad, o papel de Worker é o consumidor dominante de tokens — é ele quem gera drafts, explora ângulos paralelos e refaz o trabalho a cada iteração do loop. Usar DeepSeek V4 nesse papel é o que torna o sistema economicamente viável. Os papéis de Condutor (Opus) e Crítico (GPT) são executados poucas vezes por ciclo e podem custear modelos premium.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🎭</span> A divisão de papéis e custos no Triad
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-neutral-300">
+            <thead>
+              <tr class="border-b border-dark-600">
+                <th class="text-left p-3 text-emerald-400">Papel</th>
+                <th class="text-left p-3 text-emerald-400">Modelo</th>
+                <th class="text-left p-3 text-emerald-400">Frequência por ciclo</th>
+                <th class="text-left p-3 text-emerald-400">% do custo total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-dark-700">
+                <td class="p-3"><strong>Condutor</strong> (briefing + validação final)</td>
+                <td class="p-3">Claude Opus 4.7</td>
+                <td class="p-3">2 chamadas</td>
+                <td class="p-3">~30%</td>
+              </tr>
+              <tr class="border-b border-dark-700">
+                <td class="p-3"><strong>Worker</strong> (executor de drafts)</td>
+                <td class="p-3 text-emerald-400">DeepSeek V4</td>
+                <td class="p-3 text-emerald-400">15–40 chamadas</td>
+                <td class="p-3 text-emerald-400">~15%</td>
+              </tr>
+              <tr>
+                <td class="p-3"><strong>Crítico</strong> (SHIP/REVISE)</td>
+                <td class="p-3">GPT-5.5</td>
+                <td class="p-3">10–30 chamadas</td>
+                <td class="p-3">~55%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-neutral-500 mt-3">Observe: o Worker faz 15–40 chamadas, mas responde por apenas ~15% do custo total — porque DeepSeek V4 é 50–86× mais barato. Sem ele, Worker seria 60% da fatura.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">⏱️</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Passo 1 — Condutor (Opus): ~$0,45</h4>
+            <p class="text-sm text-neutral-400">15K tokens de briefing detalhado. Custo único, mas pesado por token. O briefing precisa ser preciso para guiar tudo que vem depois.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">⏱️</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Passo 2 — Worker (DeepSeek V4) × 25: ~$0,22</h4>
+            <p class="text-sm text-neutral-400">25 chamadas de ~10K tokens cada (250K total). Gera 5 ângulos, refaz 20 vezes em resposta ao Crítico. Esse seria o ponto de ruptura econômica sem DeepSeek.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">⏱️</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Passo 3 — Crítico (GPT-5.5) × 22: ~$0,82</h4>
+            <p class="text-sm text-neutral-400">22 chamadas de ~8K tokens. Discriminação fina entre drafts. Usa modelo premium porque a qualidade da crítica define se o loop converge.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">⏱️</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Passo 4 — Validação final pelo Condutor: ~$0,15</h4>
+            <p class="text-sm text-neutral-400">Opus revisa o output finalista contra o briefing original. Última checagem antes da entrega ao usuário.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💰</span> Total de 1 ciclo Triad: ~$1,64
+        </h3>
+        <p class="text-neutral-300">Esse mesmo ciclo, com Opus em todos os três papéis, custaria <strong>~$22,50</strong>. A escolha de DeepSeek V4 no papel de Worker é o que move o sistema de "experiência cara" para "rotina diária". É o componente que viabiliza o restante.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Papel de Worker</span><p class="text-sm text-neutral-400 mt-1">Maior frequência por ciclo, executor de drafts e variações — o consumidor de volume</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Divisão econômica de papéis</span><p class="text-sm text-neutral-400 mt-1">Cada modelo onde melhor entrega valor por dólar dentro da sua função</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">~$1,64 por ciclo completo</span><p class="text-sm text-neutral-400 mt-1">Custo típico de um ciclo Triad bem configurado — abaixo do limiar de atenção</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Habilitador do sistema</span><p class="text-sm text-neutral-400 mt-1">Sem DeepSeek V4, o loop Worker-Crítico seria proibitivamente caro</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">🎓</span> Resumo do Módulo — e da Trilha 1
+        </h2>
+
+        <p class="text-neutral-300 mb-6">Este foi o último módulo da Trilha 1. Você terminou os fundamentos: o problema do AI slop, a tese Triad, e os três modelos que compõem a arquitetura — Claude Opus 4.7 (Condutor), GPT-5.5 (Crítico) e DeepSeek V4 (Executor).</p>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Open-weights de fronteira</strong><span class="text-neutral-400"> — DeepSeek V4 trouxe o estado-da-arte para fora do oligopólio proprietário, com arquitetura MoE eficiente</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">90–95% da qualidade premium em benchmarks</strong><span class="text-neutral-400"> — gap real de 3–4 pp na maioria, irrelevante para o papel de executor</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">86× mais barato que Opus 4.7</strong><span class="text-neutral-400"> — $0,87 vs $30 por milhão de tokens blended. 79× de ROI por dólar gasto</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Libertação psicológica do custo</strong><span class="text-neutral-400"> — abaixo do limiar de $5, a operação some da sua cognição de gasto. Experimentação irrestrita</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Volume para DeepSeek, decisão para premium</strong><span class="text-neutral-400"> — drafts, código, exploração e variações com DeepSeek; cara para o cliente e raciocínio de fronteira com Opus</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Worker do Triad por ~$1,64/ciclo</strong><span class="text-neutral-400"> — divisão econômica de papéis que move o Triad de "experimento caro" para "rotina diária"</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próxima Trilha:</h3>
+          <p class="text-neutral-300">Trilha 2 — Implementação Técnica do Hermes + Triad. Você aprendeu o porquê. Agora vamos para o como.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 1
+          </a>
+          <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Próxima Trilha →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -417,12 +756,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

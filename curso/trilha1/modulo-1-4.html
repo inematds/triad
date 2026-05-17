@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="soul.md — o arquivo de memória persistente do Hermes Agent e como preenchê-lo para máxima eficiência">
+  <meta name="description" content="soul.md — a memória persistente do seu agente: identidade, missão, voz, limites e ritmo em um único arquivo">
   <title>soul.md — A memória persistente | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
@@ -19,11 +19,11 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -53,6 +53,13 @@
     html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
 
     html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    .md-block { background: #0b1220; border: 1px solid rgba(5,150,105,0.25); }
+    html:not(.dark) .md-block { background: #0f172a; border-color: rgba(5,150,105,0.35); }
+    .md-comment { color: #6ee7b7; }
+    .md-key { color: #facc15; }
+    .md-string { color: #fda4af; }
+    .md-h { color: #34d399; font-weight: 600; }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -92,8 +99,8 @@
   <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.4</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📄 soul.md</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">A memória persistente do seu agente — como o arquivo que define quem você é transforma um agente genérico em um colaborador contextual.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📄 soul.md — A memória persistente</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">A memória persistente do seu agente — identidade, missão, voz, limites e ritmo estruturados em um único arquivo.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-emerald-400">8</div>
@@ -108,7 +115,7 @@
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Prático</div>
+          <div class="text-xl font-bold text-emerald-400">Prática</div>
           <div class="text-xs text-neutral-400">Tipo</div>
         </div>
       </div>
@@ -117,318 +124,598 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">📄 O que é o soul.md e por que ele existe</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem um arquivo central, cada sessão com o Hermes recomeça do zero — explicando quem você é, o que faz, como fala. <strong class="text-emerald-400">O soul.md elimina esse retrabalho</strong>: ele é carregado em todo contexto do Hermes e funciona como a memória persistente que o LLM nunca teria sozinho.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">📂</span>
-          <div>
-            <span class="font-medium">O que é o soul.md e por que ele existe</span>
-            <span class="text-neutral-500 text-sm ml-2">- O repositório de contexto pessoal</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O soul.md é um arquivo de texto (Markdown) que serve como repositório do contexto pessoal do usuário para o Hermes Agent. É carregado automaticamente em cada tarefa, fornecendo ao agente informações que de outra forma teriam que ser repetidas a cada conversa — quem você é, o que quer construir, como opera, quais decisões já tomou.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Sem soul.md, o Hermes é um agente genérico. Com soul.md preenchido, ele se torna um colaborador que age dentro do seu contexto real, sem perguntar o óbvio.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Contexto persistente</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Carregamento automático</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Redução de repetição</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Agente genérico vs colaborador contextual</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O <code class="font-mono text-emerald-400">soul.md</code> é um arquivo markdown único — armazenado em <code class="font-mono text-emerald-400">~/.hermes/soul.md</code> — que codifica identidade, missão, métricas de negócio, voz, limites, ritmo e memória do operador. É injetado em cada chamada do Hermes para que o agente nunca opere como um LLM genérico.</p>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">🪪</span>
-          <div>
-            <span class="font-medium">Identity — nome, localização, papel, canais</span>
-            <span class="text-neutral-500 text-sm ml-2">- Eliminando ambiguidades de contexto</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Identity do soul.md armazena informações básicas: nome, pronomes, localização e fuso horário, papel profissional (como você se apresentaria), canais públicos (LinkedIn, YouTube, newsletters) e brand voice (3 adjetivos que descrevem seu estilo de comunicação). Esses dados eliminam ambiguidades de contexto básico.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Hermes usa identidade para personalizar tom, contexto geográfico e referências. Sem isso, ele não sabe se está falando com um desenvolvedor brasileiro às 9h de São Paulo ou um consultor americano em Nova York.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Nome e pronomes</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Fuso horário como contexto</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Brand voice em 3 adjetivos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Canais como pontos de presença</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-comment mb-3"># Estrutura do arquivo (~/.hermes/soul.md)</div>
+        <div class="md-h">## Identity</div>
+        <div class="md-h">## Mission</div>
+        <div class="md-h">## Goals 2026</div>
+        <div class="md-h">## Business</div>
+        <div class="md-h">## Voice</div>
+        <div class="md-h">## Hard Nos</div>
+        <div class="md-h">## Rhythm</div>
+        <div class="md-h">## Memory</div>
+        <div class="md-comment mt-3"># Carregado em TODO contexto do Hermes — ~800-1500 tokens</div>
       </div>
 
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">🎯</span>
-          <div>
-            <span class="font-medium">Mission &amp; Goals — objetivo do ano, pilares, fora de escopo</span>
-            <span class="text-neutral-500 text-sm ml-2">- O filtro estratégico de tudo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Mission define o objetivo principal do ano em uma frase ("Lançar o SaaS e atingir $20k MRR até dezembro"), três pilares de foco que sustentam esse objetivo, e explicitamente o que está fora de escopo — as distrações atraentes que você já decidiu ignorar. Essa seção é usada pelo Hermes para pesar sugestões: o que avança a missão tem prioridade.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Sem missão explícita, o Hermes sugere o que parece bom em geral — não o que é bom para você especificamente. A missão é o filtro estratégico de todas as recomendações.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Objetivo headline em uma frase</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Três pilares focados</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Lista de não-escopo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Filtro estratégico de sugestões</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">💼</span>
-          <div>
-            <span class="font-medium">Business — receita, custos, runway, equipe</span>
-            <span class="text-neutral-500 text-sm ml-2">- Contexto financeiro para decisões realistas</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Business traz o contexto financeiro e operacional: entidade legal, modelo de receita (SaaS, agência, cursos), receita mensal atual e tendência, custos mensais detalhados, runway em meses, banco/pagamentos (Stripe, Wise, etc.), ano fiscal e composição da equipe. Esses dados permitem ao Hermes fazer recomendações economicamente realistas.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Um agente sem contexto financeiro recomenda o que é tecnicamente possível, não o que é viável para o seu estágio. Com os dados do negócio, ele calibra para a sua realidade.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Receita e tendência MoM</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Runway como restrição</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Modelo de receita</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Equipe e capacidade</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🗣️</span>
-          <div>
-            <span class="font-medium">Voice — como falar com você, como escrever como você</span>
-            <span class="text-neutral-500 text-sm ml-2">- Conteúdo gerado no seu tom</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Voice tem duas partes: (1) como o Hermes deve falar com você (direto, detalhado, curto por padrão, uma pergunta por vez) e (2) como ele deve escrever como você (registro, ortografia, capitalização, palavras proibidas, vícios de pontuação). Essa seção é especialmente crítica para geração de conteúdo e comunicação pública.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Sem voice definition, conteúdo gerado pelo Hermes no seu nome soa genérico ou errado. Com ela, rascunhos de posts, e-mails e textos chegam alinhados ao seu estilo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Hard nos de linguagem</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Registro e tom</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Ortografia (brasileiro vs português)</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Capitalização como identidade</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🚫</span>
-          <div>
-            <span class="font-medium">Hard nos — limites que o agente nunca pode cruzar</span>
-            <span class="text-neutral-500 text-sm ml-2">- Restrições absolutas sem exceção</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Hard nos são restrições absolutas que o Hermes não pode violar em nenhuma circunstância: nunca inventar métricas não fornecidas, nunca mencionar determinado concorrente pelo nome, nunca sugerir uma abordagem que você já descartou explicitamente, nunca usar determinada frase ou expressão. São regras sem exceção.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Sem hard nos, o agente pode produzir conteúdo prejudicial, factualmente errado ou inconsistente com posicionamento de marca. Hard nos são o seguro do sistema.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Restrições absolutas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Nunca inventar dados</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Respeitar decisões anteriores</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Consistência de posicionamento</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">⏰</span>
-          <div>
-            <span class="font-medium">Rhythm — janelas de foco, dias de criação</span>
-            <span class="text-neutral-500 text-sm ml-2">- Sugestões no tempo certo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Rhythm mapeia sua rotina de trabalho: janela de trabalho profundo (ex: 6h-10h sem interrupções), dias de criação/gravação, quando você checa e-mail, dias sem reuniões, regra de fim de semana, ritual de revisão diária e curva de energia ao longo do dia. O Hermes usa isso para sugerir quando executar determinadas tarefas.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Um agente que não conhece seu ritmo vai sugerir uma tarefa de análise profunda às 16h quando você está com energia baixa. Com rhythm definido, sugestões se encaixam na sua realidade física.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Janela de trabalho profundo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Dias de criação vs execução</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Curva de energia</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Rituais de recuperação</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 8 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">8</span>
-          <span class="text-lg">🗃️</span>
-          <div>
-            <span class="font-medium">Memory — decisões, pessoas, ferramentas, lições</span>
-            <span class="text-neutral-500 text-sm ml-2">- O contexto que mais cresce em valor</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">A seção Memory registra quatro categorias de contexto durável: (1) Decisões já tomadas — o que você tentou, por que não funcionou, o que não sugerir de novo; (2) Pessoas em órbita — nomes, papéis, última interação; (3) Ferramentas que você usa de verdade — o stack que sobreviveu ao teste real; (4) Lições dos últimos trimestres — o que funcionou, o que não funcionou, o que surpreendeu.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">É a seção que mais cresce em valor com o tempo. Um Hermes com memória de decisões anteriores não repete erros que você já cometeu.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Decisões anti-sugestão</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Rede de pessoas como contexto</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Stack real vs stack aspiracional</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Retros trimestrais como input</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🌱</span> A diferença que o soul.md faz
+        </h3>
+        <div class="space-y-3 text-neutral-300">
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">soul.md é carregado automaticamente</strong><span class="text-neutral-400"> — cada tarefa começa com contexto completo</span></div>
+            <span class="text-red-400 mt-1 flex-shrink-0">✗</span>
+            <span><strong>Sem soul.md:</strong> o Hermes é um LLM genérico. Cada prompt precisa explicar quem você é, o que vende, como escreve. Respostas inconsistentes, voz neutra, limites violados.</span>
           </div>
           <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Oito seções complementares</strong><span class="text-neutral-400"> — Identity, Mission, Business, Voice, Hard nos, Rhythm e Memory</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Memory cresce com o tempo</strong><span class="text-neutral-400"> — decisões passadas previnem erros repetidos</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Hard nos são absolutas</strong><span class="text-neutral-400"> — o agente nunca cruza esses limites, sem exceção</span></div>
+            <span class="text-emerald-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Com soul.md:</strong> o Hermes opera como uma extensão sua. Conhece seu MRR, sua agenda, suas red lines. Escreve no seu tom, respeita seus limites, conhece seu histórico.</span>
           </div>
         </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">1.5 — OpenRouter: Um hub para todos os modelos</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.3</a>
-          <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Princípio fundador
+        </h3>
+        <p class="text-neutral-300">Sem soul.md, o Hermes é apenas um LLM genérico. Toda capacidade do sistema — agentes, ferramentas, automações — depende deste arquivo existir e estar atualizado. É o investimento de 30 minutos com o maior retorno em todo o curso.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Arquivo único de verdade</span><p class="text-sm text-neutral-400 mt-1">Toda informação persistente sobre você vive em um único arquivo legível</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Injeção automática no contexto</span><p class="text-sm text-neutral-400 mt-1">Carregado em toda chamada do Hermes sem precisar referenciar manualmente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Markdown legível por humanos</span><p class="text-sm text-neutral-400 mt-1">Você lê, edita e versiona — não é um JSON opaco gerado por máquina</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">~800-1500 tokens por chamada</span><p class="text-sm text-neutral-400 mt-1">Custo de contexto baixo o suficiente para estar sempre presente</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-1-3.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">← Módulo 1.3: O Sistema Triad</a>
-      <a href="modulo-1-5.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">Módulo 1.5: OpenRouter →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🆔 Identity — nome, localização, papel, canais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Quem você é, onde está, o que faz e por onde te encontram. <strong class="text-emerald-400">Sem Identity, o Hermes não sabe que horas são para você</strong> — agenda reunião nas 3h da manhã do seu fuso, escreve em inglês quando você atende em português.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Identity</code> codifica os dados estruturais sobre o operador — nome, localização (cidade e fuso horário), papel (founder, operador, criativo), canais de comunicação (Slack, WhatsApp, email) e idioma de operação. É a primeira coisa que o Hermes precisa saber.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Identity</div>
+        <div><span class="md-key">name:</span> <span class="md-string">"Nei Maldaner"</span></div>
+        <div><span class="md-key">role:</span> <span class="md-string">"Founder &amp; sole operator at INEMA.CLUB"</span></div>
+        <div><span class="md-key">location:</span> <span class="md-string">"Porto Alegre, BR"</span></div>
+        <div><span class="md-key">timezone:</span> <span class="md-string">"America/Sao_Paulo (GMT-3)"</span></div>
+        <div><span class="md-key">primary_language:</span> <span class="md-string">"pt-BR"</span></div>
+        <div><span class="md-key">secondary_language:</span> <span class="md-string">"en-US (technical docs)"</span></div>
+        <div class="mt-3 md-comment"># Channels (in priority order)</div>
+        <div><span class="md-key">channels:</span></div>
+        <div class="ml-4"><span class="md-key">- slack:</span> <span class="md-string">"@nei (response &lt; 2h em horário comercial)"</span></div>
+        <div class="ml-4"><span class="md-key">- whatsapp:</span> <span class="md-string">"+55 51 99... (apenas família e parceiros próximos)"</span></div>
+        <div class="ml-4"><span class="md-key">- email:</span> <span class="md-string">"nei@inema.club (response &lt; 24h)"</span></div>
+        <div class="ml-4"><span class="md-key">- calendar:</span> <span class="md-string">"cal.com/nei (booking auto-confirmado)"</span></div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🎯</span> O que cada campo desbloqueia
+        </h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>timezone</strong> → o Hermes nunca agenda fora do seu horário comercial sem confirmar</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>primary_language</strong> → respostas geradas e leads tratados no idioma certo por padrão</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>role</strong> → o Hermes sabe se pode tomar decisão sozinho (operador único = sim na maioria)</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>channels com prioridade</strong> → notificações urgentes vão para Slack, não para email</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Fuso horário explícito</span><p class="text-sm text-neutral-400 mt-1">Evita agendamentos no meio da madrugada por confusão de timezone</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Canais com prioridade</span><p class="text-sm text-neutral-400 mt-1">A ordem dos canais informa onde a urgência deve cair</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Idioma primário e secundário</span><p class="text-sm text-neutral-400 mt-1">Default pt-BR, fallback en para documentação técnica</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Papel define autonomia</span><p class="text-sm text-neutral-400 mt-1">Founder solo pode autorizar; em equipe há decisões que escalam</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">🎯 Mission &amp; Goals — objetivo, pilares, fora de escopo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Para onde você vai e — igualmente importante — <strong class="text-emerald-400">para onde você decidiu não ir</strong>. Sem Goals, o Hermes aceita qualquer oportunidade que aparece. Com fora-de-escopo explícito, ele recusa o que parece bom mas tira você do caminho.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">As seções <code class="font-mono text-emerald-400">## Mission</code> e <code class="font-mono text-emerald-400">## Goals 2026</code> codificam o objetivo de 1 ano, os 3 pilares estratégicos e — crítico — a lista explícita de "not goals" (o que está fora do escopo deste ano).</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Mission</div>
+        <div class="text-neutral-300">Construir o curso de IA aplicada mais denso e prático do Brasil,</div>
+        <div class="text-neutral-300">operado por uma pessoa só com auxílio de agentes.</div>
+        <div class="md-h mt-5 mb-3">## Goals 2026</div>
+        <div><span class="md-key">primary:</span> <span class="md-string">"1.000 alunos pagantes ativos até dez/2026"</span></div>
+        <div><span class="md-key">pillars:</span></div>
+        <div class="ml-4"><span class="md-key">- content:</span> <span class="md-string">"4 trilhas completas publicadas (40+ módulos)"</span></div>
+        <div class="ml-4"><span class="md-key">- distribution:</span> <span class="md-string">"3 canais com aquisição orgânica recorrente"</span></div>
+        <div class="ml-4"><span class="md-key">- automation:</span> <span class="md-string">"&gt;70% do operacional rodando por agentes"</span></div>
+        <div class="mt-4 md-comment"># Fora de escopo — recuse mesmo que pareça bom</div>
+        <div><span class="md-key">not_goals:</span></div>
+        <div class="ml-4 text-neutral-300">- Consultoria 1-a-1 (mata o foco no produto)</div>
+        <div class="ml-4 text-neutral-300">- Eventos presenciais (custo de tempo &gt; ROI)</div>
+        <div class="ml-4 text-neutral-300">- Contratar equipe (princípio de operador único)</div>
+        <div class="ml-4 text-neutral-300">- Aceitar investimento externo em 2026</div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que "not_goals" importa mais que "goals"
+        </h3>
+        <p class="text-neutral-300">A maioria das pessoas escreve metas. Poucas escrevem o que <em>não</em> vão fazer. O Hermes recebe propostas todo dia — leads pedindo consultoria, convites para eventos, sugestões de contratação. Sem not_goals explícito, ele propõe ações que parecem produtivas mas drenam foco. Com not_goals, ele recusa por escrito antes de te interromper.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Goals fracos</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Crescer o negócio"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Ser referência em IA"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Mais alunos"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span class="text-neutral-400">Sem lista de not_goals</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Goals operacionais</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"1.000 alunos pagantes ativos até dez/2026"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"4 trilhas com 40+ módulos publicados"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"&gt;70% do operacional automatizado"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Lista explícita de not_goals</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Objetivo único de 1 ano</span><p class="text-sm text-neutral-400 mt-1">Uma métrica primária mensurável — não três, não cinco</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">3 pilares estratégicos</span><p class="text-sm text-neutral-400 mt-1">As três alavancas que efetivamente entregam o objetivo primário</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Not goals explícitos</span><p class="text-sm text-neutral-400 mt-1">A lista que faz o Hermes recusar oportunidades sedutoras mas dispersivas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Filtro automático de propostas</span><p class="text-sm text-neutral-400 mt-1">Cada email, lead ou ideia é testada contra Goals antes de chegar até você</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">💰 Business — receita, custos, runway, equipe</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um agente que não conhece a saúde financeira do negócio <strong class="text-emerald-400">não pode tomar decisões sensíveis</strong>. Aprovar um gasto, recusar um desconto, priorizar um lead — tudo depende de saber se o runway é de 18 meses ou de 4.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Business</code> codifica os números vivos do negócio — MRR atual, custos fixos mensais, runway em meses, tamanho da equipe e estágio (bootstrap, seed, growth). É a única seção que precisa ser atualizada mensalmente sem falta.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Business</div>
+        <div class="md-comment"># Atualizado todo dia 1 do mês — fonte: dashboard Stripe</div>
+        <div><span class="md-key">stage:</span> <span class="md-string">"bootstrap (sem investimento externo)"</span></div>
+        <div><span class="md-key">mrr_brl:</span> <span class="md-string">"R$ 47.200 (mai/2026)"</span></div>
+        <div><span class="md-key">mrr_growth_3m:</span> <span class="md-string">"+18% MoM médio"</span></div>
+        <div><span class="md-key">fixed_costs_brl:</span> <span class="md-string">"R$ 9.800/mês (infra + ferramentas + contador)"</span></div>
+        <div><span class="md-key">variable_costs_brl:</span> <span class="md-string">"~R$ 4.500/mês (LLMs, ads)"</span></div>
+        <div><span class="md-key">runway_months:</span> <span class="md-string">"23 (reserva R$ 280k @ burn atual)"</span></div>
+        <div><span class="md-key">team_size:</span> <span class="md-string">"1 (operador único + agentes)"</span></div>
+        <div><span class="md-key">decision_thresholds:</span></div>
+        <div class="ml-4"><span class="md-key">- auto_approve:</span> <span class="md-string">"&lt; R$ 200 sem confirmar"</span></div>
+        <div class="ml-4"><span class="md-key">- confirm_required:</span> <span class="md-string">"R$ 200 — R$ 2.000"</span></div>
+        <div class="ml-4"><span class="md-key">- escalate:</span> <span class="md-string">"&gt; R$ 2.000 (envia Slack + aguarda)"</span></div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que o agente precisa de contexto financeiro
+        </h3>
+        <p class="text-neutral-300">Sem Business, o Hermes trata todo gasto igual. Um agente que sabe que o runway é de 23 meses e o MRR cresce 18% MoM aprova investimentos diferentes de um agente que vê 4 meses de runway. A diferença entre "compre o plano anual com 20% de desconto" e "negocie mensal e renegocie em 60 dias" depende inteiramente desse contexto.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">⚙️</span> Thresholds — a parte mais útil
+        </h3>
+        <p class="text-neutral-300 mb-3">Sem thresholds explícitos, o Hermes ou autoriza tudo (perigoso) ou pergunta tudo (inútil). Com thresholds escalonados, ele opera no ponto certo — autônomo no pequeno, conservador no médio, escalando o grande.</p>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Auto-approve</strong> → assinatura SaaS pequena, compra de domínio, licença individual</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Confirm-required</strong> → upgrade de plano anual, contratação de freelancer pontual</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Escalate</strong> → equipamento, viagem, qualquer compromisso recorrente acima de R$ 2k</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">MRR e crescimento de 3 meses</span><p class="text-sm text-neutral-400 mt-1">Snapshot atual + tendência permite decisões direcionadas, não reativas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Runway em meses, não em reais</span><p class="text-sm text-neutral-400 mt-1">Tempo é mais útil que valor absoluto para calibrar urgência</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Thresholds escalonados</span><p class="text-sm text-neutral-400 mt-1">Autonomia para o pequeno, confirmação para o médio, escalada para o grande</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Atualização mensal disciplinada</span><p class="text-sm text-neutral-400 mt-1">Esta é a única seção que precisa de update mensal — sem isso, decisões erradas</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🎤 Voice — como falar com você e como escrever como você</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Voz é o que faz o Hermes parecer uma extensão sua em vez de um chatbot. <strong class="text-emerald-400">Não basta dizer "informal" ou "técnico"</strong> — Voice precisa de exemplos concretos do que você diria e do que você jamais diria.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Voice</code> codifica como o Hermes deve escrever <em>como</em> você (em emails, posts, respostas a leads) e como deve falar <em>com</em> você (relatórios internos, alertas). Inclui tom, do/don't list, e amostras reais de frases — o material que treina a imitação.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Voice</div>
+        <div class="md-comment mb-3"># Como o Hermes escreve COMO Nei (público externo)</div>
+        <div><span class="md-key">tone_keywords:</span> <span class="md-string">[direto, técnico, sem floreio, sarcasmo seco ok]</span></div>
+        <div><span class="md-key">sentence_length:</span> <span class="md-string">"curtas. Fragmento ok."</span></div>
+        <div><span class="md-key">jargon:</span> <span class="md-string">"técnico ok com leitores técnicos; nunca corporativês"</span></div>
+        <div class="mt-4"><span class="md-key">do:</span></div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"Funciona assim: X."</span></div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"Não precisa disso."</span></div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"O custo real é Y, o resto é narrativa."</span></div>
+        <div class="mt-3"><span class="md-key">dont:</span></div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"Espero que esteja bem!"</span> (saudação vazia)</div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"Gostaríamos de propor..."</span> (corporativês)</div>
+        <div class="ml-4 text-neutral-300">- <span class="md-string">"sinergia"</span>, <span class="md-string">"alavancar"</span>, <span class="md-string">"deliverable"</span></div>
+        <div class="mt-4 md-comment"># Como o Hermes fala COM Nei (relatórios internos)</div>
+        <div><span class="md-key">internal_format:</span> <span class="md-string">"bullet curto, sem introdução, ação primeiro"</span></div>
+        <div><span class="md-key">internal_tone:</span> <span class="md-string">"telegráfico — caveman speak ok"</span></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Voz mismatch (gera estranhamento)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span>"Olá! Espero que esteja tudo bem aí com você. Gostaria de aproveitar este momento para..."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span>"Acreditamos firmemente que a sinergia entre nossas operações pode alavancar resultados expressivos"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400 mt-1">✗</span><span>"Conforme combinado, segue em anexo o deliverable referente ao escopo previamente alinhado"</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Voz match (soa como Nei)</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">✓</span><span>"Resposta direto: funciona, mas só se X. Te explico em 2 linhas."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">✓</span><span>"Faz mais sentido a gente trocar 15 min do que escrever 4 emails."</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">✓</span><span>"Anexo o material. Qualquer dúvida, manda."</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> A regra dos exemplos reais
+        </h3>
+        <p class="text-neutral-300">Adjetivos ("formal", "casual", "direto") são interpretados de forma diferente por cada modelo. <strong>Cole 5 emails reais que você escreveu</strong> e 5 que você jamais escreveria. O LLM aprende padrão melhor por amostra do que por descrição.</p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🚫 Hard nos — limites que o agente nunca pode cruzar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hard nos são <strong class="text-emerald-400">red lines inegociáveis</strong>. Não são preferências — são proibições. O Hermes pode argumentar contra qualquer outra coisa do soul.md, mas Hard Nos ele obedece sem questionar.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Hard Nos</code> lista comportamentos que o agente nunca pode executar, mesmo se o pedido vier de você sob pressão. Funcionam como guard-rails — protegem reputação, finanças e foco quando você está cansado, irritado ou com pressa.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Hard Nos</div>
+        <div class="md-comment mb-3"># Inegociáveis. Recusar mesmo se Nei pedir sob pressão.</div>
+        <div class="text-neutral-300">- Nunca enviar email cold a uma lista comprada</div>
+        <div class="text-neutral-300">- Nunca aceitar reunião antes das 10h00 (horário de foco profundo)</div>
+        <div class="text-neutral-300">- Nunca aceitar reunião na sexta à tarde (janela de revisão)</div>
+        <div class="text-neutral-300">- Nunca fazer compromisso comercial &gt; R$ 5.000 sem confirmação síncrona</div>
+        <div class="text-neutral-300">- Nunca compartilhar dados de aluno fora do banco oficial</div>
+        <div class="text-neutral-300">- Nunca prometer prazo &lt; 48h em demanda criativa</div>
+        <div class="text-neutral-300">- Nunca usar "garantido", "100%", "sem risco" em copy de venda</div>
+        <div class="text-neutral-300">- Nunca responder leads no domingo (proteção pessoal)</div>
+        <div class="mt-3 md-comment"># Comportamento quando um pedido viola um Hard No:</div>
+        <div><span class="md-key">on_violation:</span> <span class="md-string">"recusar + citar a regra + sugerir alternativa"</span></div>
+      </div>
+
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3 flex items-center">
+          <span class="mr-2">⚠️</span> Por que Hard Nos protege você de você mesmo
+        </h3>
+        <p class="text-neutral-300 mb-3">No instante em que um lead grande pede uma reunião na sexta às 17h, sua tendência é dizer sim. Quando você está cansado, o desconto agressivo soa razoável. Hard Nos são o você-com-cabeça-fria escrito por antecipação — para o você-sob-pressão obedecer.</p>
+        <p class="text-neutral-300 text-sm"><strong class="text-red-400">Regra:</strong> se for negociável, não é Hard No. Coloque na seção de preferências ou Rhythm. Hard Nos têm que ser absolutos.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🛡️</span> Anatomia de um Hard No bem escrito
+        </h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Verbo "nunca"</strong> explícito — sem "evitar", "preferir não", "tentar não"</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Condição mensurável</strong> — "antes das 10h", "&gt; R$ 5.000", não "muito cedo" ou "valor alto"</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Razão implícita ou explícita</strong> — protege foco, reputação, finanças, saúde</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Protocolo de violação</strong> — o Hermes recusa, cita a regra e propõe alternativa</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Hard No vs preferência</span><p class="text-sm text-neutral-400 mt-1">Se for negociável, não pertence aqui — vai para Rhythm ou Voice</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Você-com-cabeça-fria</span><p class="text-sm text-neutral-400 mt-1">Hard Nos são escritos por antecipação para o você-sob-pressão obedecer</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Recusa + alternativa</span><p class="text-sm text-neutral-400 mt-1">O Hermes não só nega — oferece o caminho aceitável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Lista curta e absoluta</span><p class="text-sm text-neutral-400 mt-1">5 a 10 itens, no máximo. Lista longa dilui o peso de cada um</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">⏰ Rhythm — janelas de foco, dias de criação</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Rhythm é o <strong class="text-emerald-400">contrato de como seu tempo é estruturado</strong>. Sem ele, o Hermes empilha reuniões em qualquer slot livre da agenda. Com ele, ele protege blocos de foco e empurra o operacional para janelas específicas.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Rhythm</code> codifica seu padrão semanal — janelas de foco profundo, slots para reunião, dias de criação versus dias de operação, e horários fora dos quais o Hermes não agenda nada.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Rhythm</div>
+        <div><span class="md-key">deep_work_blocks:</span></div>
+        <div class="ml-4"><span class="md-key">- mon-fri:</span> <span class="md-string">"09:00 — 12:00 (zero reunião, zero notificação)"</span></div>
+        <div class="ml-4"><span class="md-key">- tue-thu:</span> <span class="md-string">"14:00 — 17:00 (criação de conteúdo)"</span></div>
+        <div class="mt-3"><span class="md-key">meeting_windows:</span></div>
+        <div class="ml-4"><span class="md-key">- mon-wed:</span> <span class="md-string">"14:00 — 17:00 (apenas)"</span></div>
+        <div class="ml-4"><span class="md-key">- fri:</span> <span class="md-string">"10:00 — 12:00 (revisão de semana)"</span></div>
+        <div class="mt-3"><span class="md-key">creation_days:</span> <span class="md-string">"tue, thu (foco em curso/conteúdo)"</span></div>
+        <div><span class="md-key">ops_days:</span> <span class="md-string">"mon, wed (reuniões, suporte, financeiro)"</span></div>
+        <div><span class="md-key">review_day:</span> <span class="md-string">"fri (retrospectiva + planejamento semana seguinte)"</span></div>
+        <div class="mt-3"><span class="md-key">off_hours:</span> <span class="md-string">"&lt; 09:00, &gt; 18:30, fim de semana inteiro"</span></div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📅</span> Linha do tempo da semana
+        </h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs w-14 text-center flex-shrink-0 mt-0.5">SEG</span>
+            <span class="text-neutral-300 text-sm"><strong class="text-emerald-400">Ops</strong> — manhã: deep work (planejamento da semana). Tarde: reuniões de suporte e financeiro.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs w-14 text-center flex-shrink-0 mt-0.5">TER</span>
+            <span class="text-neutral-300 text-sm"><strong class="text-emerald-400">Criação</strong> — manhã: escrita de módulo. Tarde: gravação ou edição. Zero reunião.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs w-14 text-center flex-shrink-0 mt-0.5">QUA</span>
+            <span class="text-neutral-300 text-sm"><strong class="text-emerald-400">Ops</strong> — manhã: deep work (refinamento). Tarde: parcerias e leads quentes.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs w-14 text-center flex-shrink-0 mt-0.5">QUI</span>
+            <span class="text-neutral-300 text-sm"><strong class="text-emerald-400">Criação</strong> — dia inteiro de produção. Janela de criação mais longa da semana.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs w-14 text-center flex-shrink-0 mt-0.5">SEX</span>
+            <span class="text-neutral-300 text-sm"><strong class="text-emerald-400">Revisão</strong> — manhã: retrospectiva da semana, planejamento da próxima. Tarde: livre / desligada.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Diferença entre criação e ops
+        </h3>
+        <p class="text-neutral-300">Dias de criação têm um custo de switching alto — uma reunião no meio mata a tarde inteira. Dias de ops têm switching baixo — 4 reuniões seguidas funcionam bem. Separar os dias por modalidade é o que permite o Hermes proteger criação sem te bloquear de fazer ops.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Blocos de deep work nomeados</span><p class="text-sm text-neutral-400 mt-1">Slots fixos onde o Hermes recusa qualquer convite — sem exceção</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Dias de criação vs ops</span><p class="text-sm text-neutral-400 mt-1">Separar por modalidade reduz custo de context switching</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Janela de revisão semanal</span><p class="text-sm text-neutral-400 mt-1">Sexta dedicada a retrospectiva e planejamento — não a executar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Off-hours absolutos</span><p class="text-sm text-neutral-400 mt-1">Janelas onde o Hermes nunca te interrompe, mesmo com urgência</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 8 -->
+    <section id="topico-8" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">8</span>
+        <h2 class="text-2xl font-bold">🧠 Memory — decisões, pessoas, ferramentas, lições</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Memory é o <strong class="text-emerald-400">arquivo de contexto vivo</strong> — a única seção que cresce continuamente. As outras seções definem quem você é hoje; Memory acumula o que você aprendeu, decidiu, e escolheu para que o Hermes não te peça duas vezes a mesma coisa.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A seção <code class="font-mono text-emerald-400">## Memory</code> é dividida em quatro sub-seções vivas — <strong>People</strong>, <strong>Decisions</strong>, <strong>Tools</strong> e <strong>Lessons</strong> — cada uma com entradas curtas em ordem cronológica. É o que evita que o Hermes te pergunte "qual é a senha do gateway?" pela quinta vez.</p>
+      </div>
+
+      <div class="md-block rounded-xl p-6 mb-6 font-mono text-sm overflow-x-auto">
+        <div class="md-h mb-3">## Memory</div>
+        <div class="md-h">### People</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Marina (CTO Acme)</strong> — parceria curso interno, contato via Slack, prefere ligação curta a email longo</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">João (contador)</strong> — fechamento até dia 5; só responde WhatsApp</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Clara (designer freela)</strong> — capa de módulo, ~R$ 350/peça, 3 dias úteis</div>
+
+        <div class="md-h mt-4">### Decisions</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">2026-03-15:</strong> Stripe sobre Pagar.me — taxa pior mas API melhor pra recorrência</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">2026-02-08:</strong> Hospedar curso em domínio próprio (inema.club) em vez de Kiwify</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">2026-01-20:</strong> Não aceitar afiliados em 2026 (concentração de marca)</div>
+
+        <div class="md-h mt-4">### Tools</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Stripe</strong> → checkout + recorrência (senha no 1Password "Stripe-prod")</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Supabase</strong> → banco principal de alunos</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Cloudflare R2</strong> → vídeos e PDFs (~R$ 80/mês)</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Cal.com</strong> → booking público</div>
+
+        <div class="md-h mt-4">### Lessons</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Lançamento na sexta = ruim</strong> — suporte não cobre fim de semana</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Email longo &lt; vídeo de 90s</strong> — taxa de resposta 3x maior em vídeo curto</div>
+        <div class="text-neutral-300">- <strong class="text-emerald-300">Desconto &gt; 30% atrai aluno errado</strong> — churn alto, suporte caro</div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🌿</span> Como Memory cresce ao longo do tempo
+        </h3>
+        <div class="space-y-3">
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs flex-shrink-0 mt-0.5">MÊS 1</span>
+            <span class="text-neutral-300 text-sm">~5 entradas em People, 2-3 em Decisions, lista crua de Tools. Memory ainda é magro.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs flex-shrink-0 mt-0.5">MÊS 3</span>
+            <span class="text-neutral-300 text-sm">~15 pessoas com preferências, 10 decisões com datas, Lessons começa a aparecer com 4-5 padrões observados.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs flex-shrink-0 mt-0.5">MÊS 6</span>
+            <span class="text-neutral-300 text-sm">Memory vira a seção mais densa do soul.md. Hora de revisar e podar — Lessons obsoletas saem, decisões revertidas viram histórico arquivado.</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="bg-emerald-500/20 text-emerald-400 font-bold rounded px-2 py-0.5 text-xs flex-shrink-0 mt-0.5">MÊS 12</span>
+            <span class="text-neutral-300 text-sm">Memory pode ter ficado grande demais. Divide em <code class="font-mono text-emerald-400">memory-archive.md</code> e mantém só os últimos 90 dias ativos em soul.md.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> A regra do "não pergunte duas vezes"
+        </h3>
+        <p class="text-neutral-300">Toda vez que o Hermes te pergunta algo que ele já deveria saber, isso é dívida no Memory. Adicione a resposta imediatamente. Em 30 dias, ele para de te interromper — porque <em>já sabe</em>. Memory bem mantido é a métrica direta de quantas interrupções você corta por mês.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Quatro sub-seções vivas</span><p class="text-sm text-neutral-400 mt-1">People, Decisions, Tools, Lessons — cada uma com função distinta</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Decisões com data</span><p class="text-sm text-neutral-400 mt-1">Datar permite que decisões antigas sejam re-avaliadas e arquivadas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Lessons como padrão repetido</span><p class="text-sm text-neutral-400 mt-1">Só vira Lesson o que você observou pelo menos 2-3 vezes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Poda periódica</span><p class="text-sm text-neutral-400 mt-1">A cada 3-6 meses, Memory precisa ser revisado e podado</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">soul.md como arquivo único</strong><span class="text-neutral-400"> — vive em <code class="font-mono text-emerald-400">~/.hermes/soul.md</code> e é injetado em todo contexto. Sem ele, o Hermes é um LLM genérico.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Identity define operação</strong><span class="text-neutral-400"> — fuso, idioma e canais com prioridade evitam agendamentos errados e respostas no idioma errado.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Not_goals importa mais que goals</strong><span class="text-neutral-400"> — a lista de fora-de-escopo faz o Hermes recusar oportunidades dispersivas.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Business com thresholds escalonados</strong><span class="text-neutral-400"> — autonomia para o pequeno, confirmação para o médio, escalada para o grande.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Voice por exemplo real</strong><span class="text-neutral-400"> — amostras de frases que você diria e jamais diria treinam melhor que adjetivos.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Hard Nos são absolutos</strong><span class="text-neutral-400"> — o você-com-cabeça-fria escrito por antecipação para o você-sob-pressão obedecer.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Rhythm separa criação de ops</strong><span class="text-neutral-400"> — protege deep work com blocos nomeados e dias dedicados por modalidade.</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Memory é o arquivo vivo</strong><span class="text-neutral-400"> — People, Decisions, Tools e Lessons crescem, são podados e evitam que o Hermes pergunte duas vezes.</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.5 — OpenRouter: roteando modelos de forma econômica e resiliente</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 1
+          </a>
+          <a href="modulo-1-5.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -450,12 +737,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

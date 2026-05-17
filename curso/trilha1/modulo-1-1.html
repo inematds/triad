@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="O que é o Hermes Agent e como ele difere de ferramentas comuns de IA">
+  <meta name="description" content="O que é Hermes Agent — persistência, memória e automação em background para ampliar o que você faz">
   <title>O que é Hermes Agent | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
@@ -22,8 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -93,7 +92,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.1</span>
       <h1 class="text-3xl sm:text-4xl font-bold mb-4">🤖 O que é Hermes Agent</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">O agente que aprende com você — por que ele é fundamentalmente diferente de qualquer outra ferramenta de IA.</p>
+      <p class="text-lg text-neutral-400 max-w-3xl">O agente que aprende com você — persistência, memória e automação em background para ampliar o que você faz.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-emerald-400">7</div>
@@ -117,289 +116,471 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">⚡ Hermes vs ferramentas comuns de IA</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        ChatGPT, Claude.ai, Gemini — todos compartilham uma limitação invisível: <strong class="text-emerald-400">cada conversa começa do zero</strong>. Hermes Agent inverte essa lógica. Ele lembra de você entre sessões, executa fora do chat e acumula contexto à medida que trabalha.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">⚡</span>
-          <div>
-            <span class="font-medium">Hermes vs ferramentas comuns de IA</span>
-            <span class="text-neutral-500 text-sm ml-2">- Persistência vs sessão isolada</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Hermes Agent é um sistema de IA pessoal persistente, fundamentalmente diferente de chatbots ou ferramentas de IA convencionais. Enquanto ChatGPT, Claude.ai e ferramentas similares funcionam em sessões isoladas sem memória entre conversas, Hermes constrói um modelo profundo e crescente de quem você é — seus objetivos, negócio, rotina, voz e decisões passadas.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Entender a diferença fundamental entre Hermes e ferramentas tradicionais de IA é o primeiro passo para usar o sistema de forma estratégica. Sem essa distinção, você vai tratar Hermes como um chatbot e perder 90% do seu potencial.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Persistência de memória entre sessões</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Contexto pessoal acumulado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Sessão isolada vs agente contínuo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Modelo crescente de identidade</li>
-              </ul>
-            </div>
-          </div>
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Hermes Agent é um agente pessoal persistente — um processo que vive no seu sistema (não numa aba de navegador), mantém memória entre conversas, é orquestrado por um arquivo de identidade (soul.md) e executa tarefas em background sem precisar do seu chat aberto.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Chatbot comum (stateless)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Cada conversa começa do zero — sem histórico real</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Só roda quando você está digitando</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Você precisa reexplicar contexto toda vez</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Não aprende com decisões passadas</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Vive na nuvem do fornecedor, não no seu sistema</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Hermes Agent (persistente)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Memória real entre sessões em <code class="text-xs">~/.hermes/memory/</code></span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Roda em background via cron — mesmo de madrugada</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Conhece quem você é pelo soul.md</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Aprende com cada tarefa concluída</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Vive no seu sistema — você controla tudo</span></li>
+          </ul>
         </div>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">🧠</span>
-          <div>
-            <span class="font-medium">Persistência — por que importa que o agente lembre</span>
-            <span class="text-neutral-500 text-sm ml-2">- Da ferramenta ao colaborador</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Persistência significa que Hermes carrega contexto de todas as interações anteriores. Cada tarefa que você delega ensina ao agente algo novo sobre como você trabalha, o que prioriza e como decide. Com o tempo, o agente precisa de menos instruções para produzir resultados alinhados com seu estilo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">A persistência é o que transforma Hermes de uma ferramenta em um colaborador. Um assistente que lembra é fundamentalmente diferente de um que esquece tudo a cada conversa.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Memória acumulada</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>soul.md como repositório de contexto</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Curva de aprendizado do agente</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Delegação progressiva</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">🔧</span>
-          <div>
-            <span class="font-medium">Hermes vs Claude Code — papéis distintos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Orquestrador vs repositório</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Claude Code vive dentro de repositórios de código. Tem um loop de ferramentas apertado, é vinculado a sessões e construído para bases de código. Hermes vive através de toda a sua vida — gerencia projetos, monitora métricas, agenda tarefas, escreve conteúdo, analisa dados e integra com qualquer ferramenta externa.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Confundir os papéis leva a usar a ferramenta errada. Claude Code para código. Hermes para tudo o mais — e para orquestrar Claude Code como uma das ferramentas disponíveis.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Loop de ferramentas vs orquestrador</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Escopo de repositório vs escopo de vida</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Sessão bound vs persistência contínua</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Integração entre os dois sistemas</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">📈</span>
-          <div>
-            <span class="font-medium">Como Hermes aprende com cada tarefa</span>
-            <span class="text-neutral-500 text-sm ml-2">- O loop de refinamento contínuo</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Cada tarefa delegada ao Hermes é uma oportunidade de refinamento. O agente observa quais abordagens funcionam para você, quais respostas você aprova ou rejeita, e atualiza seu modelo interno. O arquivo soul.md é o principal veículo para tornar esse aprendizado explícito e durável.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Entender o mecanismo de aprendizado permite que você acelere a curva de adaptação. Em vez de esperar que o agente infira preferências, você pode alimentá-lo ativamente com o contexto certo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Feedback implícito vs explícito</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Atualização do soul.md</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Loop de melhoria</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Contexto como dado de treinamento in-context</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🌙</span>
-          <div>
-            <span class="font-medium">Agendamento em background — trabalhe enquanto dorme</span>
-            <span class="text-neutral-500 text-sm ml-2">- Produtividade assíncrona real</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Hermes pode agendar e executar tarefas de forma assíncrona — sem que você esteja presente. Isso significa que você pode delegar análises, pesquisas, relatórios e automações para serem entregues no horário que você definir, usando modelos de baixo custo como o DeepSeek V4 para trabalho pesado noturno.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">A capacidade de trabalho assíncrono multiplica sua produtividade real. Em vez de usar IA apenas quando você está ativo, você cria um sistema que avança seus objetivos 24 horas por dia.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Jobs assíncronos</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Modelo executor de background</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo de operação overnight</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Entrega agendada de resultados</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🪞</span>
-          <div>
-            <span class="font-medium">O modelo profundo de quem você é</span>
-            <span class="text-neutral-500 text-sm ml-2">- Identidade como vantagem competitiva</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O principal diferencial de Hermes é construir um entendimento multidimensional do usuário: identidade profissional, missão, metas financeiras, estilo de comunicação, ritmo de trabalho, decisões tomadas, pessoas importantes no ecossistema e lições aprendidas. Quanto mais rico esse modelo, mais útil o agente se torna.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">A qualidade das respostas de um agente de IA é diretamente proporcional à qualidade do contexto que ele tem. Um agente que conhece você profundamente elimina iterações desnecessárias e produz resultados alinhados na primeira entrega.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Perfil multidimensional</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>soul.md como espelho operacional</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Contexto como vantagem competitiva</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Redução de iterações por contexto rico</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🚀</span>
-          <div>
-            <span class="font-medium">Casos de uso reais</span>
-            <span class="text-neutral-500 text-sm ml-2">- O que Hermes faz no dia a dia</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Exemplos concretos de uso do Hermes: escolha de nichos de negócio (analisando mercados via Triad enquanto você dorme), geração de relatórios semanais de métricas, análise de vídeos e imagens via Gemini CLI, rascunho de conteúdo no seu tom de voz, monitoramento de campanhas, pesquisa de concorrentes, e criação de planos estratégicos revisados por múltiplos modelos.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Ver casos reais concretiza o potencial abstrato do sistema. Você começa a identificar onde Hermes pode assumir trabalho que hoje consome horas do seu dia.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Delegação de análise estratégica</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Automação de relatórios</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Monitoramento assíncrono</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Orquestração de múltiplos modelos para uma tarefa</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Hermes não é um chatbot</strong><span class="text-neutral-400"> — é um agente persistente que cresce com cada interação</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">soul.md é o núcleo</strong><span class="text-neutral-400"> — onde o contexto acumulado vive entre sessões</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Trabalho assíncrono real</strong><span class="text-neutral-400"> — Hermes avança seus objetivos enquanto você dorme</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Orquestrador, não substituto</strong><span class="text-neutral-400"> — Hermes usa Claude Code, DeepSeek e outros como ferramentas</span></div>
-          </div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">1.2 — O problema de um único modelo: por que múltiplos cérebros importam</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 1</a>
-          <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Stateless vs stateful</span><p class="text-sm text-neutral-400 mt-1">Chatbots não retêm estado entre sessões; Hermes retém</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Processo local</span><p class="text-sm text-neutral-400 mt-1">Hermes roda no seu sistema, não numa aba de navegador remota</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Identidade orquestrada</span><p class="text-sm text-neutral-400 mt-1">O soul.md define quem o agente acha que você é</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Execução em background</span><p class="text-sm text-neutral-400 mt-1">Não precisa do chat aberto para o agente trabalhar</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="index.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">← Trilha 1: Fundamentos</a>
-      <a href="modulo-1-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">Módulo 1.2: Múltiplos cérebros →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🧠 Persistência — por que importa que o agente lembre</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Persistência não é só "lembrar do nome". É acumular <strong class="text-emerald-400">contexto operacional</strong> — decisões tomadas, preferências de tom, projetos em andamento, padrões que funcionam para você. Cada interação fica mais útil que a anterior.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Persistência em Hermes é a capacidade de manter e consultar arquivos de memória de longo prazo — armazenados em <code class="text-emerald-400">~/.hermes/memory/</code> — que sobrevivem ao fim da sessão e são automaticamente trazidos para o contexto da próxima execução.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🗂️</span> Onde a memória mora
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><code class="text-emerald-400">~/.hermes/soul.md</code> — quem você é, missão, voz, hard nos</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><code class="text-emerald-400">~/.hermes/memory/decisions/</code> — log datado de escolhas estratégicas tomadas</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><code class="text-emerald-400">~/.hermes/memory/observations/</code> — coisas que o agente notou sobre seu trabalho</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><code class="text-emerald-400">~/.hermes/memory/projects/</code> — estado vivo de cada projeto ativo</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><code class="text-emerald-400">~/.hermes/memory/preferences.md</code> — tom, formato, ferramentas preferidas</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> O que persistência habilita
+        </h3>
+        <p class="text-neutral-300">Você diz "redige no meu tom" e ele sabe o que é seu tom. Você pede "como decidimos o preço daquele plano?" e ele cita a decisão registrada três semanas atrás. Você fala "continue o que parou ontem" e ele continua — sem você reexplicar.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Memória como arquivos locais</span><p class="text-sm text-neutral-400 mt-1">Texto simples no seu disco — auditável, editável, portável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Contexto operacional acumulado</span><p class="text-sm text-neutral-400 mt-1">Não é só fatos — são decisões, padrões e preferências em uso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Log de decisões datado</span><p class="text-sm text-neutral-400 mt-1">Permite revisitar e auditar o raciocínio por trás de escolhas passadas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Continuidade sem reexplicação</span><p class="text-sm text-neutral-400 mt-1">O agente retoma do ponto onde parou na sessão anterior</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">🔀 Hermes vs Claude Code — papéis distintos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Claude Code e Hermes Agent são complementares, não substitutos. <strong class="text-emerald-400">Claude Code é o operário do código</strong>; Hermes é o agente da sua vida e do seu negócio. Confundir os dois é o erro mais comum de quem começa.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Claude Code é uma CLI focada em sessões de desenvolvimento com contexto de projeto (código, arquivos, repositório). Hermes é um agente sempre-ligado, focado em decisões, conhecimento pessoal e automações de longo prazo — usa Claude Code como ferramenta quando precisa codar.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">🛠️ Claude Code</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Escopo:</strong> repositório / projeto de código</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Duração:</strong> sessão (você invoca, ele roda, termina)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Memória:</strong> CLAUDE.md por projeto</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Gatilho:</strong> você digita um comando</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Otimizado para:</strong> escrever, ler, editar código</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">🤖 Hermes Agent</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Escopo:</strong> sua vida, negócio, conhecimento</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Duração:</strong> contínua (cron + on-demand)</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Memória:</strong> soul.md + ~/.hermes/memory/</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Gatilho:</strong> hora, evento, ou você</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">›</span><span><strong>Otimizado para:</strong> decisões, pesquisa, conteúdo, rotinas</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Como eles se combinam
+        </h3>
+        <p class="text-neutral-300">Hermes pode invocar Claude Code como ferramenta. Exemplo: às 6h da manhã, Hermes acorda, lê seus emails de produto, decide que há um bug crítico reportado e chama Claude Code dentro do repo certo para investigar — quando você acorda, tem o diagnóstico pronto.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Sessão vs sempre-ligado</span><p class="text-sm text-neutral-400 mt-1">Claude Code roda quando chamado; Hermes vive em background</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Escopo de projeto vs vida</span><p class="text-sm text-neutral-400 mt-1">Claude Code conhece o repo; Hermes conhece você</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Hermes invoca Claude Code</span><p class="text-sm text-neutral-400 mt-1">O agente usa Claude Code como ferramenta quando código entra em cena</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">CLAUDE.md vs soul.md</span><p class="text-sm text-neutral-400 mt-1">Documentos de identidade em escopos diferentes — projeto vs pessoa</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">📈 Como Hermes aprende com cada tarefa</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Hermes não fica mais inteligente sozinho — ele fica mais útil <strong class="text-emerald-400">porque escreve observações sobre seu trabalho</strong> e essas observações entram no contexto da próxima execução. É um loop fechado: tarefa, execução, reflexão, memória atualizada.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O loop de aprendizado de Hermes é um ciclo em quatro fases — receber tarefa, executar, refletir sobre o que funcionou ou não, atualizar arquivos de memória — que faz cada tarefa subsequente ter mais contexto que a anterior, sem treinamento de modelo.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Recebe a tarefa</h4>
+            <p class="text-sm text-neutral-400">Você fala ou um trigger dispara. Hermes carrega soul.md, memórias relevantes e contexto recente antes de pensar no que fazer.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Executa</h4>
+            <p class="text-sm text-neutral-400">Usa ferramentas (browser, shell, Claude Code, APIs) para realizar a tarefa. Cada passo é registrado num log temporário da execução.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Reflete</h4>
+            <p class="text-sm text-neutral-400">Ao final, Hermes gera uma observação curta: o que funcionou, o que falhou, qual padrão emergiu, qual preferência ficou clara. Essa reflexão é o sinal de aprendizado.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Atualiza a memória</h4>
+            <p class="text-sm text-neutral-400">A observação vira um arquivo datado em <code class="text-xs">~/.hermes/memory/observations/</code>. Se for uma preferência consolidada, é promovida ao soul.md. A próxima execução já consulta esses arquivos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Aprendizado sem fine-tuning</span><p class="text-sm text-neutral-400 mt-1">O modelo não muda — o contexto carregado a cada execução muda</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Reflexão como sinal</span><p class="text-sm text-neutral-400 mt-1">O passo de reflexão é o que separa execução de aprendizado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Observações datadas</span><p class="text-sm text-neutral-400 mt-1">Cada aprendizado tem timestamp — permite auditar evolução</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Promoção ao soul.md</span><p class="text-sm text-neutral-400 mt-1">Padrões repetidos sobem da observação para a identidade do agente</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🌙 Agendamento em background — trabalhe enquanto dorme</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O diferencial mais subestimado de Hermes: <strong class="text-emerald-400">ele não precisa de você acordado</strong>. Cron jobs disparam o agente em horários definidos. Quando você abre o laptop pela manhã, o trabalho noturno já está esperando — briefings, pesquisas, drafts, alertas.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Agendamento em background é a capacidade de Hermes ser disparado por cron (ou systemd timer / launchd) em horários ou intervalos definidos, executar tarefas longas usando modelos baratos como DeepSeek, e deixar o resultado pronto para sua revisão na próxima vez que olhar.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">⏰</span> Exemplo de crontab
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2 overflow-x-auto">
+          <p><span class="text-neutral-500"># briefing matinal — 6h da manhã, todo dia</span></p>
+          <p>0 6 * * *  hermes morning-briefing</p>
+          <p class="mt-3"><span class="text-neutral-500"># resumo dos emails da noite — 23h</span></p>
+          <p>0 23 * * * hermes inbox-digest</p>
+          <p class="mt-3"><span class="text-neutral-500"># pesquisa profunda noturna — 2h, segunda a sexta</span></p>
+          <p>0 2 * * 1-5 hermes deep-research --topic-from queue</p>
+          <p class="mt-3"><span class="text-neutral-500"># revisão semanal — domingo 19h</span></p>
+          <p>0 19 * * 0 hermes weekly-review</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🌙</span> O que cabe rodar de madrugada
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Pesquisa profunda:</strong> 200 fontes lidas por DeepSeek em horas, sintetizadas em relatório curto. Custo: dólares, não dezenas.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Drafts de conteúdo:</strong> 5 versões de post, newsletter ou ensaio prontos para você editar pela manhã.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Monitoramento:</strong> mudanças em preços de concorrentes, menções da sua marca, novos commits em repos que você acompanha.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Tarefas chatas de código:</strong> migração de dependência, refatoração de testes, upgrade de versão — Hermes chama Claude Code.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Briefings personalizados:</strong> calendário do dia, notícias filtradas, lembretes acionáveis — entregues às 6h.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que isso é uma virada de chave
+        </h3>
+        <p class="text-neutral-300">Sua produtividade deixa de ser limitada pelo seu tempo desperto. 8 horas de sono viram 8 horas de trabalho do agente. Ao acordar, você não começa um dia — você continua um.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Cron como gatilho</span><p class="text-sm text-neutral-400 mt-1">Hermes não precisa de chat aberto — qualquer scheduler do SO o dispara</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Modelo barato para tarefa longa</span><p class="text-sm text-neutral-400 mt-1">DeepSeek e similares deixam pesquisas de horas viáveis em custo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Resultado pronto pela manhã</span><p class="text-sm text-neutral-400 mt-1">Você consome trabalho terminado, não inicia trabalho do zero</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">ScheduleWakeup e similares</span><p class="text-sm text-neutral-400 mt-1">Em macOS/Linux, é possível acordar a máquina só para a tarefa</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">👤 O modelo profundo de quem você é</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem o soul.md, Hermes é só mais um LLM bem embrulhado. Com ele, vira <strong class="text-emerald-400">um agente que entende sua missão, seu jeito de falar e o que você se recusa a fazer</strong>. É o multiplicador silencioso do sistema.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O soul.md é um arquivo markdown vivo — geralmente em <code class="text-emerald-400">~/.hermes/soul.md</code> — que descreve identidade, missão atual, voz/tom, valores não-negociáveis e contexto operacional do usuário. É carregado automaticamente em todo prompt do agente.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📜</span> Anatomia de um soul.md
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Identidade:</strong> quem você é em uma frase honesta — não título de LinkedIn, papel real.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Missão atual:</strong> o que você está construindo agora, com prazo e critério de sucesso.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Voz:</strong> como você escreve — exemplos de frases suas, palavras que você nunca usa.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Hard nos:</strong> o que o agente jamais deve fazer em seu nome — limites éticos, formatos proibidos, decisões fora do escopo.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Contexto operacional:</strong> negócios ativos, ferramentas usadas, pessoas-chave, restrições.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Tip crítico
+        </h3>
+        <p class="text-neutral-300">O soul.md é o multiplicador — sem ele, Hermes é só mais um LLM. Invista uma tarde escrevendo-o como se fosse o briefing para um chefe-de-gabinete novo. Atualize-o quando perceber o agente errando o tom: o erro está no soul.md, não no prompt da tarefa.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Identidade explicitada</span><p class="text-sm text-neutral-400 mt-1">O que está implícito na sua cabeça precisa estar escrito para o agente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Hard nos como guard-rails</span><p class="text-sm text-neutral-400 mt-1">Lista explícita do que o agente nunca deve fazer em seu nome</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Documento vivo</span><p class="text-sm text-neutral-400 mt-1">Atualizado conforme você evolui e o agente desafina — não é estático</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Multiplicador silencioso</span><p class="text-sm text-neutral-400 mt-1">Sem soul.md, todo o resto do sistema produz resultado genérico</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">💼 Casos de uso reais</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Teoria sem cenário concreto evapora. Aqui estão <strong class="text-emerald-400">cinco aplicações reais</strong> que pessoas estão rodando com Hermes hoje — cada uma combinando persistência, agendamento e o soul.md de formas diferentes.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Casos de uso reais são padrões de aplicação de Hermes — cada um materializa um arranjo específico de trigger (cron, evento, comando), modelo (DeepSeek para volume, Claude para nuance) e memória (qual subconjunto carregar) — que resolvem uma fricção recorrente da vida ou do negócio.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">A</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Briefing matinal personalizado</h4>
+            <p class="text-sm text-neutral-400">Às 6h, Hermes lê calendário, inbox e feeds escolhidos, filtra pelo soul.md (o que importa para sua missão atual) e entrega um documento de 1 página: 3 prioridades do dia, 2 conflitos de agenda, 1 alerta. Acende a tela e seu dia começa com mira.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">B</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Pesquisa profunda noturna</h4>
+            <p class="text-sm text-neutral-400">Você joga um tópico na fila antes de dormir. Às 2h, Hermes dispara DeepSeek contra 100–300 fontes, sintetiza num relatório com citações e marca pontos onde precisa do seu julgamento. De manhã, 6 horas de pesquisa custaram poucos dólares.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">C</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Drafts de social e newsletter</h4>
+            <p class="text-sm text-neutral-400">Hermes lê suas observações da semana, cruza com a voz definida no soul.md e produz 5 drafts de post + 1 esqueleto de newsletter — todos atravessados pelo seu tom, não pelo tom genérico do modelo. Você só edita.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">D</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Decisão de negócio com histórico</h4>
+            <p class="text-sm text-neutral-400">Você pergunta "vale aumentar o preço do plano Pro?". Hermes consulta decisões anteriores sobre pricing, observações sobre churn recente, dados de uso e devolve um memo curto com 3 cenários. Cita as fontes internas — você confere a memória dele.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+            <span class="text-emerald-400 font-bold">E</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-emerald-400">Code review e manutenção</h4>
+            <p class="text-sm text-neutral-400">Hermes monitora repositórios escolhidos. Quando um PR encosta no que ele sabe que é frágil (registrado em observações passadas), invoca Claude Code para revisar e comenta no PR — você só aprova ou refuta.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> O padrão por trás dos cinco
+        </h3>
+        <p class="text-neutral-300">Cada caso combina três peças: <strong>memória</strong> (sabe quem você é e o que já decidiu), <strong>trigger</strong> (alguma coisa que não é você acorda o agente) e <strong>delegação correta de modelo</strong> (Claude para nuance, DeepSeek para volume, Claude Code para código). Toda aplicação interessante de Hermes encaixa nesse padrão.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Padrão memória + trigger + modelo</span><p class="text-sm text-neutral-400 mt-1">Toda aplicação útil de Hermes combina essas três peças</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Briefing como ritual</span><p class="text-sm text-neutral-400 mt-1">Trocar o feed infinito por um briefing focado às 6h</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Pesquisa noturna barata</span><p class="text-sm text-neutral-400 mt-1">Volume durante o sono usando modelo de baixo custo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Decisão com memória citável</span><p class="text-sm text-neutral-400 mt-1">O agente justifica respostas com pedaços do seu próprio histórico</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Hermes é um agente persistente</strong><span class="text-neutral-400"> — não um chatbot. Vive no seu sistema, lembra entre sessões e roda em background</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Memória em ~/.hermes/memory/</strong><span class="text-neutral-400"> — soul.md, decisões, observações e projetos como arquivos locais auditáveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Hermes ≠ Claude Code</strong><span class="text-neutral-400"> — Claude Code cuida do repo; Hermes cuida da vida e do negócio. Hermes invoca Claude Code quando precisa codar</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Loop de aprendizado</strong><span class="text-neutral-400"> — recebe, executa, reflete, atualiza memória. Cada tarefa torna a próxima mais útil</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Agendamento via cron</strong><span class="text-neutral-400"> — pesquisas e drafts durante o sono usando modelos baratos como DeepSeek</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">soul.md é o multiplicador</strong><span class="text-neutral-400"> — sem ele, Hermes é só mais um LLM. Identidade, missão, voz e hard nos definem a diferença</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.2 — O problema de um único modelo</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 1
+          </a>
+          <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
-    // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -418,13 +599,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    // Topic toggle
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>

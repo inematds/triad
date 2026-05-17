@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="O Sistema Triad explicado — Condutor, Executor e Crítico — como funciona o fluxo de Planeje, Execute, Critique">
+  <meta name="description" content="O Sistema Triad — Condutor, Executor, Crítico: o fluxo de três papéis que entrega resultados verificados">
   <title>O Sistema Triad | TRIAD — INEMA.CLUB</title>
   <script>
     tailwind.config = {
@@ -22,8 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation { display: none; }
-    .topic-explanation.active { display: block; }
+    .dark body { background-color: #111827; }
 
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
@@ -92,8 +91,8 @@
   <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.3</span>
-      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ O Sistema Triad</h1>
-      <p class="text-lg text-neutral-400 max-w-3xl">Planeje, Execute, Critique — a arquitetura de três modelos que elimina viés e garante qualidade através de revisão estruturada.</p>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚡ O Sistema Triad</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Planeje, Execute, Critique — o fluxo Condutor → Executor → Crítico que entrega resultados verificados.</p>
       <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
           <div class="text-xl font-bold text-emerald-400">7</div>
@@ -104,7 +103,7 @@
           <div class="text-xs text-neutral-400">Minutos</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
-          <div class="text-xl font-bold text-emerald-400">Básico</div>
+          <div class="text-xl font-bold text-emerald-400">Intermediário</div>
           <div class="text-xs text-neutral-400">Nível</div>
         </div>
         <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
@@ -117,285 +116,687 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <!-- TÓPICOS -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🗺️ Visão geral do fluxo: Condutor → Executor → Crítico</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Triad é um sistema de <strong class="text-emerald-400">três papéis distintos</strong> executados por três modelos diferentes. Cada papel resolve um problema que os outros não conseguem resolver sozinhos — e a separação é o que produz resultado verificado em vez de output plausível.
+      </p>
 
-      <!-- Tópico 1 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">🗺️</span>
-          <div>
-            <span class="font-medium">Visão geral do fluxo — Condutor → Executor → Crítico</span>
-            <span class="text-neutral-500 text-sm ml-2">- O mapa antes do território</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Triad é um fluxo de três etapas sequenciais. O Condutor (Opus) recebe o objetivo e define o trabalho. O Executor (DeepSeek V4) faz o trabalho pesado por horas se necessário. O Crítico (GPT-5.5) avalia cada draft até aprovar. Somente após a aprovação do Crítico o resultado volta para o Condutor para validação final.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Ter a visão do fluxo completo antes de mergulhar em cada papel evita confusão durante a implementação. O mapa antecede o território.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Fluxo sequencial de três etapas</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Condutor → Executor → Crítico</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Aprovação como gate de qualidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Loop interno vs loop externo</li>
-              </ul>
-            </div>
-          </div>
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um pipeline com três etapas obrigatórias: o Condutor (Opus) transforma o objetivo em briefing preciso; o Executor (DeepSeek) explora múltiplos ângulos em paralelo; o Crítico (GPT-5.5) avalia cada draft contra os critérios do briefing e emite SHIP, REVISE ou FUNDAMENTAL FLAW. O loop Executor↔Crítico roda até SHIP, e o Condutor faz a validação final.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🔗</span> O fluxo, ponta a ponta
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-1 overflow-x-auto">
+          <p>Usuário</p>
+          <p>   │  objetivo bruto</p>
+          <p>   ▼</p>
+          <p>┌─────────────────────────┐</p>
+          <p>│  CONDUTOR (Opus)        │  interroga, briefa, valida</p>
+          <p>└─────────────────────────┘</p>
+          <p>   │  briefing estruturado</p>
+          <p>   ▼</p>
+          <p>┌─────────────────────────┐</p>
+          <p>│  EXECUTOR (DeepSeek)    │  3–5 ângulos em paralelo</p>
+          <p>└─────────────────────────┘</p>
+          <p>   │  drafts ◄──────┐</p>
+          <p>   ▼               │  REVISE</p>
+          <p>┌─────────────────────────┐</p>
+          <p>│  CRÍTICO (GPT-5.5)      │  SHIP / REVISE / FLAW</p>
+          <p>└─────────────────────────┘</p>
+          <p>   │  SHIP</p>
+          <p>   ▼</p>
+          <p>CONDUTOR valida → entrega ao usuário</p>
         </div>
       </div>
 
-      <!-- Tópico 2 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">🎼</span>
-          <div>
-            <span class="font-medium">Opus como Condutor — interrogar, briefar, validar</span>
-            <span class="text-neutral-500 text-sm ml-2">- O arquiteto que nunca constrói</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Condutor usa Claude Opus 4.7 e tem três responsabilidades fixas: (1) INTERROGAR — fazer 5-10 perguntas de clarificação até ter objetivo, restrições e critérios de sucesso bem definidos; (2) BRIEFAR — escrever um briefing de uma página para o Executor; (3) VALIDAR — revisar o output final do Crítico contra o briefing original. O Condutor nunca executa o trabalho.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Entender que o Condutor não executa é fundamental. Ele é o arquiteto, não o construtor. Essa separação é o que mantém o briefing honesto.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>System prompt do Condutor</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>5-10 perguntas de clarificação</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Briefing de uma página</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Validação final vs execução</li>
-              </ul>
-            </div>
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 text-sm font-semibold mb-1">🎙️ CONDUTOR</div>
+          <div class="text-xs text-neutral-500 mb-2">Claude Opus</div>
+          <p class="text-sm text-neutral-300">Pergunta o que falta, escreve o briefing, valida o output final contra o objetivo original.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 text-sm font-semibold mb-1">⚙️ EXECUTOR</div>
+          <div class="text-xs text-neutral-500 mb-2">DeepSeek</div>
+          <p class="text-sm text-neutral-300">Explora 3–5 ângulos em paralelo com premissas distintas. Volume e custo baixo.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 text-sm font-semibold mb-1">🔍 CRÍTICO</div>
+          <div class="text-xs text-neutral-500 mb-2">GPT-5.5</div>
+          <p class="text-sm text-neutral-300">Avalia cada ângulo contra os critérios. Emite veredicto específico, não opinião.</p>
         </div>
       </div>
 
-      <!-- Tópico 3 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">⚡</span>
-          <div>
-            <span class="font-medium">DeepSeek como Executor — volume, custo, resiliência</span>
-            <span class="text-neutral-500 text-sm ml-2">- O coração econômico do sistema</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Executor usa DeepSeek V4 e recebe o briefing do Condutor. Sua tarefa é atacar o problema por 3-5 ângulos em paralelo, produzindo um draft por ângulo. Não decide qual é o melhor — isso é papel do Crítico. Pode rodar por horas a custo muito baixo ($0,87/M tokens vs $75/M do Opus), o que torna economicamente viável rodar o loop de revisão muitas vezes.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Executor é o coração econômico do sistema. Entender por que DeepSeek foi escolhido — e o que ele faz exatamente — permite calibrar a expectativa de qualidade e custo.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>3-5 ângulos em paralelo</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo de execução vs qualidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Draft sem julgamento de valor</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Loop de revisão viável economicamente</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 4 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">🔍</span>
-          <div>
-            <span class="font-medium">GPT-5.5 como Crítico — rigor, especificidade, aprovação</span>
-            <span class="text-neutral-500 text-sm ml-2">- SHIP, REVISE ou FUNDAMENTAL FLAW</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O Crítico usa GPT-5.5 e avalia cada draft do Executor. Retorna sempre um dos três vereditos: SHIP (aprovar e enviar ao Condutor), REVISE (listar problemas específicos e devolver ao Executor), ou FUNDAMENTAL FLAW (o draft tem um problema estrutural — recomeçar do zero). Critica com especificidade: "X assume Y, falha quando Z" — não "poderia ser melhor".</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">A especificidade do Crítico é o que diferencia o sistema de uma revisão genérica. Saber o que o Crítico deve e não deve fazer permite calibrar seu system prompt.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>SHIP / REVISE / FUNDAMENTAL FLAW</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Crítica específica vs vaga</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Diferentes arquiteturas como requisito</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Gap analysis vs aprovação genérica</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 5 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">🔁</span>
-          <div>
-            <span class="font-medium">O loop interno DeepSeek ↔ GPT — até o SHIP</span>
-            <span class="text-neutral-500 text-sm ml-2">- Onde acontece a maior parte da melhoria</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">O loop interno é a parte do Triad que não envolve o usuário. DeepSeek produz draft → GPT critica → DeepSeek revisa → GPT reavalia → repete até SHIP. Esse loop pode rodar dezenas de vezes a custo marginal baixo. É o mecanismo que garante qualidade sem escalar o custo proporcionalmente.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">O loop interno é onde a maior parte da melhoria de qualidade acontece. Entender sua mecânica ajuda a projetar tarefas que se beneficiam dele.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Iteração sem intervenção humana</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo marginal do loop</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Convergência por especificidade</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Quando sair do loop (SHIP vs loop infinito)</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 6 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">🧬</span>
-          <div>
-            <span class="font-medium">Por que os modelos devem ser de arquiteturas diferentes</span>
-            <span class="text-neutral-500 text-sm ml-2">- Diversidade arquitetural como requisito</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Se Executor e Crítico fossem do mesmo modelo — por exemplo, ambos Claude — o Crítico tenderia a validar as mesmas premissas e cometer os mesmos erros de raciocínio que o Executor. A pesquisa de Reflexion mostra que crítica de mesmo modelo não é significativamente melhor que autoavaliação. Arquiteturas diferentes criam perspectivas genuinamente distintas.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Essa é a justificativa técnica para não simplificar o Triad usando apenas um provedor. A diversidade arquitetural não é luxo — é requisito funcional.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Viés arquitetural compartilhado</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Reflexion e seus limites</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Diversidade como requisito</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Mesmo modelo = mesmos pontos cegos</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tópico 7 -->
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
-          <span class="text-lg">🏗️</span>
-          <div>
-            <span class="font-medium">Exemplo prático — escolha de nicho de negócio</span>
-            <span class="text-neutral-500 text-sm ml-2">- O Triad em ação no mundo real</span>
-          </div>
-        </button>
-        <div class="topic-explanation px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-emerald-400 font-semibold">O que é:</span>
-              <p class="text-neutral-300 text-sm mt-1">Cenário real: um empreendedor quer saber qual nicho escolher para vender sites e serviços de IA para empresas locais no Texas. O Condutor faz perguntas (geografia, faixa de preço, modelo de vendas, restrições). DeepSeek analisa mercados de restauração de água/fogo/mofo, fundações, serviços de urgência. GPT-5.5 critica e filtra. O resultado final é uma lista fundamentada dos 3 melhores nichos com justificativa.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm mt-1">Ver o Triad em ação com um caso concreto torna a arquitetura tangível e demonstra o tipo de tarefa para qual ela é ideal.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-              <ul class="space-y-1 mt-1">
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Tarefas de decisão estratégica</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Perguntas de clarificação do Condutor</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Nichos de alto valor por urgência</li>
-                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Resultado convergido vs resposta rápida de um modelo</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESUMO -->
-    <section class="mb-12">
-      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
-        <div class="space-y-4 mb-8">
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Três papéis distintos</strong><span class="text-neutral-400"> — Condutor define, Executor executa, Crítico aprova</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Loop interno autônomo</strong><span class="text-neutral-400"> — DeepSeek e GPT iteram sem intervenção humana até o SHIP</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Três vereditos apenas</strong><span class="text-neutral-400"> — SHIP, REVISE ou FUNDAMENTAL FLAW eliminam ambiguidade</span></div>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-emerald-400 mt-1">✓</span>
-            <div><strong class="text-white">Arquiteturas diferentes são obrigatórias</strong><span class="text-neutral-400"> — mesmos pesos = mesmos pontos cegos</span></div>
-          </div>
-        </div>
-        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
-          <p class="text-neutral-300">1.4 — soul.md: A memória persistente do seu agente</p>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.2</a>
-          <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Separação de papéis</span><p class="text-sm text-neutral-400 mt-1">Cada modelo resolve um problema que os outros não resolvem sozinhos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Pipeline determinístico</span><p class="text-sm text-neutral-400 mt-1">A ordem Condutor → Executor → Crítico → Validação é fixa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Loop interno</span><p class="text-sm text-neutral-400 mt-1">Executor e Crítico iteram entre si até SHIP — o usuário não participa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Validação final</span><p class="text-sm text-neutral-400 mt-1">O Condutor revisa o SHIP do Crítico antes de entregar — duplo controle</p></div>
         </div>
       </div>
     </section>
 
-    <!-- NAV PREV/NEXT -->
-    <div class="flex justify-between pt-6 border-t border-dark-600">
-      <a href="modulo-1-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">← Módulo 1.2: Múltiplos cérebros</a>
-      <a href="modulo-1-4.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">Módulo 1.4: soul.md →</a>
-    </div>
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🎙️ Opus como Condutor — interrogar, briefar, validar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Condutor é o único papel que conversa com o usuário. <strong class="text-emerald-400">Claude Opus é escolhido aqui porque seu forte é raciocínio estruturado</strong> — ele interroga até entender, escreve um briefing testável, e valida o resultado final contra o objetivo original.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O modelo de planejamento — Claude Opus opera como gerente de projeto. Recebe o pedido do usuário (geralmente vago), faz perguntas até eliminar ambiguidade, produz um briefing estruturado com critérios mensuráveis, e no final do loop revisa o output entregue pelo Crítico antes de devolver ao usuário.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Estrutura de um briefing do Condutor
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2 overflow-x-auto">
+          <p># BRIEFING</p>
+          <p>OBJETIVO: [uma frase, sem ambiguidade]</p>
+          <p></p>
+          <p>CRITÉRIOS DE SUCESSO:</p>
+          <p>  - [testável #1]</p>
+          <p>  - [testável #2]</p>
+          <p>  - [testável #3]</p>
+          <p></p>
+          <p>RESTRIÇÕES:</p>
+          <p>  - [o que NÃO fazer]</p>
+          <p>  - [formatos inaceitáveis]</p>
+          <p></p>
+          <p>CONTEXTO: [dados que o Executor não tem]</p>
+          <p></p>
+          <p>ÂNGULOS SUGERIDOS:</p>
+          <p>  1. [premissa A]</p>
+          <p>  2. [premissa B — fundamentalmente diferente de A]</p>
+          <p>  3. [premissa C]</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Sem Condutor</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Usuário envia objetivo vago direto ao Executor</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Crítico avalia sem critérios — vira opinião</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Loop diverge: SHIP em coisa errada</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>Resultado plausível, não verificado</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Com Condutor</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Briefing elimina ambiguidade antes da execução</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Crítico tem critérios objetivos para julgar</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Loop converge: SHIP é alinhado ao objetivo</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>Validação final confirma encaixe com o pedido</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que Opus aqui
+        </h3>
+        <p class="text-neutral-300">Opus tem o melhor raciocínio passo-a-passo da família Anthropic. Ele consegue (a) detectar lacunas no pedido inicial, (b) formular perguntas que reduzem ambiguidade, (c) sintetizar respostas em critérios testáveis. Esses três passos definem se o resto do Triad vai produzir algo útil ou apenas plausível.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Interrogação prévia</span><p class="text-sm text-neutral-400 mt-1">O Condutor pergunta antes de despachar — não assume</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Briefing como contrato</span><p class="text-sm text-neutral-400 mt-1">O briefing é o contrato que o Crítico usa para julgar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Validação final</span><p class="text-sm text-neutral-400 mt-1">Mesmo após SHIP do Crítico, o Condutor revisa o encaixe</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Único ponto de contato</span><p class="text-sm text-neutral-400 mt-1">O usuário só fala com o Condutor — Executor e Crítico ficam encapsulados</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">⚙️ DeepSeek como Executor — volume, custo, resiliência</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Executor produz volume — 3–5 ângulos por iteração, e potencialmente dezenas de iterações até SHIP. <strong class="text-emerald-400">DeepSeek é escolhido aqui porque combina capacidade de raciocínio com custo baixo o suficiente para rodar por horas</strong> sem inviabilizar a operação.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O modelo de execução — DeepSeek opera como força de trabalho do Triad. Lê o briefing, gera múltiplos ângulos com premissas diferentes, recebe feedback do Crítico, revisa e ressubmete. Pode rodar continuamente por horas em tarefas grandes sem que o custo se torne proibitivo.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 text-center">
+          <div class="text-3xl font-bold text-emerald-400 mb-1">$0.87</div>
+          <div class="text-xs text-neutral-500 mb-2">por milhão de tokens</div>
+          <p class="text-xs text-neutral-400">DeepSeek — Executor</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 text-center">
+          <div class="text-3xl font-bold text-neutral-400 mb-1">~$15</div>
+          <div class="text-xs text-neutral-500 mb-2">por milhão de tokens</div>
+          <p class="text-xs text-neutral-400">Opus — Condutor</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 text-center">
+          <div class="text-3xl font-bold text-neutral-400 mb-1">~$10</div>
+          <div class="text-xs text-neutral-500 mb-2">por milhão de tokens</div>
+          <p class="text-xs text-neutral-400">GPT-5.5 — Crítico</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🛠️</span> Por que DeepSeek aqui
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Custo 17× menor que Opus:</strong> permite gerar 17× mais drafts pelo mesmo orçamento — viabiliza paralelismo real.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Janela de contexto longa:</strong> aguenta briefings densos sem perder o início.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Arquitetura MoE:</strong> ativa apenas os experts relevantes por token, mantendo latência baixa em iterações longas.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-emerald-400 mt-1">•</span><span><strong>Resiliência operacional:</strong> roda por horas sem rate limit estourar — ideal para tarefas com 10+ iterações.</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Princípio do executor "barato"
+        </h3>
+        <p class="text-neutral-300">O Executor é o papel que mais consome tokens — porque é quem produz volume. Usar o modelo mais caro aqui inverteria a economia do Triad. Você quer o modelo mais barato que ainda consiga raciocinar — não o modelo mais inteligente disponível.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Executor como força bruta</span><p class="text-sm text-neutral-400 mt-1">Gerar volume é mais importante que gerar perfeição na primeira tentativa</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Custo viabiliza loop</span><p class="text-sm text-neutral-400 mt-1">17× mais barato que Opus permite 10+ iterações sem inviabilizar a operação</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">MoE para latência</span><p class="text-sm text-neutral-400 mt-1">Mixture of Experts ativa só o necessário — bom para iterações longas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Resiliência de rate limit</span><p class="text-sm text-neutral-400 mt-1">Sustenta tarefas multi-hora sem interrupção</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">🔍 GPT-5.5 como Crítico — rigor, especificidade, aprovação</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Crítico é o portão de qualidade. <strong class="text-emerald-400">GPT-5.5 é escolhido aqui porque tem o melhor desempenho em detectar premissas implícitas e falhas lógicas finas</strong> — exatamente o que diferencia uma resposta plausível de uma resposta correta.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O modelo de revisão — GPT-5.5 recebe o briefing e cada draft do Executor, e emite um de três veredictos: SHIP (atende todos os critérios), REVISE (problema localizado e corrigível), ou FUNDAMENTAL FLAW (a premissa do draft está errada — recomeçar). Cada veredicto vem com especificação do problema, localização no draft e direção da correção.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 font-bold text-lg mb-2">✓ SHIP</div>
+          <p class="text-sm text-neutral-300">Todos os critérios do briefing foram atendidos. Encaminhar ao Condutor para validação final.</p>
+        </div>
+        <div class="bg-yellow-900/20 rounded-xl border border-yellow-500/30 p-5">
+          <div class="text-yellow-400 font-bold text-lg mb-2">↻ REVISE</div>
+          <p class="text-sm text-neutral-300">Problema específico e localizado. Executor revisa a parte indicada e ressubmete.</p>
+        </div>
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+          <div class="text-red-400 font-bold text-lg mb-2">✗ FUNDAMENTAL FLAW</div>
+          <p class="text-sm text-neutral-300">A premissa do draft está errada. Descartar e gerar novo ângulo com premissa diferente.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Crítica vaga (rejeitada)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Análise rasa, melhorar"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Faltam exemplos"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Resultado fraco"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Refazer com mais profundidade"</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-6">
+          <h4 class="font-bold text-emerald-400 mb-4">✓ Crítica específica (válida)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Ângulo 2 assume LTV ≥ 12 meses sem dado de retenção"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Critério #3 (ticket ≥ $3k) não atendido no nicho A"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"Parágrafo 4 cita competidores sem preço — viola restrição"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-emerald-400">✓</span><span>"FUNDAMENTAL FLAW: ângulo 3 confunde causa e correlação"</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> System prompt do Crítico (núcleo)
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2 overflow-x-auto">
+          <p>Você é o Crítico. Você NÃO escreve drafts.</p>
+          <p>Para cada draft recebido:</p>
+          <p>  1. Liste cada critério do briefing</p>
+          <p>  2. Marque ATENDIDO/NÃO-ATENDIDO/PREMISSA-INVÁLIDA</p>
+          <p>  3. Emita veredicto: SHIP | REVISE | FUNDAMENTAL FLAW</p>
+          <p>  4. Se REVISE: localize o trecho, descreva o gap,</p>
+          <p>     proponha direção (NÃO escreva o conteúdo).</p>
+          <p></p>
+          <p>Proibido: "poderia ser melhor", "mais detalhado",</p>
+          <p>         "mais profundo", "mais exemplos".</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Três veredictos</span><p class="text-sm text-neutral-400 mt-1">SHIP, REVISE, FUNDAMENTAL FLAW — sem zona cinzenta intermediária</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Crítico não escreve</span><p class="text-sm text-neutral-400 mt-1">Aponta direção; reescrita é trabalho do Executor — separação de papéis</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Especificidade obrigatória</span><p class="text-sm text-neutral-400 mt-1">Onde, o quê, por que — sem isso o veredicto é inválido</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Premissa vs execução</span><p class="text-sm text-neutral-400 mt-1">REVISE corrige; FUNDAMENTAL FLAW recomeça — distinção crítica</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🔁 O loop interno DeepSeek ↔ GPT — até o SHIP</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Entre o briefing e o SHIP existe um loop fechado. <strong class="text-emerald-400">O Executor produz, o Crítico julga, o Executor revisa</strong> — e essa iteração continua até que todos os critérios do briefing sejam atendidos. O usuário não vê esse loop; ele só recebe o resultado validado.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O ciclo de iteração entre Executor e Crítico. Começa quando o Executor recebe o briefing e termina quando o Crítico emite SHIP em todos os ângulos avaliados. Tarefas de complexidade média convergem em 2–3 iterações; tarefas com premissas instáveis podem precisar de 5+.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">⏱️</span> Timeline de uma execução real
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">D1</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor → 1º draft</div>
+              <p class="text-sm text-neutral-300">3 ângulos gerados. Ângulo 1: nicho clínicas odontológicas. Ângulo 2: SaaS para pequenos contadores. Ângulo 3: serviço de manutenção predial.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">C1</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-yellow-500/30">
+              <div class="text-xs text-yellow-400 mb-1">Crítico → REVISE</div>
+              <p class="text-sm text-neutral-300">"Ângulo 1 assume ticket $3k+ sem dado. Ângulo 2 cita 3 competidores sem preço — viola restrição. Ângulo 3 sem urgência de compra documentada."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">D2</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor → 2º draft</div>
+              <p class="text-sm text-neutral-300">Ângulo 1 com dado de ticket médio (R$ 4.200, fonte CFO). Ângulo 2 com preço dos 3 competidores. Ângulo 3 reescrito com gatilho de urgência (multas ANVISA).</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">C2</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-yellow-500/30">
+              <div class="text-xs text-yellow-400 mb-1">Crítico → REVISE</div>
+              <p class="text-sm text-neutral-300">"Ângulo 1 e 3 OK. Ângulo 2: o preço citado é do plano básico — o critério #2 exige ticket médio efetivo. Recalcular com mix realista."</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">D3</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor → 3º draft</div>
+              <p class="text-sm text-neutral-300">Ângulo 2 recalculado: mix 60% básico + 30% plus + 10% enterprise → ticket médio $3.180. Atende critério.</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">✓</span>
+            </div>
+            <div class="flex-1 bg-emerald-900/20 rounded-xl p-4 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400 mb-1">Crítico → SHIP</div>
+              <p class="text-sm text-neutral-300">"Todos os 3 ângulos atendem aos 5 critérios do briefing. Encaminhar ao Condutor para validação final."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Benchmark de convergência
+        </h3>
+        <p class="text-neutral-300">Tarefas de complexidade média devem convergir em 2–3 iterações. Acima de 5 iterações, suspeite do briefing — provavelmente um critério está mal formulado ou um ângulo precisa de inversão de premissa.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Loop fechado</span><p class="text-sm text-neutral-400 mt-1">Usuário fora; Executor e Crítico iteram sozinhos até SHIP</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Convergência por critério</span><p class="text-sm text-neutral-400 mt-1">Cada iteração resolve um critério não atendido — progresso mensurável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Limite de iterações</span><p class="text-sm text-neutral-400 mt-1">5+ iterações é sinal de briefing fraco, não de executor ruim</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">SHIP como gate</span><p class="text-sm text-neutral-400 mt-1">Sem SHIP, nada chega ao Condutor — sem Condutor, nada chega ao usuário</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🌈 Por que os modelos devem ser de arquiteturas diferentes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Se você usasse três instâncias do mesmo modelo, eles compartilhariam as mesmas cegueiras — premissas implícitas, padrões de raciocínio, vieses de treino. <strong class="text-emerald-400">Arquiteturas diferentes pegam erros diferentes</strong>, e essa diversidade é o que torna o Triad mais que a soma das partes.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O princípio da diversidade arquitetural — combinar modelos que foram treinados com filosofias diferentes (Constitutional AI, RLHF + tools, MoE) para que as cegueiras de um sejam compensadas pelos fortes do outro. É a versão LLM da revisão por pares de disciplinas distintas.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 font-bold mb-2">Claude (Anthropic)</div>
+          <div class="text-xs text-neutral-500 mb-3">Constitutional AI</div>
+          <p class="text-sm text-neutral-300 mb-3">Treinado com princípios constitucionais aplicados recursivamente. Forte em raciocínio estruturado, ético e em seguir instruções complexas.</p>
+          <p class="text-xs text-emerald-400">Pega: ambiguidade, escopo, ética operacional</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 font-bold mb-2">GPT (OpenAI)</div>
+          <div class="text-xs text-neutral-500 mb-3">RLHF + Tools</div>
+          <p class="text-sm text-neutral-300 mb-3">Treinado com RLHF intensivo e uso de ferramentas. Forte em detecção de inconsistência factual e verificação contra padrões conhecidos.</p>
+          <p class="text-xs text-emerald-400">Pega: alucinação, falha lógica, premissa frágil</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-emerald-500/30 p-5">
+          <div class="text-emerald-400 font-bold mb-2">DeepSeek</div>
+          <div class="text-xs text-neutral-500 mb-3">Mixture of Experts</div>
+          <p class="text-sm text-neutral-300 mb-3">Arquitetura MoE com experts especializados por domínio. Forte em volume, paralelismo e em ângulos não-convencionais por roteamento de experts.</p>
+          <p class="text-xs text-emerald-400">Pega: ângulos que Claude/GPT descartariam</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">🧪</span> O experimento mental
+        </h3>
+        <p class="text-neutral-300 mb-3">Imagine três Claudes Opus no Triad. Se Claude tem um viés sistemático contra X (ex: ângulos de negócio com risco regulatório), o Condutor não vai sugerir X, o Executor não vai gerar X, e o Crítico não vai detectar a ausência de X. <strong class="text-emerald-400">O viés vira invisível para o sistema inteiro.</strong></p>
+        <p class="text-neutral-300">Agora misture: Opus condutor, DeepSeek executor (com experts diferentes), GPT-5.5 crítico (com RLHF diferente). A chance de todos os três compartilharem o mesmo viés cai drasticamente. O sistema vê o que cada modelo sozinho não veria.</p>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Analogia: revisão por pares
+        </h3>
+        <p class="text-neutral-300">Em ciência, um paper de biologia revisto por três biólogos do mesmo grupo é mais frágil que o mesmo paper revisto por um biólogo, um estatístico e um físico. As cegueiras disciplinares são diferentes, e os erros que escapam de cada um são detectados pelos outros. O Triad aplica esse princípio a modelos de linguagem.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Cegueira compartilhada</span><p class="text-sm text-neutral-400 mt-1">Mesma arquitetura = mesmos vieses = mesmos pontos cegos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Diversidade arquitetural</span><p class="text-sm text-neutral-400 mt-1">Constitutional AI + RLHF + MoE produz três tipos de visão diferentes</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Erro complementar</span><p class="text-sm text-neutral-400 mt-1">Os erros de cada modelo são detectados pelos pontos fortes dos outros</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Revisão por pares</span><p class="text-sm text-neutral-400 mt-1">A justificativa científica do Triad — diversidade disciplinar reduz erro</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🎯 Exemplo prático — escolha de nicho de negócio</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Para tornar o fluxo concreto, vamos seguir uma execução real do início ao fim. <strong class="text-emerald-400">O usuário envia uma pergunta vaga; o Triad devolve três nichos validados</strong> contra critérios mensuráveis. Cada passo do pipeline é mostrado.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-emerald-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um walkthrough completo do Triad em ação, desde o pedido do usuário ("ajude a escolher um nicho de negócio") até a entrega final, passando pela interrogação do Condutor, briefing, exploração paralela do Executor, loop com o Crítico e validação final.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-4 flex items-center">
+          <span class="mr-2">⏱️</span> Pipeline completo, passo a passo
+        </h3>
+        <div class="space-y-4">
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-neutral-500/20 flex items-center justify-center">
+              <span class="text-neutral-300 font-bold text-sm">U</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Usuário</div>
+              <p class="text-sm text-neutral-300">"Me ajuda a escolher um nicho de negócio para abrir."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">🎙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400 mb-1">Condutor (Opus) — interrogação</div>
+              <p class="text-sm text-neutral-300">"Antes de despachar: (1) capital disponível? (2) tempo até precisar de receita? (3) localização? (4) está disposto a operar B2B ou só B2C? (5) tem alguma habilidade técnica que serve de barreira?"</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-neutral-500/20 flex items-center justify-center">
+              <span class="text-neutral-300 font-bold text-sm">U</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Usuário responde</div>
+              <p class="text-sm text-neutral-300">"R$ 80k. 6 meses. Curitiba. B2B preferível. Sei programar e tenho 8 anos de experiência."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">🎙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400 mb-1">Condutor → Briefing</div>
+              <div class="bg-dark-700/50 rounded-lg p-3 font-mono text-xs text-neutral-300 mt-2 space-y-1">
+                <p>OBJETIVO: 3 nichos B2B em Curitiba com break-even &lt; 6m</p>
+                <p>CRITÉRIOS:</p>
+                <p>  - ticket médio ≥ R$ 3.000</p>
+                <p>  - urgência alta (perda financeira em &lt; 30 dias)</p>
+                <p>  - ≥ 3 competidores identificados com preço</p>
+                <p>  - barreira técnica que aproveite programação</p>
+                <p>  - investimento inicial ≤ R$ 80k</p>
+                <p>RESTRIÇÕES: sem B2C; sem nicho saturado em Curitiba</p>
+                <p>ÂNGULOS: 1) automação fiscal · 2) compliance regulatório</p>
+                <p>         3) integração de ERPs · 4) operação de e-commerce</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">⚙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor (DeepSeek) → 1º draft</div>
+              <p class="text-sm text-neutral-300">Explora os 4 ângulos. Cada um com mercado endereçável, ticket estimado, 3 competidores, urgência e custo de aquisição. Total: ~12 páginas.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">🔍</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-yellow-500/30">
+              <div class="text-xs text-yellow-400 mb-1">Crítico (GPT-5.5) → REVISE</div>
+              <p class="text-sm text-neutral-300">"Ângulo 1 OK. Ângulo 2 não documenta urgência ≥ 30d. Ângulo 3 cita competidores nacionais — restrição local não foi avaliada. Ângulo 4 viola restrição (e-commerce é B2C-adjacente em Curitiba)."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">⚙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor → 2º draft</div>
+              <p class="text-sm text-neutral-300">Ângulo 2 revisto (multa LGPD em 30d como gatilho). Ângulo 3 revisto (competidores locais Curitiba). Ângulo 4 descartado e substituído por "automação operacional para indústrias do CIC".</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center">
+              <span class="text-yellow-400 font-bold text-sm">🔍</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-yellow-500/30">
+              <div class="text-xs text-yellow-400 mb-1">Crítico → REVISE</div>
+              <p class="text-sm text-neutral-300">"Ângulos 1, 2, 3 atendem. Ângulo 4 ainda não documenta ticket ≥ R$ 3k — projetos de automação industrial geralmente são acima, mas o draft não cita fonte."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">⚙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Executor → 3º draft</div>
+              <p class="text-sm text-neutral-300">Ângulo 4 com ticket médio de R$ 8.500 documentado (3 cases públicos do CIC + Sebrae PR).</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">✓</span>
+            </div>
+            <div class="flex-1 bg-emerald-900/20 rounded-xl p-4 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400 mb-1">Crítico → SHIP</div>
+              <p class="text-sm text-neutral-300">"Os 4 ângulos atendem aos 5 critérios. Encaminhar ao Condutor."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-emerald-400 font-bold text-sm">🎙️</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-emerald-500/30">
+              <div class="text-xs text-emerald-400 mb-1">Condutor → Validação final</div>
+              <p class="text-sm text-neutral-300">"Os 4 ângulos batem com o objetivo. Selecionando os 3 melhores (1, 3, 4) por melhor encaixe com 'programação como barreira' — o critério implícito do usuário. Entregando ranqueado."</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-neutral-500/20 flex items-center justify-center">
+              <span class="text-neutral-300 font-bold text-sm">U</span>
+            </div>
+            <div class="flex-1 bg-dark-800 rounded-xl p-4 border border-dark-600">
+              <div class="text-xs text-neutral-500 mb-1">Usuário recebe</div>
+              <p class="text-sm text-neutral-300">3 nichos validados com ticket, urgência, competidores, barreira técnica e investimento — cada um defensável contra os critérios que o próprio usuário ajudou a definir.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> O que mudou em relação a "pedir para um LLM"
+        </h3>
+        <p class="text-neutral-300">Se o usuário tivesse perguntado a um único modelo "que nicho devo abrir?", a resposta seria plausível mas não verificada — sem critérios, sem comparação de ângulos, sem revisão por outra arquitetura. O Triad força que cada afirmação passe por um teste antes de chegar ao usuário.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Interrogação antes da execução</span><p class="text-sm text-neutral-400 mt-1">5 perguntas do Condutor eliminaram 80% da ambiguidade do pedido</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">3 iterações até SHIP</span><p class="text-sm text-neutral-400 mt-1">Dentro do benchmark de complexidade média</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Critérios como contrato</span><p class="text-sm text-neutral-400 mt-1">O Crítico só aprova quando cada critério é demonstrado, não suposto</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-emerald-400 font-semibold">Validação final ranqueia</span><p class="text-sm text-neutral-400 mt-1">O Condutor não só valida — prioriza com base no contexto do usuário</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Três papéis distintos</strong><span class="text-neutral-400"> — Condutor planeja, Executor produz, Crítico valida. A separação é o que produz resultado verificado</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Opus como Condutor</strong><span class="text-neutral-400"> — raciocínio estruturado para interrogar, briefar e validar. Único ponto de contato com o usuário</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">DeepSeek como Executor</strong><span class="text-neutral-400"> — custo 17× menor permite volume e iterações longas sem inviabilizar a operação</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">GPT-5.5 como Crítico</strong><span class="text-neutral-400"> — SHIP / REVISE / FUNDAMENTAL FLAW com especificidade obrigatória; não escreve, aponta direção</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Loop interno até SHIP</strong><span class="text-neutral-400"> — Executor e Crítico iteram fechados; 2–3 iterações é o benchmark de convergência</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Arquiteturas diferentes</strong><span class="text-neutral-400"> — Constitutional AI + RLHF + MoE evitam cegueira compartilhada; revisão por pares aplicada a LLMs</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.4 — soul.md, a memória persistente</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 1
+          </a>
+          <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
-    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
   </footer>
 
   <script>
@@ -417,12 +818,7 @@
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
     });
-
-    function toggleTopic(button) {
-      const topicItem = button.closest('.topic-item');
-      const explanation = topicItem.querySelector('.topic-explanation');
-      explanation.classList.toggle('active');
-    }
   </script>
+
 </body>
 </html>
