@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Integrações Externas — conectando Telegram, N8N e Zapier ao Hermes Agent">
+  <title>Integrações Externas | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-amber-400 text-sm flex items-center gap-1">← Trilha 4</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a>
+      <span>/</span>
+      <span class="text-amber-400">Módulo 4.4</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔗 Integrações Externas</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Conectando o Hermes ao mundo — Telegram como interface mobile, N8N para orquestração e Zapier para integrações sem código.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">~40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Intermediário</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Integração</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICOS -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+
+      <!-- Tópico 1 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🌐</span>
+          <div>
+            <span class="font-medium">Por que integrar ferramentas externas</span>
+            <span class="text-neutral-500 text-sm ml-2">- Hermes como hub central de automação</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O Hermes sozinho é poderoso, mas seu impacto multiplica quando conectado ao restante do seu stack: Telegram para acionar tarefas do celular, N8N para orquestrar fluxos complexos com múltiplos sistemas, e Zapier para conectar centenas de ferramentas SaaS sem código. A integração transforma Hermes de ferramenta local em hub central de automação.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Sem integrações, o Hermes funciona apenas quando você está no terminal. Com integrações, qualquer evento em qualquer sistema pode disparar uma tarefa — o agente passa a trabalhar no contexto de todo o seu ecossistema digital.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como receptor de webhooks</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Integrações como canais de entrada</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta via canal de origem ou arquivo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Stack de automação conectado</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 2 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">📱</span>
+          <div>
+            <span class="font-medium">Telegram — configurando o bot</span>
+            <span class="text-neutral-500 text-sm ml-2">- BotFather e token de acesso</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Para criar um bot Telegram conectado ao Hermes: (1) abra o BotFather no Telegram e envie /newbot, (2) defina nome e username do bot, (3) receba o token de acesso, (4) adicione TELEGRAM_BOT_TOKEN no arquivo .env do Hermes, (5) execute hermes integrations telegram enable para ativar o listener, (6) envie /start para o bot no Telegram para confirmar conexão.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Telegram é o canal de acesso mobile mais prático para o Hermes. Com o bot configurado, você delega tarefas de qualquer lugar — no celular, sem abrir terminal, enquanto está em trânsito ou numa reunião.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>BotFather para criação do bot</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>TELEGRAM_BOT_TOKEN no .env</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Listener ativado via hermes integrations</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona no mesmo chat</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 3 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">📨</span>
+          <div>
+            <span class="font-medium">Recebendo tarefas via Telegram webhook</span>
+            <span class="text-neutral-500 text-sm ml-2">- Do chat ao job executado</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Quando você envia uma mensagem ao bot Telegram, ela chega ao Hermes como um webhook POST. O Hermes identifica o chat_id do remetente (verificação de segurança), extrai o texto da mensagem, converte em instrução de job, executa, e responde de volta ao mesmo chat com o resultado — o ciclo completo fica transparente no chat.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Entender o fluxo técnico permite depurar quando algo falha e personalizar o comportamento — como adicionar comandos especiais (/resumo, /status, /jobs) que o bot reconhece como atalhos para ações frequentes.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Webhook POST do Telegram</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Verificação de chat_id autorizado</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Comandos especiais como atalhos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona no chat de origem</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 4 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">⚡</span>
+          <div>
+            <span class="font-medium">N8N — visão geral e casos de uso</span>
+            <span class="text-neutral-500 text-sm ml-2">- Orquestração visual de automações</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">N8N é uma plataforma de automação open-source com interface visual de fluxos (nodes e edges). Diferente do Zapier (cloud-only, pago por tarefa), o N8N pode rodar localmente, é self-hosted e tem custo fixo. Com N8N você cria pipelines visuais que conectam qualquer serviço — e pode incluir o Hermes como um node via HTTP Request para o webhook.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">N8N resolve automações complexas que envolvem múltiplos sistemas e lógica condicional — coisa que um webhook simples não faz. É o orquestrador ideal para fluxos como "novo lead → enriquece dados → Hermes escreve email personalizado → envia via SendGrid".</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>N8N self-hosted vs cloud</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Fluxos visuais com nodes e edges</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como node via HTTP Request</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Lógica condicional e ramificações</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 5 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">🔧</span>
+          <div>
+            <span class="font-medium">Conectando o Hermes ao N8N via webhook</span>
+            <span class="text-neutral-500 text-sm ml-2">- Configuração do node e autenticação</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">No N8N, adicione um node "HTTP Request" com método POST, URL apontando para o endpoint do Hermes (http://localhost:PORT/webhook), header Authorization com seu token e body JSON contendo task (instrução), skill (persona a usar) e callback_url (onde enviar o resultado). O Hermes processa e chama de volta o callback com o output.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">A configuração do node N8N é o único passo técnico necessário. Depois disso, qualquer fluxo que o N8N processa pode incluir o Hermes como etapa de inteligência — sem código adicional.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Endpoint http://localhost:PORT/webhook</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Header Authorization com token</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Body JSON com task, skill, callback_url</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta assíncrona via callback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 6 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">⚙️</span>
+          <div>
+            <span class="font-medium">Zapier como alternativa sem código</span>
+            <span class="text-neutral-500 text-sm ml-2">- Quando usar Zapier vs N8N</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Zapier é a alternativa cloud-managed ao N8N — mais simples de configurar (sem instalação), com mais de 5000 integrações nativas e plano gratuito para fluxos básicos. A limitação é custo variável por tarefa e execução em cloud da Zapier (sem controle total dos dados). Para o Hermes, usa o mesmo mecanismo: Zap com ação Webhook POST para o endpoint do Hermes.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Zapier é a escolha certa para equipes não-técnicas que precisam de integrações rápidas sem instalar N8N. O mesmo padrão de webhook funciona — a diferença é operacional, não técnica.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Zapier para equipes não-técnicas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>5000+ integrações nativas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Custo variável vs N8N self-hosted fixo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Mesmo padrão webhook funciona</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 7 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+          <span class="text-lg">🔄</span>
+          <div>
+            <span class="font-medium">Pipeline completo: Telegram → Hermes → Triad → resposta</span>
+            <span class="text-neutral-500 text-sm ml-2">- Integrando todos os componentes</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O pipeline completo funciona assim: você envia "Analisa os dados de vendas desta semana e recomenda 3 ações" pelo Telegram → Hermes recebe via webhook, carrega soul.md + skill de análise → aciona padrão Triad (DeepSeek rascunha, Claude valida, GPT sintetiza) → Hermes consolida e envia a análise de volta para o Telegram → você lê no celular 5 minutos depois.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Ver o pipeline completo em operação é o momento em que tudo se conecta. Entender cada handoff — do Telegram ao Hermes ao Triad e de volta — permite otimizar a latência total e depurar exatamente onde uma falha ocorreu.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Telegram como interface de entrada</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes orquestrando Triad</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resposta consolidada de volta ao canal</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Latência total do pipeline end-to-end</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Telegram como interface mobile</strong><span class="text-neutral-400"> — aciona tarefas de qualquer lugar sem terminal</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">N8N para fluxos complexos</strong><span class="text-neutral-400"> — orquestração visual com múltiplos sistemas</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Zapier para equipes não-técnicas</strong><span class="text-neutral-400"> — mesma lógica de webhook, zero instalação</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Pipeline end-to-end funcional</strong><span class="text-neutral-400"> — Telegram → Hermes → Triad → resposta</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.5 — Deploy no GitHub Pages: publicando o curso para o mundo</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.3</a>
+          <a href="modulo-4-5.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV PREV/NEXT -->
+    <div class="flex justify-between pt-6 border-t border-dark-600">
+      <a href="modulo-4-3.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.3: Automação Overnight</a>
+      <a href="modulo-4-5.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.5: Deploy GitHub Pages →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
+    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      explanation.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

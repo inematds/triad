@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avançado | TRIAD</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha purple) */
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .hover\:border-purple-500\/30:hover { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+            <span class="text-sm font-medium">← Curso</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center">
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">
+        TRILHA 3
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔮 Avançado</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Otimize, monitore, proteja e expanda seu sistema Hermes + Triad
+      </p>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Módulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">42</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">~6h</div>
+          <div class="text-xs text-neutral-400">Duração</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- NAVEGAÇÃO RÁPIDA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Navegação Rápida</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="#modulo-3-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+            <span class="text-purple-400 font-bold text-sm">3.1</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Engenharia de prompts para o Triad</h3>
+          <p class="text-xs text-neutral-400">Estrutura, critérios e iteração dos prompts</p>
+        </a>
+
+        <a href="#modulo-3-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+            <span class="text-purple-400 font-bold text-sm">3.2</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Controle de custos e rate limits</h3>
+          <p class="text-xs text-neutral-400">Tokens, orçamento e proteção financeira</p>
+        </a>
+
+        <a href="#modulo-3-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+            <span class="text-purple-400 font-bold text-sm">3.3</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Monitoramento, logs e saúde</h3>
+          <p class="text-xs text-neutral-400">Dashboard, alertas e ritual de revisão</p>
+        </a>
+
+        <a href="#modulo-3-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+            <span class="text-purple-400 font-bold text-sm">3.4</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Segurança — Chaves e dados sensíveis</h3>
+          <p class="text-xs text-neutral-400">Chaves, permissões e checklist de produção</p>
+        </a>
+
+        <a href="#modulo-3-5" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+            <span class="text-purple-400 font-bold text-sm">3.5</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Resiliência — Fallbacks e recuperação</h3>
+          <p class="text-xs text-neutral-400">Retry, checkpoints e recuperação de falhas</p>
+        </a>
+
+        <a href="#modulo-3-6" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+            <span class="text-purple-400 font-bold text-sm">3.6</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-purple-400 transition-colors">Expandindo o Pantheon</h3>
+          <p class="text-xs text-neutral-400">Novas personas, skills e organização</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- DIVISOR -->
+    <div class="flex items-center space-x-4 mb-10">
+      <div class="flex-1 h-px bg-dark-600"></div>
+      <span class="text-sm text-neutral-400 font-medium">Conteúdo detalhado</span>
+      <div class="flex-1 h-px bg-dark-600"></div>
+    </div>
+
+    <!-- MÓDULO 3.1 -->
+    <div id="modulo-3-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.1</span>
+          <span class="text-xs text-neutral-500">~55 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">✍️ Engenharia de prompts para o Triad</h3>
+        <p class="text-neutral-400 text-sm">Estruture briefings precisos, calibre o Crítico e itere os prompts do sistema com método — o maior alavanca de qualidade do Triad.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Por que o prompt do Condutor define tudo</span><span class="text-neutral-500 text-sm ml-2">- Briefing como multiplicador de qualidade</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Condutor é o modelo que transforma seu objetivo vago em um briefing preciso que o Worker pode executar. Um prompt fraco do Condutor produz um briefing fraco → Worker gera drafts medíocres → Crítico reprova em loop → custo alto, resultado ruim. Um prompt forte define critérios de sucesso mensuráveis, restrições claras e ângulos específicos para explorar.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Otimizar o prompt do Condutor tem o maior retorno de qualquer ajuste no sistema. Um briefing de qualidade reduz as iterações do loop Worker-Crítico em 60–80%.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Briefing como multiplicador de qualidade · Critérios de sucesso mensuráveis · Restrições explícitas · Redução de iterações por qualidade do briefing</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Estrutura do briefing ideal — o que não pode faltar</span><span class="text-neutral-500 text-sm ml-2">- 5 elementos obrigatórios</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Um briefing eficaz do Triad tem cinco elementos: (1) Objetivo em uma frase sem ambiguidade; (2) Critérios de sucesso mensuráveis — como você saberá que o resultado é bom; (3) Restrições explícitas — o que não fazer, formatos inaceitáveis; (4) Contexto relevante — informações que o Worker precisa mas não tem acesso; (5) 3–5 ângulos sugeridos para exploração paralela.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Saber os cinco elementos permite auditar qualquer briefing antes de despachar ao Worker. Se algum elemento estiver faltando, o briefing está incompleto.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Cinco elementos do briefing · Objetivo sem ambiguidade · Critérios mensuráveis · Ângulos sugeridos · Auditoria pré-execução</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Como formular critérios de sucesso claros</span><span class="text-neutral-500 text-sm ml-2">- Critério testável vs subjetivo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Critérios vagos ("boa análise de mercado") produzem outputs que parecem válidos mas são inúteis. Critérios específicos são testáveis: "identifica nichos onde o ticket médio por cliente é acima de $3.000, o mercado é local e a urgência de compra é alta". O Crítico usa os critérios para aplicar SHIP/REVISE objetivamente.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Critérios específicos são o que permite que o Crítico seja rigoroso de forma objetiva em vez de subjetiva. Sem eles, o sistema produz qualidade inconsistente.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Critério testável vs subjetivo · Urgência como critério · Critério como input do Crítico · Consistência por especificidade</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Instruções para o Worker — ângulos, volume, paralelismo</span><span class="text-neutral-500 text-sm ml-2">- Premissa diferente vs linguagem diferente</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O system prompt do Worker deve especificar: quantos ângulos explorar (3–5), que cada ângulo use uma premissa fundamentalmente diferente (não apenas linguagem diferente), que o Worker mostre seu raciocínio (não apenas a conclusão), e que não julgue qual ângulo é melhor — isso é papel do Crítico. Para tarefas de volume: "se o Crítico retornar REVISE com o mesmo problema pela segunda vez, inverta a premissa central".</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O Worker sem instruções claras de paralelismo produz variações superficiais do mesmo ângulo, não exploração genuína. A instrução de premissa diferente é o que força diversidade real.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Premissa diferente vs linguagem diferente · Raciocínio visível · Sem julgamento de valor · Inversão de premissa como estratégia · Diversidade real de ângulos</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Calibrando o Crítico — o que "brutalmente criticar" significa</span><span class="text-neutral-500 text-sm ml-2">- Crítica específica vs vaga</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Crítico deve ser instruído a criticar com especificidade: "X assume Y, mas isso falha quando Z" é crítica válida. "Poderia ser mais detalhado" não é crítica — é observação vaga. O Crítico deve sempre indicar: qual é o problema específico, onde no draft ele aparece, e como seria diferente se fosse corrigido. Para tarefas estratégicas: "questione a premissa central se ela não for verificável".</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Um Crítico vago faz o Worker girar sem melhorar. Um Crítico específico converte cada iteração em melhoria mensurável.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Crítica específica vs vaga · Localização do problema no draft · Como seria diferente · Questionamento de premissa · Crítica como driver de melhoria</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Fallbacks no prompt — "se tokens acabarem, default para X"</span><span class="text-neutral-500 text-sm ml-2">- PARTIAL_DELIVERY como sinal</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Em tarefas longas, modelos podem atingir limites de contexto no meio da execução. Adicione fallbacks explícitos no system prompt do Worker: "se você atingir o limite de tokens antes de completar todos os ângulos, entregue os ângulos completos e sinalize PARTIAL_DELIVERY — não truncue ângulos no meio". Para o Crítico: "se receber um PARTIAL_DELIVERY, avalie apenas os ângulos completos e sinalize quantos faltam".</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Sem fallbacks explícitos, o modelo trunca silenciosamente no momento do limite — e o Crítico avalia trabalho incompleto como se fosse completo. Fallbacks tornam as falhas visíveis e recuperáveis.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Limite de contexto · PARTIAL_DELIVERY como sinal · Truncamento silencioso · Falha visível vs silenciosa · Recuperação de tarefa parcial</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Iterando os prompts — como medir e melhorar</span><span class="text-neutral-500 text-sm ml-2">- Log de execuções e menos de 3 iterações como benchmark</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Para iterar sistematicamente: (1) mantenha um log das últimas 5 execuções com resultado e número de iterações do loop; (2) identifique o padrão de reprovação mais frequente do Crítico — esse padrão indica um gap no briefing do Condutor; (3) adicione instrução específica para cobrir esse gap; (4) execute com a mesma tarefa de referência e compare. Bom sistema: menos de 3 iterações para tarefas de complexidade média.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Iterar sem medir é girar em círculos. Com métricas simples (número de iterações, tipo de reprovação mais frequente), você transforma otimização em processo sistemático.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Log de execuções · Padrão de reprovação · Gap do briefing · Tarefa de referência · Menos de 3 iterações como benchmark</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-1.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3.2 -->
+    <div id="modulo-3-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.2</span>
+          <span class="text-xs text-neutral-500">~50 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">💰 Controle de custos e gestão de rate limits</h3>
+        <p class="text-neutral-400 text-sm">Tokens, orçamento por modelo, alertas e decisões de free tier vs pago — o freio financeiro do sistema.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Entendendo tokens — input vs output, cache vs fresh</span><span class="text-neutral-500 text-sm ml-2">- A estrutura de custo dos LLMs</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O custo de uso de LLMs é calculado em tokens — unidades de texto que variam entre 3–4 caracteres em inglês e 2–3 em português. Custos separados para tokens de input (o que você envia) e output (o que o modelo responde). Input é geralmente mais barato que output. Alguns modelos (como Claude) oferecem cache de prompt — tokens de input repetidos entre chamadas são cobrados a 10% do preço normal.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender a estrutura de custo é o pré-requisito para qualquer estratégia de otimização. Sem esse conhecimento, você otimiza o componente errado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Input tokens vs output tokens · Cache de prompt · Relação input/output em português · Custo por modelo · Estimativa antes de executar</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Como calcular custo antes de rodar uma tarefa pesada</span><span class="text-neutral-500 text-sm ml-2">- 750 palavras ≈ 1.000 tokens</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Antes de rodar uma tarefa overnight longa, estime o custo: (1) estime o briefing em tokens — regra prática: 750 palavras ≈ 1.000 tokens; (2) estime o tamanho de cada draft (500–2.000 tokens para análises médias); (3) multiplique pelo número esperado de iterações; (4) multiplique pelo preço do modelo; (5) adicione 30% como margem de erro. Para DeepSeek V4 a $0,87/M output: 10 iterações × 1.000 tokens = $0,0087.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Estimar custo antes de executar elimina surpresas. Em tarefas novas, uma estimativa ruim pode resultar em custo 10x maior que o esperado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">750 palavras = 1.000 tokens · Estimativa de iterações · Margem de 30% · Cálculo para DeepSeek V4 · Surpresa como resultado de não estimar</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Rate limits — o que são, quando acontecem, como evitar</span><span class="text-neutral-500 text-sm ml-2">- TPM, RPM e BYOK</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Rate limits são limites impostos pelos provedores no número de tokens ou chamadas por minuto/hora/dia. Quando atingidos, retornam erro 429 Too Many Requests. Os limites variam por modelo e por tier de conta. Para o Triad em uso intensivo, os rate limits mais comuns são tokens por minuto (TPM) e requisições por minuto (RPM). BYOK na DeepSeek resolve o problema de limite compartilhado no OpenRouter.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Rate limits são o principal ponto de falha em loops overnight. Saber quando acontecem e como evitá-los é o que garante que o trabalho noturno chega completo pela manhã.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">TPM e RPM · 429 Too Many Requests · Tier de conta e limites · BYOK como solução · Limites compartilhados vs dedicados</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Estratégias de orçamento por modelo e por semana</span><span class="text-neutral-500 text-sm ml-2">- Loop runaway e alertas de 80%</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Orçamento prático para o Triad: defina um limite semanal por papel — ex: Condutor (Opus): $5/semana, Worker (DeepSeek): $10/semana, Crítico (GPT-5.5): $3/semana. Configure alertas no OpenRouter para cada modelo quando atingir 80% do orçamento semanal. Reserve 20% para experimentos fora do Triad.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Orçamento por modelo evita que um loop runaway (loop sem parada) consuma créditos ilimitados. É o freio de segurança financeiro do sistema.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Orçamento por papel · Limite semanal · Alertas de 80% · Loop runaway · Reserva para experimentos</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Alertas de custo no OpenRouter — configurando limites</span><span class="text-neutral-500 text-sm ml-2">- Spend Alerts e limite hard mensal</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No OpenRouter, vá em Settings → Billing → Spend Alerts. Configure: alerta de email quando gasto diário atingir $X; limite hard de gasto mensal (o OpenRouter bloqueia novas chamadas automaticamente). Para projetos de equipe, crie chaves de API separadas por projeto para monitorar custo por iniciativa.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Alertas automáticos são o sistema de proteção que funciona enquanto você dorme. Sem eles, você pode acordar com uma conta inesperada de um loop que ficou rodando além do planejado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Spend Alerts no OpenRouter · Limite hard mensal · Alerta por projeto · Chave por projeto · Proteção automática overnight</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Quando usar free tier vs pago — a decisão certa</span><span class="text-neutral-500 text-sm ml-2">- Limite de 10 chamadas como regra prática</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Free tiers são adequados para: testes de configuração, exploração de novos prompts, tarefas de baixa prioridade onde velocidade não importa. Não são adequados para: o Triad em produção (rate limits muito baixos), tarefas overnight (risco de interrupção), e loops de mais de 5 iterações. Regra prática: se a tarefa vai levar mais de 10 minutos ou produzir mais de 10 chamadas, use tier pago com BYOK.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Usar free tier nas situações erradas resulta em trabalho interrompido e estados inconsistentes — muitas vezes mais custoso em tempo que a economia em dinheiro.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Free tier para testes · Pago para produção · Limite de 10 chamadas · Risco de interrupção · Custo em tempo vs custo em dinheiro</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Otimizando prompts para reduzir tokens sem perder qualidade</span><span class="text-neutral-500 text-sm ml-2">- Cache de system prompt e estrutura de briefing</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Técnicas de redução de tokens que não sacrificam qualidade: (1) remover exemplos redundantes do system prompt; (2) usar listas em vez de parágrafos nas instruções de sistema; (3) colocar instruções constantes no prompt do sistema (cacheado) e variáveis no prompt do usuário (fresh); (4) para o briefing do Condutor, usar formato estruturado de 5 seções em vez de prosa; (5) pedir ao Worker para mostrar raciocínio em bullets, não em parágrafos.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Reduzir tokens sem perder qualidade é o que permite fazer mais com o mesmo orçamento. Cada técnica tem impacto mensurável no custo sem afetar a profundidade do output.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Cache de system prompt · Lista vs parágrafo · Briefing estruturado · Raciocínio em bullets · Redução sem sacrifício de qualidade</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-2.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3.3 -->
+    <div id="modulo-3-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.3</span>
+          <span class="text-xs text-neutral-500">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">📊 Monitoramento, logs e saúde do sistema</h3>
+        <p class="text-neutral-400 text-sm">Disponibilidade, custo, qualidade e ritual diário de 5 minutos — o que mantém o Hermes funcionando de forma confiável.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">O que monitorar em um sistema Hermes ativo</span><span class="text-neutral-500 text-sm ml-2">- 4 categorias de monitoramento</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Um sistema Hermes em uso regular precisa de quatro categorias de monitoramento: (1) Disponibilidade — o Hermes responde? (2) Custo — está dentro do orçamento? (3) Qualidade — os outputs do Triad estão sendo aprovados em menos de 3 iterações? (4) Saúde do soul.md — as informações estão atualizadas? Um sistema mal monitorado deriva silenciosamente para comportamento inesperado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Monitoramento sistemático transforma o Hermes de uma ferramenta que funciona às vezes em um sistema confiável. Sem ele, você descobre problemas depois de ter consequências.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Quatro categorias de monitoramento · Disponibilidade vs custo vs qualidade · Deriva silenciosa · Monitoramento como prevenção · Atualidade do soul.md</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Logs nativos do Hermes — onde ficam e como ler</span><span class="text-neutral-500 text-sm ml-2">- ~/.hermes/logs/ e diagnóstico retroativo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes mantém logs em <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">~/.hermes/logs/</code>. Cada sessão gera um arquivo de log com timestamp contendo: chamadas de modelo (qual modelo, quantos tokens, custo), ferramentas executadas, erros e warnings, e histórico de decisões do agente. O comando <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">hermes logs --last 10</code> mostra os últimos 10 eventos.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Saber onde ficam os logs e como lê-los é o que permite diagnosticar problemas retroativamente. "Por que o Hermes fez X?" é uma pergunta que os logs respondem.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">~/.hermes/logs/ · hermes logs --last · hermes logs --session · Tokens e custo por chamada · Diagnóstico retroativo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Dashboard do OpenRouter como painel de saúde</span><span class="text-neutral-500 text-sm ml-2">- Revisão diária de 2 minutos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O dashboard do OpenRouter (openrouter.ai/activity) é o melhor painel de saúde financeira do sistema. Verifique diariamente: custo total do dia anterior vs média dos últimos 7 dias; modelo com maior custo; chamadas com erro; e latência por modelo. Anomalias em qualquer dessas métricas indicam problema.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O dashboard centraliza todas as informações financeiras do sistema em um lugar. Verificar 2 minutos por dia é suficiente para detectar anomalias antes que se tornem problemas grandes.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Revisão diária de 2 minutos · Custo vs média 7 dias · Modelo mais caro · Taxa de erro · Latência por modelo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Alertas de falha — configurando notificações</span><span class="text-neutral-500 text-sm ml-2">- Email, Telegram e eventos críticos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Configure alertas por email ou Telegram para eventos críticos: (1) Custo diário excede o limite; (2) Erro 429 repetido — rate limit crônico; (3) Job agendado não completou no tempo esperado; (4) soul.md não atualizado há mais de 30 dias. Para alertas via Telegram, use o bot do Hermes ou integre via Webhook ao seu bot pessoal.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Alertas proativos eliminam a necessidade de monitoramento ativo constante. Você age quando precisa, não monitora constantemente.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Alerta de custo · Alerta de rate limit · Alerta de job falho · soul.md stale · Telegram como canal de alerta</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Revisão diária — o ritual de 5 minutos</span><span class="text-neutral-500 text-sm ml-2">- Prevenção vs remediação</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Um ritual diário de 5 minutos de saúde do sistema: (1) abrir o OpenRouter dashboard e verificar custo de ontem; (2) verificar se há jobs incompletos no Hermes; (3) ler o resumo do que Hermes fez nas últimas 24 horas; (4) verificar se há alertas pendentes; (5) confirmar que o soul.md ainda reflete a realidade atual. Esse ritual pode ser automatizado — peça ao Hermes para enviar um resumo diário às 8h.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">5 minutos por dia de revisão previne horas de debugging quando algo vai errado. É o custo de manutenção mais barato possível para um sistema de produção.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Ritual de 5 minutos · Jobs incompletos · Resumo diário automático · soul.md vs realidade atual · Prevenção vs remediação</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Detectando tarefas presas ou loops infinitos</span><span class="text-neutral-500 text-sm ml-2">- Sinal STUCK e escala para o Condutor</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Tarefas presas acontecem quando o loop Worker-Crítico entra em ciclo: o Crítico reprovando sempre com o mesmo problema, o Worker revisando sem conseguir resolver. Sinais: mesmo número de iterações crescendo sem convergência; custo subindo sem entrega. Solução: adicionar instrução no Worker "se o Crítico reprovar o mesmo problema três vezes, sinalize STUCK e escale para o Condutor".</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Loops infinitos são o bug mais caro de um sistema de IA agêntica. Um loop overnight sem parada pode consumir créditos significativos antes de ser detectado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Sinal STUCK · Escala para o Condutor · Loop sem convergência · Custo crescente sem entrega · Limite de iterações como proteção</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Documentando o histórico de decisões do agente</span><span class="text-neutral-500 text-sm ml-2">- ~/.hermes/memory/ e insights para o soul.md</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes mantém histórico de decisões em <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">~/.hermes/memory/</code>. Periodicamente, exporte e revise: quais tipos de tarefa foram delegados com mais frequência, quais tiveram melhor qualidade, quais foram reprovados pelo Crítico mais vezes. Essa análise revela onde o sistema é mais e menos eficiente. Adicione os insights à seção Memory do soul.md para que o Hermes aprenda com o histórico.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O histórico de decisões é o dado bruto para melhoria contínua. Sem revisão periódica, você perde a oportunidade de aprender com o que o sistema já fez.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">~/.hermes/memory/ · Exportação periódica · Tipos de tarefa com melhor ROI · Padrão de reprovação · Insights para o soul.md</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-3.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3.4 -->
+    <div id="modulo-3-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.4</span>
+          <span class="text-xs text-neutral-500">~50 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🔐 Segurança — Chaves e dados sensíveis</h3>
+        <p class="text-neutral-400 text-sm">Proteção de API keys, permissões mínimas e checklist de segurança antes de colocar o agente em produção.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">O risco real de vazar chaves de API</span><span class="text-neutral-500 text-sm ml-2">- Bot scanning e uso não autorizado em horas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Chaves de API expostas são usadas por bots que escaneiam repositórios GitHub, pastas públicas e logs em tempo real. Uma chave da OpenAI ou Anthropic exposta pode resultar em centenas de dólares de uso não autorizado em horas. GitHub Secret Scanning detecta automaticamente padrões de chaves e notifica, mas a notificação vem depois da exposição.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O risco não é teórico — acontece rotineiramente com desenvolvedores que acidentalmente commitam arquivos de configuração. Entender o nível de risco motiva as boas práticas.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Bot scanning de repositórios · GitHub Secret Scanning · Uso não autorizado em horas · Custo de vazamento · Notificação tardia</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Nunca colocar chaves no soul.md — alternativas seguras</span><span class="text-neutral-500 text-sm ml-2">- hermes secrets set e .env</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O soul.md é um arquivo de texto que pode ser lido por qualquer processo com acesso ao <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">~/.hermes/</code>. Nunca inclua chaves de API, senhas ou tokens no soul.md. Alternativas seguras: variáveis de ambiente (arquivo <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">.env</code> nunca commitado), um gerenciador de senhas (1Password, Bitwarden), ou o keychain do sistema via <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">hermes secrets set KEY valor</code>.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O soul.md é um ponto de exposição óbvio para pessoas que não conhecem o sistema. Estabelecer a regra "nunca chaves no soul.md" antes de começar a preencher evita o hábito errado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">soul.md como arquivo de texto · hermes secrets set · Variáveis de ambiente · .env no .gitignore · Gerenciador de senhas</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Variáveis de ambiente — como usar corretamente</span><span class="text-neutral-500 text-sm ml-2">- .env, .gitignore e padrão da indústria</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Variáveis de ambiente são armazenadas no ambiente do sistema operacional, não em arquivos. Crie um arquivo <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">.env</code> na raiz do diretório de trabalho (nunca no repositório), adicione ao <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">.gitignore</code>, e carregue com <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">source .env</code> antes de iniciar o Hermes. No arquivo: <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">ANTHROPIC_API_KEY=sk-ant-...</code> em cada linha.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Variáveis de ambiente são o padrão da indústria para credenciais: ficam fora do sistema de arquivos de projeto, não aparecem em logs de debug e não são acidentalmente commitadas.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">.env e .gitignore · source .env · ~/.bashrc para persistência · Fora do projeto git · Padrão da indústria</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Rotação de chaves — quando e como trocar</span><span class="text-neutral-500 text-sm ml-2">- A cada 90 dias como rotina</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Rotação de chaves é o processo de substituir periodicamente suas API keys por novas. Pratique rotação: a cada 90 dias como rotina, imediatamente se suspeitar de exposição, e ao offboard um colaborador que tinha acesso. Para rotacionar: gere nova chave no provedor, atualize as variáveis de ambiente, teste que o sistema funciona com a nova chave, e então revogue a chave antiga.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Chaves antigas que nunca foram rotacionadas são um risco silencioso — você não sabe se foram expostas em algum momento. Rotação regular limita a janela de exposição potencial.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Rotação a cada 90 dias · Rotação imediata por suspeita · Revogar depois de confirmar nova chave · Offboard como gatilho · Janela de exposição</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Permissões mínimas — dando ao agente apenas o que precisa</span><span class="text-neutral-500 text-sm ml-2">- Menor privilégio e prompt injection</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes pode ser configurado com escopos de ferramenta limitados: <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">hermes config set tools.allowed "terminal,gemini"</code> restringe o Hermes a usar apenas essas ferramentas. Para o Triad específico, o Hermes precisa: acesso à internet (chamadas de API), acesso ao terminal (para CLIs), leitura de <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">~/.hermes/</code>. Não precisa de: acesso a arquivos fora de diretórios configurados ou execução de scripts arbitrários.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Princípio de menor privilégio — dar ao agente apenas o que ele precisa para a função limita o dano potencial de um comportamento inesperado ou de um prompt injection.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Escopo de ferramentas · hermes config tools.allowed · Menor privilégio · Prompt injection · Dano limitado por restrição</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">O que o Hermes pode ver — e o que nunca mostrar</span><span class="text-neutral-500 text-sm ml-2">- Minimização de dados no contexto</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes tem acesso a tudo que você inclui no soul.md, no histórico de conversas e nos arquivos que você passa explicitamente. Evite incluir no soul.md: senhas de qualquer tipo, dados pessoais de terceiros sem necessidade, informações financeiras detalhadas além do necessário para contexto, e informações confidenciais de contratos ou acordos de sigilo.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O contexto que você dá ao Hermes pode eventualmente chegar a um modelo externo via API. Minimizar dados sensíveis no contexto é uma prática de privacidade básica.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">soul.md como contexto transmitido · Dados de terceiros · Informações financeiras vs contexto financeiro · Acordo de sigilo · Minimização de dados</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Checklist de segurança antes de deixar o agente em produção</span><span class="text-neutral-500 text-sm ml-2">- Protocolo de verificação por projeto</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Antes de usar o Hermes para tarefas de produção, verifique: ✓ Chaves estão em variáveis de ambiente, não em arquivos de texto · ✓ .env está no .gitignore · ✓ soul.md não contém credenciais · ✓ hermes tools.allowed está configurado com escopo mínimo · ✓ Alerta de custo está ativo no OpenRouter · ✓ Limite de orçamento mensal está definido · ✓ Última rotação de chaves foi há menos de 90 dias. Este checklist deve ser repetido a cada novo projeto.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Um checklist sistemático substitui a dependência de memória. Segurança que depende de lembrar é segurança que vai falhar eventualmente.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Checklist como protocolo · Verificação antes de produção · Independência de memória · Repetição por projeto · Falha inevitável por dependência de memória</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-4.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3.5 -->
+    <div id="modulo-3-5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.5</span>
+          <span class="text-xs text-neutral-500">~50 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🛡️ Resiliência — Fallbacks e recuperação de erros</h3>
+        <p class="text-neutral-400 text-sm">Fallbacks de provedor, limites de retry, checkpoints e testes de resiliência — projetando o sistema para falhar bem.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">O que acontece quando um modelo falha ou fica lento</span><span class="text-neutral-500 text-sm ml-2">- Falha como dado estatístico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Falhas de modelo em sistemas de produção são inevitáveis: indisponibilidade de provedor (ocorre algumas vezes por mês em qualquer provedor), sobrecarga de servidor (latências de 30–60s em horários de pico), rate limit excedido (429), e erros de qualidade (modelo retorna resposta truncada ou sem sentido). Cada tipo de falha requer uma estratégia diferente de recuperação.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Aceitar que falhas vão acontecer — e projetar o sistema para lidar com elas — é o que diferencia um protótipo de um sistema de produção. A questão não é se vai falhar, mas quando e como recuperar.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Indisponibilidade de provedor · Rate limit como falha · Resposta truncada · Falha como dado estatístico · Design para recuperação</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Configurando fallbacks no OpenRouter</span><span class="text-neutral-500 text-sm ml-2">- Array de modelos e transparência para o Hermes</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No OpenRouter, você pode especificar um array de modelos fallback em sua chamada de API: se o modelo primário retornar erro ou timeout, o OpenRouter automaticamente tenta o próximo na lista. Exemplo para o Worker: primário <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">deepseek/deepseek-chat</code>, fallback 1 <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">mistral/mistral-large</code>, fallback 2 <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">meta-llama/llama-3.1-70b-instruct</code>. O fallback é transparente para o Hermes.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Fallbacks no OpenRouter são a forma mais simples de resiliência — uma linha de configuração que protege contra indisponibilidade de provedor sem mudança no código do Hermes.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Array de fallback · Transparência para o Hermes · Fallback para mesmo papel · Configuração única · Proteção contra indisponibilidade</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Fallbacks no prompt — instruções defensivas para o Worker</span><span class="text-neutral-500 text-sm ml-2">- PARTIAL_DELIVERY e BRIEFING_CONFLICT</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Além de fallbacks de provedor, adicione instruções defensivas no system prompt do Worker: "Se você atingir o limite de tokens antes de completar todos os ângulos, entregue os ângulos completos e sinalize PARTIAL_DELIVERY com o número de ângulos faltantes. Não truncue ângulos no meio — um ângulo incompleto é inútil. Se você encontrar informação contraditória no briefing, sinalize BRIEFING_CONFLICT antes de prosseguir."</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Instruções defensivas tornam falhas visíveis e nomeadas — PARTIAL_DELIVERY e BRIEFING_CONFLICT são muito mais fáceis de diagnosticar do que um output silenciosamente incompleto ou errado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">PARTIAL_DELIVERY · BRIEFING_CONFLICT · Ângulo incompleto vs ausente · Falha nomeada vs silenciosa · Instruções defensivas como protocolo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Limites de retry — quantas vezes tentar antes de parar</span><span class="text-neutral-500 text-sm ml-2">- Três tentativas e backoff exponencial</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Sem limites de retry, um loop que falha repetidamente pode rodar indefinidamente. Configure no system prompt do Worker: "se o Crítico retornar REVISE com o mesmo problema pela terceira vez consecutiva, escale para o Condutor com status STUCK. Não tente uma quarta revisão do mesmo ângulo." Para falhas de API: retry automático máximo 3 vezes com backoff exponencial (1s, 2s, 4s).</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Limites de retry são o freio de segurança do sistema. Sem eles, um loop mal configurado pode rodar por horas sem progressão.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Três tentativas como limite · STUCK como sinal de escalada · Backoff exponencial · Loop sem progressão · Consumo sem resultado</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Checkpoints — salvando estado parcial em tarefas longas</span><span class="text-neutral-500 text-sm ml-2">- Falha como inconveniência vs catástrofe</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Para tarefas que levam mais de 30 minutos ou mais de 20 iterações, instrua o Worker a salvar estado parcial periodicamente: "a cada 5 ângulos completados, escreva o progresso parcial no formato: CHECKPOINT: [número de ângulos completados]/[total], seguido dos ângulos prontos". Se a tarefa for interrompida, o Condutor pode retomar a partir do último checkpoint em vez de reiniciar do zero.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Checkpoints transformam falhas de tarefa longa de catástrofe em inconveniência. Sem eles, qualquer interrupção joga fora todo o trabalho feito até aquele momento.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">CHECKPOINT como protocolo · Retomada parcial · A cada 5 ângulos · Formato de checkpoint · Falha como inconveniência vs catástrofe</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Recuperação manual — como retomar uma tarefa interrompida</span><span class="text-neutral-500 text-sm ml-2">- Log como fonte de estado</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Quando uma tarefa é interrompida, o processo de recuperação manual é: (1) verificar no log do Hermes qual foi o último estado registrado; (2) identificar se há um CHECKPOINT no output parcial; (3) construir um novo prompt que inclua o contexto do checkpoint e instrua a continuar de onde parou; (4) verificar custo consumido antes de reiniciar. Para tarefas sem checkpoint, avaliar se vale recomeçar ou abandonar.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Saber recuperar uma tarefa interrompida salva o trabalho já feito e o custo já consumido. Sem esse processo, toda interrupção resulta em desperdício.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Log como fonte de estado · CHECKPOINT como ponto de retomada · Prompt de continuação · Custo consumido vs valor recuperável · Abandonar vs recomeçar</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Testando resiliência — simulando falhas</span><span class="text-neutral-500 text-sm ml-2">- Validação antes de produção crítica</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Antes de confiar no sistema para tarefas críticas overnight, teste a resiliência ativamente: (1) simule uma falha de modelo trocando para um modelo inexistente e verificando se o fallback é acionado; (2) envie um briefing deliberadamente contraditório e verifique se o Worker sinaliza BRIEFING_CONFLICT; (3) force STUCK mandando um briefing impossível; (4) interrompa uma tarefa no meio e verifique o processo de recuperação.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Testar resiliência em condição controlada revela problemas antes de eles aparecerem em produção. É a diferença entre descobrir que o fallback não funciona durante um teste vs durante uma tarefa crítica às 3h da manhã.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Modelo inexistente como teste · Briefing contraditório · STUCK forçado · Interrupção controlada · Validação antes de produção crítica</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-5.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3.6 -->
+    <div id="modulo-3-6" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.6</span>
+          <span class="text-xs text-neutral-500">~55 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🏛️ Expandindo o Pantheon — Novas personas e skills</h3>
+        <p class="text-neutral-400 text-sm">Quando criar novas personas, como especializá-las e como organizar e compartilhar o Pantheon da equipe.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Quando criar uma nova persona vs usar Orpheus</span><span class="text-neutral-500 text-sm ml-2">- Escopo da tarefa como critério</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Orpheus é para deep work estratégico que justifica o custo e tempo do loop Triad completo. Crie novas personas quando: a tarefa tem um padrão recorrente com perfil específico (ex: análise de conteúdo de redes sociais), o Orpheus está sendo chamado para tarefas de escopo médio que não precisam de 3 modelos, ou você quer especialização sem o overhead do Triad.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Usar Orpheus para tudo é como usar martelo para parafuso. Personas especializadas são mais rápidas e baratas para tarefas de escopo definido.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Escopo da tarefa como critério · Overhead do Triad · Especialização vs generalismo · Padrão recorrente como gatilho · Custo-benefício por persona</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Mapeando seus tipos de trabalho — quais precisam de persona própria</span><span class="text-neutral-500 text-sm ml-2">- Auditoria das últimas 20 tarefas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Faça uma auditoria das últimas 20 tarefas que delegou ao Hermes e categorize por tipo: análise estratégica, criação de conteúdo, pesquisa de mercado, revisão técnica, planejamento, comunicação externa. Tipos que aparecem mais de 3 vezes por semana e têm um padrão de prompt consistente são candidatos a persona própria.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A auditoria transforma intuição em dado. Sem ela, você cria personas por conveniência, não por necessidade — e acaba com um Pantheon grande demais para gerenciar.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Auditoria das últimas 20 tarefas · Frequência como critério · Padrão consistente · Pantheon manejável · Criação por dado vs intuição</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Criando uma persona de pesquisa de mercado</span><span class="text-neutral-500 text-sm ml-2">- Ágora: estrutura fixa vs Triad</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Persona "Ágora" — especialista em pesquisa de mercado. System prompt: "Você é Ágora, especialista em análise de mercado. Para cada pesquisa: (1) identifique o mercado-alvo com 3 critérios objetivos; (2) mapeie os 5 maiores players com posicionamento, preço e diferencial; (3) identifique 3 gaps não atendidos com evidência; (4) avalie atratividade por um modelo de scoring simples." Modelo: DeepSeek V4 (sem Crítico — a estrutura fixa substitui a crítica).</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Ver um exemplo concreto de persona especializada demonstra como traduzir um tipo recorrente de trabalho em uma persona funcional.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Persona Ágora · Estrutura fixa vs Triad · DeepSeek como executor único · Formato de entrega padronizado · Scoring de mercado</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Criando uma persona de geração de conteúdo</span><span class="text-neutral-500 text-sm ml-2">- Hermes Scribe e soul.md como fonte de voz</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Persona "Hermes Scribe" — especialista em geração de conteúdo no seu tom de voz. System prompt: "Você é Hermes Scribe. Gere conteúdo estritamente no tom definido no soul.md (brand voice). Para cada peça: (1) leia a seção Voice do soul.md; (2) confirme o canal de destino (LinkedIn, newsletter, YouTube script); (3) gere três variações curtas; (4) aplique os hard nos do soul.md como filtro." Modelo: Claude Sonnet (mais econômico que Opus para geração de texto).</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Geração de conteúdo é um dos casos de uso mais frequentes. Uma persona dedicada com tom de voz calibrado elimina iterações de edição após a geração.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Persona Hermes Scribe · soul.md como fonte de voz · Três variações · Hard nos como filtro · Sonnet vs Opus para texto</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Criando uma persona de análise técnica de código</span><span class="text-neutral-500 text-sm ml-2">- Arquiteto e Opus para raciocínio máximo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Persona "Arquiteto" — especialista em revisão e análise de código. System prompt: "Você é Arquiteto. Para cada análise: (1) identifique os 3 maiores riscos técnicos com impacto estimado; (2) liste débito técnico acumulado com prioridade (crítico/alto/médio/baixo); (3) proponha o menor conjunto de mudanças para reduzir os riscos críticos; (4) estime esforço de cada mudança em dias de desenvolvedor. Use Claude Code como ferramenta para ler o repositório antes de analisar." Modelo: Claude Opus.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Análise técnica de código é um caso onde o custo adicional do Opus se justifica. O Arquiteto demonstra como escolher o modelo certo por tipo de tarefa.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Persona Arquiteto · Riscos técnicos com impacto · Débito técnico priorizado · Claude Code como ferramenta · Opus para raciocínio máximo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Gerenciando múltiplas personas — nomenclatura e organização</span><span class="text-neutral-500 text-sm ml-2">- Limite de 5–7 ativas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Com múltiplas personas no Pantheon, organize por: convenção de nomenclatura (nomes mitológicos para estratégicas, nomes descritivos para operacionais), tag por domínio (estratégia, conteúdo, técnica, pesquisa), e documentação de invocação (quando chamar cada uma, o que ela não faz). Limite o Pantheon ativo a 5–7 personas — mais do que isso, o overhead de gestão supera o benefício.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Um Pantheon desorganizado se torna difícil de usar. A fricção de lembrar qual persona serve para qual tarefa aumenta com o número de personas sem organização.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Convenção de nomenclatura · Tags por domínio · Documentação de invocação · Limite de 5–7 ativas · Overhead de gestão</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Compartilhando personas com sua equipe — exportar e importar</span><span class="text-neutral-500 text-sm ml-2">- hermes pantheon export/import</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Personas do Hermes podem ser exportadas via <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">hermes pantheon export --persona Orpheus &gt; orpheus.yaml</code>. Para importar em outro Hermes: <code class="font-mono bg-dark-700 px-1 rounded text-purple-400">hermes pantheon import orpheus.yaml</code>. O arquivo exportado inclui: system prompt, modelo configurado, ferramentas permitidas e metadados de versão. Para equipes, mantenha as personas compartilhadas em um repositório git separado do código.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A capacidade de compartilhar personas transforma o Hermes de ferramenta individual em ativo de equipe. Uma persona bem calibrada pode poupar horas de configuração para cada novo membro.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes pantheon export · hermes pantheon import · YAML/JSON portável · Repositório de personas da equipe · Ativo compartilhado vs individual</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-6.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+      <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+        ← Trilha 2: Implementação Técnica
+      </a>
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">
+        Trilha 4: Casos de Uso →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

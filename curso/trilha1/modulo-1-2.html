@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Por que um único modelo de IA não é suficiente — viés de confirmação e a necessidade de múltiplos cérebros">
+  <title>O problema de um único modelo | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-emerald-400 text-sm flex items-center gap-1">← Trilha 1</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span>/</span>
+      <span class="text-emerald-400">Módulo 1.2</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧩 O problema de um único modelo</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Por que múltiplos cérebros importam — viés de confirmação, autoavaliação e a pesquisa por trás do Triad.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">~35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Básico</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Teoria</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICOS -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+
+      <!-- Tópico 1 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🪞</span>
+          <div>
+            <span class="font-medium">Viés de confirmação em modelos únicos</span>
+            <span class="text-neutral-500 text-sm ml-2">- Sycophancy: o modelo concorda, não ajuda</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">Quando você consulta um único modelo de IA, ele tende a confirmar a direção que você já sinalizou na pergunta. Se você pergunta "como fazer X funcionar", o modelo raramente questiona se X é a abordagem certa. Isso é viés de confirmação — o modelo otimiza para concordância, não para verdade.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">Reconhecer esse padrão é essencial para não tomar decisões importantes baseado em análises que apenas validaram sua premissa inicial.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Sycophancy em LLMs</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Viés de ancoragem por prompt</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Concordância vs utilidade</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Pergunta mal formulada → resposta inútil</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 2 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🔄</span>
+          <div>
+            <span class="font-medium">Por que um modelo não consegue criticar a si mesmo</span>
+            <span class="text-neutral-500 text-sm ml-2">- Pontos cegos estruturais</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">Um único modelo que planeja, executa e revisa o próprio trabalho tem um problema estrutural: usa os mesmos pesos, o mesmo conjunto de vieses e os mesmos padrões de raciocínio nas três etapas. Ele não vai identificar os erros que cometeu porque não sabe que cometeu — esses erros são exatamente seus pontos cegos.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">Entender a limitação estrutural de autoavaliação explica por que o sistema Triad usa modelos de arquiteturas diferentes para cada papel.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Autoavaliação em LLMs</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Pontos cegos compartilhados</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Arquitetura como fator determinante</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Necessidade de perspectiva externa</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 3 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">🏗️</span>
+          <div>
+            <span class="font-medium">Diferentes arquiteturas, diferentes pontos cegos</span>
+            <span class="text-neutral-500 text-sm ml-2">- Diversidade como vantagem</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">Modelos de IA treinados por empresas diferentes, com dados diferentes e objetivos de treinamento diferentes, desenvolvem conjuntos distintos de vieses e pontos cegos. O que Claude tende a errar, GPT pode acertar — e vice-versa. Essa diversidade arquitetural é uma vantagem quando explorada sistematicamente.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">A base teórica para o Triad. Se os modelos fossem idênticos, não haveria benefício em usá-los juntos. É a diferença que cria valor.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Diversidade de treinamento</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Pontos cegos específicos por arquitetura</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Complementaridade entre modelos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Por que não usar dois Claude juntos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 4 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">📚</span>
+          <div>
+            <span class="font-medium">Pesquisa — Reflexion e multi-agent critique</span>
+            <span class="text-neutral-500 text-sm ml-2">- A ciência por trás do sistema</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">O paper "Reflexion" (Shinn et al., 2023) demonstrou que agentes que recebem feedback verbal de suas próprias ações melhoram significativamente o desempenho em tarefas complexas. Pesquisa posterior expandiu para sistemas multi-agente, mostrando que crítica externa (de outro modelo) supera autoavaliação em qualidade de output.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">O Triad não é intuição — é uma arquitetura fundamentada em pesquisa publicada. Conhecer a base científica ajuda a calibrar como usar o sistema.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Reflexion framework</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Self-critique vs external critique</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Multi-agent debate</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Melhoria por iteração com feedback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 5 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">💸</span>
+          <div>
+            <span class="font-medium">O custo de decisões ruins por falta de revisão</span>
+            <span class="text-neutral-500 text-sm ml-2">- ROI da revisão multi-modelo</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">Decisões estratégicas tomadas com base em análise de um único modelo podem ser custosas — seja uma escolha de nicho errada, uma estratégia de precificação inadequada, ou um produto construído para o mercado errado. O custo de corrigir uma decisão ruim é geralmente muito maior que o custo de revisá-la antes de executar.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">Contextualiza o valor do Triad em termos econômicos. O custo adicional de rodar três modelos é irrelevante comparado ao custo de uma decisão estratégica errada.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Custo de reversão de decisão</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Análise de risco antes de execução</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>ROI da revisão multi-modelo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Decisão sem revisão como risco operacional</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 6 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">🔩</span>
+          <div>
+            <span class="font-medium">O princípio WD-40 — melhoria por loops rápidos</span>
+            <span class="text-neutral-500 text-sm ml-2">- Qualidade emerge de iteração</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">O WD-40 funciona para 40 funções diferentes porque a fórmula que chegou ao mercado foi a 40ª tentativa. A empresa não ficou famosa por ter acertado na primeira — ficou por ter iterado 40 vezes. O Triad aplica o mesmo princípio: múltiplas iterações com revisão rigorosa entre elas.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">Entender que qualidade emerge de iteração, não de perfeição na primeira tentativa, muda como você projeta seus fluxos de trabalho com IA.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Iteração rápida</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Feedback loop apertado</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Melhoria incremental</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Qualidade como resultado de processo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 7 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+          <span class="text-lg">🎯</span>
+          <div>
+            <span class="font-medium">Como o Triad resolve o problema de viés único</span>
+            <span class="text-neutral-500 text-sm ml-2">- Separação de papéis como design</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-emerald-400 font-semibold">O que é:</span>
+              <p class="text-neutral-300 text-sm mt-1">O Triad separa planejamento, execução e crítica em três modelos de arquiteturas distintas. Opus (Condutor) define o problema sem executá-lo. DeepSeek (Executor) executa sem poder aprovar. GPT-5.5 (Crítico) critica sem ter produzido o trabalho. Nenhum modelo tem poder sobre as três etapas — o que elimina o viés de autoavaliação.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm mt-1">Entender como o Triad resolve estruturalmente o problema de viés é o que justifica a complexidade da arquitetura. Não é três modelos por luxo — é por necessidade.</p>
+            </div>
+            <div>
+              <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Separação de papéis</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Ausência de autoavaliação</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Diversidade arquitetural como design</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span>Fluxo unidirecional de aprovação</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Viés de confirmação é estrutural</strong><span class="text-neutral-400"> — modelos otimizam para concordância, não para verdade</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Autoavaliação não funciona</strong><span class="text-neutral-400"> — um modelo não detecta seus próprios pontos cegos</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Pesquisa valida o Triad</strong><span class="text-neutral-400"> — Reflexion e multi-agent critique provam que crítica externa supera autoavaliação</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-emerald-400 mt-1">✓</span>
+            <div><strong class="text-white">Separação de papéis é o design</strong><span class="text-neutral-400"> — nenhum modelo controla as três etapas</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-emerald-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">1.3 — O Sistema Triad: Planeje, Execute, Critique</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-1-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 1.1</a>
+          <a href="modulo-1-3.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV PREV/NEXT -->
+    <div class="flex justify-between pt-6 border-t border-dark-600">
+      <a href="modulo-1-1.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">← Módulo 1.1: O que é Hermes Agent</a>
+      <a href="modulo-1-3.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400">Módulo 1.3: O Sistema Triad →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
+    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      explanation.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

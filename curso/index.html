@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TRIAD — Trilhas de Aprendizado sobre o sistema Hermes Agent, OpenRouter e DeepSeek. Escolha sua trilha e comece agora no INEMA.CLUB.">
+  <title>TRIAD — Trilhas de Aprendizado | INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - todas as cores de acento (landing usa todas as trilhas) */
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:border-emerald-500\/30:hover { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color: #059669; }
+
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:border-blue-500\/30:hover { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:border-purple-500\/30:hover { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .group:hover .group-hover\:text-purple-400 { color: #7c3aed; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:border-amber-500\/30:hover { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .group:hover .group-hover\:text-amber-400 { color: #92400e; }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <!-- Logo + INEMA.CLUB -->
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+            <span class="text-2xl">⚡</span>
+            <span class="font-bold text-lg hidden sm:inline">TRIAD</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors">INEMA.CLUB</a>
+        </div>
+
+        <!-- Breadcrumb + Theme Toggle -->
+        <div class="flex items-center space-x-2">
+          <a href="../index.html" class="text-sm text-neutral-400 hover:text-neutral-100 transition-colors hidden sm:inline">← Voltar</a>
+
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- HEADER -->
+    <header class="bg-gradient-to-br from-dark-800 via-dark-900 to-dark-900 py-16 border-b border-dark-600">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-4 border border-primary/40">
+          CURSO COMPLETO
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+          ⚡ TRIAD — Trilhas de Aprendizado
+        </h1>
+        <p class="text-lg text-neutral-400 max-w-2xl mx-auto">
+          Escolha sua trilha e comece agora
+        </p>
+        <!-- Stats -->
+        <div class="flex items-center justify-center gap-8 mt-8 text-sm text-neutral-400">
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold text-neutral-100">4</span>
+            <span>Trilhas</span>
+          </div>
+          <div class="w-px h-8 bg-dark-600"></div>
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold text-neutral-100">24</span>
+            <span>Módulos</span>
+          </div>
+          <div class="w-px h-8 bg-dark-600"></div>
+          <div class="flex flex-col items-center">
+            <span class="text-2xl font-bold text-neutral-100">~12h</span>
+            <span>Duração</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRILHAS GRID -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- TRILHA 1 — Fundamentos (Emerald) -->
+        <div class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 transition-all flex flex-col">
+          <div class="p-6 border-b border-dark-600">
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full border border-emerald-500/30">
+                Trilha 1
+              </span>
+              <span class="text-xs text-neutral-500">6 módulos · ~3h</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">🌱 Fundamentos</h2>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Entenda o que é o sistema Triad, por que ele existe e como cada componente — Hermes, OpenRouter e DeepSeek — se encaixa.
+            </p>
+          </div>
+
+          <!-- Módulos -->
+          <div class="p-6 flex-1">
+            <p class="text-xs text-neutral-500 font-semibold uppercase tracking-wide mb-3">Módulos</p>
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <span>O que é Hermes Agent</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <span>O problema de um único modelo</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                <span>O Sistema Triad</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                <span>soul.md — Memória persistente</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">5</span>
+                <span>OpenRouter — Hub de modelos</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">6</span>
+                <span>DeepSeek V4 — Executor de baixo custo</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-6 pt-0 flex justify-start">
+            <a href="trilha1/index.html" class="inline-flex items-center px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-lg transition-colors">
+              Começar Trilha →
+            </a>
+          </div>
+        </div>
+
+        <!-- TRILHA 2 — Implementação Técnica (Blue) -->
+        <div class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 transition-all flex flex-col">
+          <div class="p-6 border-b border-dark-600">
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full border border-blue-500/30">
+                Trilha 2
+              </span>
+              <span class="text-xs text-neutral-500">6 módulos · ~3h</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2 group-hover:text-blue-400 transition-colors">🔧 Implementação Técnica</h2>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Configure o ambiente, conecte as ferramentas e coloque o Triad para rodar. Da instalação até a integração completa com DeepSeek e Gemini.
+            </p>
+          </div>
+
+          <!-- Módulos -->
+          <div class="p-6 flex-1">
+            <p class="text-xs text-neutral-500 font-semibold uppercase tracking-wide mb-3">Módulos</p>
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <span>Configurando o ambiente Hermes</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <span>Conectando OpenRouter</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                <span>Integrando DeepSeek V4</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                <span>Gemini CLI multimodal</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">5</span>
+                <span>Criando a skill Orpheus</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">6</span>
+                <span>soul.md na prática</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-6 pt-0 flex justify-start">
+            <a href="trilha2/index.html" class="inline-flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors">
+              Começar Trilha →
+            </a>
+          </div>
+        </div>
+
+        <!-- TRILHA 3 — Avançado (Purple) -->
+        <div class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 transition-all flex flex-col">
+          <div class="p-6 border-b border-dark-600">
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full border border-purple-500/30">
+                Trilha 3
+              </span>
+              <span class="text-xs text-neutral-500">6 módulos · ~3h</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors">🧠 Avançado</h2>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Domine engenharia de prompts, controle de custos, monitoramento, segurança e resiliência do sistema em produção.
+            </p>
+          </div>
+
+          <!-- Módulos -->
+          <div class="p-6 flex-1">
+            <p class="text-xs text-neutral-500 font-semibold uppercase tracking-wide mb-3">Módulos</p>
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <span>Engenharia de prompts do Triad</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <span>Controle de custos e rate limits</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                <span>Monitoramento e saúde do sistema</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                <span>Segurança — Chaves e dados sensíveis</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">5</span>
+                <span>Resiliência — Fallbacks e erros</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">6</span>
+                <span>Expandindo o Pantheon</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-6 pt-0 flex justify-start">
+            <a href="trilha3/index.html" class="inline-flex items-center px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold rounded-lg transition-colors">
+              Começar Trilha →
+            </a>
+          </div>
+        </div>
+
+        <!-- TRILHA 4 — Construção e Escala (Amber) -->
+        <div class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-amber-500/30 transition-all flex flex-col">
+          <div class="p-6 border-b border-dark-600">
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full border border-amber-500/30">
+                Trilha 4
+              </span>
+              <span class="text-xs text-neutral-500">6 módulos · ~3h</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2 group-hover:text-amber-400 transition-colors">🏗️ Construção e Escala</h2>
+            <p class="text-neutral-400 text-sm leading-relaxed">
+              Construa o sistema completo, automatize processos overnight, integre com o mundo externo e faça deploy para o GitHub Pages.
+            </p>
+          </div>
+
+          <!-- Módulos -->
+          <div class="p-6 flex-1">
+            <p class="text-xs text-neutral-500 font-semibold uppercase tracking-wide mb-3">Módulos</p>
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <span>Arquitetura completa do sistema</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <span>Construindo o Pantheon visual</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                <span>Automação overnight</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                <span>Integrações externas</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">5</span>
+                <span>Deploy GitHub Pages</span>
+              </li>
+              <li class="flex items-start space-x-2 text-sm text-neutral-300">
+                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">6</span>
+                <span>Onboarding para não-técnicos</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-6 pt-0 flex justify-start">
+            <a href="trilha4/index.html" class="inline-flex items-center px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold rounded-lg transition-colors">
+              Começar Trilha →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>
+        TRIAD — Trilhas de Aprendizado · 2026 ·
+        <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 transition-colors font-medium">INEMA.CLUB</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

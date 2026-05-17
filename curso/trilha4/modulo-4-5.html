@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Deploy no GitHub Pages — publicando o curso TRIAD para o mundo com CI/CD automático">
+  <title>Deploy GitHub Pages | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-amber-400 text-sm flex items-center gap-1">← Trilha 4</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a>
+      <span>/</span>
+      <span class="text-amber-400">Módulo 4.5</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.5</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🚀 Deploy no GitHub Pages</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Publicando o curso TRIAD para o mundo — do repositório local ao site público com CI/CD automático e zero custo de hospedagem.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">~30</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Básico</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Deploy</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICOS -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+
+      <!-- Tópico 1 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">📦</span>
+          <div>
+            <span class="font-medium">Preparação do repositório</span>
+            <span class="text-neutral-500 text-sm ml-2">- git init, estrutura e primeiro push</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Para preparar o repositório: (1) na pasta raiz do projeto execute <code class="bg-dark-600 px-1 rounded text-amber-400">git init</code>, (2) crie um .gitignore excluindo .env, node_modules e arquivos temporários, (3) <code class="bg-dark-600 px-1 rounded text-amber-400">git add .</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git commit -m "initial commit"</code>, (4) crie o repositório no GitHub (público, sem README), (5) <code class="bg-dark-600 px-1 rounded text-amber-400">git remote add origin</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git push -u origin main</code>.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">O .gitignore correto é crítico — sem ele, você pode acidentalmente publicar tokens de API, configurações de modelos ou dados pessoais do soul.md. A preparação do repositório é a fundação de um deploy seguro.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>.gitignore cobrindo .env e dados sensíveis</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Repositório público para GitHub Pages</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Branch main como fonte do Pages</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Commit semântico para histórico claro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 2 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">⚙️</span>
+          <div>
+            <span class="font-medium">Configuração do GitHub Pages</span>
+            <span class="text-neutral-500 text-sm ml-2">- .nojekyll obrigatório e settings</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">No GitHub, acesse Settings → Pages → Source: Deploy from branch → Branch: main → folder: / (root). CRÍTICO: crie um arquivo vazio chamado <code class="bg-dark-600 px-1 rounded text-amber-400">.nojekyll</code> na raiz do repositório. Sem ele, o GitHub Pages tenta processar o HTML com Jekyll e pode quebrar caminhos de arquivos com underscores ou diretórios especiais.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">O .nojekyll é o erro mais comum em deploys no GitHub Pages com HTML puro. Sem ele, arquivos em pastas começando com underscore ou underlines nos nomes podem não ser servidos corretamente.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>.nojekyll na raiz — obrigatório para HTML puro</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Settings → Pages → Deploy from branch</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>URL gerada: usuario.github.io/repo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Deploy automático em cada push para main</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 3 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">🗂️</span>
+          <div>
+            <span class="font-medium">Estrutura de arquivos para Pages</span>
+            <span class="text-neutral-500 text-sm ml-2">- Links relativos e caminhos corretos</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">GitHub Pages serve arquivos estáticos a partir da raiz do repositório. Todas as referências entre páginas devem usar caminhos relativos (href="curso/trilha1/index.html", não href="/curso/trilha1/index.html"). Links absolutos com barra inicial falham porque o repositório serve em /nome-do-repo/, não na raiz do domínio.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Links absolutos quebram silenciosamente no Pages — a página carrega mas a navegação falha. Links relativos funcionam tanto localmente quanto no Pages sem nenhuma mudança, tornando o desenvolvimento e o deploy intercambiáveis.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sempre usar caminhos relativos em href</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Nunca usar / no início de links internos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>../index.html para navegar para cima</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Teste local com Live Server antes do push</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 4 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🤖</span>
+          <div>
+            <span class="font-medium">GitHub Actions para CI/CD automático</span>
+            <span class="text-neutral-500 text-sm ml-2">- Workflow de deploy em cada commit</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Com GitHub Actions, você cria um workflow em .github/workflows/deploy.yml que roda automaticamente em cada push para main: valida a estrutura HTML, verifica links quebrados com htmlproofer, e faz o deploy para Pages. Para projetos simples de HTML estático, o deploy automático via Settings → Pages já é suficiente — Actions é para quem quer validação antes do deploy.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">CI/CD automatiza a garantia de qualidade — você nunca publica acidentalmente HTML inválido ou links quebrados. Para um curso com dezenas de páginas, a validação automática é essencial para manter credibilidade.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Workflow em .github/workflows/deploy.yml</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Trigger em push para main</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>htmlproofer para validar links</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Deploy bloqueado se validação falha</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 5 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">🏷️</span>
+          <div>
+            <span class="font-medium">Versionamento com tags e releases</span>
+            <span class="text-neutral-500 text-sm ml-2">- Marcando versões estáveis do curso</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Tags git marcam pontos estáveis no histórico: <code class="bg-dark-600 px-1 rounded text-amber-400">git tag -a v1.0 -m "Trilha 1 completa"</code> e <code class="bg-dark-600 px-1 rounded text-amber-400">git push origin v1.0</code>. No GitHub, você pode criar Releases a partir de tags — com notas de versão, changelog e arquivos para download. Isso permite que alunos saibam exatamente quando o conteúdo foi atualizado e o que mudou.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Releases dão transparência ao aluno — ele vê que a Trilha 4 foi adicionada na versão 4.0, que um módulo foi corrigido na 4.1. Isso aumenta confiança no material e facilita acompanhar as atualizações.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tags anotadas para versões estáveis</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Releases com notas de mudanças</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Semantic versioning para o curso</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Changelog visível para alunos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 6 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">👥</span>
+          <div>
+            <span class="font-medium">Distribuição para equipes</span>
+            <span class="text-neutral-500 text-sm ml-2">- CONTRIBUTING.md e branch protection</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Para equipes, o repositório precisa de: CONTRIBUTING.md com guia de como adicionar ou editar módulos (seguindo o design system), branch protection em main exigindo Pull Request aprovado antes de merge, e branch naming convention (feature/modulo-X-Y para novos módulos, fix/modulo-X-Y para correções). Isso garante que todos os colaboradores seguem o mesmo padrão.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Sem governança, colaboradores introduzem inconsistências que desviam do design system. CONTRIBUTING.md e branch protection garantem qualidade independente de quem contribui.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>CONTRIBUTING.md com guia do design system</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Branch protection exigindo PR aprovado</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Naming convention para branches</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Review obrigatório antes de merge em main</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 7 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+          <span class="text-lg">📊</span>
+          <div>
+            <span class="font-medium">Analytics e monitoramento do site</span>
+            <span class="text-neutral-500 text-sm ml-2">- Medindo engajamento sem custo</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Para monitorar o curso no GitHub Pages, integre o Google Analytics (gratuito) adicionando o snippet gtag.js no head de todas as páginas. Acompanhe: pages mais visitadas, tempo médio por módulo, taxa de conclusão (via eventos de scroll depth), e origem do tráfego. Uma alternativa sem cookies é o Plausible Analytics — open-source e compatível com LGPD.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Analytics transforma o curso de estático para melhorado por dados. Se o Módulo 1.3 tem abandono alto, talvez seja longo demais. Se o Módulo 4.1 recebe mais tráfego, talvez mereça mais conteúdo. Dados informam as próximas versões.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Google Analytics via gtag.js no head</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Eventos de scroll depth por módulo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Plausible como alternativa sem cookies</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Dados informando evolução do conteúdo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">.nojekyll é obrigatório</strong><span class="text-neutral-400"> — sem ele o Pages processa Jekyll e pode quebrar</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Sempre links relativos</strong><span class="text-neutral-400"> — nunca use / no início de links internos</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">CI/CD com GitHub Actions</strong><span class="text-neutral-400"> — valida antes de publicar</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Analytics desde o primeiro dia</strong><span class="text-neutral-400"> — dados informam evolução do conteúdo</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.6 — Onboarding Não-Técnico: facilitando a adoção para quem não programa</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.4</a>
+          <a href="modulo-4-6.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV PREV/NEXT -->
+    <div class="flex justify-between pt-6 border-t border-dark-600">
+      <a href="modulo-4-4.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.4: Integrações</a>
+      <a href="modulo-4-6.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.6: Onboarding Não-Técnico →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
+    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      explanation.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

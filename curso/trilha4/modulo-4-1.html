@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Arquitetura do sistema TRIAD — como Hermes, OpenRouter, soul.md e os modelos se conectam">
+  <title>Arquitetura do Sistema | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-amber-400 text-sm flex items-center gap-1">← Trilha 4</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a>
+      <span>/</span>
+      <span class="text-amber-400">Módulo 4.1</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🏗️ Arquitetura do Sistema</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Como os componentes do TRIAD se conectam — Hermes, OpenRouter, soul.md, Pantheon e Gemini CLI formando uma máquina coesa.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">8</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">~40</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Arquitetura</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICOS -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+
+      <!-- Tópico 1 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🧩</span>
+          <div>
+            <span class="font-medium">Os cinco componentes do TRIAD</span>
+            <span class="text-neutral-500 text-sm ml-2">- Hermes, Triad, OpenRouter, soul.md, Pantheon</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O sistema TRIAD tem cinco componentes fundamentais: Hermes Agent (orquestrador central), o padrão Triad (três modelos para decisões robustas), OpenRouter (gateway multi-modelo via BYOK), soul.md (memória persistente do contexto pessoal) e Pantheon (dashboard visual para gerenciar personas e prompts). Cada componente tem papel específico e se integra com os demais.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Entender a arquitetura completa permite diagnosticar problemas, otimizar cada camada e escalar o sistema com consciência. Sem o mapa mental dos componentes, você usa o sistema como caixa-preta e perde capacidade de customização.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Hermes como orquestrador central</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Triad como workflow de três modelos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>OpenRouter como hub de roteamento</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>soul.md como memória persistente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 2 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">🔀</span>
+          <div>
+            <span class="font-medium">OpenRouter — o hub de roteamento</span>
+            <span class="text-neutral-500 text-sm ml-2">- BYOK e acesso a todos os modelos</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">OpenRouter é um gateway que unifica o acesso a dezenas de modelos de IA (Claude, GPT, DeepSeek, Gemini, Llama) via uma única API. Com o modelo BYOK (Bring Your Own Keys), você conecta suas próprias chaves de cada provider e paga diretamente — sem markup da plataforma intermediária. Uma configuração, todos os modelos.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">OpenRouter é o que torna o padrão Triad operacional. Sem ele, você precisaria gerenciar APIs separadas para cada modelo. Com ele, trocar de Claude para DeepSeek para GPT é uma mudança de uma linha no código.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>API unificada para múltiplos providers</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>BYOK — sem markup intermediário</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Roteamento dinâmico por modelo</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Configuração via variável OPENROUTER_API_KEY</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 3 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">📄</span>
+          <div>
+            <span class="font-medium">soul.md — a memória persistente</span>
+            <span class="text-neutral-500 text-sm ml-2">- Contexto acumulado entre sessões</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">soul.md é um arquivo Markdown que vive em ~/.hermes/soul.md e funciona como o "estado persistente" do Hermes. Contém identidade profissional do usuário, metas, ritmo de trabalho, projetos ativos, personas preferidas, decisões tomadas e lições aprendidas. É carregado automaticamente como contexto em cada sessão.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">soul.md é o diferencial que transforma Hermes de chatbot em colaborador. Sem ele, cada sessão começa do zero. Com ele, o agente sempre conhece quem você é, o que importa e como você decide.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Arquivo em ~/.hermes/soul.md</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Carregamento automático em cada sessão</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Contexto pessoal estruturado em seções</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Atualização incremental conforme o agente aprende</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 4 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">🏛️</span>
+          <div>
+            <span class="font-medium">Pantheon — o dashboard de personas</span>
+            <span class="text-neutral-500 text-sm ml-2">- Gerenciamento visual de system prompts</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Pantheon é o painel visual do TRIAD — uma interface web local onde você gerencia todas as personas (skills), versiona system prompts, testa configurações e sincroniza com o Hermes. É o ponto de controle central para quem opera múltiplas personas e precisa de visibilidade sobre o que cada agente faz.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Sem Pantheon, gerenciar múltiplas personas é confuso — arquivos espalhados, sem histórico de versões, sem visão consolidada. Com Pantheon, você tem controle visual total sobre o ecossistema de agentes.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Interface web local para gestão de personas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Versionamento de system prompts</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Sincronização com ~/.hermes/skills/</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Dashboard de atividade de personas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 5 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">👁️</span>
+          <div>
+            <span class="font-medium">Gemini CLI — a camada multimodal</span>
+            <span class="text-neutral-500 text-sm ml-2">- Análise de imagens e vídeos localmente</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Gemini CLI é uma ferramenta de linha de comando que permite ao Hermes processar conteúdo multimodal — imagens, screenshots, vídeos curtos e documentos PDF — localmente, sem upload para a nuvem. Opera com tier gratuito generoso do Google AI Studio e se integra como ferramenta bash dentro do Hermes.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">A maioria dos agentes de texto não consegue analisar imagens ou vídeos. Gemini CLI preenche essa lacuna, permitindo que Hermes lide com conteúdo visual — analisar dashboards, capturar screenshots de sites, transcrever vídeos de reunião.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Processamento local de imagens e vídeos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tier gratuito do Google AI Studio</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Integração via ferramenta bash no Hermes</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Complemento multimodal ao stack de texto</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 6 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">⚙️</span>
+          <div>
+            <span class="font-medium">Fluxo completo de uma tarefa</span>
+            <span class="text-neutral-500 text-sm ml-2">- Do input ao resultado final</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Uma tarefa no TRIAD segue o fluxo: (1) usuário envia instrução ao Hermes, (2) Hermes carrega soul.md + skill relevante, (3) aciona modelo via OpenRouter com context adequado, (4) se tarefa complexa, executa padrão Triad com dois ou três modelos, (5) consolida resultado, (6) entrega e atualiza logs em ~/.hermes/jobs/.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Mapear o fluxo completo revela onde cada componente entra e onde podem ocorrer gargalos ou falhas. Com esse mapa, você otimiza inputs, escolhe o modelo certo para cada etapa e depura problemas com precisão.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Pipeline input → contexto → modelo → resultado</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Carregamento condicional de skills</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Logs em ~/.hermes/jobs/</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Decisão de acionar padrão Triad</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 7 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+          <span class="text-lg">🔌</span>
+          <div>
+            <span class="font-medium">Pontos de extensão da arquitetura</span>
+            <span class="text-neutral-500 text-sm ml-2">- Onde plugar novas ferramentas</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">A arquitetura TRIAD tem pontos de extensão deliberados: (1) novas skills via ~/.hermes/skills/, (2) novos modelos via OpenRouter sem mudar código, (3) webhooks de entrada via N8N ou Zapier, (4) ferramentas bash customizadas registradas no CLAUDE.md, e (5) novas seções no soul.md para novos tipos de contexto.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Conhecer os pontos de extensão corretos evita gambiarras. Em vez de modificar o núcleo do sistema, você expande de forma limpa e reversível — adicionando capacidades sem quebrar o que já funciona.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Skills como unidades de extensão</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Ferramentas bash customizadas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Webhooks como entradas externas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Modelos substituíveis via configuração</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 8 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">8</span>
+          <span class="text-lg">📊</span>
+          <div>
+            <span class="font-medium">Custos e dimensionamento</span>
+            <span class="text-neutral-500 text-sm ml-2">- Quanto custa operar o sistema em escala</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O TRIAD é projetado para custo mínimo: DeepSeek V4 processa tarefas pesadas overnight por cerca de 1% do custo de Claude Opus. Gemini CLI usa tier gratuito para multimodal. Claude Opus é reservado para decisões críticas. Uma operação de volume médio (50 tarefas/mês) custa menos de $10 com esse stack otimizado.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Planejar custos antecipadamente evita surpresas. Entender a relação custo-valor de cada modelo permite alocar o orçamento de IA de forma inteligente — usando modelos caros só quando o ROI justifica.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>DeepSeek V4 para volume overnight</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Claude Opus para decisões críticas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Gemini gratuito para multimodal</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Alocação de orçamento por tipo de tarefa</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Cinco componentes integrados</strong><span class="text-neutral-400"> — Hermes, Triad, OpenRouter, soul.md e Pantheon</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Fluxo de tarefa mapeado</strong><span class="text-neutral-400"> — do input ao resultado com rastreabilidade completa</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Extensível por design</strong><span class="text-neutral-400"> — skills, modelos, webhooks e ferramentas plugáveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Custo otimizado</strong><span class="text-neutral-400"> — modelo certo para cada tipo de tarefa</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.2 — Pantheon Dashboard: gerenciamento visual de personas e system prompts</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 4</a>
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV PREV/NEXT -->
+    <div class="flex justify-between pt-6 border-t border-dark-600">
+      <a href="index.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Trilha 4: Construção e Escala</a>
+      <a href="modulo-4-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.2: Pantheon Dashboard →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
+    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      explanation.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

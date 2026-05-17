@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Engenharia de prompts para o Triad — estrutura de briefing, critérios de sucesso e iteração sistemática">
+  <title>Engenharia de prompts para o Triad | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-purple-400 text-sm flex items-center gap-1">← Trilha 3</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Módulo 3.1</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">✍️ Engenharia de prompts para o Triad</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Estruture briefings precisos, calibre o Crítico e itere os prompts do sistema com método — a maior alavanca de qualidade do Triad.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">~55</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Prática</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">🎯 Por que o prompt do Condutor define tudo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Condutor é o modelo que transforma seu objetivo vago em um briefing preciso. <strong class="text-purple-400">Otimizar o prompt do Condutor tem o maior retorno</strong> de qualquer ajuste no sistema — um briefing de qualidade reduz as iterações do loop Worker-Crítico em 60–80%.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O prompt do Condutor é a instrução que define como o primeiro modelo do Triad — Claude Opus — interroga o usuário, formula o briefing e valida o resultado final. É o elemento com maior impacto na qualidade de todo o output do sistema.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">🔗</span> A cadeia de qualidade
+        </h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3">
+            <span class="text-red-400 mt-1 flex-shrink-0">✗</span>
+            <span><strong>Prompt fraco do Condutor</strong> → briefing fraco → Worker gera drafts medíocres → Crítico reprova em loop → custo alto, resultado ruim</span>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1 flex-shrink-0">✓</span>
+            <span><strong>Prompt forte do Condutor</strong> → critérios de sucesso mensuráveis, restrições claras, ângulos específicos → Worker produz drafts sólidos → menos iterações</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Otimizar o prompt do Condutor tem o maior retorno de qualquer ajuste no sistema. Um briefing de qualidade reduz as iterações do loop Worker-Crítico em 60–80%. É o ponto de alavanca número um do Triad.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Briefing como multiplicador</span><p class="text-sm text-neutral-400 mt-1">A qualidade do briefing multiplica a qualidade de todo o output do sistema</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Critérios de sucesso mensuráveis</span><p class="text-sm text-neutral-400 mt-1">O Crítico precisa de critérios testáveis para aplicar SHIP/REVISE objetivamente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Restrições explícitas</span><p class="text-sm text-neutral-400 mt-1">O que não fazer, formatos inaceitáveis, informações que não podem ser assumidas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Redução de iterações</span><p class="text-sm text-neutral-400 mt-1">60–80% menos iterações no loop quando o briefing é de alta qualidade</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">📋 Estrutura do briefing ideal — o que não pode faltar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um briefing eficaz tem <strong class="text-purple-400">cinco elementos obrigatórios</strong>. Se algum estiver faltando, o briefing está incompleto — e você pode auditar isso antes de despachar ao Worker.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um briefing ideal é o documento de uma página produzido pelo Condutor que contém cinco elementos obrigatórios: objetivo sem ambiguidade, critérios de sucesso mensuráveis, restrições explícitas, contexto relevante e ângulos sugeridos para exploração paralela.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">Objetivo em uma frase sem ambiguidade</h4>
+            <p class="text-sm text-neutral-400">Uma única frase que define o resultado esperado sem margem para interpretação. "Analise o mercado" é vago. "Identifique os 3 nichos de mercado local com ticket médio acima de $3.000 e urgência de compra alta" é objetivo.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">Critérios de sucesso mensuráveis</h4>
+            <p class="text-sm text-neutral-400">Como você saberá que o resultado é bom. Testáveis, não subjetivos. O Crítico usa esses critérios para aplicar SHIP/REVISE objetivamente.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">Restrições explícitas</h4>
+            <p class="text-sm text-neutral-400">O que não fazer, formatos inaceitáveis, informações que não podem ser assumidas sem dados. Previne trabalho inútil antes de começar.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">Contexto relevante</h4>
+            <p class="text-sm text-neutral-400">Informações que o Worker precisa mas não tem acesso. Dados de mercado, histórico de decisões anteriores, restrições operacionais específicas.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">5</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2 text-purple-400">3–5 ângulos sugeridos para exploração paralela</h4>
+            <p class="text-sm text-neutral-400">Direções que o Worker deve explorar simultaneamente. Cada ângulo deve partir de uma premissa fundamentalmente diferente — não apenas linguagem diferente.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Cinco elementos do briefing</span><p class="text-sm text-neutral-400 mt-1">Objetivo, critérios, restrições, contexto e ângulos — todos obrigatórios</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Auditoria pré-execução</span><p class="text-sm text-neutral-400 mt-1">Verificar os cinco elementos antes de despachar ao Worker evita iterações desnecessárias</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Ângulos com premissa diferente</span><p class="text-sm text-neutral-400 mt-1">Premissa fundamentalmente diferente, não apenas reformulação da mesma ideia</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Critérios mensuráveis</span><p class="text-sm text-neutral-400 mt-1">O Crítico aplica SHIP/REVISE com base nesses critérios — precisam ser testáveis</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">📏 Como formular critérios de sucesso claros</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Critérios vagos produzem outputs que parecem válidos mas são inúteis. <strong class="text-purple-400">Critérios específicos são testáveis</strong> — e são o que permite que o Crítico seja rigoroso de forma objetiva.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um critério de sucesso claro é uma condição testável e verificável por qualquer observador — como "ticket médio acima de $3.000" ou "mínimo 3 competidores identificados com preço" — em contraste com critérios subjetivos como "boa análise" ou "resultado de qualidade".</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Critério vago (inútil)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Boa análise de mercado"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Análise profunda e detalhada"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Resultado de alta qualidade"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Insights relevantes para o negócio"</span></li>
+          </ul>
+        </div>
+        <div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">✓ Critério testável (válido)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"Identifica nichos com ticket médio acima de $3.000"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"Mercado local em raio de 50 milhas"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"Urgência de compra alta (perda financeira imediata)"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"Mínimo 3 competidores identificados com preço"</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">💡</span> Por que aprender
+        </h3>
+        <p class="text-neutral-300">Critérios específicos são o que permite que o Crítico seja rigoroso de forma objetiva em vez de subjetiva. Sem eles, o sistema produz qualidade inconsistente — o Crítico aprova ou reprova por intuição, não por critério.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Critério testável vs subjetivo</span><p class="text-sm text-neutral-400 mt-1">Um critério é testável se pode ser verificado de forma objetiva por qualquer observador</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Urgência como critério</span><p class="text-sm text-neutral-400 mt-1">Definir "urgência" como "perda financeira imediata se não resolvido" é testável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Critério como input do Crítico</span><p class="text-sm text-neutral-400 mt-1">O Crítico usa os critérios do briefing como base para SHIP/REVISE — sem eles, é subjetivo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Consistência por especificidade</span><p class="text-sm text-neutral-400 mt-1">Critérios específicos produzem qualidade consistente entre diferentes execuções</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">🔀 Instruções para o Worker — ângulos, volume, paralelismo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Worker sem instruções claras de paralelismo produz variações superficiais do mesmo ângulo. <strong class="text-purple-400">A instrução de premissa diferente</strong> é o que força diversidade real — não apenas linguagem diferente.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">As instruções no system prompt do Worker que controlam a diversidade dos ângulos — incluindo quantos explorar (3–5), a exigência de premissa fundamentalmente diferente, raciocínio visível e o mecanismo de inversão de premissa quando o mesmo problema aparece duas vezes.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> O que incluir no system prompt do Worker
+        </h3>
+        <ul class="space-y-3 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Quantos ângulos explorar:</strong> geralmente 3–5. Mais de 5 dilui o esforço; menos de 3 limita a diversidade.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Premissa fundamentalmente diferente:</strong> cada ângulo deve partir de uma premissa distinta, não reformulação do mesmo argumento com palavras diferentes.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Raciocínio visível:</strong> o Worker mostra seu raciocínio (não apenas a conclusão). O Crítico avalia a lógica, não só o resultado.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Sem julgamento de valor:</strong> o Worker não decide qual ângulo é melhor. Isso é papel do Crítico.</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Inversão de premissa:</strong> "se o Crítico retornar REVISE com o mesmo problema pela segunda vez, inverta a premissa central do ângulo".</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Premissa diferente vs linguagem diferente</span><p class="text-sm text-neutral-400 mt-1">A diferença que garante exploração genuína, não reformulação superficial</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Raciocínio visível</span><p class="text-sm text-neutral-400 mt-1">O Crítico avalia a lógica do raciocínio, não apenas a conclusão final</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Inversão de premissa como estratégia</span><p class="text-sm text-neutral-400 mt-1">Quando o mesmo problema aparece duas vezes, inverter a premissa central força nova abordagem</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Diversidade real de ângulos</span><p class="text-sm text-neutral-400 mt-1">3–5 ângulos com premissas distintas maximizam as chances de encontrar a melhor solução</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">⚡ Calibrando o Crítico — o que "brutalmente criticar" significa</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um Crítico vago faz o Worker girar sem melhorar. <strong class="text-purple-400">Um Crítico específico converte cada iteração em melhoria mensurável</strong> — localizando o problema, explicando por que é um problema, e mostrando como seria diferente se corrigido.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A calibragem do Crítico é o ajuste do system prompt do papel Crítico para exigir feedback específico — identificando qual é o problema, onde ele aparece no draft e como seria diferente se corrigido — em vez de avaliações vagas como "poderia ser mais detalhado".</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6">
+          <h4 class="font-bold text-red-400 mb-4">✗ Crítica vaga (não usar)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Poderia ser mais detalhado"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Faltam mais exemplos"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"A análise é superficial"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-red-400">✗</span><span>"Precisa de mais profundidade"</span></li>
+          </ul>
+        </div>
+        <div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-6">
+          <h4 class="font-bold text-purple-400 mb-4">✓ Crítica específica (usar)</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"X assume Y, mas isso falha quando Z"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"No parágrafo 3, a afirmação A não é verificável — precisaria de dado B"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"A premissa central do ângulo 2 ignora o fator C — se considerado, a conclusão inverteria"</span></li>
+            <li class="flex items-start space-x-2"><span class="text-purple-400">✓</span><span>"O critério de sucesso #2 não foi atendido porque..."</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📋 Três elementos de uma crítica válida</h3>
+        <div class="space-y-3 text-neutral-300">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 font-bold flex-shrink-0">1.</span><span><strong>Qual é o problema específico</strong> — não "análise fraca", mas "a premissa X falha sob a condição Y"</span></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 font-bold flex-shrink-0">2.</span><span><strong>Onde no draft ele aparece</strong> — não "em geral", mas "no ângulo 2, parágrafo 3"</span></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 font-bold flex-shrink-0">3.</span><span><strong>Como seria diferente se corrigido</strong> — não apenas o problema, mas a direção da correção</span></div>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Crítica específica vs vaga</span><p class="text-sm text-neutral-400 mt-1">Especificidade é o que converte crítica em instrução de melhoria</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Localização do problema no draft</span><p class="text-sm text-neutral-400 mt-1">O Worker precisa saber onde corrigir, não só que algo está errado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Questionamento de premissa</span><p class="text-sm text-neutral-400 mt-1">Para tarefas estratégicas, o Crítico questiona a premissa central se não for verificável</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Crítica como driver de melhoria</span><p class="text-sm text-neutral-400 mt-1">Cada iteração deve produzir melhoria mensurável — crítica vaga não permite isso</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🛟 Fallbacks no prompt — "se tokens acabarem, default para X"</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Sem fallbacks explícitos, o modelo trunca silenciosamente no limite de contexto — e o Crítico avalia trabalho incompleto como se fosse completo. <strong class="text-purple-400">Fallbacks tornam as falhas visíveis e recuperáveis.</strong>
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Fallbacks no prompt são instruções explícitas que definem o que o Worker e o Crítico devem fazer quando atingem o limite de contexto — como emitir um sinal PARTIAL_DELIVERY em vez de truncar silenciosamente o trabalho.</p>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Fallbacks para o Worker
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2">
+          <p>"Se você atingir o limite de tokens antes de completar todos os ângulos:</p>
+          <p class="ml-4">- Entregue os ângulos que você completou integralmente</p>
+          <p class="ml-4">- Sinalize PARTIAL_DELIVERY: [X ângulos completos de Y]</p>
+          <p class="ml-4">- NÃO truncue ângulos no meio — um ângulo incompleto é inútil"</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4 flex items-center">
+          <span class="mr-2">📝</span> Fallbacks para o Crítico
+        </h3>
+        <div class="bg-dark-700/50 rounded-lg p-4 font-mono text-sm text-neutral-300 space-y-2">
+          <p>"Se receber um PARTIAL_DELIVERY do Worker:</p>
+          <p class="ml-4">- Avalie apenas os ângulos completos que foram entregues</p>
+          <p class="ml-4">- Sinalize no seu veredicto quantos ângulos estão faltando</p>
+          <p class="ml-4">- Não aplique FUNDAMENTAL FLAW por ângulos faltantes — essa é uma limitação de execução, não de qualidade"</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Limite de contexto</span><p class="text-sm text-neutral-400 mt-1">Todo modelo tem um limite de tokens — tarefas longas podem atingi-lo antes de completar</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">PARTIAL_DELIVERY como sinal</span><p class="text-sm text-neutral-400 mt-1">Um sinal nomeado que torna a falha visível e permite recuperação controlada</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Falha visível vs silenciosa</span><p class="text-sm text-neutral-400 mt-1">Truncamento silencioso é muito mais perigoso que um sinal explícito de falha parcial</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Recuperação de tarefa parcial</span><p class="text-sm text-neutral-400 mt-1">Com PARTIAL_DELIVERY, você pode retomar de onde parou em vez de reiniciar do zero</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">📈 Iterando os prompts — como medir e melhorar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Iterar sem medir é girar em círculos. <strong class="text-purple-400">Com métricas simples</strong> — número de iterações e tipo de reprovação mais frequente — você transforma otimização em processo sistemático.
+      </p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-purple-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-purple-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O processo de melhoria contínua dos prompts do Triad — registrando as últimas 5 execuções, identificando o padrão de reprovação mais frequente do Crítico, adicionando instrução específica para cobrir o gap e comparando com uma tarefa de referência.</p>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">1</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2">Manter um log das últimas 5 execuções</h4>
+            <p class="text-sm text-neutral-400">Registre para cada execução: tarefa, resultado (SHIP/FUNDAMENTAL FLAW), número de iterações do loop, e tipo de reprovação mais frequente do Crítico.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">2</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2">Identificar o padrão de reprovação mais frequente</h4>
+            <p class="text-sm text-neutral-400">O padrão de reprovação do Crítico indica um gap específico no briefing do Condutor. Se o Crítico sempre reprova por "premissa não verificável", o briefing não está exigindo evidências.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">3</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2">Adicionar instrução específica para cobrir o gap</h4>
+            <p class="text-sm text-neutral-400">Uma instrução específica no briefing do Condutor que endereça diretamente o padrão de reprovação identificado.</p>
+          </div>
+        </div>
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <span class="text-purple-400 font-bold">4</span>
+          </div>
+          <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600">
+            <h4 class="font-semibold mb-2">Executar com a mesma tarefa de referência e comparar</h4>
+            <p class="text-sm text-neutral-400">Use a mesma tarefa de referência para comparar o número de iterações antes e depois do ajuste. Melhora real = menos iterações para a mesma tarefa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center">
+          <span class="mr-2">🎯</span> Benchmark: bom sistema
+        </h3>
+        <p class="text-neutral-300">Menos de 3 iterações no loop Worker-Crítico para tarefas de complexidade média. Se você consistentemente precisar de 5+ iterações, o briefing do Condutor precisa de ajuste.</p>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Log de execuções</span><p class="text-sm text-neutral-400 mt-1">As últimas 5 execuções como base de dados para identificar padrões</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Padrão de reprovação como indicador</span><p class="text-sm text-neutral-400 mt-1">O tipo de reprovação mais frequente mapeia diretamente para o gap no briefing</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Tarefa de referência</span><p class="text-sm text-neutral-400 mt-1">A mesma tarefa usada para comparar desempenho antes e depois do ajuste</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-purple-400 font-semibold">Menos de 3 iterações como benchmark</span><p class="text-sm text-neutral-400 mt-1">Benchmark para tarefas de complexidade média — acima disso, o briefing precisa de ajuste</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="mr-3">✅</span> Resumo do Módulo
+        </h2>
+
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">O prompt do Condutor</strong><span class="text-neutral-400"> — define a qualidade de todo o output. É o maior ponto de alavanca do Triad</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Os 5 elementos do briefing</strong><span class="text-neutral-400"> — objetivo, critérios, restrições, contexto e ângulos são todos obrigatórios</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Critérios testáveis</strong><span class="text-neutral-400"> — permitem que o Crítico aplique SHIP/REVISE objetivamente, não por intuição</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Premissa diferente vs linguagem diferente</strong><span class="text-neutral-400"> — a instrução crítica para diversidade real de ângulos</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">PARTIAL_DELIVERY</strong><span class="text-neutral-400"> — fallback explícito que torna falhas de contexto visíveis e recuperáveis</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Menos de 3 iterações</strong><span class="text-neutral-400"> — benchmark para tarefas de complexidade média. Acima disso, ajuste o briefing</span></div>
+          </div>
+        </div>
+
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">3.2 — Controle de custos e gestão de rate limits</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+            ← Voltar para Trilha 3
+          </a>
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">
+            Próximo Módulo →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

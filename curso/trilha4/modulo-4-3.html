@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Automação Overnight — agendando tarefas para o Hermes executar enquanto você dorme">
+  <title>Automação Overnight | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .bg-amber-500\/20 { background-color: rgba(217, 119, 6, 0.12); }
+    html:not(.dark) .bg-amber-500\/10 { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .border-amber-500\/30 { border-color: rgba(217, 119, 6, 0.25); }
+    html:not(.dark) .hover\:bg-amber-500\/30:hover { background-color: rgba(217, 119, 6, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-amber-400 text-sm flex items-center gap-1">← Trilha 4</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-amber-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-amber-400">Trilha 4</a>
+      <span>/</span>
+      <span class="text-amber-400">Módulo 4.3</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-amber-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-full mb-4">MÓDULO 4.3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🌙 Automação Overnight</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Configurando o Hermes para trabalhar enquanto você dorme — agendamento de jobs, checkpoints e revisão matinal.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">7</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">~35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Intermediário</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-amber-400">Prático</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICOS -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-8 divide-y divide-dark-600">
+
+      <!-- Tópico 1 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">🎯</span>
+          <div>
+            <span class="font-medium">Casos de uso para automação overnight</span>
+            <span class="text-neutral-500 text-sm ml-2">- O que faz sentido rodar à noite</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Tarefas ideais para overnight são aquelas longas, não urgentes e que não precisam de input interativo: análise de concorrentes (pesquisar 20 sites), geração de relatórios semanais, revisão de métricas de múltiplos canais, rascunho de conteúdo em lote (10 posts), pesquisa de mercado com consolidação de fontes, e verificação de consistência em bases de dados ou documentação.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Nem toda tarefa é candidata a overnight. Identificar os padrões certos (longa, não interativa, tolerante a latência) permite montar uma fila noturna que multiplica sua produtividade real sem risco de erros por falta de supervisão.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tarefas longas e não interativas</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Tolerância a latência como critério</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Análise em lote vs análise pontual</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Revisão humana obrigatória no resultado</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 2 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">📅</span>
+          <div>
+            <span class="font-medium">hermes schedule add — agendando um job</span>
+            <span class="text-neutral-500 text-sm ml-2">- Sintaxe e opções do comando</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O comando <code class="bg-dark-600 px-1 rounded text-amber-400">hermes schedule add</code> cria um job agendado com os parâmetros: --name (identificador), --task (instrução em linguagem natural), --time (cron expression ou hora natural como "23:30"), --model (qual modelo usar, padrão deepseek), --output (onde salvar o resultado) e --notify (canal de notificação ao completar).</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Agendar um job leva menos de um minuto quando você conhece a sintaxe. A maioria das flags tem defaults inteligentes — na prática, você só precisa de --name, --task e --time para a maioria dos casos.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Flags --name, --task, --time obrigatórias</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>--model padrão é deepseek para overnight</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Suporte a cron expression e linguagem natural</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>--output define onde o resultado é salvo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 3 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">📋</span>
+          <div>
+            <span class="font-medium">Definindo inputs e outputs do job</span>
+            <span class="text-neutral-500 text-sm ml-2">- Como estruturar tarefas para execução autônoma</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Um job overnight eficaz precisa de inputs bem definidos (arquivos de referência, URLs, parâmetros fixos) e outputs claros (formato do resultado: JSON, Markdown, PDF). O task description deve ser completamente autocontido — o agente não pode pedir esclarecimento durante a execução, então a instrução precisa cobrir todos os cenários possíveis.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Jobs mal especificados falham silenciosamente ou produzem resultados inutilizáveis. A disciplina de definir inputs e outputs antes de agendar reduz drasticamente a taxa de falha e o trabalho de reprocessamento pela manhã.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Instrução autocontida sem ambiguidade</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Inputs como arquivos ou parâmetros fixos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Output format especificado explicitamente</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Fallback definido para casos de erro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 4 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">💾</span>
+          <div>
+            <span class="font-medium">Checkpoints em ~/.hermes/jobs/</span>
+            <span class="text-neutral-500 text-sm ml-2">- Rastreabilidade e recuperação de falhas</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Durante a execução, o Hermes salva checkpoints periódicos em ~/.hermes/jobs/[job-name]/. Cada checkpoint é um arquivo JSON com o estado atual do job: progresso percentual, etapa em execução, outputs parciais e eventuais erros. Se o job falhar, os checkpoints permitem retomar de onde parou em vez de reiniciar do zero.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Jobs longos podem falhar por timeout, erro de API ou queda de conexão. Checkpoints são a diferença entre perder 2 horas de processamento e retomar de 80% de progresso — especialmente crítico em análises de alto volume.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Checkpoints automáticos em ~/.hermes/jobs/</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Estado salvo como JSON por etapa</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Resume automático em caso de falha</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Outputs parciais consultáveis durante execução</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 5 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">☀️</span>
+          <div>
+            <span class="font-medium">Protocolo de revisão matinal</span>
+            <span class="text-neutral-500 text-sm ml-2">- Como revisar e aprovar resultados overnight</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">O protocolo matinal começa com <code class="bg-dark-600 px-1 rounded text-amber-400">hermes jobs review</code> — um resumo de todos os jobs executados com status (concluído/falhou/parcial), tempo de execução e path dos outputs. Para cada job concluído, você aprova, rejeita ou solicita refinamento. Aprovações movem o output para o destino final; rejeições disparam re-execução com novo contexto.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Resultados overnight sem revisão humana são perigosos — modelos cometem erros sutis que passam despercebidos sem uma segunda leitura. O protocolo garante que você mantém controle sobre o que vai para produção, mesmo delegando o processamento.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>hermes jobs review como ponto de entrada</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Aprovar / Rejeitar / Refinar como ações</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Re-execução com contexto adicional</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Revisão humana obrigatória antes de produção</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 6 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">🔗</span>
+          <div>
+            <span class="font-medium">Webhooks N8N para automação avançada</span>
+            <span class="text-neutral-500 text-sm ml-2">- Disparando jobs a partir de eventos externos</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Além do agendamento por horário, o Hermes pode ser disparado por eventos via webhook N8N: novo formulário submetido, novo lead no CRM, post publicado, métrica atingindo threshold, ou qualquer evento de outra ferramenta. O N8N processa o evento, formata o payload e chama o endpoint webhook do Hermes — que executa o job correspondente.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Agendamento fixo por horário é limitado. Webhooks permitem automação reativa — o job roda quando o evento acontece, não numa janela de tempo pré-definida. Isso é crítico para fluxos que dependem de dados externos em tempo real.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Automação reativa vs programada</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Endpoint webhook do Hermes</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>N8N como orquestrador de eventos</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Payload formatado como instrução de job</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tópico 7 -->
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+          <span class="text-lg">🔁</span>
+          <div>
+            <span class="font-medium">Loop de melhoria contínua dos jobs</span>
+            <span class="text-neutral-500 text-sm ml-2">- Refinando automações com base em resultados</span>
+          </div>
+        </button>
+        <div class="topic-explanation px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">O que é</h3>
+              <p class="text-neutral-300 text-sm mt-1">Cada ciclo de revisão matinal é uma oportunidade de melhorar os jobs. O Hermes registra metadados de performance: tempo de execução, tokens consumidos, número de re-tentativas, qualidade do output (você avalia). Com esses dados, você identifica jobs caros demais, lentos demais ou com outputs abaixo do esperado e refina a instrução ou troca o modelo.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Por que aprender</h3>
+              <p class="text-neutral-300 text-sm mt-1">Automações que não evoluem se tornam obsoletas. O loop de melhoria transforma cada noite em aprendizado — jobs que rodam 30 dias ficam progressivamente mais rápidos, baratos e precisos conforme você refina as instruções.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-amber-400 mb-2">Conceitos-chave</h3>
+              <ul class="space-y-1 mt-1">
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Metadados de performance por job</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Avaliação de qualidade pelo usuário</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Refinamento incremental de instruções</li>
+                <li class="text-sm text-neutral-300 flex items-start gap-2"><span class="text-amber-400 mt-0.5">•</span>Troca de modelo por custo-performance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-amber-900/40 via-dark-800 to-dark-800 rounded-xl border border-amber-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Jobs agendados com hermes schedule</strong><span class="text-neutral-400"> — instrução, modelo e horário em um comando</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Checkpoints para recuperação de falhas</strong><span class="text-neutral-400"> — nunca reinicia do zero após erro</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Protocolo de revisão matinal</strong><span class="text-neutral-400"> — controle humano sobre o que vai para produção</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-amber-400 mt-1">✓</span>
+            <div><strong class="text-white">Loop de melhoria contínua</strong><span class="text-neutral-400"> — cada noite torna os jobs mais eficientes</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-amber-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">4.4 — Integrações Externas: Telegram, N8N e Zapier conectados ao Hermes</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-4-2.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 4.2</a>
+          <a href="modulo-4-4.html" class="flex-1 text-center px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV PREV/NEXT -->
+    <div class="flex justify-between pt-6 border-t border-dark-600">
+      <a href="modulo-4-2.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">← Módulo 4.2: Pantheon</a>
+      <a href="modulo-4-4.html" class="flex items-center gap-2 text-sm text-neutral-400 hover:text-amber-400">Módulo 4.4: Integrações Externas →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 mt-12 py-6 text-center">
+    <p class="text-neutral-500 text-sm">Parte do curso <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      explanation.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

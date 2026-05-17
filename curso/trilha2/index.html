@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementação Técnica | TRIAD</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha blue) */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .hover\:border-blue-500\/30:hover { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+
+    /* Light mode - remove gradientes */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300 transition-colors">
+            <span class="text-sm font-medium">← Curso</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center">
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        TRILHA 2
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Implementação Técnica</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Configure, conecte e faça o sistema funcionar do zero
+      </p>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">6</div>
+          <div class="text-xs text-neutral-400">Módulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">42</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">~5h</div>
+          <div class="text-xs text-neutral-400">Duração</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Prático</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- NAVEGAÇÃO RÁPIDA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Navegação Rápida</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+            <span class="text-blue-400 font-bold text-sm">2.1</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">Configurando o ambiente Hermes</h3>
+          <p class="text-xs text-neutral-400">Instalação, setup inicial e verificação</p>
+        </a>
+
+        <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+            <span class="text-blue-400 font-bold text-sm">2.2</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">Conectando OpenRouter</h3>
+          <p class="text-xs text-neutral-400">Chaves, dashboard e roteamento de modelos</p>
+        </a>
+
+        <a href="#modulo-2-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+            <span class="text-blue-400 font-bold text-sm">2.3</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">Integrando DeepSeek V4</h3>
+          <p class="text-xs text-neutral-400">Worker do Triad com chave própria</p>
+        </a>
+
+        <a href="#modulo-2-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+            <span class="text-blue-400 font-bold text-sm">2.4</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">Gemini CLI</h3>
+          <p class="text-xs text-neutral-400">Capacidade multimodal no terminal</p>
+        </a>
+
+        <a href="#modulo-2-5" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">5</span>
+            <span class="text-blue-400 font-bold text-sm">2.5</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">Criando a skill Orpheus</h3>
+          <p class="text-xs text-neutral-400">Seu deep work agent no Hermes</p>
+        </a>
+
+        <a href="#modulo-2-6" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center space-x-3 mb-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold flex-shrink-0">6</span>
+            <span class="text-blue-400 font-bold text-sm">2.6</span>
+          </div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">soul.md na prática</h3>
+          <p class="text-xs text-neutral-400">Preenchendo e ativando sua memória</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- DIVISOR -->
+    <div class="flex items-center space-x-4 mb-10">
+      <div class="flex-1 h-px bg-dark-600"></div>
+      <span class="text-sm text-neutral-400 font-medium">Conteúdo detalhado</span>
+      <div class="flex-1 h-px bg-dark-600"></div>
+    </div>
+
+    <!-- MÓDULO 2.1 -->
+    <div id="modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.1</span>
+          <span class="text-xs text-neutral-500">~50 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">⚙️ Configurando o ambiente Hermes</h3>
+        <p class="text-neutral-400 text-sm">Instalação passo a passo, configuração de diretórios e verificação de saúde do sistema antes de avançar.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Pré-requisitos — o que você precisa antes de começar</span><span class="text-neutral-500 text-sm ml-2">- Sistema, Node.js e conta Anthropic</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Para instalar e usar o Hermes Agent você precisa de: sistema operacional macOS, Linux ou Windows com WSL; Node.js 18+ instalado; conta na Anthropic (para Claude); terminal com permissões de usuário; e opcionalmente VS Code ou outro editor de código. Não é necessário ser desenvolvedor — mas familiaridade com o terminal é essencial.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Verificar pré-requisitos antes de instalar evita erros frustrantes no meio do processo. Saber o que você tem e o que falta é o primeiro passo para uma instalação sem surpresas.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Node.js como runtime · Terminal/shell básico · Conta Anthropic · WSL para Windows · Permissões de usuário vs admin</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Instalação do Hermes Agent — passo a passo</span><span class="text-neutral-500 text-sm ml-2">- npm, setup wizard e configuração inicial</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes Agent é instalado via terminal. O processo envolve: clonar ou instalar via npm o pacote do Hermes, configurar variáveis de ambiente, rodar o setup inicial que guia pela configuração de modelos. O comando central é <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup</code> que abre um wizard interativo para configurar chaves de API e preferências.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Seguir a sequência correta de instalação evita estados inconsistentes. Pular passos do setup inicial é a causa mais comum de erros difíceis de diagnosticar.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">npm install global · hermes setup wizard · Variáveis de ambiente · Estado de configuração · Verificação pós-instalação</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Configuração inicial — diretórios, permissões, variáveis</span><span class="text-neutral-500 text-sm ml-2">- ~/.hermes/ e ANTHROPIC_API_KEY</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após a instalação base, o Hermes cria uma estrutura de diretórios em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/</code> que inclui: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">soul.md</code> (contexto pessoal), <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">skills/</code> (personas e skills), <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">memory/</code> (histórico e memória) e <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">config.json</code> (configurações gerais). As variáveis de ambiente necessárias são: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">ANTHROPIC_API_KEY</code>, e opcionalmente <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">OPENROUTER_API_KEY</code> para modelos alternativos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Conhecer a estrutura de diretórios do Hermes permite fazer backup do que importa, entender onde fica cada coisa e diagnosticar problemas com mais rapidez.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">~/.hermes/ como base · Estrutura de diretórios · ANTHROPIC_API_KEY · Backup de configuração · config.json</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Primeiro teste — confirmar que Hermes está funcionando</span><span class="text-neutral-500 text-sm ml-2">- Smoke test pós-instalação</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após a instalação e configuração, o primeiro teste é uma conversa simples: perguntar ao Hermes algo sobre você mesmo para confirmar que ele responde, acessa o soul.md e executa ferramentas básicas. Um bom teste inicial é: "Hermes, o que você sabe sobre mim até agora?" seguido de "Use o terminal para criar um arquivo de teste em ~/Desktop/hermes-test.txt".</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Testar uma funcionalidade simples antes de avançar para configurações complexas isola problemas. Se o básico funciona, a instalação está correta.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Smoke test · Verificação de soul.md · Execução de ferramenta de terminal · Iteração de diagnóstico</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">O dashboard do Hermes — visão geral da interface</span><span class="text-neutral-500 text-sm ml-2">- Pantheon, histórico e status de jobs</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Hermes tem uma interface de dashboard (acessível via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes dashboard</code> ou pela extensão do VS Code/IDE) que centraliza: histórico de conversas, skills e personas ativas (Pantheon), uso e custo de tokens, status de jobs agendados e memória ativa. O dashboard é onde você gerencia o sistema visualmente sem precisar do terminal.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Conhecer o dashboard antes de precisar dele reduz fricção. Você sabe onde olhar quando algo vai errado e como navegar entre as diferentes funcionalidades do Hermes.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes dashboard · Pantheon visual · Histórico de sessões · Status de jobs · Custo acumulado</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Conectando Claude Code ao Hermes — integração</span><span class="text-neutral-500 text-sm ml-2">- Delegação de tarefas de código</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Claude Code (CLI de desenvolvimento) e Hermes (agente pessoal) podem ser usados de forma integrada. O Hermes pode invocar Claude Code como uma ferramenta para tarefas de código, e o dashboard do Hermes pode mostrar dados de uso do Claude Code. A integração é configurada via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup integrations</code> e permite que Hermes delegue tarefas de código sem sair do seu fluxo principal.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A integração entre Hermes e Claude Code é onde o sistema atinge seu potencial máximo — Hermes orquestra a vida toda, incluindo o trabalho de código que Claude Code executa.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes setup integrations · Delegação de tarefas de código · Dashboard unificado · Fluxo de orquestração</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Verificação de saúde — checklist pós-instalação</span><span class="text-neutral-500 text-sm ml-2">- Base sólida antes de avançar</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após completar a instalação, um checklist de verificação de saúde confirma que tudo está funcionando: Hermes responde ✓ | soul.md é carregado ✓ | Chave API está ativa ✓ | Terminal funciona como ferramenta ✓ | Dashboard abre ✓ | Histórico é salvo entre sessões ✓ | Skills podem ser carregadas ✓.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Um sistema parcialmente configurado pode parecer funcionar mas falhar em casos importantes. O checklist sistemático garante que você tem uma base sólida antes de avançar.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Verificação sistemática · Diagnóstico de instalação · Base sólida antes de avançar · Identificação de problemas latentes</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.2 -->
+    <div id="modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.2</span>
+          <span class="text-xs text-neutral-500">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🔑 Conectando OpenRouter</h3>
+        <p class="text-neutral-400 text-sm">Chaves, dashboard e roteamento — o gateway para todos os modelos do Triad em um único lugar.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Criando sua conta no OpenRouter</span><span class="text-neutral-500 text-sm ml-2">- Email ou OAuth em menos de 5 minutos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Acesse openrouter.ai, clique em "Sign In" e crie uma conta com email ou via OAuth (Google, GitHub). Após confirmar o email, você tem acesso ao dashboard com créditos de teste. Para uso regular, você precisará adicionar créditos ou um método de pagamento. O processo completo leva menos de 5 minutos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A conta do OpenRouter é o gateway para todos os modelos do Triad. Sem ela, você está limitado aos modelos de um único provedor.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">openrouter.ai · OAuth de conta · Créditos de teste · Método de pagamento · Dashboard inicial</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Gerando a API key principal</span><span class="text-neutral-500 text-sm ml-2">- sk-or- e boas práticas de segurança</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No dashboard do OpenRouter, vá em "Keys" → "Create Key". Dê um nome descritivo (ex: "hermes-triad"), defina um limite de crédito opcional para controle de gastos e copie a chave gerada (começa com <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">sk-or-</code>). Armazene em local seguro — não é possível ver a chave novamente após fechar a janela.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A API key é o único elemento que autentica suas chamadas. Perdê-la significa gerar uma nova e atualizar todas as integrações. Gerenciar chaves corretamente é segurança básica.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">sk-or- prefix · Limite de crédito como proteção · Armazenamento seguro · Rotação de chaves · Nunca commitar no git</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Configurando OpenRouter no Hermes</span><span class="text-neutral-500 text-sm ml-2">- hermes setup model e seleção de provedor</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No terminal, execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup model</code>. O wizard mostrará uma lista de provedores suportados. Use a barra de espaço para selecionar "OpenRouter" e pressione Enter. Cole sua API key quando solicitado. O Hermes confirma a conexão testando uma chamada simples. Você pode configurar qual modelo OpenRouter usar como padrão para cada papel (Condutor, Executor, Crítico).</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O setup correto garante que o Hermes roteie chamadas pelo OpenRouter automaticamente. Erros nessa etapa causam falhas silenciosas onde Hermes usa o modelo errado ou não acessa modelos alternativos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes setup model · Seleção de provedor · Teste de conexão automático · Modelo padrão por papel · Verificação de configuração</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Testando a conexão — chamada de verificação</span><span class="text-neutral-500 text-sm ml-2">- Smoke test com DeepSeek via OpenRouter</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após configurar OpenRouter, teste com: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes "Use o modelo deepseek/deepseek-chat via OpenRouter e me diga qual é a capital do Brasil"</code>. Se a resposta mencionar "Brasília" e o log mostrar o provedor OpenRouter/DeepSeek, a conexão está funcionando. Se houver erro de autenticação, verifique se a chave foi colada corretamente e se tem créditos disponíveis.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Testar a conexão com um caso simples antes de rodar tarefas complexas economiza tempo de debugging. Uma falha aqui é infinitamente mais fácil de diagnosticar do que uma falha no meio de um loop do Triad.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Teste de smoke · deepseek/deepseek-chat · Log de provedor · Diagnóstico de autenticação · Verificação de créditos</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Navegando o dashboard — uso, custos, modelos disponíveis</span><span class="text-neutral-500 text-sm ml-2">- openrouter.ai/activity como painel de controle</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O dashboard do OpenRouter (openrouter.ai/activity) mostra: histórico de chamadas com modelo, tokens e custo de cada uma; gráfico de uso por período; custo acumulado; e lista de todos os modelos disponíveis com preços atualizados. A aba "Models" permite filtrar por capacidade, preço e provedor.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Monitorar o dashboard regularmente é a única forma de identificar uso inesperado, custos fora do esperado ou chamadas a modelos errados. É o painel de controle financeiro do seu sistema de IA.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">openrouter.ai/activity · Custo por chamada · Gráfico de uso · Filtro de modelos · Alerta de custo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Selecionando modelos padrão para cada papel do Triad</span><span class="text-neutral-500 text-sm ml-2">- Condutor, Executor e Crítico no config.json</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No Hermes, você configura qual modelo OpenRouter usar para cada papel: Condutor → <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">anthropic/claude-opus-4</code> (ou <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">claude-opus-4:nitro</code> para velocidade), Executor → <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">deepseek/deepseek-chat</code>, Crítico → <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">openai/gpt-4o</code>. Essa configuração fica em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/config.json</code> e pode ser sobrescrita por skill específica.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Configurar os modelos corretos por papel é o que transforma o Hermes em um sistema Triad real. Sem essa configuração, todos os papéis usam o mesmo modelo padrão — eliminando o benefício arquitetural.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">config.json · Modelo por papel · Sufixos :nitro/:floor · Override por skill · anthropic/ vs openai/ vs deepseek/</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Troubleshooting — erros comuns e soluções</span><span class="text-neutral-500 text-sm ml-2">- 401, 404, 429 e timeout</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Os erros mais comuns ao configurar OpenRouter no Hermes: (1) <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">401 Unauthorized</code> — chave errada ou sem créditos; (2) <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">404 Model not found</code> — nome de modelo incorreto; (3) <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">Rate limit 429</code> — sem chave própria usando modelo popular, solução: adicionar BYOK; (4) Timeout — modelo lento, solução: adicionar sufixo <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">:nitro</code>; (5) Configuração não salva — editar config.json diretamente e reiniciar Hermes.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Saber os erros antes de encontrá-los reduz drasticamente o tempo de resolução. A maioria dos problemas de integração tem causa simples e solução direta.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">401 vs 404 vs 429 · BYOK como solução de rate limit · :nitro para timeout · config.json direto · Reinicialização do Hermes</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.3 -->
+    <div id="modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.3</span>
+          <span class="text-xs text-neutral-500">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🤖 Integrando DeepSeek V4 como Worker do Triad</h3>
+        <p class="text-neutral-400 text-sm">Chave própria, BYOK no OpenRouter e rate limits independentes para loops overnight sem interrupção.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Por que ter chave própria da DeepSeek no OpenRouter</span><span class="text-neutral-500 text-sm ml-2">- Rate limits compartilhados vs dedicados</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Por padrão, chamadas ao DeepSeek V4 via OpenRouter compartilham rate limits com outros usuários. Para uso intensivo — especialmente loops overnight do Triad — isso pode causar erros <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">429</code> (rate limit excedido). Com chave própria (BYOK), suas chamadas têm rate limits independentes da base de usuários do OpenRouter.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Rate limits inesperados no meio de um loop overnight podem interromper o trabalho e deixar uma tarefa incompleta. BYOK é a proteção contra esse problema.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Rate limit compartilhado vs dedicado · 429 Too Many Requests · BYOK como solução · Uso intensivo overnight · Continuidade de loop</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Criando conta e carregando créditos na DeepSeek Platform</span><span class="text-neutral-500 text-sm ml-2">- $5-$10 para semanas de uso</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Acesse platform.deepseek.com, crie uma conta com email e confirme. Na seção "Billing" ou "Top Up", adicione créditos via cartão de crédito. Para começar, $5-$10 é suficiente para semanas de uso normal do Triad. A plataforma mostra saldo em tempo real e histórico de uso por modelo.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Os créditos na DeepSeek Platform são consumidos apenas quando você usa sua chave própria. Sem créditos, a chave retorna erro de pagamento. É importante entender que o saldo na DeepSeek é separado do saldo no OpenRouter.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">platform.deepseek.com · Top up de créditos · Saldo DeepSeek vs OpenRouter · $5-$10 inicial · Billing em tempo real</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Gerando API key da DeepSeek</span><span class="text-neutral-500 text-sm ml-2">- platform.deepseek.com/api-keys</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Na DeepSeek Platform, vá em "API Keys" → "Create new API key". Dê um nome (ex: "hermes-triad-worker"), copie a chave gerada (começa com <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">sk-</code>). Como toda chave de API, você não consegue visualizá-la novamente depois — copie imediatamente para um gerenciador de senhas ou variável de ambiente.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A chave da DeepSeek é o que vincula suas chamadas ao seu saldo na plataforma. Sem ela, você depende do pool compartilhado do OpenRouter com seus rate limits.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">platform.deepseek.com/api-keys · sk- prefix · Gerenciador de senhas · Variável de ambiente · Backup seguro</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Adicionando a chave no OpenRouter (Bring Your Own Keys)</span><span class="text-neutral-500 text-sm ml-2">- Uma configuração, uso contínuo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No dashboard do OpenRouter, vá em "Settings" → "Integrations" → "Bring Your Own Keys". Procure por "DeepSeek" na lista de provedores, clique em "Configure" e cole sua chave da DeepSeek Platform. O OpenRouter valida a chave automaticamente. Após salvar, chamadas ao <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">deepseek/deepseek-chat</code> via OpenRouter usarão automaticamente sua chave.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A integração BYOK acontece uma única vez e funciona para todas as chamadas futuras. Não é necessário mudar nada no Hermes após essa configuração — ele continua usando a mesma API key do OpenRouter.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">openrouter.ai/settings · BYOK configuration · Validação automática · Transparência para o Hermes · Uma configuração, uso contínuo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Configurando DeepSeek como modelo Worker no Hermes</span><span class="text-neutral-500 text-sm ml-2">- config.json e parâmetros de execução</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/config.json</code>, defina o papel Worker para usar o modelo <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">deepseek/deepseek-chat</code>. Na skill Orpheus, o system prompt do Worker especifica que ele deve usar esse modelo. Você pode também configurar parâmetros como <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">temperature</code> (0.7 recomendado) e <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">max_tokens</code> para controlar o tamanho das respostas.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A configuração correta do modelo Worker é o que garante que o DeepSeek V4 executa o papel correto no fluxo. Sem isso, o Hermes pode usar um modelo mais caro para execução quando DeepSeek é suficiente.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">config.json Worker model · deepseek/deepseek-chat · temperature 0.7 · max_tokens · Override por skill</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Testando o Worker — tarefa simples ponta a ponta</span><span class="text-neutral-500 text-sm ml-2">- Isolamento e verificação de logs</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Teste o Worker com uma tarefa estruturada simples: "Usando o modelo DeepSeek V4 como Worker, liste 3 ângulos diferentes para responder à pergunta: qual é a principal vantagem competitiva de usar múltiplos modelos de IA?". Verifique nos logs que o DeepSeek foi chamado (não Claude), que a resposta tem três ângulos distintos e que o custo foi significativamente menor que usar Opus.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Testar o Worker isoladamente antes de rodar o Triad completo garante que cada componente funciona. Problemas no Worker são mais fáceis de diagnosticar sozinhos do que dentro do loop completo.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Teste isolado de componente · Verificação de logs · Custo comparativo · Três ângulos como output esperado · Diagnóstico antes do loop completo</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Monitorando uso e custo no primeiro ciclo real</span><span class="text-neutral-500 text-sm ml-2">- Calibragem de expectativas e verificação BYOK</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após a primeira execução completa do Triad com DeepSeek como Worker, monitore: no OpenRouter dashboard, filtre as chamadas por modelo deepseek/deepseek-chat e veja o custo total; compare com o custo que seria pagar com Opus; calcule quantas execuções similares você consegue por dollar; e verifique se sua chave BYOK foi usada (o log mostra "provider: DeepSeek via BYOK" quando sua chave é ativa).</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O monitoramento do primeiro ciclo real calibra suas expectativas de custo e confirma que a configuração BYOK está funcionando corretamente. É o fechamento do loop de configuração.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Filtro por modelo no dashboard · Custo comparativo Opus vs DeepSeek · Custo por execução · Verificação BYOK ativa · Calibragem de expectativas</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.4 -->
+    <div id="modulo-2-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.4</span>
+          <span class="text-xs text-neutral-500">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🎬 Gemini CLI — Capacidade multimodal no terminal</h3>
+        <p class="text-neutral-400 text-sm">Instale, autentique e integre o Gemini CLI ao Hermes para análise de vídeo, imagem e PDF diretamente do terminal.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">O que é CLI e por que o Gemini CLI é poderoso</span><span class="text-neutral-500 text-sm ml-2">- Multimodal local como ferramenta do Hermes</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">CLI significa Command Line Interface — uma forma de interagir com um serviço via terminal, sem interface gráfica. O Gemini CLI é a implementação oficial do Google que permite usar o Gemini diretamente no terminal. O que o torna especialmente poderoso é que, quando instalado localmente, o Hermes pode invocá-lo como uma ferramenta — transformando Gemini em um executor de tarefas multimodais disponível a qualquer momento.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender o que CLI significa e por que o Gemini CLI especificamente vale a pena instalar é o que justifica o esforço de configuração. Não é só mais um modelo — é capacidade multimodal local.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">CLI vs interface gráfica · Local vs API remota · Hermes invocando CLI · Multimodal local · Custo zero com conta Google</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Instalando o Gemini CLI — clonando o repositório</span><span class="text-neutral-500 text-sm ml-2">- npm install -g e verificação</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">A instalação do Gemini CLI é feita via npm: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">npm install -g @google/gemini-cli</code>. Alternativamente, você pode clonar o repositório oficial do GitHub e instalar localmente. Para confirmar a instalação, execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini --version</code>. Se retornar o número da versão, o CLI está pronto.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A instalação via npm é o caminho mais simples e garante que você recebe atualizações automáticas. Clonar o repositório é para quem quer modificar o CLI ou usar versões de desenvolvimento.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">npm install -g · gemini --version · Repositório GitHub oficial · Atualização automática · Instalação global vs local</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Autenticando com sua conta Google</span><span class="text-neutral-500 text-sm ml-2">- gemini auth login e tier gratuito</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após instalar, execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini auth login</code>. O CLI abrirá um link de autenticação no browser ou solicitará que você cole um código de verificação. Autentique com sua conta Google. A autenticação é salva localmente e válida por um período longo. O tier gratuito do Gemini é generoso para uso pessoal e inclui acesso ao Gemini 2.0.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A autenticação via conta Google elimina a necessidade de chave de API — o que significa custo zero para começar. Entender o processo de auth evita confusão entre autenticação do CLI e chave de API.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">gemini auth login · OAuth com conta Google · Tier gratuito · Sem API key necessária · Validade da autenticação</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Comandos básicos — primeiras chamadas no terminal</span><span class="text-neutral-500 text-sm ml-2">- gemini "prompt" e flag -f para arquivos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Com o Gemini CLI autenticado, os comandos básicos são: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini "sua pergunta aqui"</code> para uma resposta simples; <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini -f arquivo.pdf "resuma este documento"</code> para análise de arquivo; <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gemini -f imagem.png "descreva o que você vê"</code> para análise visual. O CLI suporta arquivos de texto, PDF, imagens e vídeos como entrada.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Familiaridade com a sintaxe básica do CLI é necessária antes de integrá-lo ao Hermes. Saber o que funciona diretamente no terminal facilita o debugging quando a integração tem problemas.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">gemini "prompt" · -f para arquivo · Tipos de arquivo suportados · Análise de PDF, imagem, vídeo · Saída no terminal</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Conectando o Gemini CLI ao Hermes como ferramenta</span><span class="text-neutral-500 text-sm ml-2">- hermes setup tools e detecção automática</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Para que o Hermes possa usar o Gemini CLI, você precisa configurá-lo como uma ferramenta disponível. No setup do Hermes, <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes setup tools</code> mostra ferramentas de terminal instaladas automaticamente. Se o Gemini CLI estiver no PATH, o Hermes o detecta automaticamente. Caso contrário, adicione manualmente: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes tools add gemini --command "gemini"</code>.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A integração como ferramenta é o que permite delegar tarefas multimodais ao Hermes sem precisar chamar o Gemini manualmente. O Hermes decide quando usar Gemini com base na natureza da tarefa.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes setup tools · Detecção automática via PATH · hermes tools add · Delegação automática de multimodal · Verificação de ferramenta disponível</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Caso de uso: analisar vídeo/imagem via Hermes</span><span class="text-neutral-500 text-sm ml-2">- Gemini como especialista multimodal</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Com o Gemini CLI integrado, você pode pedir ao Hermes: "Use o Gemini CLI para analisar meu vídeo do YouTube [URL] e me dê um breakdown dos primeiros 30 segundos — o que aparece na tela, qual é o gancho visual e qual é a energia transmitida". O Hermes invoca o Gemini, processa o vídeo e retorna a análise estruturada.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Ver um caso de uso concreto e de alto valor demonstra por que vale a pena configurar o Gemini CLI. Análise de vídeo é algo que nenhum outro modelo no Triad faz bem — Gemini é o especialista.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Análise de vídeo do YouTube · Breakdown visual de conteúdo · Hermes como orquestrador · Gemini como especialista multimodal · Output estruturado</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Expandindo para GitHub CLI, OpenAI CLI e outros</span><span class="text-neutral-500 text-sm ml-2">- Padrão extensível de CLIs como ferramentas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O mesmo padrão de integração do Gemini CLI funciona para outros CLIs: GitHub CLI (<code class="font-mono bg-dark-700 px-1 rounded text-blue-400">gh</code>) para criar issues e PRs via Hermes, OpenAI CLI para tarefas específicas da OpenAI, Vercel CLI para deploy, e qualquer ferramenta de terminal que o Hermes possa detectar ou configurar. O ecossistema de CLIs expande o que o Hermes pode fazer sem precisar de interfaces web.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender que o Gemini CLI é apenas um exemplo de um padrão extensível muda como você pensa sobre o que o Hermes pode fazer. Qualquer CLI instalado pode se tornar uma ferramenta do Hermes.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">gh CLI para GitHub · Vercel CLI para deploy · Padrão extensível · Hermes como orquestrador de CLIs · Ecossistema local de ferramentas</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.5 -->
+    <div id="modulo-2-5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.5</span>
+          <span class="text-xs text-neutral-500">~50 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🎭 Criando a skill Orpheus — Seu deep work agent</h3>
+        <p class="text-neutral-400 text-sm">Configure o Pantheon, escreva os três system prompts do Triad e teste Orpheus com uma tarefa real.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">O que é uma skill no Hermes e como funciona</span><span class="text-neutral-500 text-sm ml-2">- System prompt, modelo e ferramentas por skill</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Skills no Hermes são configurações de comportamento especializado — uma combinação de system prompt personalizado, modelo específico, fluxo de execução e conjunto de ferramentas disponíveis. Quando você ativa uma skill, o Hermes muda sua forma de responder e executar tarefas para seguir o padrão definido na skill. Skills podem ser persistentes (sempre ativas) ou invocadas on-demand.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Entender skills é o que permite criar comportamentos especializados dentro do Hermes — como o fluxo Triad — sem precisar repetir instruções longas a cada conversa.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">System prompt personalizado por skill · Modelo específico por skill · Invocação on-demand vs persistente · Comportamento especializado · Skills como módulos de comportamento</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">O Pantheon — o painel de personas e skills</span><span class="text-neutral-500 text-sm ml-2">- hermes pantheon e gerenciamento visual</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O Pantheon é a interface visual do Hermes para gerenciar personas e skills. Acessível via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes pantheon</code> ou pelo dashboard, ele mostra todas as suas personas ativas, permite criar novas, editar system prompts, configurar modelos por persona e sincronizar com o Hermes. Cada persona no Pantheon aparece como um "deus" com nome, missão e capacidades definidas.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O Pantheon torna o gerenciamento de múltiplas personas visual e intuitivo. Sem ele, você precisaria editar arquivos de configuração diretamente — mais propenso a erros e mais difícil de visualizar.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes pantheon · Persona como entidade · Visual vs arquivo de config · Sincronização com Hermes · Nome e missão de persona</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Criando a persona Orpheus no Pantheon</span><span class="text-neutral-500 text-sm ml-2">- Nome, missão e modelo orquestrador</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">No Pantheon, clique em "Add Persona", defina o nome como "Orpheus", a descrição como "Deep work agent — usa o fluxo Triad para tarefas estratégicas complexas" e selecione Claude Opus 4 como modelo orquestrador. A persona criada aparece no dashboard e pode ser invocada via "Use o Orpheus para..." no chat do Hermes.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Criar a persona Orpheus é o momento em que o sistema Triad se torna uma entidade nomeada e invocável dentro do Hermes. Dar um nome ajuda a comunicar a intenção — "preciso de Orpheus" sinaliza trabalho profundo.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Add persona no Pantheon · Nome Orpheus · Modelo orquestrador · Invocação por nome · Deep work como intenção</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Os três system prompts do Triad — Conductor, Worker, Critic</span><span class="text-neutral-500 text-sm ml-2">- SHIP/REVISE/FUNDAMENTAL FLAW</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O sistema Orpheus usa três system prompts distintos. Conductor (Opus): interroga com 5-10 perguntas, escreve um briefing de uma página para o Worker, valida quando Worker + Crítico convergirem — nunca executa o trabalho ele mesmo. Worker (DeepSeek): recebe o briefing e ataca de 3-5 ângulos em paralelo, passa cada draft ao Critic, revisa até receber SHIP. Critic (GPT): retorna VERDITO (SHIP/REVISE/FUNDAMENTAL FLAW), O QUE QUEBRA, O QUE FALTA e MELHOR ÂNGULO — com exemplos específicos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Esses são os system prompts exatos que definem o comportamento do Orpheus. Entendê-los permite ajustá-los para seus casos de uso específicos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Conductor nunca executa · Worker usa 3-5 ângulos · Critic retorna SHIP/REVISE/FUNDAMENTAL FLAW · Específico vs vago · Critério de aprovação rigoroso</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Sincronizando Orpheus com o Hermes via prompt</span><span class="text-neutral-500 text-sm ml-2">- Confirmação de entendimento antes da tarefa</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após criar o Orpheus no Pantheon, sincronize com o Hermes via prompt de contexto: "Hermes, estou sincronizando a persona Orpheus com você. Orpheus é meu agente de deep work que usa o fluxo Triad: Opus como Condutor (interroga, brifa, valida), DeepSeek como Worker (executa de 3-5 ângulos, loop com Crítico), GPT-5.5 como Crítico (SHIP/REVISE/FUNDAMENTAL FLAW). Confirme que você entendeu o fluxo e me diga o que precisa antes de receber uma tarefa para Orpheus."</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A sincronização via prompt confirma que o Hermes entendeu o fluxo corretamente antes de você investir em uma tarefa real. É como fazer o Hermes "ler o manual" em voz alta.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Prompt de sincronização · Confirmação de entendimento · Detecção de gaps antes da tarefa · Feedback do Hermes sobre o que precisa · Iteração de configuração</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Testando Orpheus com uma tarefa real</span><span class="text-neutral-500 text-sm ml-2">- Médio valor estratégico, fluxo ponta a ponta</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O primeiro teste real do Orpheus deve ser uma tarefa de médio valor estratégico — importante o suficiente para valer a profundidade do Triad, mas não crítica ao ponto de que um resultado imperfeito seja prejudicial. Exemplo: "Orpheus, quero entender quais são os 3 principais erros que empreendedores cometem ao usar IA nos primeiros 90 dias. Me dê sua análise mais profunda." O Orpheus vai interrogar, briefar, executar e criticar.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O primeiro teste real confirma se o fluxo funciona de ponta a ponta no seu setup específico. Problemas de configuração que não aparecem em testes simples surgem em tarefas com múltiplas etapas e modelos.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Tarefa de médio valor · Fluxo ponta a ponta · Identificação de problemas de configuração · Interrogação como primeira etapa · Resultado convergido</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Ajustando e refinando a persona após o primeiro uso</span><span class="text-neutral-500 text-sm ml-2">- Iteração de system prompt baseada em resultado</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Após o primeiro uso real do Orpheus, avalie: o Condutor fez as perguntas certas? O Worker produziu ângulos genuinamente distintos? O Crítico foi específico o suficiente? Se o Condutor foi muito verboso, ajuste o system prompt para "máximo 5 perguntas, uma de cada vez". Se o Worker produziu ângulos similares, adicione "cada ângulo deve usar uma premissa fundamentalmente diferente". Iteração é esperada.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O primeiro uso raramente é perfeito. A capacidade de identificar onde ajustar e como ajustar é o que separa quem tem um sistema funcional de quem tem um sistema excelente.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Avaliação pós-uso · Ajuste de system prompt · Iteração esperada · Diagnóstico de qualidade · Critérios de bom output por papel</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-5.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2.6 -->
+    <div id="modulo-2-6" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold">2.6</span>
+          <span class="text-xs text-neutral-500">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">📋 soul.md na prática — Preenchendo e ativando</h3>
+        <p class="text-neutral-400 text-sm">Do template em branco ao contexto pessoal completo — Identity, Mission, Business, Voice, Rhythm e Memory.</p>
+      </div>
+
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <div><span class="font-medium">Baixando e abrindo o template soul.md</span><span class="text-neutral-500 text-sm ml-2">- ~/.hermes/soul.md como localização correta</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">O template soul.md está disponível no arquivo de referência do curso e no repositório do Hermes. Baixe o template para <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/soul.md</code> — esse é o local padrão que o Hermes carrega automaticamente. Abra o arquivo em qualquer editor de texto. As seções em itálico são instruções a substituir pelo seu conteúdo real.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Ter o template no local correto e editável é o pré-requisito para tudo o mais neste módulo. Um soul.md no local errado é ignorado pelo Hermes silenciosamente.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">~/.hermes/soul.md · Carregamento automático · Editor de texto simples · Itálico = instrução a substituir · Localização correta</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <div><span class="font-medium">Preenchendo Identity e Mission com seus dados reais</span><span class="text-neutral-500 text-sm ml-2">- Headline goal sem suavizações</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Identity: preencha nome, pronomes, localização e fuso horário (ex: "São Paulo, BR · BRT / UTC-3"), seu papel profissional em uma frase e 3 adjetivos de brand voice ("direto, prático, sem jargão"). Mission: escreva seu headline goal em uma frase sem suavizações, liste 3 pilares concretos e escreva explicitamente o que está fora de escopo este ano.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Identity e Mission são as seções que mais impactam a relevância das sugestões do Hermes. Um headline goal vago ("crescer minha marca") produz sugestões genéricas. Um headline específico ("atingir 10k seguidores no LinkedIn até dezembro vendendo consultoria de IA") produz sugestões acionáveis.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Fuso horário explícito · 3 adjetivos de brand voice · Headline goal sem suavizações · 3 pilares concretos · Out-of-scope como proteção</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <div><span class="font-medium">Documentando seu negócio — receita, custos, métricas</span><span class="text-neutral-500 text-sm ml-2">- Runway como restrição real</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Na seção Business, preencha entidade legal (nome e estrutura), modelo de receita (SaaS / agência / cursos / consultoria), receita mensal atual e tendência percentual MoM, custos mensais detalhados (ferramentas, pessoal, infraestrutura), runway em meses se receita caísse a zero, e quais métricas o Hermes deve monitorar por canal.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Sem contexto financeiro, o Hermes recomenda o que é tecnicamente possível — não o que é viável para seu estágio. "Contrate mais 3 pessoas" é uma sugestão ruim se você tem 2 meses de runway.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Receita e tendência MoM · Runway como restrição real · Custo detalhado por categoria · Métricas por canal · Contexto que calibra viabilidade</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <div><span class="font-medium">Definindo sua voz e seus hard nos</span><span class="text-neutral-500 text-sm ml-2">- Palavras proibidas e proteção de posicionamento</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Voice: liste como quer ser respondido (curto por padrão, uma pergunta por vez, sem emojis, sem bullet points desnecessários), e como o Hermes deve escrever no seu estilo (registro, ortografia brasileira, capitalização, palavras proibidas). Hard nos: liste o que o Hermes nunca pode fazer — ex: "nunca afirmar métricas que não compartilhei", "nunca mencionar [concorrente X] pelo nome", "nunca sugerir [abordagem Y] — já testei e não funciona".</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">Voice e Hard nos são as seções que mais evitam retrabalho. Sem elas, você passa horas pedindo ao Hermes para mudar o formato, o tom ou retirar informações que não deveria ter incluído.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Formato padrão de resposta · Ortografia como identidade · Palavras proibidas · Hard no como proteção de posicionamento · Histórico de tentativas fracassadas</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <div><span class="font-medium">Mapeando seu ritmo de trabalho — janelas, dias, energia</span><span class="text-neutral-500 text-sm ml-2">- Curva de energia como dado de configuração</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Na seção Rhythm, mapeie sua semana real: quando você tem energia máxima para trabalho criativo (ex: 6h-9h), quais dias são para criação vs execução vs reuniões, quando você checa mensagens (duas vezes por dia, não em tempo real), quais dias são sem reuniões, e a curva de energia ao longo do dia (manhã: criativo; tarde: operacional; noite: revisão e leitura).</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">O Hermes usa o ritmo para sugerir quando executar diferentes tipos de tarefas. Uma análise profunda sugerida para as 16h vai ser ignorada. A mesma análise sugerida para amanhã às 7h tem chance real de ser feita.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Janela de trabalho profundo · Dias de criação vs execução · Check de mensagens em batch · Curva de energia · Rituais de recuperação</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <div><span class="font-medium">Registrando decisões, pessoas e ferramentas na seção Memory</span><span class="text-neutral-500 text-sm ml-2">- Anti-sugestão por decisão documentada</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Memory é dividida em quatro sub-seções: (1) Decisões — liste o que você tentou, por que não funcionou e o que não sugerir de novo; (2) Pessoas — nomes, papel, última interação e o que você deve/eles devem a você; (3) Ferramentas — apenas as que sobreviveram ao uso real; (4) Lições trimestrais — o que funcionou, o que não funcionou, o que surpreendeu. Seja específico — "tentei landing pages em inglês, CTR foi 40% menor que em português" é útil; "inglês não funciona" é inútil.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A seção Memory é a que cresce mais em valor com o tempo. Registrar uma decisão hoje evita que o Hermes sugira a mesma abordagem daqui a seis meses — depois que você esqueceu por que descartou.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">Anti-sugestão por decisão documentada · Rede de pessoas como contexto · Stack real vs aspiracional · Lições trimestrais como input · Especificidade como requisito</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">7</span>
+            <div><span class="font-medium">Fazendo Hermes carregar o soul.md — verificação final</span><span class="text-neutral-500 text-sm ml-2">- hermes reload soul e diagnóstico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm mt-1">Com o soul.md preenchido em <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">~/.hermes/soul.md</code>, reinicie o Hermes ou execute <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes reload soul</code>. Para verificar que o arquivo foi carregado corretamente, pergunte: "Hermes, o que você sabe sobre mim? Resuma meu perfil com base no que tem no soul.md". Se a resposta incluir detalhes específicos que você preencheu, o carregamento funcionou. Se for genérica, verifique o caminho do arquivo e a sintaxe do Markdown.</p></div>
+              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm mt-1">A verificação final fecha o loop da configuração. Um soul.md mal posicionado ou com erro de sintaxe é silenciosamente ignorado pelo Hermes, resultando em respostas genéricas sem indicação do problema.</p></div>
+              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm mt-1">hermes reload soul · Pergunta de verificação · Resposta específica = sucesso · Resposta genérica = problema · Diagnóstico de caminho e sintaxe</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-6.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO INFERIOR -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-8">
+      <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+        ← Trilha 1: Fundamentos
+      </a>
+      <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">
+        Trilha 3: Fluxos Avançados →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+
+      explanation.classList.toggle('active');
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Criando a skill Orpheus — seu deep work agent com o fluxo Triad no Hermes">
+  <title>Skill Orpheus | TRIAD — INEMA.CLUB</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-neutral-400 hover:text-blue-400 text-sm flex items-center gap-1">← Trilha 2</a>
+          <span class="text-neutral-600">|</span>
+          <a href="../../index.html" class="text-neutral-400 hover:text-neutral-300 text-sm">Curso</a>
+        </div>
+        <div class="flex items-center space-x-3">
+          <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          <button id="theme-toggle" aria-label="Alternar tema" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Módulo 2.5</span>
+    </div>
+  </div>
+
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.5</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎭 Criando a skill Orpheus — Seu deep work agent</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Configure o Pantheon, escreva os três system prompts do Triad e teste Orpheus com uma tarefa real — o momento em que o sistema se torna uma entidade nomeada e invocável.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">7</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~50</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Config</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- T1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
+        <h2 class="text-2xl font-bold">📚 O que é uma skill no Hermes e como funciona</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Skills são configurações de comportamento especializado — combinando system prompt, modelo específico, fluxo de execução e ferramentas disponíveis. <strong class="text-blue-400">Quando você ativa uma skill, o Hermes muda seu comportamento inteiro</strong> para seguir o padrão definido nela.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Uma skill é um módulo de comportamento especializado no Hermes — composto por system prompt, modelo específico, ferramentas disponíveis e fluxo de execução. Ativar uma skill redireciona o comportamento completo do Hermes para o padrão definido nela.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🏗️ O que compõe uma skill</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="space-y-3">
+            <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white text-sm">System prompt</strong><p class="text-xs text-neutral-400 mt-1">Define como o Hermes pensa e responde enquanto a skill está ativa</p></div>
+            <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white text-sm">Modelo específico</strong><p class="text-xs text-neutral-400 mt-1">Cada skill pode usar um modelo diferente do padrão do config.json</p></div>
+          </div>
+          <div class="space-y-3">
+            <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white text-sm">Ferramentas disponíveis</strong><p class="text-xs text-neutral-400 mt-1">Quais CLIs e capacidades estão acessíveis durante essa skill</p></div>
+            <div class="p-3 bg-dark-800/50 rounded-lg"><strong class="text-white text-sm">Invocação on-demand</strong><p class="text-xs text-neutral-400 mt-1">"Use o Orpheus para..." ativa a skill sem configuração adicional</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">System prompt por skill</span><p class="text-sm text-neutral-400 mt-1">Instrução que redefine o comportamento do Hermes para um contexto específico</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Modelo específico</span><p class="text-sm text-neutral-400 mt-1">Skills podem usar modelos diferentes — Orpheus usa Opus como Condutor</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">On-demand vs persistente</span><p class="text-sm text-neutral-400 mt-1">Skills invocadas por pedido vs skills sempre ativas em segundo plano</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Módulos de comportamento</span><p class="text-sm text-neutral-400 mt-1">Skills como blocos de comportamento especializado que se ativam quando necessário</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
+        <h2 class="text-2xl font-bold">🏛️ O Pantheon — o painel de personas e skills</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Pantheon é a interface visual do Hermes para gerenciar personas. <strong class="text-blue-400">Sem o Pantheon, você editaria arquivos de configuração diretamente</strong> — mais propenso a erros e mais difícil de visualizar o que está ativo.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O Pantheon é a interface visual do Hermes acessada via <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">hermes pantheon</code> — um painel que lista todas as personas ativas, permite criar novas, editar system prompts e configurar modelos por persona sem editar arquivos JSON diretamente.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🖥️ Acessando o Pantheon</h3>
+        <div class="space-y-3">
+          <div>
+            <p class="text-sm text-neutral-400 mb-1">Via terminal:</p>
+            <code class="block font-mono bg-dark-700 px-3 py-2 rounded text-blue-400 text-sm">hermes pantheon</code>
+          </div>
+          <p class="text-sm text-neutral-300">Ou acesse pelo dashboard do Hermes → aba "Pantheon". Você verá todas as personas ativas, pode criar novas, editar system prompts e configurar modelos por persona.</p>
+        </div>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">hermes pantheon</span><p class="text-sm text-neutral-400 mt-1">Comando para abrir a interface visual de gerenciamento de personas</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Persona como entidade</span><p class="text-sm text-neutral-400 mt-1">Cada persona tem nome, missão, modelo e system prompt próprios</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Visual vs arquivo</span><p class="text-sm text-neutral-400 mt-1">Pantheon é mais confiável que editar arquivos JSON diretamente</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Sincronização</span><p class="text-sm text-neutral-400 mt-1">Mudanças no Pantheon são sincronizadas automaticamente com o Hermes</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
+        <h2 class="text-2xl font-bold">✨ Criando a persona Orpheus no Pantheon</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Criar o Orpheus é o momento em que o sistema Triad se torna uma entidade nomeada dentro do Hermes. <strong class="text-blue-400">Dar um nome à persona</strong> ajuda a comunicar a intenção — "preciso do Orpheus" sinaliza claramente trabalho profundo que exige o fluxo completo.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">O processo de criar a persona Orpheus no Pantheon — definindo nome, missão ("deep work agent com fluxo Triad completo") e Claude Opus 4 como modelo orquestrador, tornando o sistema Triad invocável por nome.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🛠️ Configuração da persona Orpheus</h3>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">1.</span><span class="text-neutral-300">No Pantheon, clique em <strong>"Add Persona"</strong></span></div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">2.</span><span class="text-neutral-300">Nome: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">Orpheus</code></span></div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">3.</span><span class="text-neutral-300">Descrição: "Deep work agent — usa o fluxo Triad para tarefas estratégicas complexas"</span></div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">4.</span><span class="text-neutral-300">Modelo orquestrador: <code class="font-mono bg-dark-700 px-1 rounded text-blue-400">Claude Opus 4</code></span></div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">5.</span><span class="text-neutral-300">Salvar — Orpheus aparece no Pantheon e pode ser invocado pelo nome</span></div>
+        </div>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Por que "Orpheus"</h3>
+        <p class="text-neutral-300 text-sm">Orpheus é o personagem mitológico que desceu ao submundo para recuperar algo valioso — uma metáfora para trabalho profundo que vai além da superfície. O nome comunica ao Hermes (e a você) a natureza da tarefa: não é uma pergunta simples, é um trabalho que merece profundidade total do Triad.</p>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Add persona no Pantheon</span><p class="text-sm text-neutral-400 mt-1">Processo de criação de uma nova persona especializada</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Nome Orpheus</span><p class="text-sm text-neutral-400 mt-1">Identidade que sinaliza profundidade e fluxo Triad completo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Modelo orquestrador</span><p class="text-sm text-neutral-400 mt-1">Claude Opus 4 como Condutor do fluxo Triad da persona</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Invocação por nome</span><p class="text-sm text-neutral-400 mt-1">"Use o Orpheus para..." ativa o fluxo Triad completo automaticamente</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
+        <h2 class="text-2xl font-bold">📝 Os três system prompts do Triad — Conductor, Worker, Critic</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O sistema Orpheus usa três system prompts distintos, um para cada papel. <strong class="text-blue-400">Esses são os prompts exatos</strong> que definem o comportamento do Triad — entendê-los permite ajustá-los para seus casos de uso específicos.</p>
+
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Os três system prompts que definem o comportamento de cada papel no Triad — Conductor (interroga, brifa, valida), Worker (executa de múltiplos ângulos, itera) e Critic (SHIP/REVISE/FUNDAMENTAL FLAW) — que são inseridos na persona Orpheus do Pantheon.</p>
+      </div>
+
+      <div class="space-y-6 mb-6">
+        <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6">
+          <h3 class="text-lg font-semibold text-blue-400 mb-4">🎯 Conductor (Claude Opus 4)</h3>
+          <div class="bg-dark-900/50 rounded-lg p-4 mb-3 border border-dark-600">
+            <p class="font-mono text-sm text-neutral-300 leading-relaxed">Você é o Condutor do Hermes Triad.<br><br>
+1. INTERROGAR — faça 5-10 perguntas de clarificação até ter objetivo, restrições e critérios de sucesso.<br>
+2. BRIEFAR — escreva um briefing de uma página para o Worker.<br>
+3. VALIDAR — quando Worker + Crítico convergirem, valide contra o briefing.<br><br>
+<strong>Nunca execute o trabalho você mesmo.</strong></p>
+          </div>
+          <p class="text-sm text-neutral-400">O Conductor é o estrategista — define o que fazer, não faz.</p>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-neutral-300 mb-4">⚡ Worker (DeepSeek V4)</h3>
+          <div class="bg-dark-900/50 rounded-lg p-4 mb-3 border border-dark-600">
+            <p class="font-mono text-sm text-neutral-300 leading-relaxed">Você é o Worker do Hermes Triad.<br><br>
+Receba o briefing do Conductor.<br>
+Ataque-o de 3-5 ângulos em paralelo.<br>
+Passe cada draft ao Critic.<br>
+Receba o feedback. Revise.<br>
+Se FUNDAMENTAL FLAW, reinicie com premissas invertidas.<br>
+Repita até SHIP.</p>
+          </div>
+          <p class="text-sm text-neutral-400">O Worker é o executor — produz múltiplos ângulos e itera até convergir.</p>
+        </div>
+
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+          <h3 class="text-lg font-semibold text-neutral-300 mb-4">🔍 Critic (GPT)</h3>
+          <div class="bg-dark-900/50 rounded-lg p-4 mb-3 border border-dark-600">
+            <p class="font-mono text-sm text-neutral-300 leading-relaxed">Você é o Critic do Hermes Triad.<br><br>
+Para cada draft, retorne:<br>
+VERDITO (SHIP / REVISE / FUNDAMENTAL FLAW)<br>
+O QUE QUEBRA — falhas específicas com exemplos<br>
+O QUE FALTA — gaps vs briefing<br>
+MELHOR ÂNGULO — se múltiplos drafts, qual vence e por quê<br><br>
+Seja específico. Só aprove com SHIP quando o draft responde genuinamente ao briefing.</p>
+          </div>
+          <p class="text-sm text-neutral-400">O Critic é o árbitro — aprova, rejeita ou descarta com justificativa específica.</p>
+        </div>
+      </div>
+
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Conductor nunca executa</span><p class="text-sm text-neutral-400 mt-1">O papel do Conductor é estratégico — define e valida, não produz</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Worker usa 3-5 ângulos</span><p class="text-sm text-neutral-400 mt-1">Múltiplas abordagens em paralelo para cobrir o espaço de soluções</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">SHIP/REVISE/FUNDAMENTAL FLAW</span><p class="text-sm text-neutral-400 mt-1">Três estados possíveis do Critic — critério claro de progresso</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Critério de aprovação rigoroso</span><p class="text-sm text-neutral-400 mt-1">Critic só aprova SHIP quando o draft genuinamente responde ao briefing</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
+        <h2 class="text-2xl font-bold">🔄 Sincronizando Orpheus com o Hermes via prompt</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Após criar o Orpheus no Pantheon, sincronize com o Hermes via prompt de contexto. <strong class="text-blue-400">A sincronização confirma que o Hermes entendeu o fluxo</strong> antes de você investir tempo em uma tarefa real — detecta gaps antes que importem.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">Um prompt explícito que descreve o fluxo Triad completo ao Hermes e pede confirmação de entendimento — verificação prévia que detecta configurações incompletas antes de você investir tempo em uma tarefa real.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">💬 Prompt de sincronização</h3>
+        <div class="bg-dark-900/50 rounded-lg p-4 border border-dark-600">
+          <p class="text-sm text-neutral-300 italic leading-relaxed">"Hermes, estou sincronizando a persona Orpheus com você. Orpheus é meu agente de deep work que usa o fluxo Triad: Opus como Condutor (interroga, brifa, valida), DeepSeek como Worker (executa de 3-5 ângulos, loop com Crítico), GPT como Crítico (SHIP/REVISE/FUNDAMENTAL FLAW). Confirme que você entendeu o fluxo e me diga o que precisa antes de receber uma tarefa para Orpheus."</p>
+        </div>
+        <p class="text-sm text-neutral-400 mt-3">O Hermes deve confirmar o entendimento e solicitar qualquer informação que ainda precise para executar o fluxo corretamente.</p>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Prompt de sincronização</span><p class="text-sm text-neutral-400 mt-1">Confirmação explícita de que o Hermes entende o fluxo antes de usá-lo</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Confirmação de entendimento</span><p class="text-sm text-neutral-400 mt-1">Hermes "lê o manual em voz alta" — valida sua compreensão</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Detecção de gaps</span><p class="text-sm text-neutral-400 mt-1">Identifica o que falta antes de investir tempo em uma tarefa real</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Iteração de configuração</span><p class="text-sm text-neutral-400 mt-1">O feedback do Hermes guia ajustes na configuração antes do primeiro uso</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
+        <h2 class="text-2xl font-bold">🧪 Testando Orpheus com uma tarefa real</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O primeiro teste real deve ser uma tarefa de médio valor estratégico — <strong class="text-blue-400">importante o suficiente para valer o fluxo Triad, mas não crítica</strong> ao ponto de que um resultado imperfeito seja prejudicial. Use o primeiro teste para calibrar, não para decidir.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A execução do fluxo Triad completo com o Orpheus em uma tarefa estratégica real — passando por interrogação, briefing, execução em múltiplos ângulos, avaliação do Crítico e validação final do Conductor.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🎯 Tarefa de teste recomendada</h3>
+        <div class="bg-dark-900/50 rounded-lg p-4 border border-dark-600 mb-4">
+          <p class="text-sm text-neutral-300 italic">"Orpheus, quero entender quais são os 3 principais erros que empreendedores cometem ao usar IA nos primeiros 90 dias. Me dê sua análise mais profunda."</p>
+        </div>
+        <h4 class="font-semibold text-white mb-3">O que você verá no fluxo:</h4>
+        <div class="space-y-2 text-sm text-neutral-300">
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">1.</span>Conductor (Opus) faz 5-8 perguntas de clarificação</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">2.</span>Você responde às perguntas</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">3.</span>Conductor escreve o briefing de uma página</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">4.</span>Worker (DeepSeek) ataca de 3-5 ângulos diferentes</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">5.</span>Critic (GPT) avalia com SHIP/REVISE/FUNDAMENTAL FLAW</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">6.</span>Worker revisa com base no feedback</div>
+          <div class="flex items-start gap-3"><span class="text-blue-400 font-bold">7.</span>Conductor valida o resultado final contra o briefing</div>
+        </div>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Tarefa de médio valor</span><p class="text-sm text-neutral-400 mt-1">Importante para valer o esforço, mas não crítica se o resultado for imperfeito</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Fluxo ponta a ponta</span><p class="text-sm text-neutral-400 mt-1">Testar o ciclo completo: interrogação → briefing → execução → crítica → validação</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Interrogação como primeira etapa</span><p class="text-sm text-neutral-400 mt-1">Se o Orpheus pula a interrogação e vai direto para resposta, o Conductor está errado</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Resultado convergido</span><p class="text-sm text-neutral-400 mt-1">O Triad deve convergir para uma resposta SHIP antes de apresentar o resultado</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- T7 -->
+    <section id="topico-7" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">7</span>
+        <h2 class="text-2xl font-bold">🔧 Ajustando e refinando a persona após o primeiro uso</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O primeiro uso raramente é perfeito — e isso é esperado. <strong class="text-blue-400">A capacidade de identificar onde ajustar</strong> é o que separa quem tem um sistema funcional de quem tem um sistema excelente.</p>
+      <div class="bg-dark-800/50 rounded-xl border border-blue-500/20 p-6 mb-6">
+        <h3 class="text-sm font-semibold text-blue-400 mb-2">O que é</h3>
+        <p class="text-neutral-300">A avaliação pós-uso de cada papel separadamente — verificando se o Conductor fez perguntas específicas, se o Worker produziu ângulos genuinamente distintos e se o Critic foi objetivo — e aplicando ajustes cirúrgicos nos system prompts.</p>
+      </div>
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🔍 O que avaliar após o primeiro uso</h3>
+        <div class="space-y-4">
+          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">O Conductor fez as perguntas certas?</h4>
+            <p class="text-sm text-neutral-300 mb-2">Se as perguntas foram vagas ou genéricas demais:</p>
+            <p class="text-sm text-blue-400 font-mono">Ajuste: adicione "cada pergunta deve revelar uma restrição ou pressuposto específico"</p>
+          </div>
+          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">O Worker produziu ângulos genuinamente distintos?</h4>
+            <p class="text-sm text-neutral-300 mb-2">Se os ângulos foram variações do mesmo tema:</p>
+            <p class="text-sm text-blue-400 font-mono">Ajuste: adicione "cada ângulo deve usar uma premissa fundamentalmente diferente"</p>
+          </div>
+          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">O Critic foi específico o suficiente?</h4>
+            <p class="text-sm text-neutral-300 mb-2">Se o feedback foi vago ou apenas positivo:</p>
+            <p class="text-sm text-blue-400 font-mono">Ajuste: adicione "cite exemplos específicos do texto quando apontar falhas"</p>
+          </div>
+          <div class="p-4 bg-dark-800/50 rounded-lg border border-dark-600">
+            <h4 class="font-semibold text-white mb-2">O Conductor foi muito verboso?</h4>
+            <p class="text-sm text-neutral-300 mb-2">Se fez 15 perguntas quando 5 bastavam:</p>
+            <p class="text-sm text-blue-400 font-mono">Ajuste: "máximo 5 perguntas, uma de cada vez, mais diretas"</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+        <h3 class="text-lg font-semibold mb-4">🔑 Conceitos-chave</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Avaliação pós-uso</span><p class="text-sm text-neutral-400 mt-1">Avaliar cada papel separadamente — Conductor, Worker e Critic podem ter problemas distintos</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Ajuste de system prompt</span><p class="text-sm text-neutral-400 mt-1">Mudanças cirúrgicas no prompt resolvem problemas específicos sem quebrar o que funciona</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Iteração esperada</span><p class="text-sm text-neutral-400 mt-1">Primeiro uso imperfeito não é falha — é calibração necessária do sistema</p></div>
+          <div class="bg-dark-700 rounded-lg p-3"><span class="text-blue-400 font-semibold">Critérios por papel</span><p class="text-sm text-neutral-400 mt-1">Cada papel tem critérios de qualidade diferentes — avalie com critérios corretos</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do Módulo 2.5</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skills compreendidas</strong><span class="text-neutral-400"> — comportamento especializado via system prompt, modelo e ferramentas</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Pantheon acessado e entendido</strong><span class="text-neutral-400"> — interface visual para gerenciar personas sem editar arquivos</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Persona Orpheus criada</strong><span class="text-neutral-400"> — com nome, missão e Opus 4 como modelo orquestrador</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Três system prompts configurados</strong><span class="text-neutral-400"> — Conductor, Worker e Critic com comportamentos distintos e precisos</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Sincronização com Hermes executada</strong><span class="text-neutral-400"> — confirmação de entendimento antes do primeiro uso real</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Primeiro teste executado e refinado</strong><span class="text-neutral-400"> — sistema calibrado após feedback do fluxo real</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">2.6 — soul.md na prática: preenchendo e ativando sua memória pessoal no Hermes</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-4.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo 2.4</a>
+          <a href="modulo-2-6.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>TRIAD — <a href="https://inema.club" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a> · 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
